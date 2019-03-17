@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <title>Sortera skivorna</title>
+    <meta content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name = "viewport" />
+    <link rel="stylesheet" type="text/css" href="{% static 'records/stylesheet.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'records/favicon.ico' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{% static 'records/main.js' %}"></script>
+</head>
+    <body>
+        <div class="header">
+            <h1>Skivorna</h1>
+            <div class="search">
+                Sök <input type="text" id="search">
+            </div>
+            <div class="buttons">
+                <button type="button" id="show_filters">&#9660;</button>
+                <button type="button" id="show_orders">&#8645;</button>
+                <button type="button" id="reload">&#8635;</button>
+            </div>
+            <div id="counter">0</div>
+            <div class="filter_container dropdown" style="display:none">
+                <div id="filters"></div>
+                <div class="new_filter">
+                    <select class="filter_attribute">
+                        <option value="artist">Artist</option>
+                        <option value="format">Format</option>
+                        <option value="year">År</option>
+                    </select>
+                    <select class="filter_compare">
+                        <option value="eq">=</option>
+                        <option value="neq">!=</option>
+                        <option value="sub">~</option>
+                        <option value="lt">&lt;</option>
+                        <option value="mt">&gt;</option>
+                    </select>
+                    <input type="text" class="filter_value">
+                    <button type="button" class="add_filter">+</button>
+                </div>
+            </div>
+            <div class="order_container dropdown" style="display:none">
+                <div id="orders"></div>
+                <div class="new_order">
+                    <select class="order_attribute">
+                        <option value="artists">Artist</option>
+                        <option value="format">Format</option>
+                        <option value="year">År</option>
+                    </select>
+                    <label for="order_reverse">Vänd</label>
+                    <input type="checkbox" class="order_reverse" id="order_reverse">
+                    <button type="button" class="add_order">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="status">Väntar på data...</div>
+        <div id="loader" style="display: none">Laddar in skivor...</div>
+        <div id="artist-info" style="display:none">
+            <button id="hide-artist">Stäng artist</button>
+            <div class="name"></div><img style="display:none"><div class="description" style="display:none"></div>
+            <div class="members" style="display:none"></div><div class="groups" style="display:none"></div>
+        </div>
+        <div id="collection"></div>
+        <div id="record-popup" style="display:none"></div>
+    </body>
+</html>
