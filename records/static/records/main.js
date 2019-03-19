@@ -223,7 +223,7 @@ function Collection(div) {
         html += getArtists(record.artists, true);
         html += "</div><div class='name'>";
         html += record.name;
-        html += "</div><div class='format'>";
+        html += "</div><div class='left'><div class='format'>";
         html += record.format;
         html += "</div><div class='year'>";
         html += record.year;
@@ -236,6 +236,11 @@ function Collection(div) {
             }
             html += "</div>";
         });
+        html += "</div>";
+        if (record.spotifyId) {
+            html += "<div class='right'><iframe src='https://open.spotify.com/embed/album/" + record.spotifyId
+            html += "' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe></div>";
+        }
         $("#record-popup").html(html).show();
     };
 
