@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 import json
 
@@ -33,6 +33,12 @@ def updateCollection(request):
     user, created = DiscogsUser.objects.get_or_create(username=discogsUserName)
     createCollection(user)
     return HttpResponse(json.dumps(user.to_dict()))
+
+def setRecordSpotifyId(request, record_id, spotify_id):
+    record = get_object_or_404(Record, id=record_id)
+    record.spotifyId = spotify_id
+    record.save()
+    return HttpResponse(json.dumps(record.to_dict()))
 
 def getArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
