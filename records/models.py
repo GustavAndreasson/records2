@@ -40,6 +40,7 @@ class Record(models.Model):
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
     spotifyId = models.CharField(max_length=32, blank=True, null=True)
+    youtubeId = models.CharField(max_length=32, blank=True, null=True)
     artists = models.ManyToManyField(Artist, through='RecordArtists')
 
     def __str__(self):
@@ -51,7 +52,7 @@ class Record(models.Model):
         track_objects = self.track_set.all()
         tracks = [track.to_dict() for track in track_objects]
         return {"id": self.id, "name": self.name, "cover": self.cover, "format": self.format, "year": self.year, "thumbnail": self.thumbnail,
-                "spotifyId": self.spotifyId, "artists": artists, "tracks": tracks}
+                "spotifyId": self.spotifyId, "youtubeId": self.youtubeId, "artists": artists, "tracks": tracks}
 
     def get_artist(self):
         ras = RecordArtists.objects.filter(record=self)

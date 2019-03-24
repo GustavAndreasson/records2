@@ -219,11 +219,11 @@ function Collection(div) {
         var html = "<img class='cover format-" + record.format + "' src='" + record.cover;
         html += "' alt='" + getArtists(record.artists) + " - " + record.name;
         html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
-        html += "<div class='artists'>";
+        html += "<div class='left'><div class='artists'>";
         html += getArtists(record.artists, true);
         html += "</div><div class='name'>";
         html += record.name;
-        html += "</div><div class='left'><div class='format'>";
+        html += "</div><div class='format'>";
         html += record.format;
         html += "</div><div class='year'>";
         html += record.year;
@@ -236,12 +236,33 @@ function Collection(div) {
             }
             html += "</div>";
         });
-        html += "</div>";
+        html += "</div><div class='right'>";
         if (record.spotifyId) {
-            html += "<div class='right'><iframe src='https://open.spotify.com/embed/album/" + record.spotifyId
-            html += "' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe></div>";
+            html += "<iframe class='listenIframe' src='https://open.spotify.com/embed/album/" + record.spotifyId
+            html += "' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe>";
         }
-        $("#record-popup").html(html).show();
+        if (record.youtubeId) {
+            html += "<iframe class='listenIframe' width='300' height='300' src='https://www.youtube.com/embed/" + record.youtubeId
+            html += "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+        }
+        html += "<div class='addListen'></div></div>";
+        $("#record-popup").html(html);
+        var listenInput = $("<input id='listenId'>")
+        var spotifyButton = $("<span class='setListenId' data-type='spotify'><img src='/static/records/Spotify_Icon_RGB_Green.png'></span>");
+        var youtubeButton = $("<span class='setListenId' data-type='youtube'><img src='/static/records/youtube_social_circle_red.png'></span>");
+        $("#record-popup .right .addListen").append(listenInput).append(spotifyButton).append(youtubeButton);
+        $("#record-popup").show();
+        var addListenId = function() {
+            var type = $(this).data('type');
+            $.getJSON(
+                "record/" + record.id + "/set/" + type + "id/" + $("#listenId").val(),
+            ).done(function(data) {
+                self.collection[record.id] = data;
+            });
+        }
+        listenInput.click(function() {return false;});
+        spotifyButton.click(addListenId);
+        youtubeButton.click(addListenId);
     };
 
     self.setCollection = function(user) {

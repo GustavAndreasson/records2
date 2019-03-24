@@ -10,7 +10,7 @@ class TrackInline(admin.TabularInline):
     model = Track
 
 class RecordAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'spotifyId',  'updated']
+    fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'spotifyId', 'youtubeId', 'updated']
     inlines = [ArtistInline, TrackInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']

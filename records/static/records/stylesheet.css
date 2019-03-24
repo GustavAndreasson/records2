@@ -116,6 +116,7 @@ body {
     margin-right: calc(40px - 50%);
     transform: translate(-50%, 0);
     max-height: calc(100vh - 100px);
+    max-width: 615px;
     background-color: #ffffff;
     overflow-x: hidden;
     overflow-y: auto;
@@ -130,10 +131,28 @@ body {
 
 #record-popup .left {
     float: left;
+    width: 300px;
 }
 
 #record-popup .right {
-    float:  right;
+    float: right;
+}
+
+#record-popup .listenIframe {
+    display: block;
+    margin-bottom: 3px;
+}
+
+#record-popup .setListenId {
+    display: inline-block;
+    height: 20px;
+    vertical-align: bottom;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+#record-popup .setListenId img {
+    width: 20px;
 }
 
 @media (min-width: 768px) {
