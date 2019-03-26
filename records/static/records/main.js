@@ -237,14 +237,17 @@ function Collection(div) {
             html += "</div>";
         });
         html += "</div><div class='right'>";
-        if (record.spotifyId) {
+        $.each(record.listens, function(i, listen) {
+            html += listen.html;
+        });
+        /*if (record.spotifyId) {
             html += "<iframe class='listenIframe' src='https://open.spotify.com/embed/album/" + record.spotifyId
             html += "' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe>";
         }
         if (record.youtubeId) {
             html += "<iframe class='listenIframe' width='300' height='300' src='https://www.youtube.com/embed/" + record.youtubeId
             html += "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
-        }
+        }*/
         html += "<div class='addListen'></div></div>";
         $("#record-popup").html(html);
         var listenInput = $("<input id='listenId'>")
@@ -255,7 +258,7 @@ function Collection(div) {
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
-                "record/" + record.id + "/set/" + type + "id/" + $("#listenId").val(),
+                "record/" + record.id + "/set/" + type + "/" + $("#listenId").val(),
             ).done(function(data) {
                 self.collection[record.id] = data;
             });

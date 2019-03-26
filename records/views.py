@@ -34,17 +34,17 @@ def updateCollection(request):
     createCollection(user)
     return HttpResponse(json.dumps(user.to_dict()))
 
-def setRecordSpotifyId(request, record_id, spotify_id):
+def setRecordListen(request, record_id, listen_name, listen_key):
     record = get_object_or_404(Record, id=record_id)
-    record.spotifyId = spotify_id
-    record.save()
+    listen = get_object_or_404(Listen, name=listen_name)
+    RecordListens.objects.create(record=record, listen=listen, listen_key=listen_key)
     return HttpResponse(json.dumps(record.to_dict()))
 
-def setRecordYoutubeId(request, record_id, youtube_id):
-    record = get_object_or_404(Record, id=record_id)
-    record.youtubeId = youtube_id
-    record.save()
-    return HttpResponse(json.dumps(record.to_dict()))
+#def setRecordYoutubeId(request, record_id, youtube_id):
+#    record = get_object_or_404(Record, id=record_id)
+#    record.youtubeId = youtube_id
+#    record.save()
+#    return HttpResponse(json.dumps(record.to_dict()))
 
 def getArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)

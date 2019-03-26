@@ -31,6 +31,15 @@ class Artist(models.Model):
         return {"id": self.id, "name": self.name, "image": self.image, "description": self.description, "members": members, "groups": groups}
 
 
+class Listen(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+    template = models.TextField(blank=True, null=True)
+    icon = models.CharField(max_length=64, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Record(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -39,8 +48,8 @@ class Record(models.Model):
     year = models.IntegerField(blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
-    spotifyId = models.CharField(max_length=32, blank=True, null=True)
-    youtubeId = models.CharField(max_length=32, blank=True, null=True)
+    #spotifyId = models.CharField(max_length=32, blank=True, null=True)
+    listens = models.ManyToManyField(Listen, through='RecordListens')
     artists = models.ManyToManyField(Artist, through='RecordArtists')
 
     def __str__(self):
@@ -49,10 +58,12 @@ class Record(models.Model):
     def to_dict(self):
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
+        rls = RecordListens.objects.filter(record=self)
+        listens = [rl.to_dict() for rl in rls]
         track_objects = self.track_set.all()
         tracks = [track.to_dict() for track in track_objects]
         return {"id": self.id, "name": self.name, "cover": self.cover, "format": self.format, "year": self.year, "thumbnail": self.thumbnail,
-                "spotifyId": self.spotifyId, "youtubeId": self.youtubeId, "artists": artists, "tracks": tracks}
+                "listens": listens, "artists": artists, "tracks": tracks}
 
     def get_artist(self):
         ras = RecordArtists.objects.filter(record=self)
@@ -100,8 +111,14 @@ class Track(models.Model):
             artists = None
         return {"position": self.position, "name": self.name, "artists" : artists}
 
-    #class Meta:
-    #    ordering = ['position']
+
+class RecordListens(models.Model):
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+    listen = models.ForeignKey(Listen, on_delete=models.CASCADE)
+    listen_key = models.CharField(max_length=64, blank=True, null=True)
+
+    def to_dict(self):
+        return {"name": self.listen.name, "icon": self.listen.icon, "html": self.listen.template.format(self.listen_key)}
 
 
 class RecordArtists(models.Model):
