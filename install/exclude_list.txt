@@ -1,0 +1,6 @@
+install
+.git
+*~
+var
+__pycache__
+.env
