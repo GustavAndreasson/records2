@@ -138,12 +138,12 @@ body {
     float: right;
 }
 
-#record-popup .listenIframe {
+#record-popup .listens iframe {
     display: block;
     margin-bottom: 3px;
 }
 
-#record-popup .setListenId {
+#record-popup .set-listen-id {
     display: inline-block;
     height: 20px;
     vertical-align: bottom;
@@ -151,7 +151,7 @@ body {
     cursor: pointer;
 }
 
-#record-popup .setListenId img {
+#record-popup .set-listen-id img {
     width: 20px;
 }
 

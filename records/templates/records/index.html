@@ -26,6 +26,7 @@
                 <div id="filters"></div>
                 <div class="new_filter">
                     <select class="filter_attribute">
+                        <option value="name">Album</option>
                         <option value="artist">Artist</option>
                         <option value="format">Format</option>
                         <option value="year">År</option>
@@ -48,6 +49,7 @@
                         <option value="artists">Artist</option>
                         <option value="format">Format</option>
                         <option value="year">År</option>
+                        <option value="addedDate">Tillagd</option>
                     </select>
                     <label for="order_reverse">Vänd</label>
                     <input type="checkbox" class="order_reverse" id="order_reverse">
@@ -63,6 +65,23 @@
             <div class="members" style="display:none"></div><div class="groups" style="display:none"></div>
         </div>
         <div id="collection"></div>
-        <div id="record-popup" style="display:none"></div>
+        <div id="record-popup" style="display:none"><img class="cover">
+            <div class="left">
+                <div class="artists"></div>
+                <div class="name"></div>
+                <div class="format"></div>
+                <div class="year"></div>
+                <div class="tracks"></div>
+            </div>
+            <div class="right">
+                <div class="listens"></div>
+                <div class="add-listen">
+                    <input id="listen-id">
+                    {% for listen in listen_list %}
+                        <span class='set-listen-id' data-type='{{listen.name}}'><img src='{{listen.icon}}'></span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

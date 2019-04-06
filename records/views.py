@@ -8,9 +8,10 @@ from .services import createCollection
 
 # Create your views here.
 def index(request):
-    return render(request, 'records/index.html', {})
+    listen_list = Listen.objects.all()
+    return render(request, 'records/index.html', {'listen_list': listen_list})
 
-def getCollection(request):
+def getCollection(request, data_level):
     discogsUserName = "gustav.andreasson"
     if request.COOKIES.get('discogs_username'):
         discogsUserName = request.COOKIES.get('discogs_username')
@@ -19,7 +20,7 @@ def getCollection(request):
     if created:
         createCollection(user)
 
-    return HttpResponse(json.dumps(user.to_dict()))
+    return HttpResponse(json.dumps(user.to_dict(int(data_level))))
 
 def setCollection(request, user_id):
     response = HttpResponse("{}")
@@ -32,7 +33,7 @@ def updateCollection(request):
         discogsUserName = request.COOKIES.get('discogs_username')
     user, created = DiscogsUser.objects.get_or_create(username=discogsUserName)
     createCollection(user)
-    return HttpResponse(json.dumps(user.to_dict()))
+    return HttpResponse(json.dumps(user.to_dict(1)))
 
 def setRecordListen(request, record_id, listen_name, listen_key):
     record = get_object_or_404(Record, id=record_id)

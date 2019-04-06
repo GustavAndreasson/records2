@@ -5,7 +5,7 @@ $(function() {
         artists = new ArtistCollection("#artist-info");
 
         col.artists = artists;
-        col.loadCollection();
+        col.loadCollection(0);
 
         filters = new Filters("#filters", col);
         $("#search").on("input", filters.run);
@@ -142,18 +142,21 @@ function Collection(div) {
         $.each(record.artists, function(id, artist) {
             self.artists.addArtist(artist.artist);
         });
-        var html = "<div class='record' id='record-" + record.id + "'";
-        if (!filterRecord(record)) {
-            html += " style='display: none'";
-        } else {
-            self.counter += 1;
+        if ($("#record-" + record.id).length == 0) {
+            var html = "<div class='record' id='record-" + record.id + "'";
+            if (!filterRecord(record)) {
+                html += " style='display: none'";
+            } else {
+                self.counter += 1;
+            }
+            html += ">";
+            $(self.div).append(html);
         }
-        html += "><img class='cover format-" + record.format + "' src='" + record.thumbnail;
+        var html = "<img class='cover format-" + record.format + "' src='" + record.thumbnail;
         html += "' alt='" + getArtists(record.artists) + " - " + record.name;
         html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
         html += "</div>";
-        $(self.div).append(html);
-        return html;
+        $("#record-" + record.id).html(html);
     }
 
     function filterRecord(record) {
@@ -216,44 +219,29 @@ function Collection(div) {
 
     self.showRecord = function() {
         var record = self.collection[$(this).attr("id").substr(7)];
-        var html = "<img class='cover format-" + record.format + "' src='" + record.cover;
-        html += "' alt='" + getArtists(record.artists) + " - " + record.name;
-        html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
-        html += "<div class='left'><div class='artists'>";
-        html += getArtists(record.artists, true);
-        html += "</div><div class='name'>";
-        html += record.name;
-        html += "</div><div class='format'>";
-        html += record.format;
-        html += "</div><div class='year'>";
-        html += record.year;
-        html += "</div>";
+        var recordPopup = $("#record-popup");
+        var coverImg = recordPopup.find(".cover");
+        coverImg.attr("src", record.cover);
+        coverImg.attr("alt", getArtists(record.artists) + " - " + record.name);
+        coverImg.attr("title", getArtists(record.artists) + " - " + record.name);
+        recordPopup.find(".artists").html(getArtists(record.artists, true));
+        recordPopup.find(".name").html(record.name);
+        recordPopup.find(".format").html(record.format);
+        recordPopup.find(".year").html(record.year);
+        var tracks = recordPopup.find(".tracks")
         $.each(record.tracks, function(i, track) {
-            html += "<div class='track'><span class='position'>";
+            var html = "<div class='track'><span class='position'>";
             html += track.position + "</span> " + track.name;
             if (track.artists) {
                 html += " (" + getArtists(track.artists, true) + ")";
             }
             html += "</div>";
+            tracks.append(html);
         });
-        html += "</div><div class='right'>";
+        var listens = recordPopup.find(".listens")
         $.each(record.listens, function(i, listen) {
-            html += listen.html;
+            listens.append(listen.html);
         });
-        /*if (record.spotifyId) {
-            html += "<iframe class='listenIframe' src='https://open.spotify.com/embed/album/" + record.spotifyId
-            html += "' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe>";
-        }
-        if (record.youtubeId) {
-            html += "<iframe class='listenIframe' width='300' height='300' src='https://www.youtube.com/embed/" + record.youtubeId
-            html += "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
-        }*/
-        html += "<div class='addListen'></div></div>";
-        $("#record-popup").html(html);
-        var listenInput = $("<input id='listenId'>")
-        var spotifyButton = $("<span class='setListenId' data-type='spotify'><img src='/static/records/Spotify_Icon_RGB_Green.png'></span>");
-        var youtubeButton = $("<span class='setListenId' data-type='youtube'><img src='/static/records/youtube_social_circle_red.png'></span>");
-        $("#record-popup .right .addListen").append(listenInput).append(spotifyButton).append(youtubeButton);
         $("#record-popup").show();
         var addListenId = function() {
             var type = $(this).data('type');
@@ -263,59 +251,63 @@ function Collection(div) {
                 self.collection[record.id] = data;
             });
         }
-        listenInput.click(function() {return false;});
-        spotifyButton.click(addListenId);
-        youtubeButton.click(addListenId);
+        recordPopup.find("#listen-id").click(function() {return false;});
+        recordPopup.find(".set-listen-id").click(addListenId);
     };
 
     self.setCollection = function(user) {
         $.post("collection/set/" + user);
     };
 
-    self.loadCollection = function() {
-        $.getJSON(
-            "collection/get"
-        ).done(
-            function(data) {
-                $("#status").html("");
-                var count = 0;
-                $.each(data, function(i, release) {
-                    addRecord(release);
-                    count++;
-                });
-                if (count == 0) {
-                    self.updateCollection();
+    self.loadCollection = function(dataLevel) {
+        if (dataLevel < 3) {
+            $("#status").html("Laddar ner omgång " + dataLevel);
+            $.getJSON(
+                "collection/get/" + dataLevel
+            ).done(
+                function(data) {
+                    var count = 0;
+                    $.each(data, function(i, release) {
+                        addRecord(release);
+                        count++;
+                    });
+                    $("#status").html("");
+                    $("#counter").text(self.counter);
+                    if (count == 0) {
+                        self.updateCollection();
+                    } else {
+                        self.loadCollection(dataLevel + 1)
+                    }
                 }
-                $("#counter").text(self.counter);
-            }
-        ).fail(function() {
-            $("#status").html("ERROR");
-        });
+            ).fail(function() {
+                $("#status").html("ERROR");
+            });
+        }
     };
 
     self.updateCollection = function(page) {
         var pagesize = 100;
         if (!page) page = 1;
+        $("#status").html("Uppdaterar samling");
+        $("#loader").show();
         $.getJSON(
-            "collection/update",
-            {page:page, page_size:pagesize}
+            "collection/update"//,
+            //{page:page, page_size:pagesize}
         ).done(
             function(data) {
-                $("#status").html("");
-                $("#loader").show();
-                var count = 0;
                 $.each(data.releases, function(i, release) {
                     addRecord(release);
-                    count++;
                 });
+                $("#status").html("");
                 $("#counter").text(self.counter);
-                if (data.releases && !data.last) {
-                    self.updateCollection(page + 1);
-                } else {
+                //if (data.releases && !data.last) {
+                //    self.updateCollection(page + 1);
+                //} else {
                     $("#loader").hide();
-                }
+                //}
             }
         ).fail(function() {
+            $("#loader").hide();
             $("#status").html("ERROR");
         });
     };

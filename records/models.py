@@ -55,15 +55,22 @@ class Record(models.Model):
     def __str__(self):
         return self.name
 
-    def to_dict(self):
+    def to_dict(self, data_level):
+        dict = {"id": self.id, "name": self.name, "cover": self.cover, "format": self.format, "year":  self.year, "thumbnail": self.thumbnail, "data_level": data_level}
+        if data_level == 0:
+            return dict
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
+        dict["artists"] = artists
+        if data_level == 1:
+            return dict
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
+        dict["listens"] = listens
         track_objects = self.track_set.all()
         tracks = [track.to_dict() for track in track_objects]
-        return {"id": self.id, "name": self.name, "cover": self.cover, "format": self.format, "year": self.year, "thumbnail": self.thumbnail,
-                "listens": listens, "artists": artists, "tracks": tracks}
+        dict["tracks"] = tracks
+        return dict
 
     def get_artist(self):
         ras = RecordArtists.objects.filter(record=self)
@@ -80,11 +87,11 @@ class DiscogsUser(models.Model):
     def __str__(self):
         return self.username
 
-    def to_dict(self):
+    def to_dict(self, data_level):
         urs = UserRecords.objects.filter(user=self)
         dict = {}
         for ur in urs:
-            dict[ur.record.id] = ur.record.to_dict()
+            dict[ur.record.id] = ur.record.to_dict(data_level)
             dict[ur.record.id]["addedDate"] = str(ur.added_date)
         return dict
 

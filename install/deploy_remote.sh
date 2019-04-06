@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -avze ssh --exclude-from "$(dirname $0)/exclude_list.txt" $(dirname $0)/../ gustav@212.85.79.94:/var/www/records2/
+rsync -avze ssh --exclude-from "$(dirname $0)/exclude_list.txt" $(dirname $0)/../ gustav@212.85.79.94:/home/records/

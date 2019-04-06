@@ -28,8 +28,9 @@ def updateRecord(record, release_data):
     if release_data.get('tracklist'):
         for track_data in release_data.get('tracklist'):
             createTrack(record, track_data)
-    record.cover = release_data.get('cover_image')
-    record.thumbnail = release_data.get('thumb')
+    if release_data.get('image'):
+        record.cover = release_data['image'][0].get('uri')
+        record.thumbnail = release_data['image'][0].get('uri')
     record.year = release_data.get('year')
     record.updated = date.today()
     record.save()
