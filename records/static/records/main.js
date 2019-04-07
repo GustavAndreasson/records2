@@ -221,6 +221,7 @@ function Collection(div) {
         var record = self.collection[$(this).attr("id").substr(7)];
         var recordPopup = $("#record-popup");
         var coverImg = recordPopup.find(".cover");
+        coverImg.removeAttr("src");
         coverImg.attr("src", record.cover);
         coverImg.attr("alt", getArtists(record.artists) + " - " + record.name);
         coverImg.attr("title", getArtists(record.artists) + " - " + record.name);
@@ -229,6 +230,7 @@ function Collection(div) {
         recordPopup.find(".format").html(record.format);
         recordPopup.find(".year").html(record.year);
         var tracks = recordPopup.find(".tracks")
+        tracks.html("");
         $.each(record.tracks, function(i, track) {
             var html = "<div class='track'><span class='position'>";
             html += track.position + "</span> " + track.name;
@@ -239,10 +241,11 @@ function Collection(div) {
             tracks.append(html);
         });
         var listens = recordPopup.find(".listens")
+        listens.html("");
         $.each(record.listens, function(i, listen) {
             listens.append(listen.html);
         });
-        $("#record-popup").show();
+        recordPopup.show();
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
@@ -261,7 +264,8 @@ function Collection(div) {
 
     self.loadCollection = function(dataLevel) {
         if (dataLevel < 3) {
-            $("#status").html("Laddar ner omgång " + dataLevel);
+            var statuses = ["album", "artister", "låtar"]
+            $("#status").html("Laddar ner " + statuses[dataLevel] + "...");
             $.getJSON(
                 "collection/get/" + dataLevel
             ).done(
@@ -289,7 +293,6 @@ function Collection(div) {
         var pagesize = 100;
         if (!page) page = 1;
         $("#status").html("Uppdaterar samling");
-        $("#loader").show();
         $.getJSON(
             "collection/update"//,
             //{page:page, page_size:pagesize}
@@ -302,12 +305,9 @@ function Collection(div) {
                 $("#counter").text(self.counter);
                 //if (data.releases && !data.last) {
                 //    self.updateCollection(page + 1);
-                //} else {
-                    $("#loader").hide();
                 //}
             }
         ).fail(function() {
-            $("#loader").hide();
             $("#status").html("ERROR");
         });
     };
