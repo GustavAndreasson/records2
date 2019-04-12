@@ -55,6 +55,14 @@ body {
     margin-top: 10px;
 }
 
+#status {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 2px 10px 0 5px;
+    background: #ddd;
+}
+
 .record {
     display: inline-block;
     margin: 4px;
