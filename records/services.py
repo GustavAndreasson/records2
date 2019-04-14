@@ -31,6 +31,12 @@ def updateRecord(record, release_data):
     if release_data.get('images'):
         record.cover = release_data['images'][0].get('uri')
         record.thumbnail = release_data['images'][0].get('uri')
+    if release_data.get('videos'):
+        listen = Listen.objects.get(name='youtube')
+        for video in release_data.get('videos'):
+            if "youtube" in video['uri'] and "v=" in video['uri']:
+                listen_key = video['uri'][video['uri'].find('v=')+2:]
+                RecordListens.objects.create(record=record, listen=listen, listen_key=listen_key)
     record.year = release_data.get('year')
     record.updated = date.today()
     record.save()

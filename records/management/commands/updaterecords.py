@@ -24,5 +24,8 @@ class Command(BaseCommand):
                 if not release_data.get('images'):
                     if master_data.get('images'):
                         release_data['images'] = master_data.get('images')
+                if not release_data.get('videos'):
+                    if master_data.get('videos'):
+                        release_data['videos'] = master_data.get('videos')
             self.stdout.write("Updating record " + record.name)
             updateRecord(record, release_data)
