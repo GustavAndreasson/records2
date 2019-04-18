@@ -148,7 +148,20 @@ body {
 
 #record-popup .listens iframe {
     display: block;
+}
+
+#record-popup .listen-select {
     margin-bottom: 3px;
+}
+
+#record-popup .listen-select span {
+    width: 20px;
+}
+
+#record-popup .listen-select span img {
+    width: 20px;
+    margin-right: 2px;
+    vertical-align: bottom;
 }
 
 #record-popup .set-listen-id {

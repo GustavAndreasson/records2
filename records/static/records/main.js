@@ -240,22 +240,40 @@ function Collection(div) {
             html += "</div>";
             tracks.append(html);
         });
-        var listens = recordPopup.find(".listens")
-        listens.html("");
+        var listens = recordPopup.find(".listens");
+        listens.children().not(':last').remove();
+        var listenSelect = recordPopup.find(".listen-select");
+        listenSelect.children().not(':last').remove();
         $.each(record.listens, function(i, listen) {
-            listens.append(listen.html);
+            var listenElement = $(listen.html);
+            listens.children().last().before(listenElement);
+            var selectListen = $("<span><img src='" + listen.icon + "'></span>");
+            selectListen.click(function() {
+                listens.children().hide();
+                listenElement.show();
+                return false;
+            });
+            listenSelect.children().last().before(selectListen);
         });
+
+        listens.children().hide();
+        listens.children().first().show();
         recordPopup.show();
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
-                "record/" + record.id + "/set/" + type + "/" + $("#listenId").val(),
+                "record/" + record.id + "/set/" + type + "/" + $("#listen-id").val(),
             ).done(function(data) {
                 self.collection[record.id] = data;
             });
         }
         recordPopup.find("#listen-id").click(function() {return false;});
         recordPopup.find(".set-listen-id").click(addListenId);
+        listenSelect.find("#add-listen").click(function() {
+            listens.children().hide();
+            listens.find(".add-listen").show();
+            return false;
+        });
     };
 
     self.setCollection = function(user) {

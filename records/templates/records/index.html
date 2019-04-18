@@ -73,12 +73,14 @@
                 <div class="tracks"></div>
             </div>
             <div class="right">
-                <div class="listens"></div>
-                <div class="add-listen">
-                    <input id="listen-id">
-                    {% for listen in listen_list %}
-                        <span class='set-listen-id' data-type='{{listen.name}}'><img src='{{listen.icon}}'></span>
-                    {% endfor %}
+                <div class="listen-select"><span id="add-listen">+</span></div>
+                <div class="listens">
+                    <div class="add-listen">
+                        <input id="listen-id">
+                        {% for listen in listen_list %}
+                            <span class='set-listen-id' data-type='{{listen.name}}'><img src='{{listen.icon}}'></span>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
