@@ -5,23 +5,27 @@ from . import discogs
 
 def createCollection(user):
     collection = discogs.getCollection(user.username)
-    for release in collection:
-        record, created = Record.objects.get_or_create(id=release['basic_information']['id'], defaults={
-            'name': _fixName(release['basic_information'].get('title')),
-            'cover': release['basic_information'].get('cover_image'),
-            'thumbnail': release['basic_information'].get('thumb'),
-            'year': release['basic_information'].get('year'),
-            'format': release['basic_information']['formats'][0].get('name')
-        })
-        if created:
-            position = 0
-            for r_artist in release['basic_information']['artists']:
-                artist, created = Artist.objects.get_or_create(id=r_artist['id'], defaults={'name': _fixArtistName(r_artist['name'])})
-                ra = RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist['join'], position=position)
-                ra.save()
-                position += 1
-        ur = UserRecords.objects.create(user=user, record=record, added_date=release['date_added'][0:10])
-        ur.save()
+    if collection:
+        for release in collection:
+            record, created = Record.objects.get_or_create(id=release['basic_information']['id'], defaults={
+                'name': _fixName(release['basic_information'].get('title')),
+                'cover': release['basic_information'].get('cover_image'),
+                'thumbnail': release['basic_information'].get('thumb'),
+                'year': release['basic_information'].get('year'),
+                'format': release['basic_information']['formats'][0].get('name')
+            })
+            if created:
+                position = 0
+                for r_artist in release['basic_information']['artists']:
+                    artist, created = Artist.objects.get_or_create(id=r_artist['id'], defaults={'name': _fixArtistName(r_artist['name'])})
+                    ra = RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist['join'], position=position)
+                    ra.save()
+                    position += 1
+            ur = UserRecords.objects.create(user=user, record=record, added_date=release['date_added'][0:10])
+            ur.save()
+        return True
+    return False
+
 
 def updateRecord(record, release_data):
     record.track_set.all().delete()

@@ -3,9 +3,20 @@ $(function() {
     if ($("#collection").length) {
         col = new Collection("#collection");
         artists = new ArtistCollection("#artist-info");
-
         col.artists = artists;
-        col.loadCollection(0);
+        var user = localStorage.getItem('discogs_username');
+        if (user) {
+            col.user = user;
+            col.loadCollectionCache();
+            col.loadCollection(0);
+        } else {
+            $("#set-collection").show();
+        }
+
+        $("#set-collection button").click(function() {
+            $("#set-collection").hide();
+            col.setCollection($("#set-collection input").val());
+        });
 
         filters = new Filters("#filters", col);
         $("#search").on("input", filters.run);
@@ -129,8 +140,10 @@ function Orders(div, col) {
 function Collection(div) {
     var self = this;
     self.div = div;
+    self.user = "";
     self.counter = 0;
     self.collection = {};
+    self.updated = null;
     self.filters = [{
         attr:"all",
         cmp:"sub",
@@ -138,7 +151,13 @@ function Collection(div) {
     }];
 
     function addRecord(record) {
-        self.collection[record.id] = record;
+        if (self.collection[record.id]) {
+            for (var attr in record) {
+                self.collection[record.id][attr] = record[attr];
+            }
+        } else {
+            self.collection[record.id] = record;
+        }
         $.each(record.artists, function(id, artist) {
             self.artists.addArtist(artist.artist);
         });
@@ -265,6 +284,7 @@ function Collection(div) {
                 "record/" + record.id + "/set/" + type + "/" + $("#listen-id").val(),
             ).done(function(data) {
                 self.collection[record.id] = data;
+                self.updateCollectionCache();
             });
         }
         recordPopup.find("#listen-id").click(function() {return false;});
@@ -277,15 +297,36 @@ function Collection(div) {
     };
 
     self.setCollection = function(user) {
-        $.post("collection/set/" + user);
+        localStorage.setItem("discogs_username", user);
+        self.user = user;
+        self.collection = {};
+        $("#collection").html("");
+        self.loadCollectionCache();
+        self.loadCollection(0);
     };
+
+    self.loadCollectionCache = function() {
+        var collection = JSON.parse(localStorage.getItem("collection." + self.user));
+        if (collection) {
+            self.updated = collection.updated;
+            $.each(collection.collection, function(i, release) {
+                addRecord(release);
+            });
+            $("#counter").text(self.counter);
+        }
+    }
+
+    self.updateCollectionCache = function() {
+        self.updated = new Date();
+        localStorage.setItem("collection." + self.user, JSON.stringify({'collection': self.collection, 'updated': self.updated}));
+    }
 
     self.loadCollection = function(dataLevel) {
         if (dataLevel < 3) {
             var statuses = ["album", "artister", "låtar"]
             $("#status").html("Laddar ner " + statuses[dataLevel] + "...");
             $.getJSON(
-                "collection/get/" + dataLevel
+                "collection/" + self.user + "/get/" + dataLevel
             ).done(
                 function(data) {
                     var count = 0;
@@ -296,10 +337,12 @@ function Collection(div) {
                     $("#status").html("");
                     $("#counter").text(self.counter);
                     if (count == 0) {
-                        self.updateCollection();
-                    } else {
-                        self.loadCollection(dataLevel + 1)
+                        $("#status").html("Ingen discogsanvändare men användarnamn " + self.user);
+                        $("#set-collection").show();
+                        return;
                     }
+                    self.updateCollectionCache();
+                    self.loadCollection(dataLevel + 1);
                 }
             ).fail(function() {
                 $("#status").html("ERROR");
@@ -308,11 +351,11 @@ function Collection(div) {
     };
 
     self.updateCollection = function(page) {
-        var pagesize = 100;
-        if (!page) page = 1;
+        //var pagesize = 100;
+        //if (!page) page = 1;
         $("#status").html("Uppdaterar samling");
         $.getJSON(
-            "collection/update"//,
+            "collection/" + self.user + "/update"//,
             //{page:page, page_size:pagesize}
         ).done(
             function(data) {
@@ -324,6 +367,7 @@ function Collection(div) {
                 //if (data.releases && !data.last) {
                 //    self.updateCollection(page + 1);
                 //}
+                self.updateCollectionCache();
             }
         ).fail(function() {
             $("#status").html("ERROR");

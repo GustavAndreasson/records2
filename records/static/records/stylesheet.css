@@ -156,6 +156,7 @@ body {
 
 #record-popup .listen-select span {
     width: 20px;
+    cursor: pointer;
 }
 
 #record-popup .listen-select span img {
