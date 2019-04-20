@@ -281,14 +281,14 @@ function Collection(div) {
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
-                "record/" + record.id + "/set/" + type + "/" + $("#listen-id").val(),
+                "record/" + record.id + "/set/" + type + "/" + recordPopup.find("#listen-id").val(),
             ).done(function(data) {
                 self.collection[record.id] = data;
                 self.updateCollectionCache(false);
             });
         };
-        recordPopup.find("#listen-id").click(function() {return false;});
-        recordPopup.find(".set-listen-id").off("click").click(addListenId);
+        recordPopup.find(".add-listen input").click(function() {return false;});
+        recordPopup.find(".add-listen span").off("click").click(addListenId);
         listenSelect.find("#add-listen").click(function() {
             listens.children().hide();
             listens.find(".add-listen").show();
