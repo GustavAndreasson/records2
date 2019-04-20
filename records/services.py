@@ -7,12 +7,22 @@ def createCollection(user):
     collection = discogs.getCollection(user.username)
     if collection:
         for release in collection:
+            formats = []
+            for format in release['basic_information']['formats']:
+                format_string = format.get('name')
+                if "7\"" in format.get('description'):
+                    format_string += "7"
+                if "10\"" in format.get('description'):
+                    format_string += "10"
+                if "12\"" in format.get('description'):
+                    format_string += "12"
+                formats = formats.append(format_string)
             record, created = Record.objects.get_or_create(id=release['basic_information']['id'], defaults={
                 'name': _fixName(release['basic_information'].get('title')),
                 'cover': release['basic_information'].get('cover_image'),
                 'thumbnail': release['basic_information'].get('thumb'),
                 'year': release['basic_information'].get('year'),
-                'format': release['basic_information']['formats'][0].get('name')
+                'format': " ".join(formats)
             })
             if created:
                 position = 0
@@ -45,6 +55,7 @@ def updateRecord(record, release_data):
     record.updated = date.today()
     record.save()
 
+    
 def createTrack(record, track_data):
     track = Track.objects.create(position=track_data.get('position'), name=_fixName(track_data.get('title')), record=record)
     if track_data.get('artists'):

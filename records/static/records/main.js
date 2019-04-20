@@ -284,11 +284,11 @@ function Collection(div) {
                 "record/" + record.id + "/set/" + type + "/" + $("#listen-id").val(),
             ).done(function(data) {
                 self.collection[record.id] = data;
-                self.updateCollectionCache();
+                self.updateCollectionCache(false);
             });
-        }
+        };
         recordPopup.find("#listen-id").click(function() {return false;});
-        recordPopup.find(".set-listen-id").click(addListenId);
+        recordPopup.find(".set-listen-id").off("click").click(addListenId);
         listenSelect.find("#add-listen").click(function() {
             listens.children().hide();
             listens.find(".add-listen").show();
@@ -316,9 +316,12 @@ function Collection(div) {
         }
     }
 
-    self.updateCollectionCache = function() {
-        self.updated = new Date();
-        localStorage.setItem("collection." + self.user, JSON.stringify({'collection': self.collection, 'updated': self.updated}));
+    self.updateCollectionCache = function(updated) {
+        if (updated) {
+            self.updated = new Date();
+        }
+        localStorage.setItem("collection." + self.user,
+                             JSON.stringify({'collection': self.collection, 'updated': self.updated}));
     }
 
     self.loadCollection = function(dataLevel) {
@@ -341,7 +344,7 @@ function Collection(div) {
                         $("#set-collection").show();
                         return;
                     }
-                    self.updateCollectionCache();
+                    self.updateCollectionCache(true);
                     self.loadCollection(dataLevel + 1);
                 }
             ).fail(function() {
@@ -367,7 +370,7 @@ function Collection(div) {
                 //if (data.releases && !data.last) {
                 //    self.updateCollection(page + 1);
                 //}
-                self.updateCollectionCache();
+                self.updateCollectionCache(true);
             }
         ).fail(function() {
             $("#status").html("ERROR");
