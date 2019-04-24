@@ -20,6 +20,22 @@ def getRelease(release_id):
 
 def getMaster(master_id):
     return readUri("/masters/" + str(master_id) + "?curr_abr=SEK")
+	
+def getArtist(artist_id):
+	return readUri("/artists/" + str(artist_id))
+	
+def getArtistReleases(artist_id):
+	uri = "/artists/" + str(artist_id) + "/releases"
+	page = 1
+    collection = [];
+    while True:
+        response = readUri(uri + "?page=" + str(page))
+        page = page + 1
+        if 'releases' in response:
+            collection.extend(response['releases'])
+        else:
+            break
+    return collection
 
 def readUri(uri):
     accesses = DiscogsAccess.objects.filter(timestamp__gt=time.time() - 60)

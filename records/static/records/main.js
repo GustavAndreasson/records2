@@ -161,6 +161,11 @@ function Collection(div) {
         $.each(record.artists, function(id, artist) {
             self.artists.addArtist(artist.artist);
         });
+		$.each(record.tracks, function(id, track) {
+			$.each(track.artists, function(id, artist) {
+				self.artists.addArtist(artist.artist);
+			});
+		});
         if ($("#record-" + record.id).length == 0) {
             var html = "<div class='record' id='record-" + record.id + "'";
             if (!filterRecord(record)) {
@@ -460,13 +465,13 @@ function ArtistCollection(div) {
         $(self.div + " .name").html(artist.name);
         $(self.div).show();
         $.getJSON(
-            "artist/get/" + artistId
+            "artist/" + artistId + "/get"
         ).done(function(data) {
             if (data.updated) {
                 addArtistData(data);
             } else {
                 $.getJSON(
-                    "artist/update/" + artistId
+                    "artist/" + artistId + "/update"
                 ).done(function(data) {
                     addArtistData(data);
                 });
