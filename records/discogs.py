@@ -5,7 +5,7 @@ from .models import DiscogsAccess
 def getCollection(user_name):
     uri = "users/" + user_name + "/collection/folders/0/releases"
     page = 1
-    collection = [];
+    collection = []
     while True:
         response = readUri(uri + "?page=" + str(page))
         page = page + 1
@@ -20,14 +20,14 @@ def getRelease(release_id):
 
 def getMaster(master_id):
     return readUri("/masters/" + str(master_id) + "?curr_abr=SEK")
-	
+
 def getArtist(artist_id):
 	return readUri("/artists/" + str(artist_id))
-	
+
 def getArtistReleases(artist_id):
-	uri = "/artists/" + str(artist_id) + "/releases"
-	page = 1
-    collection = [];
+    uri = "/artists/" + str(artist_id) + "/releases"
+    page = 1
+    collection = []
     while True:
         response = readUri(uri + "?page=" + str(page))
         page = page + 1

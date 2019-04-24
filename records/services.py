@@ -27,7 +27,7 @@ def createCollection(user):
             if created:
                 position = 0
                 for r_artist in release['basic_information']['artists']:
-                    artist, created = Artist.objects.get_or_create(id=r_artist['id'], defaults={'name': _fixArtistName(r_artist['name'])})
+                    artist, created = Artist.objects.get_or_create(id=r_artist['id'], defaults={'name': __fixArtistName(r_artist['name'])})
                     ra = RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist['join'], position=position)
                     ra.save()
                     position += 1
@@ -37,11 +37,22 @@ def createCollection(user):
     return False
 
 
-def updateRecord(record, release_data):
+def updateRecord(record):
+    release_data = discogs.getRelease(record.id)
+    if release_data.get('master_id'):
+        master_data = discogs.getMaster(release_data.get('master_id'))
+        release_data['year'] = master_data.get('year')
+        if not release_data.get('images'):
+            if master_data.get('images'):
+                release_data['images'] = master_data.get('images')
+        if not release_data.get('videos'):
+            if master_data.get('videos'):
+                release_data['videos'] = master_data.get('videos')
+
     record.track_set.all().delete()
     if release_data.get('tracklist'):
         for track_data in release_data.get('tracklist'):
-            createTrack(record, track_data)
+            __createTrack(record, track_data)
     if release_data.get('images'):
         record.cover = release_data['images'][0].get('uri')
         record.thumbnail = release_data['images'][0].get('uri')
@@ -55,18 +66,26 @@ def updateRecord(record, release_data):
     record.updated = date.today()
     record.save()
 
-    
-def createTrack(record, track_data):
-    track = Track.objects.create(position=track_data.get('position'), name=_fixName(track_data.get('title')), record=record)
+
+def __createTrack(record, track_data):
+    track = Track.objects.create(position=track_data.get('position'), name=__fixName(track_data.get('title')), record=record)
     if track_data.get('artists'):
         position = 0
         for t_artist in track_data.get('artists'):
-            artist, created = Artist.objects.get_or_create(id=t_artist['id'], defaults={'name': _fixArtistName(t_artist['name'])})
+            artist, created = Artist.objects.get_or_create(id=t_artist['id'], defaults={'name': __fixArtistName(t_artist['name'])})
             ta = TrackArtists.objects.create(track=track, artist=artist, delimiter=t_artist['join'], position=position)
             ta.save()
             position += 1
 
-def _fixName(name):
+def updateArtist(artist):
+    artist_data = discogs.getArtist(artist.id)
+    artist.description = artist_data.get('profile')
+    if artist_data.get('images'):
+        artist.image = artist_data['images'][0]['resource_url']
+    artist.updated = date.today()
+    artist.save()
+
+def __fixName(name):
     myre = re.compile(u'['
     u'\U0001F300-\U0001F64F'
     u'\U0001F680-\U0001F6FF'
@@ -74,6 +93,6 @@ def _fixName(name):
     re.UNICODE)
     return myre.sub('', name)
 
-def _fixArtistName(name):
+def __fixArtistName(name):
     myre = re.compile('\(\d+\)$')
     return _fixName(myre.sub('', name))

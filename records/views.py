@@ -3,8 +3,7 @@ from django.http import HttpResponse
 import json
 
 from .models import *
-from . import discogs
-from .services import createCollection
+from . import services
 
 def index(request):
     listen_list = Listen.objects.all()
@@ -13,14 +12,14 @@ def index(request):
 def getCollection(request, username, data_level):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
-        if not createCollection(user):
+        if not services.createCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
             return HttpResponse('{}')
     return HttpResponse(json.dumps(user.to_dict(int(data_level))))
 
 def updateCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
-    createCollection(user)
+    services.createCollection(user)
     return HttpResponse(json.dumps(user.to_dict(1)))
 
 def setRecordListen(request, record_id, listen_name, listen_key):
@@ -34,4 +33,6 @@ def getArtist(request, artist_id):
     return HttpResponse(json.dumps(artist.to_dict()))
 
 def updateArtist(request, artist_id):
-    return HttpResponse("{}")
+    artist = get_object_or_404(Artist, id=artist_id)
+    services.updateArtist(artist)
+    return HttpResponse(json.dumps(artist.to_dict()))
