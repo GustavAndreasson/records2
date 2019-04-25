@@ -166,21 +166,29 @@ function Collection(div) {
 				self.artists.addArtist(artist.artist);
 			});
 		});
-        if ($("#record-" + record.id).length == 0) {
+		var recordElement = $("#record-" + record.id);
+        if (recordElement.length) {
+			if (filterRecord(record)) {
+				recordElement.show();
+			} else {
+				recordElement.hide();
+			}
+			recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
+			recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
+			recordElement.find(".cover").attr("src", record.thumbnail);
+        } else {
             var html = "<div class='record' id='record-" + record.id + "'";
             if (!filterRecord(record)) {
                 html += " style='display: none'";
             } else {
                 self.counter += 1;
             }
-            html += ">";
+            html += "><img class='cover format-" + record.format + "' src='" + record.thumbnail;
+			html += "' alt='" + getArtists(record.artists) + " - " + record.name;
+			html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
+			html += "</div>";
             $(self.div).append(html);
-        }
-        var html = "<img class='cover format-" + record.format + "' src='" + record.thumbnail;
-        html += "' alt='" + getArtists(record.artists) + " - " + record.name;
-        html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
-        html += "</div>";
-        $("#record-" + record.id).html(html);
+		}
     }
 
     function filterRecord(record) {
