@@ -8,6 +8,7 @@ class ArtistInline(admin.TabularInline):
 
 class TrackInline(admin.TabularInline):
     model = Track
+    extra = 0
 
 class ListenInline(admin.TabularInline):
     model = RecordListens

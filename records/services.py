@@ -65,13 +65,14 @@ def __getFormat(format_data):
     formats = []
     for format in format_data:
         format_string = format.get('name')
-        if "7\"" in format.get('descriptions'):
-            format_string += "7"
-        if "10\"" in format.get('descriptions'):
-            format_string += "10"
-        if "12\"" in format.get('descriptions'):
-            format_string += "12"
-        formats.append(format_string)
+        if format.get('descriptions'):
+            if "7\"" in format.get('descriptions'):
+                format_string += "7"
+            if "10\"" in format.get('descriptions'):
+                format_string += "10"
+            if "12\"" in format.get('descriptions'):
+                format_string += "12"
+        formats.append(format_string.replace(" ", "-"))
     return " ".join(formats)
 
 
