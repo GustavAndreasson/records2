@@ -161,21 +161,23 @@ function Collection(div) {
         $.each(record.artists, function(id, artist) {
             self.artists.addArtist(artist.artist);
         });
-		$.each(record.tracks, function(id, track) {
-			$.each(track.artists, function(id, artist) {
-				self.artists.addArtist(artist.artist);
-			});
-		});
-		var recordElement = $("#record-" + record.id);
+	$.each(record.tracks, function(id, track) {
+	    $.each(track.artists, function(id, artist) {
+		self.artists.addArtist(artist.artist);
+	    });
+	});
+	var recordElement = $("#record-" + record.id);
         if (recordElement.length) {
-			if (filterRecord(record)) {
-				recordElement.show();
-			} else {
-				recordElement.hide();
-			}
-			recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
-			recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
-			recordElement.find(".cover").attr("src", record.thumbnail);
+	    if (filterRecord(record)) {
+                if (!recordElement.is(":visible")) self.counter += 1;
+		recordElement.show();
+	    } else {
+                if (recordElement.is(":visible")) self.counter -= 1;
+		recordElement.hide();
+	    }
+	    recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
+	    recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
+	    recordElement.find(".cover").attr("src", record.thumbnail);
         } else {
             var html = "<div class='record' id='record-" + record.id + "'";
             if (!filterRecord(record)) {
@@ -183,12 +185,16 @@ function Collection(div) {
             } else {
                 self.counter += 1;
             }
-            html += "><img class='cover format-" + record.format + "' src='" + record.thumbnail;
-			html += "' alt='" + getArtists(record.artists) + " - " + record.name;
-			html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
-			html += "</div>";
+            var formats = "";
+            $.each(record.format.split(" "), function(i, format) {
+                formats += " format-" + format;
+            });
+            html += "><img class='cover" + formats + "' src='" + record.thumbnail;
+	    html += "' alt='" + getArtists(record.artists) + " - " + record.name;
+	    html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
+	    html += "</div>";
             $(self.div).append(html);
-		}
+	}
     }
 
     function filterRecord(record) {
@@ -432,7 +438,6 @@ function ArtistCollection(div) {
     }
 
     function addArtistData(data) {
-        console.log(data);
         if (data.image) $(self.div + " img").attr("src", data.image).show();
         if (data.description) $(self.div + " .description").html(data.description.replace(/\r/g, "<br />")).show();
         if (data.members) {
