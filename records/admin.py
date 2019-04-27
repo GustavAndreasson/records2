@@ -13,11 +13,15 @@ class ListenInline(admin.TabularInline):
     model = RecordListens
     extra = 0
 
+def reset_updated(modeladmin, request, queryset):
+    queryset.update(updated=None)
+
 class RecordAdmin(admin.ModelAdmin):
     fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'updated']
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']
+    actions = [reset_updated, ]
 
 admin.site.register(Record, RecordAdmin)
 

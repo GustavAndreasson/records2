@@ -4,30 +4,20 @@ from .models import *
 from . import discogs
 
 def createCollection(user):
-    collection = discogs.getCollection(user.username)
-    if collection:
-        for release in collection:
-            formats = []
-            for format in release['basic_information']['formats']:
-                format_string = format.get('name')
-                if "7\"" in format.get('description'):
-                    format_string += "7"
-                if "10\"" in format.get('description'):
-                    format_string += "10"
-                if "12\"" in format.get('description'):
-                    format_string += "12"
-                formats = formats.append(format_string)
-            record, created = Record.objects.get_or_create(id=release['basic_information']['id'],
+    collection_data = discogs.getCollection(user.username)
+    if collection_data:
+        for release_data in collection:
+            record, created = Record.objects.get_or_create(id=release_data['basic_information']['id'],
                                                            defaults={
-                                                               'name': release['basic_information'].get('title'),
-                                                               'cover': release['basic_information'].get('cover_image'),
-                                                               'thumbnail': release['basic_information'].get('thumb'),
-                                                               'year': release['basic_information'].get('year'),
-                                                               'format': " ".join(formats)
+                                                               'name': release_data['basic_information'].get('title'),
+                                                               'cover': release_data['basic_information'].get('cover_image'),
+                                                               'thumbnail': release_data['basic_information'].get('thumb'),
+                                                               'year': release_data['basic_information'].get('year'),
+                                                               'format': __getFormat(release_data['basic_information'].get('formats'))
                                                            })
             if created:
                 position = 0
-                for r_artist in release['basic_information']['artists']:
+                for r_artist in release_data['basic_information']['artists']:
                     artist, created = Artist.objects.get_or_create(id=r_artist['id'],
                                                                    defaults={'name': __fixArtistName(r_artist['name'])})
                     ra = RecordArtists.objects.create(record=record,
@@ -35,7 +25,7 @@ def createCollection(user):
                                                       delimiter=r_artist['join'],
                                                       position=position)
                     position += 1
-            ur = UserRecords.objects.create(user=user, record=record, added_date=release['date_added'][0:10])
+            ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
         return True
     return False
 
@@ -66,8 +56,23 @@ def updateRecord(record):
                 listen_key = video['uri'][video['uri'].find('v=')+2:]
                 RecordListens.objects.create(record=record, listen=listen, listen_key=listen_key)
     record.year = release_data.get('year')
+    if release_data.get('formats'):
+        record.format = __getFormat(release_data.get('formats'))
     record.updated = date.today()
     record.save()
+
+def __getFormat(format_data):
+    formats = []
+    for format in format_data:
+        format_string = format.get('name')
+        if "7\"" in format.get('descriptions'):
+            format_string += "7"
+        if "10\"" in format.get('descriptions'):
+            format_string += "10"
+        if "12\"" in format.get('descriptions'):
+            format_string += "12"
+        formats.append(format_string)
+    return " ".join(formats)
 
 
 def __createTrack(record, track_data):

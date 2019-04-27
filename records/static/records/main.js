@@ -161,23 +161,23 @@ function Collection(div) {
         $.each(record.artists, function(id, artist) {
             self.artists.addArtist(artist.artist);
         });
-	$.each(record.tracks, function(id, track) {
-	    $.each(track.artists, function(id, artist) {
-		self.artists.addArtist(artist.artist);
-	    });
-	});
-	var recordElement = $("#record-" + record.id);
+        $.each(record.tracks, function(id, track) {
+            $.each(track.artists, function(id, artist) {
+                self.artists.addArtist(artist.artist);
+            });
+        });
+        var recordElement = $("#record-" + record.id);
         if (recordElement.length) {
-	    if (filterRecord(record)) {
+            if (filterRecord(record)) {
                 if (!recordElement.is(":visible")) self.counter += 1;
-		recordElement.show();
-	    } else {
+                recordElement.show();
+            } else {
                 if (recordElement.is(":visible")) self.counter -= 1;
-		recordElement.hide();
-	    }
-	    recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
-	    recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
-	    recordElement.find(".cover").attr("src", record.thumbnail);
+                recordElement.hide();
+            }
+            recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
+            recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
+            recordElement.find(".cover").attr("src", record.thumbnail);
         } else {
             var html = "<div class='record' id='record-" + record.id + "'";
             if (!filterRecord(record)) {
@@ -190,11 +190,11 @@ function Collection(div) {
                 formats += " format-" + format;
             });
             html += "><img class='cover" + formats + "' src='" + record.thumbnail;
-	    html += "' alt='" + getArtists(record.artists) + " - " + record.name;
-	    html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
-	    html += "</div>";
+            html += "' alt='" + getArtists(record.artists) + " - " + record.name;
+            html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
+            html += "</div>";
             $(self.div).append(html);
-	}
+        }
     }
 
     function filterRecord(record) {
@@ -340,7 +340,7 @@ function Collection(div) {
             self.updated = new Date();
         }
         localStorage.setItem("collection." + self.user,
-                             JSON.stringify({'collection': self.collection, 'updated': self.updated}));
+        JSON.stringify({'collection': self.collection, 'updated': self.updated}));
     }
 
     self.loadCollection = function(dataLevel) {
