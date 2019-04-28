@@ -1,5 +1,6 @@
 from django.contrib import admin
 from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens
+from records.services import updateRecord
 # Register your models here.
 
 class ArtistInline(admin.TabularInline):
@@ -17,18 +18,23 @@ class ListenInline(admin.TabularInline):
 def reset_updated(modeladmin, request, queryset):
     queryset.update(updated=None)
 
+def update_record(modeladmin, request, queryset):
+    for record in queryset:
+        updateRecord(record)
+
 class RecordAdmin(admin.ModelAdmin):
     fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'updated']
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']
-    actions = [reset_updated, ]
+    actions = [reset_updated, update_record, ]
 
 admin.site.register(Record, RecordAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'updated')
     search_fields = ['name']
+    actions = [reset_updated, ]
 
 admin.site.register(Artist, ArtistAdmin)
 
