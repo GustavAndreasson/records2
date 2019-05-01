@@ -2,28 +2,32 @@ import re
 from datetime import date
 from .models import *
 from . import discogs
+from . import spotify
 
 def createCollection(user):
     collection_data = discogs.getCollection(user.username)
     if collection_data:
         for release_data in collection:
-            record, created = Record.objects.get_or_create(id=release_data['basic_information']['id'],
-                                                           defaults={
-                                                               'name': release_data['basic_information'].get('title'),
-                                                               'cover': release_data['basic_information'].get('cover_image'),
-                                                               'thumbnail': release_data['basic_information'].get('thumb'),
-                                                               'year': release_data['basic_information'].get('year'),
-                                                               'format': __getFormat(release_data['basic_information'].get('formats'))
-                                                           })
+            record, created = Record.objects.get_or_create(
+                id=release_data['basic_information']['id'],
+                defaults={
+                    'name': release_data['basic_information'].get('title'),
+                    'cover': release_data['basic_information'].get('cover_image'),
+                    'thumbnail': release_data['basic_information'].get('thumb'),
+                    'year': release_data['basic_information'].get('year'),
+                    'format': __getFormat(release_data['basic_information'].get('formats'))
+                })
             if created:
                 position = 0
                 for r_artist in release_data['basic_information']['artists']:
-                    artist, created = Artist.objects.get_or_create(id=r_artist['id'],
-                                                                   defaults={'name': __fixArtistName(r_artist['name'])})
-                    ra = RecordArtists.objects.create(record=record,
-                                                      artist=artist,
-                                                      delimiter=r_artist['join'],
-                                                      position=position)
+                    artist, created = Artist.objects.get_or_create(
+                        id=r_artist['id'],
+                        defaults={'name': __fixArtistName(r_artist['name'])})
+                    ra = RecordArtists.objects.create(
+                        record=record,
+                        artist=artist,
+                        delimiter=r_artist['join'],
+                        position=position)
                     position += 1
             ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
         return True
@@ -49,12 +53,18 @@ def updateRecord(record):
     if release_data.get('images'):
         record.cover = release_data['images'][0].get('uri')
         record.thumbnail = release_data['images'][0].get('uri')
+    spotify_listen = Listen.objects.get(name="spotify")
+    if RecordListens.objects.filter(record=record,listen=spotify_listen).count() == 0:
+        spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
+        if spotify_id:
+            RecordListens.objects.create(record=record,listen=spotify_listen, listen_key=spotify_id)
     if release_data.get('videos'):
-        listen = Listen.objects.get(name='youtube')
+        youtube_listen = Listen.objects.get(name='youtube')
         for video in release_data.get('videos'):
             if "youtube" in video['uri'] and "v=" in video['uri']:
-                listen_key = video['uri'][video['uri'].find('v=')+2:]
-                RecordListens.objects.create(record=record, listen=listen, listen_key=listen_key)
+                youtube_key = video['uri'][video['uri'].find('v=')+2:]
+                if RecordListens.objects.filter(record=record,listen=youtube_listen, listen_key=youtube_key).count() == 0:
+                    RecordListens.objects.create(record=record, listen=youtube_listen, listen_key=youtube_key)
     record.year = release_data.get('year')
     if release_data.get('formats'):
         record.format = __getFormat(release_data.get('formats'))
@@ -83,12 +93,14 @@ def __createTrack(record, track_data):
     if track_data.get('artists'):
         position = 0
         for t_artist in track_data.get('artists'):
-            artist, created = Artist.objects.get_or_create(id=t_artist['id'],
-                                                           defaults={'name': __fixArtistName(t_artist['name'])})
-            ta = TrackArtists.objects.create(track=track,
-                                             artist=artist,
-                                             delimiter=t_artist['join'],
-                                             position=position)
+            artist, created = Artist.objects.get_or_create(
+                id=t_artist['id'],
+                defaults={'name': __fixArtistName(t_artist['name'])})
+            ta = TrackArtists.objects.create(
+                track=track,
+                artist=artist,
+                delimiter=t_artist['join'],
+                position=position)
             position += 1
 
 def updateArtist(artist):
@@ -98,18 +110,22 @@ def updateArtist(artist):
         artist.image = artist_data['images'][0].get('resource_url')
     if artist_data.get('members'):
         for member_data in artist_data.get('members'):
-            member, created = Artist.objects.get_or_create(id=member_data['id'],
-                                                           defaults={'name': __fixArtistName(member_data['name'])})
-            am = ArtistMembers.object.create(group=artist,
-                                             member=member,
-                                             active=member_data['active'])
+            member, created = Artist.objects.get_or_create(
+                id=member_data['id'],
+                defaults={'name': __fixArtistName(member_data['name'])})
+            am = ArtistMembers.object.create(
+                group=artist,
+                member=member,
+                active=member_data['active'])
     if artist_data.get('groups'):
         for group_data in artist_data.get('groups'):
-            group, created = Artist.objects.get_or_create(id=group_data['id'],
-                                                          defaults={'name': __fixArtistName(group_data['name'])})
-            am = ArtistMembers.object.create(group=group,
-                                             member=artist,
-                                             active=group_data['active'])
+            group, created = Artist.objects.get_or_create(
+                id=group_data['id'],
+                defaults={'name': __fixArtistName(group_data['name'])})
+            am = ArtistMembers.object.create(
+                group=group,
+                member=artist,
+                active=group_data['active'])
     artist.updated = date.today()
     artist.save()
 
