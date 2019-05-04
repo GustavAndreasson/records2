@@ -175,9 +175,6 @@ function Collection(div) {
                 if (recordElement.is(":visible")) self.counter -= 1;
                 recordElement.hide();
             }
-            recordElement.find(".cover").attr("alt", getArtists(record.artists) + " - " + record.name);
-            recordElement.find(".cover").attr("title", getArtists(record.artists) + " - " + record.name);
-            recordElement.find(".cover").attr("src", record.thumbnail);
         } else {
             var html = "<div class='record' id='record-" + record.id + "'";
             if (!filterRecord(record)) {
@@ -185,16 +182,19 @@ function Collection(div) {
             } else {
                 self.counter += 1;
             }
-            var formats = "";
-            $.each(record.format.split(" "), function(i, format) {
-                formats += " format-" + format;
-            });
-            html += "><img class='cover" + formats + "' src='" + record.thumbnail;
-            html += "' alt='" + getArtists(record.artists) + " - " + record.name;
-            html += "' title='" + getArtists(record.artists) + " - " + record.name + "'>";
+            html += "><img class='cover'>"
             html += "</div>";
+            recordElement = $(html);
             $(self.div).append(html);
         }
+        var recordCover = recordElement.find(".cover")
+        var formats = "";
+        $.each(record.format.split(" "), function(i, format) {
+            recordCover.addClass("format-" + format);
+        });
+        recordCover.attr("alt", getArtists(record.artists) + " - " + record.name);
+        recordCover.attr("title", getArtists(record.artists) + " - " + record.name);
+        recordCover.attr("src", record.thumbnail);
     }
 
     function filterRecord(record) {
@@ -278,42 +278,53 @@ function Collection(div) {
             html += "</div>";
             tracks.append(html);
         });
-        var listens = recordPopup.find(".listens");
-        listens.children().not(':last').remove();
-        var listenSelect = recordPopup.find(".listen-select");
-        listenSelect.children().not(':last').remove();
-        $.each(record.listens, function(i, listen) {
-            var listenElement = $(listen.html);
-            listens.children().last().before(listenElement);
-            var selectListen = $("<span><img src='" + listen.icon + "'></span>");
-            selectListen.click(function() {
-                listens.children().hide();
-                listenElement.show();
-                return false;
-            });
-            listenSelect.children().last().before(selectListen);
-        });
-
-        listens.children().hide();
-        listens.children().first().show();
+        addListens(recordPopup.find(".listens"), record);
         recordPopup.show();
+    };
+
+    function addListens(listensElement, record) {
+        listensElement.children().not(':last').remove();
+        var listenSelect = listensElement.parent().find(".listen-select");
+        listenSelect.children().not(':last').remove();
+        var first = true;
+        $.each(record.listens, function(i, listen) {
+            var listenElement = $(listen.html).addClass("listen-" + listen.name);
+            if (!first) listenElement.hide();
+            listensElement.children().last().before(listenElement);
+            if (!listenSelect.find(".select-" + listen.name).length) {
+                var selectListen = $("<span class='select-" + listen.name + "'><img src='" + listen.icon + "'></span>");
+                if (first) selectListen.addClass("active");
+                selectListen.click(function() {
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+                    listensElement.children().hide();
+                    listensElement.children(".listen-" + listen.name).show();
+                    return false;
+                });
+                listenSelect.children().last().before(selectListen);
+            }
+            first = false;
+        });
+        listensElement.find(".add-listen").hide();
+        
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
-                "record/" + record.id + "/set/" + type + "/" + recordPopup.find("#listen-id").val(),
+                "record/" + record.id + "/set/" + type + "/" + listenSelect.find("#listen-id").val()
             ).done(function(data) {
                 self.collection[record.id] = data;
                 self.updateCollectionCache(false);
+                addListens(listesElement, data);
             });
         };
-        recordPopup.find(".add-listen input").click(function() {return false;});
-        recordPopup.find(".add-listen span").off("click").click(addListenId);
+        listensElement.find(".add-listen input").click(function() {return false;});
+        listensElement.find(".add-listen span").off("click").click(addListenId);
         listenSelect.find("#add-listen").click(function() {
-            listens.children().hide();
-            listens.find(".add-listen").show();
+            listensElement.children().hide();
+            listensElement.find(".add-listen").show();
             return false;
         });
-    };
+    }
 
     self.setCollection = function(user) {
         localStorage.setItem("discogs_username", user);
@@ -359,7 +370,7 @@ function Collection(div) {
                     $("#status").html("");
                     $("#counter").text(self.counter);
                     if (count == 0) {
-                        $("#status").html("Ingen discogsanvändare men användarnamn " + self.user);
+                        $("#status").html("Ingen discogsanvändare med användarnamn " + self.user);
                         $("#set-collection").show();
                         return;
                     }
