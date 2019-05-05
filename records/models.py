@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
+from django.core.cache import cache
 
 from django.db import models
 
@@ -62,6 +63,11 @@ class Record(models.Model):
         return self.name
 
     def to_dict(self, data_level):
+        cache_key = 'record-' + str(self.id) + '-' + str(data_level)
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            cached_data['cached'] = True
+            return cached_data
         dict = {
             "id": self.id,
             "name": self.name,
@@ -69,14 +75,17 @@ class Record(models.Model):
             "format": self.format,
             "year":  self.year,
             "thumbnail": self.thumbnail,
-            "data_level": data_level
+            "data_level": data_level,
+            "cache_key": cache_key
         }
         if data_level == 0:
+            cache.set(cache_key, dict)
             return dict
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
         dict["artists"] = artists
         if data_level == 1:
+            cache.set(cache_key, dict)
             return dict
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
@@ -84,6 +93,7 @@ class Record(models.Model):
         track_objects = self.track_set.all()
         tracks = [track.to_dict() for track in track_objects]
         dict["tracks"] = tracks
+        cache.set(cache_key, dict)
         return dict
 
     def get_artist(self):
