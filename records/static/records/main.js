@@ -185,7 +185,7 @@ function Collection(div) {
             html += "><img class='cover'>"
             html += "</div>";
             recordElement = $(html);
-            $(self.div).append(html);
+            $(self.div).append(recordElement);
         }
         var recordCover = recordElement.find(".cover")
         var formats = "";
@@ -306,7 +306,7 @@ function Collection(div) {
             first = false;
         });
         listensElement.find(".add-listen").hide();
-        
+
         var addListenId = function() {
             var type = $(this).data('type');
             $.getJSON(
@@ -392,7 +392,7 @@ function Collection(div) {
             //{page:page, page_size:pagesize}
         ).done(
             function(data) {
-                $.each(data.releases, function(i, release) {
+                $.each(data, function(i, release) {
                     addRecord(release);
                 });
                 $("#status").html("");

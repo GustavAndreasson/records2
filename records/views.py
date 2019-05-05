@@ -12,14 +12,14 @@ def index(request):
 def getCollection(request, username, data_level):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
-        if not services.createCollection(user):
+        if not services.updateCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
             return HttpResponse('{}')
     return HttpResponse(json.dumps(user.to_dict(int(data_level))))
 
 def updateCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
-    services.createCollection(user)
+    services.updateCollection(user)
     return HttpResponse(json.dumps(user.to_dict(1)))
 
 def setRecordListen(request, record_id, listen_name, listen_key):

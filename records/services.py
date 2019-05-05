@@ -4,20 +4,21 @@ from .models import *
 from . import discogs
 from . import spotify
 
-def createCollection(user):
+def updateCollection(user):
     collection_data = discogs.getCollection(user.username)
     if collection_data:
-        for release_data in collection:
-            record, created = Record.objects.get_or_create(
-                id=release_data['basic_information']['id'],
-                defaults={
-                    'name': release_data['basic_information'].get('title'),
-                    'cover': release_data['basic_information'].get('cover_image'),
-                    'thumbnail': release_data['basic_information'].get('thumb'),
-                    'year': release_data['basic_information'].get('year'),
-                    'format': __getFormat(release_data['basic_information'].get('formats'))
-                })
-            if created:
+        old_collection = list(UserRecords.objects.filter(user=user).values_list('record_id', flat=True))
+        for release_data in collection_data:
+            if release_data['basic_information']['id'] not in old_collection:
+                record, created = Record.objects.get_or_create(
+                    id=release_data['basic_information']['id'],
+                    defaults={
+                        'name': release_data['basic_information'].get('title'),
+                        'cover': release_data['basic_information'].get('cover_image'),
+                        'thumbnail': release_data['basic_information'].get('thumb'),
+                        'year': release_data['basic_information'].get('year'),
+                        'format': __getFormat(release_data['basic_information'].get('formats'))
+                    })
                 position = 0
                 for r_artist in release_data['basic_information']['artists']:
                     artist, created = Artist.objects.get_or_create(
@@ -29,7 +30,10 @@ def createCollection(user):
                         delimiter=r_artist['join'],
                         position=position)
                     position += 1
-            ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
+                ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
+            else:
+                old_collection.remove(release_data['basic_information']['id'])
+        UserRecords.objects.filter(user=user).filter(record_id__in=old_collection).delete()
         return True
     return False
 
