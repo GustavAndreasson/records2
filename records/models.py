@@ -28,7 +28,14 @@ class Artist(models.Model):
         members = [{"artist": mr.member.to_dict(False), "active": mr.active} for mr in member_relations]
         group_relations = ArtistMembers.objects.filter(member=self)
         groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gt in group_relations]
-        return {"id": self.id, "name": self.name, "image": self.image, "description": self.description, "members": members, "groups": groups}
+        return {
+            "id": self.id,
+            "name": self.name,
+            "image": self.image,
+            "description": self.description,
+            "members": members,
+            "groups": groups
+        }
 
 
 class Listen(models.Model):
@@ -55,7 +62,15 @@ class Record(models.Model):
         return self.name
 
     def to_dict(self, data_level):
-        dict = {"id": self.id, "name": self.name, "cover": self.cover, "format": self.format, "year":  self.year, "thumbnail": self.thumbnail, "data_level": data_level}
+        dict = {
+            "id": self.id,
+            "name": self.name,
+            "cover": self.cover,
+            "format": self.format,
+            "year":  self.year,
+            "thumbnail": self.thumbnail,
+            "data_level": data_level
+        }
         if data_level == 0:
             return dict
         ras = RecordArtists.objects.filter(record=self)
@@ -122,9 +137,15 @@ class RecordListens(models.Model):
     record = models.ForeignKey(Record, on_delete=models.CASCADE)
     listen = models.ForeignKey(Listen, on_delete=models.CASCADE)
     listen_key = models.CharField(max_length=64, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
 
     def to_dict(self):
-        return {"name": self.listen.name, "icon": self.listen.icon, "html": self.listen.template.format(self.listen_key)}
+        return {
+            "type": self.listen.name,
+            "name": self.name,
+            "icon": self.listen.icon,
+            "html": self.listen.template.format(self.listen_key)
+        }
 
 
 class RecordArtists(models.Model):

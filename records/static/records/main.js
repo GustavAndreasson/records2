@@ -288,17 +288,22 @@ function Collection(div) {
         listenSelect.children().not(':last').remove();
         var first = true;
         $.each(record.listens, function(i, listen) {
-            var listenElement = $(listen.html).addClass("listen-" + listen.name);
+            var html = "<div class='listen'>";
+            if (listen.name) {
+                html += "<span class='listen-name'>" + listen.name + "</span>";
+            }
+            html += listen.html + "</div>";
+            var listenElement = $(html).addClass("listen-" + listen.type);
             if (!first) listenElement.hide();
             listensElement.children().last().before(listenElement);
-            if (!listenSelect.find(".select-" + listen.name).length) {
-                var selectListen = $("<span class='select-" + listen.name + "'><img src='" + listen.icon + "'></span>");
+            if (!listenSelect.find(".select-" + listen.type).length) {
+                var selectListen = $("<span class='select-" + listen.type + "'><img src='" + listen.icon + "'></span>");
                 if (first) selectListen.addClass("active");
                 selectListen.click(function() {
                     $(this).siblings().removeClass("active");
                     $(this).addClass("active");
                     listensElement.children().hide();
-                    listensElement.children(".listen-" + listen.name).show();
+                    listensElement.children(".listen-" + listen.type).show();
                     return false;
                 });
                 listenSelect.children().last().before(selectListen);

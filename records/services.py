@@ -68,7 +68,7 @@ def updateRecord(record):
             if "youtube" in video['uri'] and "v=" in video['uri']:
                 youtube_key = video['uri'][video['uri'].find('v=')+2:]
                 if RecordListens.objects.filter(record=record,listen=youtube_listen, listen_key=youtube_key).count() == 0:
-                    RecordListens.objects.create(record=record, listen=youtube_listen, listen_key=youtube_key)
+                    RecordListens.objects.create(record=record, listen=youtube_listen, listen_key=youtube_key, name=video.get('title'))
     record.year = release_data.get('year')
     if release_data.get('formats'):
         record.format = __getFormat(release_data.get('formats'))
