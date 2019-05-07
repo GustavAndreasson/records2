@@ -287,6 +287,7 @@ function Collection(div) {
         var listenSelect = listensElement.parent().find(".listen-select");
         listenSelect.children().not(':last').remove();
         var first = true;
+        var firstType = "";
         $.each(record.listens, function(i, listen) {
             var html = "<div class='listen'>";
             if (listen.name) {
@@ -294,7 +295,8 @@ function Collection(div) {
             }
             html += listen.html + "</div>";
             var listenElement = $(html).addClass("listen-" + listen.type);
-            if (!first) listenElement.hide();
+            if (first) firstType = listen.type;
+            if (listen.type != firstType) listenElement.hide();
             listensElement.children().last().before(listenElement);
             if (!listenSelect.find(".select-" + listen.type).length) {
                 var selectListen = $("<span class='select-" + listen.type + "'><img src='" + listen.icon + "'></span>");

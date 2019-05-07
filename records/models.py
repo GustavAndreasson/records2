@@ -63,11 +63,11 @@ class Record(models.Model):
         return self.name
 
     def to_dict(self, data_level):
-        cache_key = 'record-' + str(self.id) + '-' + str(data_level)
-        cached_data = cache.get(cache_key)
-        if cached_data:
-            cached_data['cached'] = True
-            return cached_data
+        if data_level > 1:
+            cached_data = cache.get(self.get_cache_key())
+            if cached_data:
+                cached_data['cached'] = True
+                return cached_data
         dict = {
             "id": self.id,
             "name": self.name,
@@ -75,17 +75,14 @@ class Record(models.Model):
             "format": self.format,
             "year":  self.year,
             "thumbnail": self.thumbnail,
-            "data_level": data_level,
-            "cache_key": cache_key
+            "data_level": data_level
         }
         if data_level == 0:
-            cache.set(cache_key, dict)
             return dict
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
         dict["artists"] = artists
         if data_level == 1:
-            cache.set(cache_key, dict)
             return dict
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
@@ -93,8 +90,11 @@ class Record(models.Model):
         track_objects = self.track_set.all()
         tracks = [track.to_dict() for track in track_objects]
         dict["tracks"] = tracks
-        cache.set(cache_key, dict)
+        cache.set(self.get_cache_key(), dict)
         return dict
+
+    def get_cache_key(self):
+        return 'record-' + str(self.id)
 
     def get_artist(self):
         ras = RecordArtists.objects.filter(record=self)
