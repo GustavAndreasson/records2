@@ -56,7 +56,7 @@ def updateRecord(record):
             __createTrack(record, track_data)
     if release_data.get('images'):
         record.cover = release_data['images'][0].get('uri')
-        record.thumbnail = release_data['images'][0].get('uri')
+        record.thumbnail = release_data['images'][0].get('uri150')
     spotify_listen = Listen.objects.get(name="spotify")
     if RecordListens.objects.filter(record=record,listen=spotify_listen).count() == 0:
         spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
