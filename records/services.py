@@ -4,8 +4,12 @@ from django.core.cache import cache
 from .models import *
 from . import discogs
 from . import spotify
+import logging
+
+logger = logging.getLogger(__name__)
 
 def updateCollection(user):
+    logger.info("Updating collection for " + user.username)
     collection_data = discogs.getCollection(user.username)
     if collection_data:
         old_collection = list(UserRecords.objects.filter(user=user).values_list('record_id', flat=True))
@@ -20,11 +24,15 @@ def updateCollection(user):
                         'year': release_data['basic_information'].get('year'),
                         'format': __getFormat(release_data['basic_information'].get('formats'))
                     })
+                if created:
+                    logger.info("Created record " + record.name + " (" + str(record.id) + ")")
                 position = 0
                 for r_artist in release_data['basic_information']['artists']:
                     artist, created = Artist.objects.get_or_create(
                         id=r_artist['id'],
                         defaults={'name': __fixArtistName(r_artist['name'])})
+                    if created:
+                        logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
                     ra = RecordArtists.objects.create(
                         record=record,
                         artist=artist,
@@ -32,14 +40,21 @@ def updateCollection(user):
                         position=position)
                     position += 1
                 ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
+                logger.info("Added record " + record.name + " (" + str(record.id) + ") to collection for " + user.username)
             else:
                 old_collection.remove(release_data['basic_information']['id'])
-        UserRecords.objects.filter(user=user).filter(record_id__in=old_collection).delete()
+        removed_records = UserRecords.objects.filter(user=user).filter(record_id__in=old_collection)
+        if removed_records.exists():
+            for ur in removed_records:
+                logger.info("Removed record " + ur.record.name + " (" + str(ur.record.id) + ") from collection for " + user.username)
+            removed_records.delete()
         return True
+    logger.info("Did not find collection for " + user.username + " on discogs")
     return False
 
 
 def updateRecord(record):
+    logger.info("Updating record " + record.name + " (" + str(record.id) + ")")
     release_data = discogs.getRelease(record.id)
     if release_data:
         if release_data.get('master_id'):
@@ -78,6 +93,7 @@ def updateRecord(record):
         record.save()
         cache.delete(record.get_cache_key())
         return True
+    logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs")
     return False
 
 def __getFormat(format_data):
@@ -113,6 +129,7 @@ def __createTrack(record, track_data):
             position += 1
 
 def updateArtist(artist):
+    logger.info("Updating artist " + artist.name + " (" + str(artist.id) + ")")
     artist_data = discogs.getArtist(artist.id)
     if artist_data:
         artist.description = artist_data.get('profile')
@@ -123,6 +140,8 @@ def updateArtist(artist):
                 member, created = Artist.objects.get_or_create(
                     id=member_data['id'],
                     defaults={'name': __fixArtistName(member_data['name'])})
+                if created:
+                    logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
                 am = ArtistMembers.object.create(
                     group=artist,
                     member=member,
@@ -132,6 +151,8 @@ def updateArtist(artist):
                 group, created = Artist.objects.get_or_create(
                     id=group_data['id'],
                     defaults={'name': __fixArtistName(group_data['name'])})
+                if created:
+                    logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
                 am = ArtistMembers.object.create(
                     group=group,
                     member=artist,
@@ -139,6 +160,7 @@ def updateArtist(artist):
         artist.updated = date.today()
         artist.save()
         return True
+    logger.info("Did not find artist " + artist.name + " (" + str(artist.id) + ") on discogs")
     return False
 
 def __fixArtistName(name):

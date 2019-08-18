@@ -87,7 +87,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{asctime} {levelname} {module} {process:d} {thread:d} {message}',
+            'format': '{asctime} {levelname} {module} {message}',
             'style': '{',
         },
         'simple': {
@@ -102,9 +102,19 @@ LOGGING = {
             'filename': 'debug.log',
             'formatter': 'verbose',
         },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        }
     },
     'loggers': {
         'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'records.services': {
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
