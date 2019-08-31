@@ -114,7 +114,7 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-        'records.services': {
+        'records': {
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,

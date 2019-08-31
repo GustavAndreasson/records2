@@ -1,6 +1,7 @@
-import requests, json, base64, time
+import requests, json, base64, time, logging
 from decouple import config
 
+logger = logging.getLogger(__name__)
 token = ("", 0)
 
 def getAlbum(artist, album):
@@ -12,6 +13,9 @@ def getAlbum(artist, album):
         albums_data = json.loads(r.text)
         if albums_data['albums']['total'] > 0:
             return albums_data['albums']['items'][0]
+    elif r.status_code >= 400:
+        e = json.loads(r.text)
+        logger.error("Request to spotify failed:\n" + str(e.get('error')) + "\n" + str(e.get('error_description')))
     return None
 
 def getAlbumId(artist, album):
@@ -24,6 +28,7 @@ def __getToken():
     global token
     if time.time() > token[1]:
         token = __renewToken()
+        logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token[1])))
     return token[0]
 
 def __renewToken():
