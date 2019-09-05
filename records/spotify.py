@@ -1,21 +1,31 @@
-import requests, json, base64, time, logging
+import requests, base64, time, logging
 from decouple import config
 
 logger = logging.getLogger(__name__)
-token = ("", 0)
+token, token_expire = ("", 0)
+
+class SpotifyError(Exception):
+    def __init__(self, code, message):
+        self.code = code
+        self.message = message
+        
+    def __str__(self):
+        return str(self.code) + ":" + self.message
 
 def getAlbum(artist, album):
     auth = "Bearer " + __getToken()
     headers = {"Authorization": auth}
     query = "album:" + album + "%20artist:" + artist + "&type=album"
     r = requests.get(config('SPOTIFY_API_URL') + "search?q=" + query, headers=headers)
+    try:
+        data = r.json()
+    except JSONDecodeError:
+        data = {}
     if r.status_code == 200:
-        albums_data = json.loads(r.text)
-        if albums_data['albums']['total'] > 0:
-            return albums_data['albums']['items'][0]
+        if data['albums']['total'] > 0:
+            return data['albums']['items'][0]
     elif r.status_code >= 400:
-        e = json.loads(r.text)
-        logger.error("Request to spotify failed:\n" + str(e.get('error')) + "\n" + str(e.get('error_description')))
+        raise SpotifyError(r.status_code, data.get('error'))
     return None
 
 def getAlbumId(artist, album):
@@ -26,10 +36,10 @@ def getAlbumId(artist, album):
 
 def __getToken():
     global token
-    if time.time() > token[1]:
-        token = __renewToken()
-        logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token[1])))
-    return token[0]
+    if time.time() > _expire:
+        token, token_expire = __renewToken()
+        logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token_expire)))
+    return token
 
 def __renewToken():
     auth = base64.b64encode(bytes(config('SPOTIFY_ID') + ":" + config('SPOTIFY_SECRET'),"utf-8"))
@@ -39,4 +49,4 @@ def __renewToken():
     }
     data = {"grant_type": "client_credentials"}
     r = requests.post(config('SPOTIFY_ACCOUNT_URL') + "token", data=data, headers=headers)
-    return (json.loads(r.text)['access_token'], json.loads(r.text)['expires_in'] + time.time())
+    return (r.json()['access_token'], r.json()['expires_in'] + time.time())

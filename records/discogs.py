@@ -1,4 +1,4 @@
-import requests, json, time, logging
+import requests, time, logging
 from decouple import config
 from .models import DiscogsAccess
 

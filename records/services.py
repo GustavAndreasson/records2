@@ -76,9 +76,12 @@ def updateRecord(record):
             record.thumbnail = release_data['images'][0].get('uri150')
         spotify_listen = Listen.objects.get(name="spotify")
         if RecordListens.objects.filter(record=record,listen=spotify_listen).count() == 0:
-            spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
-            if spotify_id:
-                RecordListens.objects.create(record=record,listen=spotify_listen, listen_key=spotify_id)
+            try:
+                spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
+                if spotify_id:
+                    RecordListens.objects.create(record=record,listen=spotify_listen, listen_key=spotify_id)
+            except SpotifyError as se:
+                logger.error("Request to spotify failed:\n" + str(se))
         if release_data.get('videos'):
             youtube_listen = Listen.objects.get(name='youtube')
             for video in release_data.get('videos'):
