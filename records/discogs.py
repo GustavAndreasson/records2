@@ -4,6 +4,14 @@ from .models import DiscogsAccess
 
 logger = logging.getLogger(__name__)
 
+class DiscogsError(Exception):
+    def __init__(self, code, message):
+        self.code = code
+        self.message = message
+        
+    def __str__(self):
+        return str(self.code) + ":" + self.message
+
 def getCollection(user_name):
     return __getPaginatedCollection("users/" + user_name + "/collection/folders/0/releases")
 
@@ -29,8 +37,8 @@ def __getPaginatedCollection(uri):
             page = page + 1
             response = __readUri(uri + "?page=" + str(page))
             collection.extend(response['releases'])
-    except KeyError: 
-        logger.error("Not expected collection response from Discogs:\n" + json.dumps(response))
+    except DiscogsError as de: 
+        logger.error("Not expected collection response from Discogs:\n" + str(de))
     return collection
 
 def __readUri(uri):
@@ -41,15 +49,17 @@ def __readUri(uri):
         time.sleep(wait)
     DiscogsAccess.objects.create(timestamp=time.time())
     headers = {"User-Agent": config('DISCOGS_AGENT')}
-    first = "&" if "?" in uri else "?"
-    auth = first + "key=" + config('DISCOGS_KEY') + "&secret=" + config('DISCOGS_SECRET')
-    url = config('DISCOGS_BASE_URL') + uri + auth
-    r = requests.get(url, headers=headers)
-    data = json.loads(r.text)
+    params = {"key": config('DISCOGS_KEY'), "secret": config('DISCOGS_SECRET')}
+    url = config('DISCOGS_BASE_URL') + uri
+    r = requests.get(url, params=params, headers=headers)
+    try:
+        data = r.json()
+    except JSONDecodeError:
+        data = {}
     if r.status_code == 429:
         logger.error("Too many requests to Discogs\n" + data.get('message') + "\ntrying again after 60 seconds")
         time.sleep(60)
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, params=params, headers=headers)
     elif r.status_code != 200:
-        logger.error("Request to Discogs (" + url + ") failed with status " + r.status_code + "\n" + data.get('message'))
+        raise DiscogsError(r.status_code, data.get('message'))
     return data
