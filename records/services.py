@@ -55,18 +55,20 @@ def updateCollection(user):
 
 def updateRecord(record):
     logger.info("Updating record " + record.name + " (" + str(record.id) + ")")
-    release_data = discogs.getRelease(record.id)
-    if release_data:
+    try:
+        release_data = discogs.getRelease(record.id)
         if release_data.get('master_id'):
-            master_data = discogs.getMaster(release_data.get('master_id'))
-            release_data['year'] = master_data.get('year')
-            if not release_data.get('images'):
-                if master_data.get('images'):
-                    release_data['images'] = master_data.get('images')
-            if not release_data.get('videos'):
-                if master_data.get('videos'):
-                    release_data['videos'] = master_data.get('videos')
-
+            try:
+                master_data = discogs.getMaster(release_data.get('master_id'))
+                release_data['year'] = master_data.get('year')
+                if not release_data.get('images'):
+                    if master_data.get('images'):
+                        release_data['images'] = master_data.get('images')
+                if not release_data.get('videos'):
+                    if master_data.get('videos'):
+                        release_data['videos'] = master_data.get('videos')
+            except discogs.DiscogsError as de:
+                logger.info("Did not find master for record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
         record.track_set.all().delete()
         if release_data.get('tracklist'):
             for track_data in release_data.get('tracklist'):
@@ -80,7 +82,7 @@ def updateRecord(record):
                 spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
                 if spotify_id:
                     RecordListens.objects.create(record=record,listen=spotify_listen, listen_key=spotify_id)
-            except SpotifyError as se:
+            except spotify.SpotifyError as se:
                 logger.error("Request to spotify failed:\n" + str(se))
         if release_data.get('videos'):
             youtube_listen = Listen.objects.get(name='youtube')
@@ -96,7 +98,8 @@ def updateRecord(record):
         record.save()
         cache.delete(record.get_cache_key())
         return True
-    logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs")
+    except discogs.DiscogsError as de:
+        logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
     return False
 
 def __getFormat(format_data):
@@ -133,8 +136,8 @@ def __createTrack(record, track_data):
 
 def updateArtist(artist):
     logger.info("Updating artist " + artist.name + " (" + str(artist.id) + ")")
-    artist_data = discogs.getArtist(artist.id)
-    if artist_data:
+    try:
+        artist_data = discogs.getArtist(artist.id)
         artist.description = artist_data.get('profile')
         if artist_data.get('images'):
             artist.image = artist_data['images'][0].get('resource_url')
@@ -163,7 +166,8 @@ def updateArtist(artist):
         artist.updated = date.today()
         artist.save()
         return True
-    logger.info("Did not find artist " + artist.name + " (" + str(artist.id) + ") on discogs")
+    except discogs.DiscogsError as de:
+        logger.info("Did not find artist " + artist.name + " (" + str(artist.id) + ") on discogs\n" + str(de))
     return False
 
 def __fixArtistName(name):
