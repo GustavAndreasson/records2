@@ -8,7 +8,7 @@ class DiscogsError(Exception):
     def __init__(self, code, message):
         self.code = code
         self.message = message
-        
+
     def __str__(self):
         return str(self.code) + ":" + self.message
 
@@ -26,7 +26,7 @@ def getArtist(artist_id):
 
 def getArtistReleases(artist_id):
     return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases")
-    
+
 def __getPaginatedCollection(uri):
     page = 1
     collection = []
@@ -37,8 +37,10 @@ def __getPaginatedCollection(uri):
             page = page + 1
             response = __readUri(uri + "?page=" + str(page))
             collection.extend(response['releases'])
-    except DiscogsError as de: 
+    except DiscogsError as de:
         logger.error("Not expected collection response from Discogs:\n" + str(de))
+        if not collection:
+            raise
     return collection
 
 def __readUri(uri):

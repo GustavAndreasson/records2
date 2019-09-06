@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 
 def updateCollection(user):
     logger.info("Updating collection for " + user.username)
-    collection_data = discogs.getCollection(user.username)
-    if collection_data:
+    try:
+        collection_data = discogs.getCollection(user.username)
         old_collection = list(UserRecords.objects.filter(user=user).values_list('record_id', flat=True))
         for release_data in collection_data:
             if release_data['basic_information']['id'] not in old_collection:
@@ -48,9 +48,10 @@ def updateCollection(user):
             for ur in removed_records:
                 logger.info("Removed record " + ur.record.name + " (" + str(ur.record.id) + ") from collection for " + user.username)
             removed_records.delete()
-        return True
-    logger.info("Did not find collection for " + user.username + " on discogs")
-    return False
+    except discogs.DiscogsError as de:
+        logger.info("Did not find collection for " + user.username + " on discogs\n" + str(de))
+        return False
+    return True
 
 
 def updateRecord(record):
@@ -97,10 +98,10 @@ def updateRecord(record):
         record.updated = date.today()
         record.save()
         cache.delete(record.get_cache_key())
-        return True
     except discogs.DiscogsError as de:
         logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
-    return False
+        return False
+    return True
 
 def __getFormat(format_data):
     formats = []
@@ -165,10 +166,10 @@ def updateArtist(artist):
                     active=group_data['active'])
         artist.updated = date.today()
         artist.save()
-        return True
     except discogs.DiscogsError as de:
         logger.info("Did not find artist " + artist.name + " (" + str(artist.id) + ") on discogs\n" + str(de))
-    return False
+        return False
+    return True
 
 def __fixArtistName(name):
     myre = re.compile('\(\d+\)$')
