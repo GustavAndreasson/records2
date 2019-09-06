@@ -1,0 +1,20 @@
+[
+{
+  "model": "records.listen",
+  "pk": 1,
+  "fields": {
+    "name": "spotify",
+    "template": "<iframe class='listenIframe' src='https://open.spotify.com/embed/album/{0}' width='300' height='380' frameborder='0' allowtransparency='true' allow='encrypted-media'></iframe>",
+    "icon": "/static/records/Spotify_Icon_RGB_Green.png"
+  }
+},
+{
+  "model": "records.listen",
+  "pk": 2,
+  "fields": {
+    "name": "youtube",
+    "template": "<iframe class='listenIframe' width='300' height='30' src='https://www.youtube.com/embed/{0}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    "icon": "/static/records/youtube_social_circle_red.png"
+  }
+}
+]
