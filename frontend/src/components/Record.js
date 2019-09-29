@@ -8,7 +8,7 @@ const Record = ({ rec, handleClick }) => {
     const getFormats = () => "format-" + rec.format.replace(/ /, " format-");
 
     return (
-        <div className="record" onClick={handleClick}>
+        <div className="record" onClick={() => handleClick(rec)}>
             <img className={`cover ${getFormats()}`} src={rec.thumbnail}
                 alt={getArtists(false) + " - " + rec.name}
                 title={getArtists(false) + " - " + rec.name} />
