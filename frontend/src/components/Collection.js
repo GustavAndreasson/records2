@@ -2,8 +2,8 @@ import React from "react";
 import Record from "./Record";
 
 const Collection = ({ col }) =>
-    <div class="collection">
-      {col && Object.values(col).map((rec) => <Record record={rec, () => alert(rec.name)} />)};
+    <div className="collection">
+      {col && Object.values(col).map((rec) => <Record rec={rec} handleClick={() => alert(rec.name)} key={rec.id} />)}
     </div>
 
 export default Collection;
