@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
-import Collection from "./Collection";
+import Record from "./Record";
 import RecordPopup from "./RecordPopup";
 
 class App extends Component {
     state = {
-        data: [],
+        collection: [],
         loaded: false,
         placeholder: "Loading...",
         activeRecord: null
@@ -18,14 +18,18 @@ class App extends Component {
             }
             return response.json();
         })
-        .then(data => this.setState({ data: data, loaded: true }));
+        .then(data => this.setState({ collection: data, loaded: true }));
     }
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
     render() {
-        const { data, loaded, placeholder, activeRecord } = this.state;
+        const { collection, loaded, placeholder, activeRecord } = this.state;
         return (
             <Fragment>
-                { loaded ? <Collection col={data} handleRecordClick={this.handleRecordClick} /> : placeholder }
+                { loaded ?
+		    <div className="collection">
+		        {col && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />)}
+		    </div>
+		    : placeholder }
                 { activeRecord && <RecordPopup rec={activeRecord} /> }
             </Fragment>
         )
