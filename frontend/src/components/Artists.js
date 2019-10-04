@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 
-const Artists = ({ artists, html }) => {
+const Artists = ({ artists, handleClick }) => {
     return (
-	artists && artists.map((artist, index) => {
-	    <Fragment>
-		{ html ? <span className="artist">{artist.artist.name}</span> : artist.artist.name; }
-	        { index < artists.length && " " + artist.delimiter }
-	    </Fragment>
-	}
+        artists && artists.map((artist, index) => (
+            <Fragment key={artist.artist.id}>
+                <span className="artist" onClick={() => handleClick(artist.artist)}>{artist.artist.name}</span>
+                { index < artists.length && " " + artist.delimiter + " " }
+            </Fragment>
+        ))
     )
 }
 export default Artists;

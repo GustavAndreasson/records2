@@ -8,7 +8,8 @@ class App extends Component {
         collection: {},
         loaded: false,
         placeholder: "Loading...",
-        activeRecord: null
+        activeRecord: null,
+        searchQuery: ""
     };
     componentDidMount() {
         fetch("records/collection/gustav.andreasson/get/2")
@@ -20,17 +21,35 @@ class App extends Component {
         })
         .then(data => this.setState({ collection: data, loaded: true }));
     }
+    search = (event) => this.setState({ searchQuery: event.target.value })
+    filter = (rec) => (
+        this.state.searchQuery == "" ||
+        rec.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0 ||
+        rec.artists.map(artist => artist.artist.name).join().toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0
+    )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
+    handleRecordPopupClick = () => this.setState({activeRecord: null});
+    handleArtistClick = (artist) => alert(artist.name);
     render() {
-        const { collection, loaded, placeholder, activeRecord } = this.state;
+        const { collection, loaded, placeholder, activeRecord, searchQuery } = this.state;
         return (
             <Fragment>
+                <div className="header">
+                    <h1>Skivorna</h1>
+                    <div className="search">
+                        <input type="text" value={searchQuery} onChange={this.search} />
+                    </div>
+                </div>
                 { loaded ?
-		    <div className="collection">
-		        { collection && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this) }
-		    </div>
-		    : placeholder }
-                { activeRecord && <RecordPopup rec={activeRecord} /> }
+        		    <div className="collection">
+        		        { collection &&
+                            Object.values(collection).map((rec) => this.filter(rec) && <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
+                        }
+        		    </div>
+		                  : placeholder }
+                { activeRecord &&
+                    <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick}/>
+                }
             </Fragment>
         )
     }

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import Artists from "./Artists";
 
-const RecordPopup = ({ rec }) => {
+const RecordPopup = ({ rec, handleClick,  handleArtistClick }) => {
     console.log(rec);
     return (rec &&
-        <div className="record-popup">
+        <div className="record-popup" onClick={handleClick}>
             <img className="cover" src={rec.cover} />
             <div className="left">
-                <div className="artists"><Artists artists={rec.artists} html=true /></div>
+                <div className="artists"><Artists artists={rec.artists} handleClick={handleArtistClick} /></div>
                 <div className="name">{rec.name}</div>
                 <div className="format">{rec.format}</div>
                 <div className="year">{rec.year}</div>
@@ -16,7 +16,11 @@ const RecordPopup = ({ rec }) => {
                     {rec.tracks && rec.tracks.map((track, index) => (
                         <div className="track" key={index}>
                             <span className="position">{track.position}</span> {track.name}
-		            { track.artists && {'('}<Artists artists={rec.artists} html=true />{')'} }
+		                    { track.artists && (
+                                <Fragment>
+                                    {" ("}<Artists artists={track.artists} handleClick={handleArtistClick} />{")"}
+                                </Fragment>)
+                            }
                         </div>
                     ))}
                 </div>
