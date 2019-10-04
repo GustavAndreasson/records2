@@ -4,3 +4,4 @@ install
 var
 __pycache__
 .env
+node_modules
