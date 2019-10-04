@@ -1,17 +1,14 @@
 import React from "react";
 
 const Record = ({ rec, handleClick }) => {
-    const getArtists = (html) => html ?
-    rec.artists[0].artist.name :
-    rec.artists[0].artist.name;
-
-    const getFormats = () => "format-" + rec.format.replace(/ /, " format-");
+    let artists = rec.artists.map((artist, index) => artist.artist.name + index < rec.artists.length ? " " + artist.delimiter : "").join(" ");
+    let formats = "format-" + rec.format.replace(/ /, " format-");
 
     return (
         <div className="record" onClick={() => handleClick(rec)}>
-            <img className={`cover ${getFormats()}`} src={rec.thumbnail}
-                alt={getArtists(false) + " - " + rec.name}
-                title={getArtists(false) + " - " + rec.name} />
+            <img className={`cover ${formats}`} src={rec.thumbnail}
+                alt={artists + " - " + rec.name}
+                title={artists + " - " + rec.name} />
         </div>
     );
 }

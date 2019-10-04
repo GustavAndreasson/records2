@@ -5,7 +5,7 @@ import RecordPopup from "./RecordPopup";
 
 class App extends Component {
     state = {
-        collection: [],
+        collection: {},
         loaded: false,
         placeholder: "Loading...",
         activeRecord: null
@@ -27,7 +27,7 @@ class App extends Component {
             <Fragment>
                 { loaded ?
 		    <div className="collection">
-		  {col && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)}
+		        { collection && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this) }
 		    </div>
 		    : placeholder }
                 { activeRecord && <RecordPopup rec={activeRecord} /> }
