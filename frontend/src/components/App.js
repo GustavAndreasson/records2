@@ -27,7 +27,7 @@ class App extends Component {
             <Fragment>
                 { loaded ?
 		    <div className="collection">
-		        {col && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />)}
+		  {col && Object.values(collection).map((rec) => <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)}
 		    </div>
 		    : placeholder }
                 { activeRecord && <RecordPopup rec={activeRecord} /> }
