@@ -118,7 +118,7 @@ body {
     font-weight: bold;
 }
 
-#record-popup {
+.record-popup {
     position: fixed;
     top: 50px;
     left: 50%;
@@ -134,48 +134,48 @@ body {
     box-shadow: 5px 5px 5px #888888;
 }
 
-#record-popup .cover {
+.record-popup .cover {
     width: 100%;
 }
 
-#record-popup .left {
+.record-popup .left {
     float: left;
     width: 300px;
 }
 
-#record-popup .right {
+.record-popup .right {
     float: right;
 }
 
-#record-popup .listens .listen {
+.record-popup .listens .listen {
     max-width: 300px;
     margin-bottom: 3px;
 }
 
-#record-popup .listens .listen iframe {
+.record-popup .listens .listen iframe {
     display: block;
 }
 
-#record-popup .listens .listen .listen-name{
+.record-popup .listens .listen .listen-name{
     font-size: 12px;
 }
 
-#record-popup .listen-select {
+.record-popup .listen-select {
     margin-bottom: 3px;
 }
 
-#record-popup .listen-select span {
+.record-popup .listen-select span {
     width: 20px;
     cursor: pointer;
 }
 
-#record-popup .listen-select span img {
+.record-popup .listen-select span img {
     width: 20px;
     margin-right: 2px;
     vertical-align: bottom;
 }
 
-#record-popup .set-listen-id {
+.record-popup .set-listen-id {
     display: inline-block;
     height: 20px;
     vertical-align: bottom;
@@ -183,7 +183,7 @@ body {
     cursor: pointer;
 }
 
-#record-popup .set-listen-id img {
+.record-popup .set-listen-id img {
     width: 20px;
 }
 
