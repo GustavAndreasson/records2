@@ -1,6 +1,6 @@
 import React from "react";
 
-import Artist from "./Artist";
+import Artists from "./Artists";
 
 const RecordPopup = ({ rec }) => {
     console.log(rec);
@@ -8,7 +8,7 @@ const RecordPopup = ({ rec }) => {
         <div className="record-popup">
             <img className="cover" src={rec.cover} />
             <div className="left">
-                <div className="artists"><Artist artists={rec.artists} html=true /></div>
+                <div className="artists"><Artists artists={rec.artists} html=true /></div>
                 <div className="name">{rec.name}</div>
                 <div className="format">{rec.format}</div>
                 <div className="year">{rec.year}</div>
@@ -16,7 +16,7 @@ const RecordPopup = ({ rec }) => {
                     {rec.tracks && rec.tracks.map((track, index) => (
                         <div className="track" key={index}>
                             <span className="position">{track.position}</span> {track.name}
-		            { track.artists && {'('}<Artist artists={rec.artists} html=true />{')'} }
+		            { track.artists && {'('}<Artists artists={rec.artists} html=true />{')'} }
                         </div>
                     ))}
                 </div>

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-const Artist = ({ artists, html }) => {
+const Artists = ({ artists, html }) => {
     return (
 	artists && artists.map((artist, index) => {
 	    <Fragment>
@@ -10,3 +10,4 @@ const Artist = ({ artists, html }) => {
 	}
     )
 }
+export default Artists;
