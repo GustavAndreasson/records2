@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Record from "./Record";
 import RecordPopup from "./RecordPopup";
+import ArtistInfo from "./ArtistInfo";
 
 class App extends Component {
     state = {
@@ -9,6 +10,7 @@ class App extends Component {
         loaded: false,
         placeholder: "Loading...",
         activeRecord: null,
+        activeArtist: null,
         searchQuery: ""
     };
     componentDidMount() {
@@ -23,15 +25,22 @@ class App extends Component {
     }
     search = (event) => this.setState({ searchQuery: event.target.value })
     filter = (rec) => (
-        this.state.searchQuery == "" ||
-        rec.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0 ||
-        rec.artists.map(artist => artist.artist.name).join().toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0
+        (
+            !this.state.activeArtist ||
+            rec.artists.map(artist => artist.artist.id).includes(this.state.activeArtist.id)
+        ) &&
+        (
+            this.state.searchQuery == "" ||
+            rec.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0 ||
+            rec.artists.map(artist => artist.artist.name).join().toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0
+        )
     )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
     handleRecordPopupClick = () => this.setState({activeRecord: null});
-    handleArtistClick = (artist) => alert(artist.name);
+    handleArtistClick = (artist) => this.setState({activeArtist: artist});
+    handleArtistCloseClick = () => this.setState({activeArtist: null});
     render() {
-        const { collection, loaded, placeholder, activeRecord, searchQuery } = this.state;
+        const { collection, loaded, placeholder, activeRecord, activeArtist, searchQuery } = this.state;
         return (
             <Fragment>
                 <div className="header">
@@ -40,6 +49,9 @@ class App extends Component {
                         <input type="text" value={searchQuery} onChange={this.search} />
                     </div>
                 </div>
+                { activeArtist &&
+                    <ArtistInfo artist={activeArtist} handleArtistClick={this.handleArtistClick} handleCloseClick={this.handleArtistCloseClick} />
+                }
                 { loaded ?
         		    <div className="collection">
         		        { collection &&
@@ -48,7 +60,7 @@ class App extends Component {
         		    </div>
 		                  : placeholder }
                 { activeRecord &&
-                    <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick}/>
+                    <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick} />
                 }
             </Fragment>
         )
