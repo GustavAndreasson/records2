@@ -149,10 +149,10 @@ def updateArtist(artist):
                     defaults={'name': __fixArtistName(member_data['name'])})
                 if created:
                     logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
-                am = ArtistMembers.object.create(
+                am = ArtistMembers.objects.update_or_create(
                     group=artist,
                     member=member,
-                    active=member_data['active'])
+                    defaults={'active': member_data['active']})
         if artist_data.get('groups'):
             for group_data in artist_data.get('groups'):
                 group, created = Artist.objects.get_or_create(
@@ -160,10 +160,10 @@ def updateArtist(artist):
                     defaults={'name': __fixArtistName(group_data['name'])})
                 if created:
                     logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
-                am = ArtistMembers.object.create(
+                am = ArtistMembers.objects.update_or_create(
                     group=group,
                     member=artist,
-                    active=group_data['active'])
+                    defaults={'active': group_data['active']})
         artist.updated = date.today()
         artist.save()
     except discogs.DiscogsError as de:

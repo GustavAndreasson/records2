@@ -110,6 +110,10 @@ body {
     font-weight: bold;
 }
 
+.artist.inactive {
+    font-weight: normal;
+}
+
 .track {
     font-size: 12px;
 }

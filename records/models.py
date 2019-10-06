@@ -28,14 +28,16 @@ class Artist(models.Model):
         member_relations = ArtistMembers.objects.filter(group=self)
         members = [{"artist": mr.member.to_dict(False), "active": mr.active} for mr in member_relations]
         group_relations = ArtistMembers.objects.filter(member=self)
-        groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gt in group_relations]
+        groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gr in group_relations]
+        updated = str(self.updated) if self.updated else ""
         return {
             "id": self.id,
             "name": self.name,
             "image": self.image,
             "description": self.description,
             "members": members,
-            "groups": groups
+            "groups": groups,
+            "updated": updated
         }
 
 
