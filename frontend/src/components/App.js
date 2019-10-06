@@ -37,7 +37,18 @@ class App extends Component {
     )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
     handleRecordPopupClick = () => this.setState({activeRecord: null});
-    handleArtistClick = (artist) => this.setState({activeArtist: artist});
+    handleArtistClick = (artist) => {
+        this.setState({activeArtist: artist});
+        fetch("records/artist/" + artist.id + "/get")
+        .then(response => response.json())
+        .then(data => {
+            this.setState({activeArtist: data});
+            !data.updated &&
+                fetch("records/artist/" + artist.id + "/update")
+                .then(response => response.json())
+                .then(data => this.setState({activeArtist: data}));
+        });
+    }
     handleArtistCloseClick = () => this.setState({activeArtist: null});
     render() {
         const { collection, loaded, placeholder, activeRecord, activeArtist, searchQuery } = this.state;
