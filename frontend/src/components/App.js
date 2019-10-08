@@ -28,10 +28,18 @@ class App extends Component {
         (
             !this.state.activeArtist ||
             rec.artists.map(artist => artist.artist.id).includes(this.state.activeArtist.id) ||
+            (rec.tracks &&
+                rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(this.state.activeArtist.id))) ||
             (this.state.activeArtist.members &&
-                this.state.activeArtist.members.some(member => rec.artists.map(artist => artist.artist.id).includes(member.id))) ||
+                this.state.activeArtist.members.some(member =>
+                    rec.artists.map(artist => artist.artist.id).includes(member.artist.id) ||
+                    (rec.tracks &&
+                        rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(member.artist.id))))) ||
             (this.state.activeArtist.groups &&
-                this.state.activeArtist.groups.some(group => rec.artists.map(artist => artist.artist.id).includes(group.id)))
+                this.state.activeArtist.groups.some(group =>
+                    rec.artists.map(artist => artist.artist.id).includes(group.artist.id) ||
+                    (rec.tracks &&
+                        rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(member.artist.id)))))
         ) &&
         (
             this.state.searchQuery == "" ||
