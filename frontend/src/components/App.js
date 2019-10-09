@@ -55,10 +55,14 @@ class App extends Component {
         .then(response => response.json())
         .then(data => {
             this.setState({activeArtist: data});
+            console.log(data);
             !data.updated &&
                 fetch("records/artist/" + artist.id + "/update")
                 .then(response => response.json())
-                .then(data => this.setState({activeArtist: data}));
+                .then(data => {
+                    this.setState({activeArtist: data});
+                    console.log(data);
+                });
         });
     }
     handleArtistCloseClick = () => this.setState({activeArtist: null});
