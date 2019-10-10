@@ -1,7 +1,7 @@
 import React from "react";
 
 const Record = ({ rec, handleClick }) => {
-    let artists = rec.artists.map((artist, index) => (index > 0 ? " " + artist.delimiter : "") + artist.artist.name).join(" ");
+    let artists = rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ");
     let formats = "format-" + rec.format.replace(/ /, " format-");
 
     return (
