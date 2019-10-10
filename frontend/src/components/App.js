@@ -15,13 +15,18 @@ class App extends Component {
     };
     componentDidMount() {
         fetch("records/collection/gustav.andreasson/get/2")
-        .then(response => {
-            if (response.status !== 200) {
-                return this.setState({ placeholder: "Something went wrong" });
-            }
-            return response.json();
-        })
-        .then(data => this.setState({ collection: data, loaded: true }));
+        .then(this.handleErrors)
+        .then(data => this.setState({ collection: data, loaded: true }))
+        .catch(error => {
+            console.log(error);
+            this.setState({ placeholder: "Something whent wrong" });
+        });
+    }
+    handleErrors = (response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
     }
     search = (event) => this.setState({ searchQuery: event.target.value })
     filter = (rec) => (
@@ -39,7 +44,7 @@ class App extends Component {
                 this.state.activeArtist.groups.some(group =>
                     rec.artists.map(artist => artist.artist.id).includes(group.artist.id) ||
                     (rec.tracks &&
-                        rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(member.artist.id)))))
+                        rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(group.artist.id)))))
         ) &&
         (
             this.state.searchQuery == "" ||
@@ -52,7 +57,7 @@ class App extends Component {
     handleArtistClick = (artist) => {
         this.setState({activeArtist: artist});
         fetch("records/artist/" + artist.id + "/get")
-        .then(response => response.json())
+        .then(this.handleErrors)
         .then(data => {
             this.setState({activeArtist: data});
             console.log(data);
@@ -63,7 +68,8 @@ class App extends Component {
                     this.setState({activeArtist: data});
                     console.log(data);
                 });
-        });
+        })
+        .catch(error => console.log(error));
     }
     handleArtistCloseClick = () => this.setState({activeArtist: null});
     render() {
@@ -82,7 +88,10 @@ class App extends Component {
                 { loaded ?
         		    <div className="collection">
         		        { collection &&
-                            Object.values(collection).map((rec) => this.filter(rec) && <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
+                            Object.values(collection)
+                            .sort((recA, recB) => recA.year - recB.year)
+                            .map((rec) => this.filter(rec) &&
+                                <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
                         }
         		    </div>
 		                  : placeholder }
