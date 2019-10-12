@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import Record from "./Record";
 import RecordPopup from "./RecordPopup";
 import ArtistInfo from "./ArtistInfo";
+import UsernameInput from "./UsernameInput";
 
 class App extends Component {
     state = {
+        discogsUsername: "",
         collection: {},
         loaded: false,
         placeholder: "Loading...",
@@ -14,7 +16,19 @@ class App extends Component {
         searchQuery: ""
     };
     componentDidMount() {
-        fetch("records/collection/gustav.andreasson/get/2")
+        let user = localStorage.getItem('discogs_username');
+        if (user) {
+            this.setUsername(user);
+        }
+    }
+    handleErrors = (response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }
+    getCollection = (username) => {
+        fetch("records/collection/" + username + "/get/2")
         .then(this.handleErrors)
         .then(data => this.setState({ collection: data, loaded: true }))
         .catch(error => {
@@ -22,11 +36,12 @@ class App extends Component {
             this.setState({ placeholder: "Something whent wrong" });
         });
     }
-    handleErrors = (response) => {
-        if (!response.ok) {
-            throw Error(response.statusText);
+    setUsername = (username) => {
+        if (username) {
+            localStorage.setItem('discogs_username', username);
+            this.setState({ discogsUsername: username });
+            this.getCollection(username);
         }
-        return response.json();
     }
     search = (event) => this.setState({ searchQuery: event.target.value })
     filter = (rec) => (
@@ -73,30 +88,39 @@ class App extends Component {
     }
     handleArtistCloseClick = () => this.setState({activeArtist: null});
     render() {
-        const { collection, loaded, placeholder, activeRecord, activeArtist, searchQuery } = this.state;
+        const { discogsUsername, collection, loaded, placeholder, activeRecord, activeArtist, searchQuery } = this.state;
         return (
             <Fragment>
                 <div className="header">
                     <h1>Skivorna</h1>
-                    <div className="search">
-                        <input type="text" value={searchQuery} onChange={this.search} />
-                    </div>
+                    { discogsUsername &&
+                        <div className="search">
+                            <input type="text" value={searchQuery} onChange={this.search} />
+                        </div>
+                    }
                 </div>
-                { activeArtist &&
-                    <ArtistInfo artist={activeArtist} handleArtistClick={this.handleArtistClick} handleCloseClick={this.handleArtistCloseClick} />
-                }
-                { loaded ?
-        		    <div className="collection">
-        		        { collection &&
-                            Object.values(collection)
-                            .sort((recA, recB) => recA.year - recB.year)
-                            .map((rec) => this.filter(rec) &&
-                                <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
+                { discogsUsername ?
+                    <Fragment>
+                        { activeArtist &&
+                            <ArtistInfo artist={activeArtist} handleArtistClick={this.handleArtistClick} handleCloseClick={this.handleArtistCloseClick} />
                         }
-        		    </div>
-		                  : placeholder }
-                { activeRecord &&
-                    <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick} />
+                        { loaded ?
+                		    <div className="collection">
+                		        { collection &&
+                                    Object.values(collection)
+                                    .sort((recA, recB) => recA.year - recB.year)
+                                    .map((rec) => this.filter(rec) &&
+                                        <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
+                                }
+                		    </div>
+        		            : placeholder
+                        }
+                        { activeRecord &&
+                            <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick} />
+                        }
+                    </Fragment>
+                :
+                    <UsernameInput handleClick={this.setUsername} />
                 }
             </Fragment>
         )
