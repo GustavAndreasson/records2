@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Record = ({ handleClick }) => {
+const UsernameInput = ({ handleClick }) => {
     const [user, setUser] = useState("");
     return (
         <div className="usernameInput">
@@ -9,4 +9,4 @@ const Record = ({ handleClick }) => {
         </div>
     );
 }
-export default Record;
+export default UsernameInput;

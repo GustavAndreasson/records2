@@ -20,7 +20,7 @@ def getCollection(request, username, data_level):
 def updateCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     services.updateCollection(user)
-    return HttpResponse(json.dumps(user.to_dict(1)))
+    return HttpResponse(json.dumps(user.to_dict(2)))
 
 def setRecordListen(request, record_id, listen_name, listen_key):
     record = get_object_or_404(Record, id=record_id)

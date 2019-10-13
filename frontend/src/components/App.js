@@ -36,6 +36,15 @@ class App extends Component {
             this.setState({ placeholder: "Something whent wrong" });
         });
     }
+    updateCollection = () => {
+        fetch("records/collection/" + this.state.discogsUsername + "/update")
+        .then(this.handleErrors)
+        .then(data => this.setState({ collection: data, loaded: true }))
+        .catch(error => {
+            console.log(error);
+            this.setState({ placeholder: "Something whent wrong" });
+        });
+    }
     setUsername = (username) => {
         if (username) {
             localStorage.setItem('discogs_username', username);
@@ -94,9 +103,14 @@ class App extends Component {
                 <div className="header">
                     <h1>Skivorna</h1>
                     { discogsUsername &&
-                        <div className="search">
-                            <input type="text" value={searchQuery} onChange={this.search} />
-                        </div>
+                        <Fragment>
+                            <div className="search">
+                                <input type="text" value={searchQuery} onChange={this.search} />
+                            </div>
+                            <div className="buttons">
+                                <button type="button" onClick={this.updateCollection}>&#8635;</button>
+                            </div>
+                        </Fragment>
                     }
                 </div>
                 { discogsUsername ?
