@@ -4,6 +4,8 @@ import Record from "./Record";
 import RecordPopup from "./RecordPopup";
 import ArtistInfo from "./ArtistInfo";
 import UsernameInput from "./UsernameInput";
+import FiltersPopup from "./FiltersPopup";
+import OrdersPopup from "./OrdersPopup";
 
 class App extends Component {
     state = {
@@ -13,7 +15,11 @@ class App extends Component {
         placeholder: "Loading...",
         activeRecord: null,
         activeArtist: null,
-        searchQuery: ""
+        searchQuery: "",
+        filters: [],
+        orders: [],
+        showFilters: false,
+        showOrders: false
     };
     componentDidMount() {
         let user = localStorage.getItem('discogs_username');
@@ -97,7 +103,19 @@ class App extends Component {
     }
     handleArtistCloseClick = () => this.setState({activeArtist: null});
     render() {
-        const { discogsUsername, collection, loaded, placeholder, activeRecord, activeArtist, searchQuery } = this.state;
+        const {
+            discogsUsername,
+            collection,
+            loaded,
+            placeholder,
+            activeRecord,
+            activeArtist,
+            searchQuery,
+            filters,
+            orders,
+            showFilters,
+            showOrders
+        } = this.state;
         return (
             <Fragment>
                 <div className="header">
@@ -108,15 +126,35 @@ class App extends Component {
                                 <input type="text" value={searchQuery} onChange={this.search} />
                             </div>
                             <div className="buttons">
+                                <button type="button" onClick={() => this.setState({ showFilters: true })}>&#9660;</button>
+                                <button type="button" onClick={() => this.setState({ showOrders: true })}>&#8645;</button>
                                 <button type="button" onClick={this.updateCollection}>&#8635;</button>
                             </div>
+                            { showFilters &&
+                                <FiltersPopup
+                                    filters={filters}
+                                    handleUpdate={(f) => this.setState({ filters: f })}
+                                    handleClose={() => this.setState({ showFilters: false })} 
+                                />
+                            }
+                            { showOrders &&
+                                <OrdersPopup
+                                    orders={orders}
+                                    handleUpdate={(o) => this.setState({ orders: o })}
+                                    handleClose={() => this.setState({ showOrders: false })}
+                                />
+                            }
                         </Fragment>
                     }
                 </div>
                 { discogsUsername ?
                     <Fragment>
                         { activeArtist &&
-                            <ArtistInfo artist={activeArtist} handleArtistClick={this.handleArtistClick} handleCloseClick={this.handleArtistCloseClick} />
+                            <ArtistInfo
+                                artist={activeArtist}
+                                handleArtistClick={this.handleArtistClick}
+                                handleCloseClick={this.handleArtistCloseClick}
+                            />
                         }
                         { loaded ?
                 		    <div className="collection">
@@ -130,7 +168,11 @@ class App extends Component {
         		            : placeholder
                         }
                         { activeRecord &&
-                            <RecordPopup rec={activeRecord} handleClick={this.handleRecordPopupClick} handleArtistClick={this.handleArtistClick} />
+                            <RecordPopup
+                                rec={activeRecord}
+                                handleClick={this.handleRecordPopupClick}
+                                handleArtistClick={this.handleArtistClick}
+                            />
                         }
                     </Fragment>
                 :
