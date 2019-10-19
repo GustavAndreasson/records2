@@ -148,7 +148,7 @@ def updateArtist(artist):
                     id=member_data['id'],
                     defaults={'name': __fixArtistName(member_data['name'])})
                 if created:
-                    logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
+                    logger.info("Created artist " + member.name + " (" + str(member.id) + ")")
                 am = ArtistMembers.objects.update_or_create(
                     group=artist,
                     member=member,
@@ -159,7 +159,7 @@ def updateArtist(artist):
                     id=group_data['id'],
                     defaults={'name': __fixArtistName(group_data['name'])})
                 if created:
-                    logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
+                    logger.info("Created artist " + group.name + " (" + str(group.id) + ")")
                 am = ArtistMembers.objects.update_or_create(
                     group=group,
                     member=artist,
