@@ -80,6 +80,10 @@ class App extends Component {
             this.state.searchQuery == "" ||
             rec.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0 ||
             rec.artists.map(artist => artist.artist.name).join().toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) >= 0
+        ) &&
+        (
+            !this.state.filters ||
+            this.state.filters.every(filter => filter.func(rec[filter.attribute], filter.value))
         )
     )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
@@ -134,7 +138,7 @@ class App extends Component {
                                 <FiltersPopup
                                     filters={filters}
                                     handleUpdate={(f) => this.setState({ filters: f })}
-                                    handleClose={() => this.setState({ showFilters: false })} 
+                                    handleClose={() => this.setState({ showFilters: false })}
                                 />
                             }
                             { showOrders &&
