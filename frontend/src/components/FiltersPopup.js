@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import Filter from "../Util/Filter";
 
 const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
-    const [attribute, setAttribute] = useState("name");
-    const [compare, setCompare] = useState("eq");
+    const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
+    const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0]);
     const [value, setValue] = useState("");
     const handleAttributeChange = (event) => setAttribute(event.target.value);
     const handleCompareChange = (event) => setCompare(event.target.value);
     const handleValueChange = (event) => setValue(event.target.value);
-    const handleAddClick = () => handleUpdate(filters.concat({
-        attribute: attribute,
-        compare: compare,
-        value:  value,
-        func: Filter.compares[compare].func
-    }));
+    const handleAddClick = () => {
+        handleUpdate(filters.concat({
+            attribute: attribute,
+            compare: compare,
+            value:  value,
+            run: Filter.getFunction(attribute, compare, value)
+        }));
+        setValue("");
+    };
     const handleRemoveClick = (index) => handleUpdate(filters.filter((_, i) => i !== index));
     return (
         <div className="filtersPopup">
@@ -32,14 +35,14 @@ const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
             <div className="new_filter">
                 <select className="filter_attribute" value={attribute} onChange={handleAttributeChange}>
                     {
-                        Filter.attributes.map(attr =>
+                        Object.values(Filter.attributes).map(attr =>
                             <option value={attr.key} key={attr.key}>{attr.name}</option>
                         )
                     }
                 </select>
                 <select className="filter_compare" value={compare} onChange={handleCompareChange}>
                     {
-                        Object.values(Filter.compares).map(cmp =>
+                        Object.values(Filter.compares).map(cmp => Filter.attributes[attribute].compares.includes(cmp.key) &&
                             <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                         )
                     }

@@ -83,7 +83,7 @@ class App extends Component {
         ) &&
         (
             !this.state.filters ||
-            this.state.filters.every(filter => filter.func(rec[filter.attribute], filter.value))
+            this.state.filters.every(filter => filter.run(rec))
         )
     )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
