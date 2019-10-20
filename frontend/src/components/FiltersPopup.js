@@ -3,7 +3,7 @@ import Filter from "../Util/Filter";
 
 const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
-    const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0]);
+    const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
     const handleAttributeChange = (event) => setAttribute(event.target.value);
     const handleCompareChange = (event) => setCompare(event.target.value);
@@ -42,7 +42,7 @@ const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
                 </select>
                 <select className="filter_compare" value={compare} onChange={handleCompareChange}>
                     {
-                        Object.values(Filter.compares).map(cmp => Filter.attributes[attribute].compares.includes(cmp.key) &&
+                        Filter.attributes[attribute].compares.map(cmp =>
                             <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                         )
                     }
