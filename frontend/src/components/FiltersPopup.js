@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Filter from "../Util/Filter";
+import Filter from "../util/Filter";
 
 const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);

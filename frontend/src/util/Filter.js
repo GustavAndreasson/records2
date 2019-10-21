@@ -10,29 +10,47 @@ const attributes = {
         name: "Album",
         key: "name",
         compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
-        getValue: rec => rec.name
+        getValues: rec => [rec.name]
     },
     artist: {
         name: "Artist",
         key: "artist",
         compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
-        getValue: rec => rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ")
+        getValue: rec => (
+	    rec.artists ? rec.artists.map(artist => artist.artist.name) : []
+	).concat(
+	    rec.artists ? rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ") : []
+	).concat(
+	    rec.tracks ? rec.tracks.map(track => track.artists ? track.artists.map(artist => artist.artist.name) : []).flat() : []
+	)
+    },
+    track: {
+	name: "Spår",
+	key: "track",
+	compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
+	getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : [] 
     },
     format: {
         name: "Format",
         key: "format",
         compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
-        getValue: rec => rec.format
+        getValues: rec => [rec.format]
     },
     year: {
         name: "År",
         key: "year",
         compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
-        getValue: rec => rec.year
+        getValues: rec => [rec.year]
+    },
+    addedDate: {
+	name: "Tillagd",
+	key: "addedDate",
+	compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
+	getValues: rec => [addedDate]
     }
 };
 
 export default {
     attributes: attributes,
-    getFunction: (attr, cmp, value) => rec => compares[cmp].func(attributes[attr].getValue(rec), value)
+    getFunction: (attr, cmp, value) => rec => attributes[attr].getValues(rec).some(recVal => compares[cmp].func(recVal, value))
 }
