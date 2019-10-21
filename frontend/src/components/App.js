@@ -163,8 +163,7 @@ class App extends Component {
                         { loaded ?
                 		    <div className="collection">
                 		        { collection &&
-                                    Object.values(collection)
-                                    .sort((recA, recB) => recA.year - recB.year)
+                                    orders.reduce((col, order) => order.run(col), Object.values(collection))
                                     .map((rec) => this.filter(rec) &&
                                         <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
                                 }
