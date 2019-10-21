@@ -17,18 +17,18 @@ const attributes = {
         key: "artist",
         compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
         getValue: rec => (
-	    rec.artists ? rec.artists.map(artist => artist.artist.name) : []
-	).concat(
-	    rec.artists ? rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ") : []
-	).concat(
-	    rec.tracks ? rec.tracks.map(track => track.artists ? track.artists.map(artist => artist.artist.name) : []).flat() : []
-	)
+            rec.artists ? rec.artists.map(artist => artist.artist.name) : []
+        ).concat(
+            rec.artists ? rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ") : []
+        ).concat(
+            rec.tracks ? rec.tracks.map(track => track.artists ? track.artists.map(artist => artist.artist.name) : []).flat() : []
+        )
     },
     track: {
-	name: "Spår",
-	key: "track",
-	compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
-	getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : [] 
+        name: "Spår",
+        key: "track",
+        compares: Object.values(compares).filter(cmp => ["sub", "eq"].includes(cmp.key)),
+        getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : [] 
     },
     format: {
         name: "Format",
@@ -43,10 +43,10 @@ const attributes = {
         getValues: rec => [rec.year]
     },
     addedDate: {
-	name: "Tillagd",
-	key: "addedDate",
-	compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
-	getValues: rec => [addedDate]
+        name: "Tillagd",
+        key: "addedDate",
+        compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
+        getValues: rec => [addedDate]
     }
 };
 
