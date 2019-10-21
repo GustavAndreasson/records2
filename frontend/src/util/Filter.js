@@ -16,7 +16,7 @@ const attributes = {
         name: "Artist",
         key: "artist",
         compares: Object.values(compares).filter(cmp => ["sub", "eq", "neq"].includes(cmp.key)),
-        getValue: rec => (
+        getValues: rec => (
             rec.artists ? rec.artists.map(artist => artist.artist.name) : []
         ).concat(
             rec.artists ? rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ") : []
@@ -28,7 +28,7 @@ const attributes = {
         name: "Spår",
         key: "track",
         compares: Object.values(compares).filter(cmp => ["sub", "eq"].includes(cmp.key)),
-        getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : [] 
+        getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : []
     },
     format: {
         name: "Format",
@@ -46,11 +46,12 @@ const attributes = {
         name: "Tillagd",
         key: "addedDate",
         compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
-        getValues: rec => [addedDate]
+        getValues: rec => [rec.addedDate]
     }
 };
 
 export default {
     attributes: attributes,
-    getFunction: (attr, cmp, value) => rec => attributes[attr].getValues(rec).some(recVal => compares[cmp].func(recVal, value))
+    compares:  compares,
+    getFunction: (attr, cmp, value) => rec => attr.getValues(rec).some(recVal => cmp.func(recVal, value))
 }
