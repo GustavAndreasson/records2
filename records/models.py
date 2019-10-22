@@ -58,6 +58,7 @@ class Record(models.Model):
     year = models.IntegerField(blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     listens = models.ManyToManyField(Listen, through='RecordListens')
     artists = models.ManyToManyField(Artist, through='RecordArtists')
 
@@ -77,6 +78,7 @@ class Record(models.Model):
             "format": self.format,
             "year":  self.year,
             "thumbnail": self.thumbnail,
+            "price": self.price,
             "data_level": data_level
         }
         if data_level == 0:

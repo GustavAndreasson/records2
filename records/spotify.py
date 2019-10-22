@@ -8,7 +8,7 @@ class SpotifyError(Exception):
     def __init__(self, code, message):
         self.code = code
         self.message = message
-        
+
     def __str__(self):
         return str(self.code) + ":" + self.message
 
@@ -35,8 +35,8 @@ def getAlbumId(artist, album):
     return None
 
 def __getToken():
-    global token
-    if time.time() > _expire:
+    global token, token_expire
+    if time.time() > token_expire:
         token, token_expire = __renewToken()
         logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token_expire)))
     return token

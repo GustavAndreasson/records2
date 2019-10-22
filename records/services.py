@@ -95,6 +95,8 @@ def updateRecord(record):
         record.year = release_data.get('year')
         if release_data.get('formats'):
             record.format = __getFormat(release_data.get('formats'))
+        if release_data.get('lowest_price'):
+            record.price = release_data.get('lowest_price')
         record.updated = date.today()
         record.save()
         cache.delete(record.get_cache_key())

@@ -23,7 +23,7 @@ def update_record(modeladmin, request, queryset):
         updateRecord(record)
 
 class RecordAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'updated']
+    fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'price', 'updated']
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']

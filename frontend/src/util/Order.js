@@ -24,8 +24,8 @@ export default {
             getValue: rec => rec.addedDate
         }
     },
-    getFunction: (attr, dir) => col => col.sort(
-        (recA, recB) => dir * (
+    getFunction: (attr, rev) => col => col.sort(
+        (recA, recB) => (rev ? -1 : 1) * (
             attr.getValue(recA) > attr.getValue(recB) ? 1 : (attr.getValue(recA) < attr.getValue(recB) ? -1 : 0)
         )
     )
