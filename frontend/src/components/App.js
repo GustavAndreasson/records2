@@ -59,7 +59,7 @@ class App extends Component {
         }
     }
     search = (event) => this.setState({ searchQuery: event.target.value })
-    filter = (rec) => (
+    filterRecord = (rec) => (
         (
             !this.state.activeArtist ||
             rec.artists.map(artist => artist.artist.id).includes(this.state.activeArtist.id) ||
@@ -120,6 +120,15 @@ class App extends Component {
             showFilters,
             showOrders
         } = this.state;
+        let orderedFilteredCollection = orders.reduce((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
+            this.filterRecord(rec) ? col.concat(rec.id) : col,
+            []
+        );
+        let prices = orderedFilteredCollection.reduce((prcs, recId) =>
+            collection[recId].price ? prcs.concat(collection[recId].price) : prcs,
+            []
+        );
+        let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);
         return (
             <Fragment>
                 <div className="header">
@@ -134,6 +143,13 @@ class App extends Component {
                                 <button type="button" onClick={() => this.setState({ showOrders: true })}>&#8645;</button>
                                 <button type="button" onClick={this.updateCollection}>&#8635;</button>
                             </div>
+                            { loaded &&
+                                <div className="stats">
+                                    <div className="counter">{"Antal skivor: " + orderedFilteredCollection.length}</div>
+                                    <div className="price-sum">{"Pris summa: " + priceSum}</div>
+                                    <div className="price-avg">{"Pris medel: " + (priceSum / prices.length)}</div>
+                                </div>
+                            }
                             { showFilters &&
                                 <FiltersPopup
                                     filters={filters}
@@ -162,10 +178,9 @@ class App extends Component {
                         }
                         { loaded ?
                             <div className="collection">
-                                { collection &&
-                                    orders.reduce((col, order) => order.run(col), Object.values(collection))
-                                    .map((rec) => this.filter(rec) &&
-                                        <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
+                                { orderedFilteredCollection &&
+                                    orderedFilteredCollection.map(recId =>
+                                        <Record rec={collection[recId]} handleClick={this.handleRecordClick} key={recId} />, this)
                                 }
                             </div>
                             : placeholder

@@ -78,7 +78,7 @@ class Record(models.Model):
             "format": self.format,
             "year":  self.year,
             "thumbnail": self.thumbnail,
-            "price": self.price,
+            "price": str(self.price) if self.price else None,
             "data_level": data_level
         }
         if data_level == 0:
