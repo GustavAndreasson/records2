@@ -161,14 +161,14 @@ class App extends Component {
                             />
                         }
                         { loaded ?
-                		    <div className="collection">
-                		        { collection &&
+                            <div className="collection">
+                                { collection &&
                                     orders.reduce((col, order) => order.run(col), Object.values(collection))
                                     .map((rec) => this.filter(rec) &&
                                         <Record rec={rec} handleClick={this.handleRecordClick} key={rec.id} />, this)
                                 }
-                		    </div>
-        		            : placeholder
+                            </div>
+                            : placeholder
                         }
                         { activeRecord &&
                             <RecordPopup

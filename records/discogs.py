@@ -16,10 +16,10 @@ def getCollection(user_name):
     return __getPaginatedCollection("users/" + user_name + "/collection/folders/0/releases")
 
 def getRelease(release_id):
-    return __readUri("/releases/" + str(release_id) + "?curr_abr=SEK")
+    return __readUri("/releases/" + str(release_id) + "?curr_abbr=SEK")
 
 def getMaster(master_id):
-    return __readUri("/masters/" + str(master_id) + "?curr_abr=SEK")
+    return __readUri("/masters/" + str(master_id) + "?curr_abbr=SEK")
 
 def getArtist(artist_id):
     return __readUri("/artists/" + str(artist_id))
