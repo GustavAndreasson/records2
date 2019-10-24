@@ -18,6 +18,11 @@ export default {
             key: "name",
             getValue: rec => rec.name
         },
+	price: {
+	    name: "Pris",
+	    key: "price",
+	    getValue: rec => rec.price
+	},
         addedDate: {
             name: "Tillagd",
             key: "addedDate",

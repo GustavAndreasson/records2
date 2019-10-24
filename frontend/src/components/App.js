@@ -146,8 +146,8 @@ class App extends Component {
                             { loaded &&
                                 <div className="stats">
                                     <div className="counter">{"Antal skivor: " + orderedFilteredCollection.length}</div>
-                                    <div className="price-sum">{"Pris summa: " + priceSum}</div>
-                                    <div className="price-avg">{"Pris medel: " + (priceSum / prices.length)}</div>
+                                    <div className="price-sum">{"Pris summa: " + priceSum.toFixed(2)}</div>
+                                    <div className="price-avg">{"Pris medel: " + (priceSum / prices.length).toFixed(2)}</div>
                                 </div>
                             }
                             { showFilters &&
