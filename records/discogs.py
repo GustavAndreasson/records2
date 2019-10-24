@@ -63,5 +63,5 @@ def __readUri(uri):
         time.sleep(60)
         r = requests.get(url, params=params, headers=headers)
     elif r.status_code != 200:
-        raise DiscogsError(r.status_code, data.get('message'))
+        raise DiscogsError(r.status_code, data['error'].get('message'))
     return data
