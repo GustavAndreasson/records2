@@ -21,7 +21,7 @@ export default {
 	price: {
 	    name: "Pris",
 	    key: "price",
-	    getValue: rec => rec.price
+	    getValue: rec => parseFloat(rec.price)
 	},
         addedDate: {
             name: "Tillagd",

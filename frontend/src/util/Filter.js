@@ -48,7 +48,7 @@ const attributes = {
         name: "Pris",
         key: "price",
 	compares: Object.values(compares).filter(cmp => ["gt", "lt", "eq"].includes(cmp.key)),
-        getValues: rec => [rec.price]
+        getValues: rec => [parseFloat(rec.price)]
     },
     addedDate: {
         name: "Tillagd",
