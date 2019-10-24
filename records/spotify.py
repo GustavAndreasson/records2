@@ -25,7 +25,7 @@ def getAlbum(artist, album):
         if data['albums']['total'] > 0:
             return data['albums']['items'][0]
     elif r.status_code >= 400:
-        raise SpotifyError(r.status_code, data['error'].message)
+        raise SpotifyError(r.status_code, data['error'].get('message'))
     return None
 
 def getAlbumId(artist, album):
