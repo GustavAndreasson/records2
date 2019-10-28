@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Order from "../util/Order";
 
-const OrdersPopup = ({ orders, handleUpdate, handleClose }) => {
+const Orders = ({ orders, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0]);
     const [reverse, setReverse] = useState(false);
     const handleAttributeChange = (event) => setAttribute(Order.attributes[event.target.value]);
     const handleReverseChange = (event) => setReverse(event.target.checked);
-    const handleAddClick = () => {
+    const handleAddClick = (e) => {
+        e.preventDefault();
         handleUpdate(orders.concat({
             attribute: attribute,
             reverse: reverse,
@@ -26,16 +27,16 @@ const OrdersPopup = ({ orders, handleUpdate, handleClose }) => {
                     </div>
                 )}
             </div>
-            <div className="new_order">
+            <form className="new_order" onSubmit={handleAddClick}>
                 <select className="order_attribute" value={attribute.key} onChange={handleAttributeChange}>
                     { Object.values(Order.attributes).map(attr =>
                         <option value={attr.key} key={attr.key}>{attr.name}</option>
                     )}
                 </select>
                 <input type="checkbox" className="order_reverse" checked={reverse} onChange={handleReverseChange} />
-                <button type="button" className="add_order" onClick={handleAddClick}>+</button>
-            </div>
+                <button type="submit" className="add_order">+</button>
+            </form>
         </div>
     );
 }
-export default OrdersPopup;
+export default Orders;

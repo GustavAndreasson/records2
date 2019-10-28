@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Record from "./Record";
-import RecordPopup from "./RecordPopup";
+import RecordInfo from "./RecordInfo";
 import ArtistInfo from "./ArtistInfo";
 import UsernameInput from "./UsernameInput";
-import FiltersPopup from "./FiltersPopup";
-import OrdersPopup from "./OrdersPopup";
+import Popup from "./Popup";
+import Filters from "./Filters";
+import Orders from "./Orders";
 
 class App extends Component {
     state = {
@@ -87,7 +88,7 @@ class App extends Component {
         )
     )
     handleRecordClick = (rec) => this.setState({activeRecord: rec});
-    handleRecordPopupClick = () => this.setState({activeRecord: null});
+    handleCloseRecordInfo = () => this.setState({activeRecord: null});
     handleArtistClick = (artist) => {
         this.setState({activeArtist: artist});
         fetch("records/artist/" + artist.id + "/get")
@@ -151,18 +152,20 @@ class App extends Component {
                                 </div>
                             }
                             { showFilters &&
-                                <FiltersPopup
-                                    filters={filters}
-                                    handleUpdate={(f) => this.setState({ filters: f })}
-                                    handleClose={() => this.setState({ showFilters: false })}
-                                />
+                                <Popup handleClose={() => this.setState({ showFilters: false })}>
+                                    <Filters
+                                        filters={filters}
+                                        handleUpdate={(f) => this.setState({ filters: f })}
+                                    />
+                                </Popup>
                             }
                             { showOrders &&
-                                <OrdersPopup
-                                    orders={orders}
-                                    handleUpdate={(o) => this.setState({ orders: o })}
-                                    handleClose={() => this.setState({ showOrders: false })}
-                                />
+                                <Popup handleClose={() => this.setState({ showOrders: false })}>
+                                    <Orders
+                                        orders={orders}
+                                        handleUpdate={(o) => this.setState({ orders: o })}
+                                    />
+                                </Popup>
                             }
                         </Fragment>
                     }
@@ -186,11 +189,12 @@ class App extends Component {
                             : placeholder
                         }
                         { activeRecord &&
-                            <RecordPopup
-                                rec={activeRecord}
-                                handleClick={this.handleRecordPopupClick}
-                                handleArtistClick={this.handleArtistClick}
-                            />
+                            <Popup handleClose={this.handleCloseRecordInfo}>
+                                <RecordInfo
+                                    rec={activeRecord}
+                                    handleArtistClick={this.handleArtistClick}
+                                />
+                            </Popup>
                         }
                     </Fragment>
                 :

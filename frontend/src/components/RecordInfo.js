@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 
 import Artists from "./Artists";
 
-const RecordPopup = ({ rec, handleClick,  handleArtistClick }) => {
+const RecordInfo = ({ rec, handleClick,  handleArtistClick }) => {
     console.log(rec);
     return (rec &&
-        <div className="record-popup" onClick={handleClick}>
+        <div className="record-info" onClick={handleClick}>
             <img className="cover" src={rec.cover} />
             <div className="left">
                 <div className="artists"><Artists artists={rec.artists} handleClick={handleArtistClick} /></div>
@@ -28,4 +28,4 @@ const RecordPopup = ({ rec, handleClick,  handleArtistClick }) => {
         </div>
     );
 }
-export default RecordPopup;
+export default RecordInfo;

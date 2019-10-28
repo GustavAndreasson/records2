@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import Filter from "../util/Filter";
 
-const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
+const Filters = ({ filters, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0]);
     const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0]);
     const [value, setValue] = useState("");
     const handleAttributeChange = (event) => setAttribute(Filter.attributes[event.target.value]);
     const handleCompareChange = (event) => setCompare(Filter.compares[event.target.value]);
     const handleValueChange = (event) => setValue(event.target.value);
-    const handleAddClick = () => {
+    const handleAddClick = (e) => {
+        e.preventDefault();
         handleUpdate(filters.concat({
             attribute: attribute,
             compare: compare,
@@ -30,7 +31,7 @@ const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
                     </div>
                 )}
             </div>
-            <div className="new_filter">
+            <form className="new_filter"  onSubmit={handleAddClick}>
                 <select className="filter_attribute" value={attribute.key} onChange={handleAttributeChange}>
                     { Object.values(Filter.attributes).map(attr =>
                         <option value={attr.key} key={attr.key}>{attr.name}</option>
@@ -42,9 +43,9 @@ const FiltersPopup = ({ filters, handleUpdate, handleClose }) => {
                     )}
                 </select>
                 <input type="text" className="filter_value"  value={value} onChange={handleValueChange}/>
-                <button type="button" className="add_filter" onClick={handleAddClick}>+</button>
-            </div>
+                <button type="submit" className="add_filter">+</button>
+            </form>
         </div>
     );
 }
-export default FiltersPopup;
+export default Filters;
