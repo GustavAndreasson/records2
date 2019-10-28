@@ -198,7 +198,7 @@ class App extends Component {
                         }
                     </Fragment>
                 :
-                    <UsernameInput handleClick={this.setUsername} />
+                    <UsernameInput handleSetUsername={this.setUsername} />
                 }
             </Fragment>
         )

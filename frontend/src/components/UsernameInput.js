@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-const UsernameInput = ({ handleClick }) => {
+const UsernameInput = ({ handleSetUsername }) => {
     const [user, setUser] = useState("");
+    const handleSubmit = e => {
+        e.preventDefault();
+        handleSetUsername(user);
+    }
     return (
-        <div className="usernameInput">
+        <form className="usernameInput" onSubmit={handleSubmit}>
             <input type="text" value={user} onChange={e => setUser(e.target.value)} />
-            <button type="button" onClick={() => handleClick(user)}>OK</button>
-        </div>
+            <button type="submit">OK</button>
+        </form>
     );
 }
 export default UsernameInput;

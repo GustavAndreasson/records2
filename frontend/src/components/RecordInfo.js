@@ -12,6 +12,7 @@ const RecordInfo = ({ rec, handleClick,  handleArtistClick }) => {
                 <div className="name">{rec.name}</div>
                 <div className="format">{rec.format}</div>
                 <div className="year">{rec.year}</div>
+                { rec.price && <div className="price">{"(" + rec.price + ")"}</div> }
                 <div className="tracks">
                     {rec.tracks && rec.tracks.map((track, index) => (
                         <div className="track" key={index}>
