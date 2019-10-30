@@ -2,60 +2,41 @@ body {
     font-family: sans-serif;
 }
 
-.header {
+header {
     overflow: hidden;
 }
 
-.header h1 {
+header h1 {
     float: left;
     margin: 5px;
     font-size: 24px;
 }
 
-.header .search {
+header .search {
     float: left;
     height: 20px;
     margin: 5px 10px;
 }
 
-.header .search input {
+header .search input {
     margin-left: 5px;
 }
 
-.header .buttons {
+header .buttons {
     float: left;
     height: 22px;
     margin: 5px 10px;
 }
 
-.header .buttons button {
+header .buttons button {
     height: 100%;
 }
 
-.header .stats {
+header .stats {
     float: right;
 }
 
-.dropdown {
-    position: absolute;
-    top: 40px;
-    min-height: 30px;
-    padding: 10px 5px 5px 5px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #000000;
-    border-right: 1px solid #000000;
-    border-left: 1px solid #000000;
-}
-
-.dropdown.filter_container .new_filter {
-    margin-top: 10px;
-}
-
-.dropdown.order_container .new_order {
-    margin-top: 10px;
-}
-
-#status {
+.status {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -122,10 +103,6 @@ body {
 
 .record .cover.format-Vinyl12 {
     height: 90px;
-}
-
-.record div {
-    display: none;
 }
 
 .artist, .year {
@@ -200,25 +177,4 @@ body {
 
 .record-info .set-listen-id img {
     width: 20px;
-}
-
-@media (min-width: 768px) {
-    .dropdown.filter_container {
-        left: 40px;
-        width: 330px;
-    }
-
-    .dropdown.order_container {
-        left: 400px;
-        width: 200px;
-    }
-}
-
-@media (max-width: 767px) {
-    .dropdown {
-        left: 0px;
-        width: 100%;
-        border-left: 0px solid #ffffff;
-        border-right: 0px solid #ffffff;
-    }
 }

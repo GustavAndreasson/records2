@@ -14,8 +14,7 @@ class App extends Component {
     state = {
         discogsUsername: "",
         collection: {},
-        loaded: false,
-        placeholder: "Loading...",
+        status: "Laddar samling...",
         activeRecord: null,
         activeArtist: null,
         searchQuery: "",
@@ -51,19 +50,20 @@ class App extends Component {
     getCollection = (username) => {
         fetch("records/collection/" + username + "/get/2")
         .then(this.handleErrors)
-        .then(data => this.setState({ collection: data, loaded: true }))
+        .then(data => this.setState({ collection: data, status: false }))
         .catch(error => {
             console.log(error);
-            this.setState({ placeholder: "Something whent wrong" });
+            this.setState({ status: "Something whent wrong" });
         });
     }
     updateCollection = () => {
+        this.setState({ status: "Uppdaterar samling..." })
         fetch("records/collection/" + this.state.discogsUsername + "/update")
         .then(this.handleErrors)
-        .then(data => this.setState({ collection: data, loaded: true }))
+        .then(data => this.setState({ collection: data, status: false }))
         .catch(error => {
             console.log(error);
-            this.setState({ placeholder: "Something whent wrong" });
+            this.setState({ status: "Something whent wrong" });
         });
     }
     setUsername = (username) => {
@@ -133,7 +133,7 @@ class App extends Component {
         const {
             discogsUsername,
             collection,
-            loaded,
+            status,
             placeholder,
             activeRecord,
             activeArtist,
@@ -154,7 +154,7 @@ class App extends Component {
         let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);
         return (
             <Fragment>
-                <header className="header">
+                <header>
                     <h1>Skivorna</h1>
                     { discogsUsername &&
                         <Fragment>
@@ -166,7 +166,7 @@ class App extends Component {
                                 <button type="button" onClick={() => this.setState({ showOrders: true })}>&#8645;</button>
                                 <button type="button" onClick={this.updateCollection}>&#8635;</button>
                             </div>
-                            { loaded &&
+                            { collection &&
                                 <div className="stats">
                                     <div className="counter">{"Antal skivor: " + orderedFilteredCollection.length}</div>
                                     <div className="price-sum">{"Pris summa: " + priceSum.toFixed(2)}</div>
@@ -192,6 +192,9 @@ class App extends Component {
                         </Fragment>
                     }
                 </header>
+                { status &&
+                    <div className="status">{status}</div>
+                }
                 { discogsUsername ?
                     <Fragment>
                         { activeArtist &&
@@ -201,14 +204,13 @@ class App extends Component {
                                 handleCloseClick={this.handleArtistCloseClick}
                             />
                         }
-                        { loaded ?
+                        { collection &&
                             <div className="collection">
                                 { orderedFilteredCollection &&
                                     orderedFilteredCollection.map(recId =>
                                         <Record rec={collection[recId]} handleClick={this.handleRecordClick} key={recId} />, this)
                                 }
                             </div>
-                            : placeholder
                         }
                         { activeRecord &&
                             <Popup handleClose={this.handleCloseRecordInfo}>

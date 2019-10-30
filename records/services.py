@@ -1,6 +1,5 @@
 import re
 from datetime import date
-from django.core.cache import cache
 from .models import *
 from . import discogs
 from . import spotify
