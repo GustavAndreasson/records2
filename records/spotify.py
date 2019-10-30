@@ -1,8 +1,9 @@
 import requests, base64, time, logging
+from django.core.cache import cache
 from decouple import config
 
 logger = logging.getLogger(__name__)
-token, token_expire = ("", 0)
+TOKEN_KEY = "spotify_token_cache_key"
 
 class SpotifyError(Exception):
     def __init__(self, code, message):
@@ -35,11 +36,11 @@ def getAlbumId(artist, album):
     return None
 
 def __getToken():
-    global token, token_expire
-    if time.time() > token_expire:
-        token, token_expire = __renewToken()
-        logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token_expire)))
-    return token
+    token_info = cache.get(TOKEN_KEY)
+    if not token_info or time.time() > token_info[1]:
+        token_info = __renewToken()
+        logger.debug("Renewed Spotify token, expires " + time.asctime(time.localtime(token_info[1])))
+    return token_info[0]
 
 def __renewToken():
     auth = base64.b64encode(bytes(config('SPOTIFY_ID') + ":" + config('SPOTIFY_SECRET'),"utf-8"))
@@ -49,4 +50,6 @@ def __renewToken():
     }
     data = {"grant_type": "client_credentials"}
     r = requests.post(config('SPOTIFY_ACCOUNT_URL') + "token", data=data, headers=headers)
-    return (r.json()['access_token'], r.json()['expires_in'] + time.time())
+    token_info = (r.json()['access_token'], r.json()['expires_in'] + time.time())
+    cache.set(TOKEN_KEY, token_info)
+    return token_info
