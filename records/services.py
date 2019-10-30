@@ -99,7 +99,6 @@ def updateRecord(record):
             record.price = release_data.get('lowest_price')
         record.updated = date.today()
         record.save()
-        cache.delete(record.get_cache_key())
     except discogs.DiscogsError as de:
         logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
         return False
