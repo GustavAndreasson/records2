@@ -132,7 +132,7 @@ class App extends Component {
         let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);
         return (
             <Fragment>
-                <div className="header">
+                <header className="header">
                     <h1>Skivorna</h1>
                     { discogsUsername &&
                         <Fragment>
@@ -169,7 +169,7 @@ class App extends Component {
                             }
                         </Fragment>
                     }
-                </div>
+                </header>
                 { discogsUsername ?
                     <Fragment>
                         { activeArtist &&
