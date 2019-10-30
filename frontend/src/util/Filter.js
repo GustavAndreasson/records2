@@ -47,7 +47,7 @@ const attributes = {
     price: {
         name: "Pris",
         key: "price",
-	compares: Object.values(compares).filter(cmp => ["gt", "lt", "eq"].includes(cmp.key)),
+	    compares: Object.values(compares).filter(cmp => ["gt", "lt", "eq"].includes(cmp.key)),
         getValues: rec => [parseFloat(rec.price)]
     },
     addedDate: {
@@ -61,5 +61,5 @@ const attributes = {
 export default {
     attributes: attributes,
     compares:  compares,
-    getFunction: (attr, cmp, value) => rec => attr.getValues(rec).some(recVal => cmp.func(recVal, value))
+    getFunction: (attr, cmp, value) => rec => attributes[attr].getValues(rec).some(recVal => compares[cmp].func(recVal, value))
 }

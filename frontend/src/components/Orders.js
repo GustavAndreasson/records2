@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Order from "../util/Order";
 
 const Orders = ({ orders, handleUpdate, handleClose }) => {
-    const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0]);
+    const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0].key);
     const [reverse, setReverse] = useState(false);
-    const handleAttributeChange = (event) => setAttribute(Order.attributes[event.target.value]);
+    const handleAttributeChange = (event) => setAttribute(Order.attributes[event.target.value].key);
     const handleReverseChange = (event) => setReverse(event.target.checked);
     const handleAddClick = (e) => {
         e.preventDefault();
@@ -21,8 +21,8 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
             <div className="orders">
                 { orders.map((order, index) =>
                     <div className="order" key={index}>
-                        <span className="attribute">{order.attribute.name}</span>
-                        <span className="direction">{order.reverse ? "N" : "U"}</span>
+                        <span className="attribute">{Order.attributes[order.attribute].name}</span>
+                        <span className="direction">{order.reverse ? " N" : " U"}</span>
                         <button type="button" className="remove_order" onClick={() => handleRemoveClick(index)}>-</button>
                     </div>
                 )}

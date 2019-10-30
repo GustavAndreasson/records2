@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Filter from "../util/Filter";
 
 const Filters = ({ filters, handleUpdate, handleClose }) => {
-    const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0]);
-    const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0]);
+    const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
+    const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
-    const handleAttributeChange = (event) => setAttribute(Filter.attributes[event.target.value]);
-    const handleCompareChange = (event) => setCompare(Filter.compares[event.target.value]);
+    const handleAttributeChange = (event) => setAttribute(Filter.attributes[event.target.value].key);
+    const handleCompareChange = (event) => setCompare(Filter.compares[event.target.value].key);
     const handleValueChange = (event) => setValue(event.target.value);
     const handleAddClick = (e) => {
         e.preventDefault();
@@ -24,8 +24,8 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
             <div className="filters">
                 { filters.map((filter, index) =>
                     <div className="filter" key={index}>
-                        <span className="attribute">{filter.attribute.name}</span>
-                        <span className="compare">{filter.compare.name}</span>
+                        <span className="attribute">{Filter.attributes[filter.attribute].name}</span>
+                        <span className="compare">{Filter.compares[filter.compare].name}</span>
                         <span className="value">{filter.value}</span>
                         <button type="button" className="remove_filter" onClick={() => handleRemoveClick(index)}>-</button>
                     </div>
@@ -38,7 +38,7 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
                     )}
                 </select>
                 <select className="filter_compare" value={compare.key} onChange={handleCompareChange}>
-                    { attribute.compares.map(cmp =>
+                    { Filter.attributes[attribute].compares.map(cmp =>
                         <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                     )}
                 </select>

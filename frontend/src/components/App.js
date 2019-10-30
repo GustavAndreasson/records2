@@ -7,6 +7,8 @@ import UsernameInput from "./UsernameInput";
 import Popup from "./Popup";
 import Filters from "./Filters";
 import Orders from "./Orders";
+import FilterUtil from "../util/Filter";
+import OrderUtil from "../util/Order";
 
 class App extends Component {
     state = {
@@ -26,6 +28,18 @@ class App extends Component {
         let user = localStorage.getItem('discogs_username');
         if (user) {
             this.setUsername(user);
+        }
+        let filters = localStorage.getItem('filters');
+        if (filters) {
+            this.setState({
+                filters: JSON.parse(filters).map(f => { return { ...f, "run": FilterUtil.getFunction(f.attribute, f.compare, f.value) }; })
+            });
+        }
+        let orders = localStorage.getItem('orders');
+        if (orders) {
+            this.setState({
+                orders: JSON.parse(orders).map(o => { return { ...o, "run": OrderUtil.getFunction(o.attribute, o.reverse) }; })
+            });
         }
     }
     handleErrors = (response) => {
@@ -58,6 +72,14 @@ class App extends Component {
             this.setState({ discogsUsername: username });
             this.getCollection(username);
         }
+    }
+    setFilters = (filters) => {
+        localStorage.setItem('filters', JSON.stringify(filters));
+        this.setState({ filters: filters });
+    }
+    setOrders = (orders) => {
+        localStorage.setItem('orders', JSON.stringify(orders));
+        this.setState({ orders: orders });
     }
     search = (event) => this.setState({ searchQuery: event.target.value })
     filterRecord = (rec) => (
@@ -155,7 +177,7 @@ class App extends Component {
                                 <Popup handleClose={() => this.setState({ showFilters: false })}>
                                     <Filters
                                         filters={filters}
-                                        handleUpdate={(f) => this.setState({ filters: f })}
+                                        handleUpdate={this.setFilters}
                                     />
                                 </Popup>
                             }
@@ -163,7 +185,7 @@ class App extends Component {
                                 <Popup handleClose={() => this.setState({ showOrders: false })}>
                                     <Orders
                                         orders={orders}
-                                        handleUpdate={(o) => this.setState({ orders: o })}
+                                        handleUpdate={this.setOrders}
                                     />
                                 </Popup>
                             }
