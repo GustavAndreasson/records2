@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import "./styling/RecordInfo.scss";
 
 import Artists from "./Artists";
 

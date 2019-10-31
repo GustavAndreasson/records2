@@ -1,0 +1,36 @@
+.record {
+    display: inline-block;
+    margin: 4px;
+    box-shadow: 2px 2px 5px #888888;
+    vertical-align: middle;
+
+    &:hover {
+        box-shadow: 5px 5px 5px #888888;
+        margin: 1px 7px 7px 1px;
+    }
+
+    .cover {
+        height: 40px;
+        display: block;
+
+        &.format-CD {
+            height: 40px;
+        }
+
+        &.format-Vinyl7 {
+            height: 50px;
+        }
+
+        &.format-Vinyl10 {
+            height: 70px;
+        }
+
+        &.format-Vinyl {
+            height: 90px;
+        }
+
+        &.format-Vinyl12 {
+            height: 90px;
+        }
+    }
+}

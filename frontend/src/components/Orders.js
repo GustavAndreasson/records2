@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Order from "../util/Order";
+import "./styling/Orders.scss";
 
 const Orders = ({ orders, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0].key);
@@ -17,8 +18,8 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(orders.filter((_, i) => i !== index));
     return (
-        <div className="ordersPopup">
-            <div className="orders">
+        <div className="orders">
+            <div className="current-orders">
                 { orders.map((order, index) =>
                     <div className="order" key={index}>
                         <span className="attribute">{Order.attributes[order.attribute].name}</span>
@@ -27,14 +28,14 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
                     </div>
                 )}
             </div>
-            <form className="new_order" onSubmit={handleAddClick}>
-                <select className="order_attribute" value={attribute.key} onChange={handleAttributeChange}>
+            <form className="new-order" onSubmit={handleAddClick}>
+                <select className="order-attribute" value={attribute.key} onChange={handleAttributeChange}>
                     { Object.values(Order.attributes).map(attr =>
                         <option value={attr.key} key={attr.key}>{attr.name}</option>
                     )}
                 </select>
-                <input type="checkbox" className="order_reverse" checked={reverse} onChange={handleReverseChange} />
-                <button type="submit" className="add_order">+</button>
+                <input type="checkbox" className="order-reverse" checked={reverse} onChange={handleReverseChange} />
+                <button type="submit" className="add-order">+</button>
             </form>
         </div>
     );

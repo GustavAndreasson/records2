@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Filter from "../util/Filter";
+import "./styling/Filters.scss";
 
 const Filters = ({ filters, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
@@ -20,30 +21,30 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(filters.filter((_, i) => i !== index));
     return (
-        <div className="filtersPopup">
-            <div className="filters">
+        <div className="filters">
+            <div className="current-filters">
                 { filters.map((filter, index) =>
                     <div className="filter" key={index}>
                         <span className="attribute">{Filter.attributes[filter.attribute].name}</span>
                         <span className="compare">{Filter.compares[filter.compare].name}</span>
                         <span className="value">{filter.value}</span>
-                        <button type="button" className="remove_filter" onClick={() => handleRemoveClick(index)}>-</button>
+                        <button type="button" className="remove-filter" onClick={() => handleRemoveClick(index)}>-</button>
                     </div>
                 )}
             </div>
-            <form className="new_filter"  onSubmit={handleAddClick}>
-                <select className="filter_attribute" value={attribute.key} onChange={handleAttributeChange}>
+            <form className="new-filter"  onSubmit={handleAddClick}>
+                <select className="filter-attribute" value={attribute.key} onChange={handleAttributeChange}>
                     { Object.values(Filter.attributes).map(attr =>
                         <option value={attr.key} key={attr.key}>{attr.name}</option>
                     )}
                 </select>
-                <select className="filter_compare" value={compare.key} onChange={handleCompareChange}>
+                <select className="filter-compare" value={compare.key} onChange={handleCompareChange}>
                     { Filter.attributes[attribute].compares.map(cmp =>
                         <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                     )}
                 </select>
-                <input type="text" className="filter_value"  value={value} onChange={handleValueChange}/>
-                <button type="submit" className="add_filter">+</button>
+                <input type="text" className="filter-value"  value={value} onChange={handleValueChange}/>
+                <button type="submit" className="add-filter">+</button>
             </form>
         </div>
     );

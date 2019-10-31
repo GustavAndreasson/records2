@@ -1,0 +1,9 @@
+.artist {
+    color: #0000aa;
+    cursor: pointer;
+    font-weight: bold;
+
+    &.inactive {
+        font-weight: normal;
+    }
+}

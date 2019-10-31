@@ -1,4 +1,5 @@
 import React from "react";
+import "./styling/Popup.scss";
 
 const Popup = ({ children, handleClose }) => (
     <div className="popup">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styling/UsernameInput.scss";
 
 const UsernameInput = ({ handleSetUsername }) => {
     const [user, setUser] = useState("");
@@ -7,7 +8,7 @@ const UsernameInput = ({ handleSetUsername }) => {
         handleSetUsername(user);
     }
     return (
-        <form className="usernameInput" onSubmit={handleSubmit}>
+        <form className="username-input" onSubmit={handleSubmit}>
             <input type="text" value={user} onChange={e => setUser(e.target.value)} />
             <button type="submit">OK</button>
         </form>

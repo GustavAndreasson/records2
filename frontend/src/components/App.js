@@ -9,6 +9,7 @@ import Filters from "./Filters";
 import Orders from "./Orders";
 import FilterUtil from "../util/Filter";
 import OrderUtil from "../util/Order";
+import "./styling/App.scss";
 
 class App extends Component {
     state = {

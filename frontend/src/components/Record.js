@@ -1,4 +1,5 @@
 import React from "react";
+import "./styling/Record.scss";
 
 const Record = ({ rec, handleClick }) => {
     let artists = rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ");
