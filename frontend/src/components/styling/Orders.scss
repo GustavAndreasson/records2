@@ -16,6 +16,17 @@
         }
     }
     .new-order {
+        .order-reverse {
+            display:none;
+            & + label:before {
+                content: "⇩";
+                padding: 0 5px;
+            }
+            &:checked + label:before {
+                content: "⇧";
+                padding: 0 5px;
+            }
+        }
         .add-order {
             float: right;
         }
