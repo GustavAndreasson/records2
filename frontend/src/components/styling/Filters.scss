@@ -1,3 +1,29 @@
 .filters {
-    
+    .current-filters {
+        margin-bottom: 5px;
+
+        .filter {
+            border: 1px solid #000;
+            border-radius: 5px;
+            padding: 5px;
+            margin-bottom: 3px;
+
+            .compare {
+                padding: 0 5px;
+            }
+            .remove-filter {
+                margin-left: 5px;
+                float: right;
+                line-height: 12px;
+            }
+        }
+    }
+    .new-filter {
+        .filter-value {
+            width: 150px;
+        }
+        .add-filter {
+            float: right;
+        }
+    }
 }
