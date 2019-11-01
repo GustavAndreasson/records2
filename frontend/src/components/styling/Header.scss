@@ -1,0 +1,33 @@
+header {
+    overflow: hidden;
+
+    h1 {
+        float: left;
+        margin: 5px;
+        font-size: 24px;
+    }
+
+    .search {
+        float: left;
+        height: 20px;
+        margin: 5px 10px;
+
+        input {
+            margin-left: 5px;
+        }
+    }
+
+    .buttons {
+        float: left;
+        height: 22px;
+        margin: 5px 10px;
+
+        button {
+            height: 100%;
+        }
+    }
+
+    .stats {
+        float: right;
+    }
+}

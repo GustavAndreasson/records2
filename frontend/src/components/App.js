@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
+import Header from "./Header";
 import Record from "./Record";
 import RecordInfo from "./RecordInfo";
 import ArtistInfo from "./ArtistInfo";
@@ -155,44 +156,37 @@ class App extends Component {
         let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);
         return (
             <Fragment>
-                <header>
-                    <h1>Skivorna</h1>
-                    { discogsUsername &&
-                        <Fragment>
-                            <div className="search">
-                                <input type="text" value={searchQuery} onChange={this.search} />
-                            </div>
-                            <div className="buttons">
-                                <button type="button" onClick={() => this.setState({ showFilters: true })}>&#9660;</button>
-                                <button type="button" onClick={() => this.setState({ showOrders: true })}>&#8645;</button>
-                                <button type="button" onClick={this.updateCollection}>&#8635;</button>
-                            </div>
-                            { collection &&
-                                <div className="stats">
-                                    <div className="counter">{"Antal skivor: " + orderedFilteredCollection.length}</div>
-                                    <div className="price-sum">{"Pris summa: " + priceSum.toFixed(2)}</div>
-                                    <div className="price-avg">{"Pris medel: " + (priceSum / prices.length).toFixed(2)}</div>
-                                </div>
-                            }
-                            { showFilters &&
-                                <Popup handleClose={() => this.setState({ showFilters: false })}>
-                                    <Filters
-                                        filters={filters}
-                                        handleUpdate={this.setFilters}
-                                    />
-                                </Popup>
-                            }
-                            { showOrders &&
-                                <Popup handleClose={() => this.setState({ showOrders: false })}>
-                                    <Orders
-                                        orders={orders}
-                                        handleUpdate={this.setOrders}
-                                    />
-                                </Popup>
-                            }
-                        </Fragment>
+                <Header
+                    showControls={discogsUsername}
+                    searchQuery={searchQuery}
+                    handleSearchUpdated={this.search}
+                    handleShowFilters={() => this.setState({ showFilters: true })}
+                    handleShowOrders={() => this.setState({ showOrders: true })}
+                    handleUpdateCollection={this.updateCollection}
+                    collectionStats={
+                        collection && {
+                            qty: orderedFilteredCollection.length,
+                            sum: priceSum.toFixed(2),
+                            avg: (priceSum / prices.length).toFixed(2)
+                        }
                     }
-                </header>
+                />
+                { showFilters &&
+                    <Popup handleClose={() => this.setState({ showFilters: false })}>
+                        <Filters
+                            filters={filters}
+                            handleUpdate={this.setFilters}
+                        />
+                    </Popup>
+                }
+                { showOrders &&
+                    <Popup handleClose={() => this.setState({ showOrders: false })}>
+                        <Orders
+                            orders={orders}
+                            handleUpdate={this.setOrders}
+                        />
+                    </Popup>
+                }
                 { status &&
                     <div className="status">{status}</div>
                 }
