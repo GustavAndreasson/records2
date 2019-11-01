@@ -111,8 +111,18 @@ class App extends Component {
             this.state.filters.every(filter => filter.run(rec))
         )
     )
-    handleRecordClick = (rec) => this.setState({activeRecord: rec});
-    handleCloseRecordInfo = () => this.setState({activeRecord: null});
+    handleRecordClick = (rec) => {
+        this.setState({activeRecord: rec});
+        let threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        if (!rec.updated || rec.updated < threeMonthsAgo.toISOString()) {
+            fetch("records/record/" + rec.id + "/update")
+            .then(this.handleErrors)
+            .then(data => this.setState({ collection: {...this.state.collection, [rec.id]: data }, activeRecord: data }))
+            .catch(error => console.log(error));
+        }
+    }
+    handleCloseRecordInfo = () => this.setState({ activeRecord: null });
     handleArtistClick = (artist) => {
         this.setState({activeArtist: artist});
         fetch("records/artist/" + artist.id + "/get")
@@ -123,14 +133,12 @@ class App extends Component {
             !data.updated &&
                 fetch("records/artist/" + artist.id + "/update")
                 .then(response => response.json())
-                .then(data => {
-                    this.setState({activeArtist: data});
-                    console.log(data);
-                });
+                .then(data => this.setState({ activeArtist: data }))
+                .catch(error => console.log(error));
         })
         .catch(error => console.log(error));
     }
-    handleArtistCloseClick = () => this.setState({activeArtist: null});
+    handleArtistCloseClick = () => this.setState({ activeArtist: null });
     render() {
         const {
             discogsUsername,

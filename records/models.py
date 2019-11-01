@@ -29,7 +29,7 @@ class Artist(models.Model):
         members = [{"artist": mr.member.to_dict(False), "active": mr.active} for mr in member_relations]
         group_relations = ArtistMembers.objects.filter(member=self)
         groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gr in group_relations]
-        updated = str(self.updated) if self.updated else ""
+        updated = str(self.updated) if self.updated else None
         return {
             "id": self.id,
             "name": self.name,
@@ -65,7 +65,7 @@ class Record(models.Model):
     def __str__(self):
         return self.name
 
-    def to_dict(self, data_level):
+    def to_dict(self, data_level=2):
         if data_level > 1:
             cached_data = cache.get(self.get_cache_key())
             if cached_data:
@@ -79,6 +79,7 @@ class Record(models.Model):
             "year":  self.year,
             "thumbnail": self.thumbnail,
             "price": str(self.price) if self.price else None,
+            "updated": str(self.updated) if self.updated else None,
             "data_level": data_level
         }
         if data_level == 0:
