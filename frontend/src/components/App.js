@@ -172,7 +172,7 @@ class App extends Component {
                     handleShowOrders={() => this.setState({ showOrders: true })}
                     handleUpdateCollection={this.updateCollection}
                     collectionStats={
-                        collection && {
+                        orderedFilteredCollection.length > 0 && {
                             qty: orderedFilteredCollection.length,
                             sum: priceSum.toFixed(2),
                             avg: (priceSum / prices.length).toFixed(2)
@@ -207,7 +207,7 @@ class App extends Component {
                                 handleCloseClick={this.handleArtistCloseClick}
                             />
                         }
-                        { collection &&
+                        { orderedFilteredCollection.length > 0  &&
                             <div className="collection">
                                 { orderedFilteredCollection &&
                                     orderedFilteredCollection.map(recId =>
