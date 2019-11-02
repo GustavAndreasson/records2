@@ -20,11 +20,13 @@
             display:none;
             & + label:before {
                 content: "⇩";
-                padding: 0 5px;
+                padding: 1px 3px;
+                border: 1px solid #000;
+                margin: 0 5px;
+                border-radius: 3px;
             }
             &:checked + label:before {
                 content: "⇧";
-                padding: 0 5px;
             }
         }
         .add-order {
