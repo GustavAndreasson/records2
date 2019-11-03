@@ -1,6 +1,6 @@
 .filters {
     .current-filters {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
 
         .filter {
             border: 1px solid #000;
@@ -14,13 +14,17 @@
             .remove-filter {
                 margin-left: 5px;
                 float: right;
-                line-height: 12px;
+                line-height: 0.9em;
             }
         }
     }
     .new-filter {
+        .filter-compare {
+            margin: 0 3px;
+        }
         .filter-value {
-            width: 150px;
+            width: 100px;
+            margin-right: 5px;
         }
         .add-filter {
             float: right;

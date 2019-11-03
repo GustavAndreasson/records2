@@ -1,6 +1,6 @@
 .orders {
     .current-orders {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
 
         .order {
             border: 1px solid #000;
@@ -8,22 +8,26 @@
             padding: 5px;
             margin-bottom: 3px;
 
+            .direction {
+                margin-left: 10px;
+            }
+
             .remove-order {
                 margin-left: 5px;
                 float: right;
-                line-height: 12px;
+                line-height: 0.9em;
             }
         }
     }
     .new-order {
         .order-reverse {
             display:none;
+
+            & + label {
+                margin: 0 10px;
+            }
             & + label:before {
                 content: "⇩";
-                padding: 1px 3px;
-                border: 1px solid #000;
-                margin: 0 5px;
-                border-radius: 3px;
             }
             &:checked + label:before {
                 content: "⇧";
