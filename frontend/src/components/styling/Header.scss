@@ -10,17 +10,13 @@ header {
     .search {
         float: left;
         height: 20px;
-        margin: 5px 10px;
-
-        input {
-            margin-left: 5px;
-        }
+        margin: 10px 15px 8px;
     }
 
     .buttons {
         float: left;
         height: 22px;
-        margin: 5px 10px;
+        margin: 10px 10px;
 
         button {
             margin-left: 5px;
@@ -30,5 +26,6 @@ header {
 
     .stats {
         float: right;
+        font-size: 0.8em;
     }
 }

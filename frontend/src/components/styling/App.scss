@@ -5,32 +5,3 @@
     padding: 2px 10px 0 5px;
     background: #ddd;
 }
-
-button, select, .button {
-    background: none;
-    color: inherit;
-    font: inherit;
-    outline: inherit;
-    display: inline-block;
-    padding: 1px 3px;
-    border: 1px solid #000;
-    border-radius: 3px;
-    background-color: #fff;
-    cursor: pointer;
-
-    &:active {
-        color: #111;
-    }
-}
-input {
-    background: none;
-    color: inherit;
-    font: inherit;
-    font-size: 0.9em;
-    outline: inherit;
-    display: inline-block;
-    border: 1px solid #000;
-    border-radius: 3px;
-    background-color: #fff;
-    padding: 3px;
-}
