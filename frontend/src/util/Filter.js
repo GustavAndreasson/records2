@@ -1,9 +1,9 @@
 const compares = {
-    sub: {name: "~", key: "sub", func: (a, b) => a.toLowerCase().indexOf(b.toLowerCase()) >= 0},
+    sub: {name: "\u2248", key: "sub", func: (a, b) => a.toLowerCase().indexOf(b.toLowerCase()) >= 0},
     eq: {name: "=", key: "eq", func: (a, b) => a == b},
-    neq: {name: "!=", key: "neq", func: (a, b) => a != b},
+    neq: {name: "\u2260", key: "neq", func: (a, b) => a != b},
     seq: {name: "=", key: "seq", func: (a, b) => a.toLowerCase() == b.toLowerCase()},
-    sneq: {name: "!=", key: "sneq", func: (a, b) => a.toLowerCase() != b.toLowerCase()},
+    sneq: {name: "\u2260", key: "sneq", func: (a, b) => a.toLowerCase() != b.toLowerCase()},
     lt: {name: "<", key: "lt", func: (a, b) => a <= b},
     gt: {name: ">", key: "gt", func: (a, b) => a >= b}
 };
@@ -11,13 +11,13 @@ const attributes = {
     name: {
         name: "Album",
         key: "name",
-        compares: Object.values(compares).filter(cmp => ["sub", "seq", "sneq"].includes(cmp.key)),
+        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.name]
     },
     artist: {
         name: "Artist",
         key: "artist",
-        compares: Object.values(compares).filter(cmp => ["sub", "seq", "sneq"].includes(cmp.key)),
+        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => (
             rec.artists ? rec.artists.map(artist => artist.artist.name) : []
         ).concat(
@@ -29,31 +29,31 @@ const attributes = {
     track: {
         name: "Spår",
         key: "track",
-        compares: Object.values(compares).filter(cmp => ["sub", "seq"].includes(cmp.key)),
+        compares: ["sub", "seq"].map(cmp => compares[cmp]),
         getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : []
     },
     format: {
         name: "Format",
         key: "format",
-        compares: Object.values(compares).filter(cmp => ["sub", "seq", "sneq"].includes(cmp.key)),
+        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.format]
     },
     year: {
         name: "År",
         key: "year",
-        compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
+        compares: ["eq", "neq", "lt", "gt"].map(cmp => compares[cmp]),
         getValues: rec => [rec.year]
     },
     price: {
         name: "Pris",
         key: "price",
-	    compares: Object.values(compares).filter(cmp => ["gt", "lt", "eq"].includes(cmp.key)),
+	    compares: ["gt", "lt", "eq"].map(cmp => compares[cmp]),
         getValues: rec => [parseFloat(rec.price)]
     },
     addedDate: {
         name: "Tillagd",
         key: "addedDate",
-        compares: Object.values(compares).filter(cmp => ["eq", "neq", "lt", "gt"].includes(cmp.key)),
+        compares: ["eq", "neq", "lt", "gt"].map(cmp => compares[cmp]),
         getValues: rec => [rec.addedDate]
     }
 };

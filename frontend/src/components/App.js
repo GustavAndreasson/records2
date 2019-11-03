@@ -153,7 +153,7 @@ class App extends Component {
             showFilters,
             showOrders
         } = this.state;
-        let orderedFilteredCollection = orders.reduce((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
+        let orderedFilteredCollection = orders.reduceRight((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
             this.filterRecord(rec) ? col.concat(rec.id) : col,
             []
         );
