@@ -124,7 +124,7 @@ class App extends Component {
     }
     handleCloseRecordInfo = () => this.setState({ activeRecord: null });
     handleArtistClick = (artist) => {
-        this.setState({activeArtist: artist});
+        this.setState({ activeArtist: artist, activeRecord: null });
         fetch("records/artist/" + artist.id + "/get")
         .then(this.handleErrors)
         .then(data => {
