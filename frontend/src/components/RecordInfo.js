@@ -3,7 +3,7 @@ import "./styling/RecordInfo.scss";
 
 import Artists from "./Artists";
 
-const RecordInfo = ({ rec, handleClick,  handleArtistClick }) => {
+const RecordInfo = ({ rec, handleClick,  handleArtistClick, handleYearClick }) => {
     console.log(rec);
     return (rec &&
         <div className="record-info" onClick={handleClick}>
@@ -12,7 +12,7 @@ const RecordInfo = ({ rec, handleClick,  handleArtistClick }) => {
                 <div className="artists"><Artists artists={rec.artists} handleClick={handleArtistClick} /></div>
                 <div className="name">{rec.name}</div>
                 <div className="format">{rec.format}</div>
-                <div className="year">{rec.year}</div>
+                <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div>
                 { rec.price && <div className="price">{"(" + rec.price + ")"}</div> }
                 <div className="tracks">
                     {rec.tracks && rec.tracks.map((track, index) => (

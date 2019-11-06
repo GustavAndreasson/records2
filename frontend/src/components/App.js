@@ -83,7 +83,13 @@ class App extends Component {
         localStorage.setItem('orders', JSON.stringify(orders));
         this.setState({ orders: orders });
     }
-    search = (event) => this.setState({ searchQuery: event.target.value })
+    setSearch = (event) => this.setState({ searchQuery: event.target.value })
+    setYear = (year) => this.setFilters(this.state.filters.concat({
+        attribute: "year",
+        compare: "eq",
+        value: year,
+        run: FilterUtil.getFunction("year", "eq", year)
+    }))
     filterRecord = (rec) => (
         (
             !this.state.activeArtist ||
@@ -167,7 +173,7 @@ class App extends Component {
                 <Header
                     showControls={discogsUsername}
                     searchQuery={searchQuery}
-                    handleSearchUpdated={this.search}
+                    handleSearchUpdated={this.setSearch}
                     handleShowFilters={() => this.setState({ showFilters: true })}
                     handleShowOrders={() => this.setState({ showOrders: true })}
                     handleUpdateCollection={this.updateCollection}
@@ -220,6 +226,7 @@ class App extends Component {
                                 <RecordInfo
                                     rec={activeRecord}
                                     handleArtistClick={this.handleArtistClick}
+                                    handleYearClick={this.setYear}
                                 />
                             </Popup>
                         }
