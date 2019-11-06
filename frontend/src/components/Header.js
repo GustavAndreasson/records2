@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import "./styling/Header.scss";
 
-const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilters, handleShowOrders, handleUpdateCollection, collectionStats }) => (
+const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilters, qtyFilters, handleShowOrders, qtyOrders,
+    handleUpdateCollection, collectionStats }) => (
     <header>
         <h1>Skivorna</h1>
         { showControls &&
@@ -10,8 +11,12 @@ const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilt
                     <input type="text" value={searchQuery} onChange={handleSearchUpdated} />
                 </div>
                 <div className="buttons">
-                    <button type="button" onClick={handleShowFilters}>&#9660;</button>
-                    <button type="button" onClick={handleShowOrders}>&#8645;</button>
+                    <button type="button" onClick={handleShowFilters}>&#9660;
+                        { qtyFilters > 0 && <span className="button-qty">{qtyFilters}</span> }
+                    </button>
+                    <button type="button" onClick={handleShowOrders}>&#8645;
+                        { qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span> }
+                    </button>
                     <button type="button" onClick={handleUpdateCollection}>&#8635;</button>
                 </div>
                 { collectionStats &&

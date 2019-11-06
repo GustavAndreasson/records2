@@ -175,7 +175,9 @@ class App extends Component {
                     searchQuery={searchQuery}
                     handleSearchUpdated={this.setSearch}
                     handleShowFilters={() => this.setState({ showFilters: true })}
+                    qtyFilters={this.state.filters.length}
                     handleShowOrders={() => this.setState({ showOrders: true })}
+                    qtyOrders={this.state.orders.length}
                     handleUpdateCollection={this.updateCollection}
                     collectionStats={
                         orderedFilteredCollection.length > 0 && {

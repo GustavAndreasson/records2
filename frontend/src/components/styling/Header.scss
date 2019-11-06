@@ -21,6 +21,18 @@ header {
         button {
             margin-left: 5px;
             height: 100%;
+            position: relative;
+            .button-qty {
+                background-color: #ff0000;
+                border-radius: 5px;
+                font-size: 9px;
+                color: #ffffff;
+                display: inline-block;
+                position: absolute;
+                bottom: -2px;
+                right: -2px;
+                width: 10px;
+            }
         }
     }
 
