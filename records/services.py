@@ -25,19 +25,19 @@ def updateCollection(user):
                     })
                 if created:
                     logger.info("Created record " + record.name + " (" + str(record.id) + ")")
-                position = 0
-                for r_artist in release_data['basic_information']['artists']:
-                    artist, created = Artist.objects.get_or_create(
-                        id=r_artist['id'],
-                        defaults={'name': __fixArtistName(r_artist['name'])})
-                    if created:
-                        logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
-                    ra = RecordArtists.objects.create(
-                        record=record,
-                        artist=artist,
-                        delimiter=r_artist['join'],
-                        position=position)
-                    position += 1
+                    position = 0
+                    for r_artist in release_data['basic_information']['artists']:
+                        artist, created = Artist.objects.get_or_create(
+                            id=r_artist['id'],
+                            defaults={'name': __fixArtistName(r_artist['name'])})
+                        if created:
+                            logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
+                        ra = RecordArtists.objects.create(
+                            record=record,
+                            artist=artist,
+                            delimiter=r_artist['join'],
+                            position=position)
+                        position += 1
                 ur = UserRecords.objects.create(user=user, record=record, added_date=release_data['date_added'][0:10])
                 logger.info("Added record " + record.name + " (" + str(record.id) + ") to collection for " + user.username)
             else:
