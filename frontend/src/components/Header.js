@@ -11,13 +11,13 @@ const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilt
                     <input type="text" value={searchQuery} onChange={handleSearchUpdated} />
                 </div>
                 <div className="buttons">
-                    <button type="button" onClick={handleShowFilters}>&#9660;
+                    <button type="button" className="fas fa-filter" onClick={handleShowFilters}>
                         { qtyFilters > 0 && <span className="button-qty">{qtyFilters}</span> }
                     </button>
-                    <button type="button" onClick={handleShowOrders}>&#8645;
+                    <button type="button" className="fas fa-sort" onClick={handleShowOrders}>
                         { qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span> }
                     </button>
-                    <button type="button" onClick={handleUpdateCollection}>&#8635;</button>
+                    <button type="button" className="fas fa-sync" onClick={handleUpdateCollection}></button>
                 </div>
                 { collectionStats &&
                     <div className="stats">

@@ -18,7 +18,7 @@ const RecordInfo = ({ rec, handleClick,  handleArtistClick, handleYearClick }) =
                     {rec.tracks && rec.tracks.map((track, index) => (
                         <div className="track" key={index}>
                             <span className="position">{track.position}</span> {track.name}
-		                    { track.artists && (
+                            { track.artists && (
                                 <Fragment>
                                     {" ("}<Artists artists={track.artists} handleClick={handleArtistClick} />{")"}
                                 </Fragment>)

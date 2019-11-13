@@ -23,7 +23,7 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
                 { orders.map((order, index) =>
                     <div className="order" key={index}>
                         <span className="attribute">{Order.attributes[order.attribute].name}</span>
-                        <span className="direction">{order.reverse ? "\u21e7" : "\u21e9"}</span>
+                        <i className={"direction fas " + order.reverse ? "fa-sort-up" : "fa-sort-down"}></i>
                         <button type="button" className="remove-order" onClick={() => handleRemoveClick(index)}>-</button>
                     </div>
                 )}
