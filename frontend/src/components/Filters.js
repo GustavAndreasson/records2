@@ -6,8 +6,11 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
     const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
-    const handleAttributeChange = (event) => setAttribute(Filter.attributes[event.target.value].key);
-    const handleCompareChange = (event) => setCompare(Filter.compares[event.target.value].key);
+    const handleAttributeChange = (event) => {
+        setAttribute(event.target.value);
+        setCompare(Filter.attributes[event.target.value].compares[0].key)
+    }
+    const handleCompareChange = (event) => setCompare(event.target.value);
     const handleValueChange = (event) => setValue(event.target.value);
     const handleAddClick = (e) => {
         e.preventDefault();
@@ -33,12 +36,12 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
                 )}
             </div>
             <form className="new-filter"  onSubmit={handleAddClick}>
-                <select className="filter-attribute" value={attribute.key} onChange={handleAttributeChange}>
+                <select className="filter-attribute" value={attribute} onChange={handleAttributeChange}>
                     { Object.values(Filter.attributes).map(attr =>
                         <option value={attr.key} key={attr.key}>{attr.name}</option>
                     )}
                 </select>
-                <select className="filter-compare" value={compare.key} onChange={handleCompareChange}>
+                <select className="filter-compare" value={compare} onChange={handleCompareChange}>
                     { Filter.attributes[attribute].compares.map(cmp =>
                         <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                     )}
