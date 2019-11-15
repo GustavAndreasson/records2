@@ -23,8 +23,8 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
                 { orders.map((order, index) =>
                     <div className="order" key={index}>
                         <span className="attribute">{Order.attributes[order.attribute].name}</span>
-                        <i className={"direction fas " + order.reverse ? "fa-sort-up" : "fa-sort-down"}></i>
-                        <button type="button" className="remove-order" onClick={() => handleRemoveClick(index)}>-</button>
+                        <i className={"direction fas " + (order.reverse ? "fa-sort-up" : "fa-sort-down")}></i>
+                        <button type="button" className="remove-order fas fa-minus" onClick={() => handleRemoveClick(index)}></button>
                     </div>
                 )}
             </div>
@@ -35,8 +35,8 @@ const Orders = ({ orders, handleUpdate, handleClose }) => {
                     )}
                 </select>
                 <input type="checkbox" className="order-reverse" id="order-reverse" checked={reverse} onChange={handleReverseChange} />
-                <label htmlFor="order-reverse" className="button"></label>
-                <button type="submit" className="add-order">+</button>
+                <label htmlFor="order-reverse" className="button fas"></label>
+                <button type="submit" className="add-order fas fa-plus"></button>
             </form>
         </div>
     );

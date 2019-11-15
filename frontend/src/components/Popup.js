@@ -3,8 +3,8 @@ import "./styling/Popup.scss";
 
 const Popup = ({ children, handleClose }) => (
     <div className="popup">
-        <div className="close-button" onClick={handleClose}>{"\u2715"}</div>
-        { children }
+        <div className="close-button fas fa-times" onClick={handleClose}></div>
+        <div className="content">{ children }</div>
     </div>
 )
 export default Popup;

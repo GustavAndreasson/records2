@@ -27,10 +27,10 @@
                 margin: 0 10px;
             }
             & + label:before {
-                content: "⇩";
+                content: "\f0dd";
             }
             &:checked + label:before {
-                content: "⇧";
+                content: "\f0de";
             }
         }
         .add-order {

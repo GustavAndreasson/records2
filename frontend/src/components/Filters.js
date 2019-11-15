@@ -28,7 +28,7 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
                         <span className="attribute">{Filter.attributes[filter.attribute].name}</span>
                         <span className="compare">{Filter.compares[filter.compare].name}</span>
                         <span className="value">{filter.value}</span>
-                        <button type="button" className="remove-filter" onClick={() => handleRemoveClick(index)}>-</button>
+                        <button type="button" className="remove-filter fas fa-minus" onClick={() => handleRemoveClick(index)}></button>
                     </div>
                 )}
             </div>
@@ -44,7 +44,7 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
                     )}
                 </select>
                 <input type="text" className="filter-value"  value={value} onChange={handleValueChange}/>
-                <button type="submit" className="add-filter">+</button>
+                <button type="submit" className="add-filter fas fa-plus"></button>
             </form>
         </div>
     );
