@@ -1,3 +1,40 @@
+body {
+    font-family: sans-serif;
+}
+
+button, select, .button {
+    background: none;
+    color: inherit;
+    outline: inherit;
+    display: inline-block;
+    padding: 1px 5px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: bottom;
+    height: 26px;
+    box-sizing: border-box;
+    min-width: 30px;
+    text-align: center;
+
+    &:active {
+        color: #111;
+    }
+}
+
+input {
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: 0.9em;
+    outline: inherit;
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 3px;
+}
+
 .status {
     position: fixed;
     bottom: 0;

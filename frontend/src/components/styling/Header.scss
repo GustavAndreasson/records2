@@ -9,19 +9,19 @@ header {
 
     .search {
         float: left;
-        height: 20px;
         margin: 10px 15px 8px;
     }
 
     .buttons {
         float: left;
-        height: 22px;
-        margin: 10px 10px;
+        height: 26px;
+        margin: 8px 10px;
 
         button {
             margin-left: 5px;
             height: 100%;
             position: relative;
+
             .button-qty {
                 background-color: #ff0000;
                 border-radius: 5px;
