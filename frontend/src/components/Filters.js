@@ -1,8 +1,18 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { setFilters } from '../actions';
 import Filter from "../util/Filter";
 import "./styling/Filters.scss";
 
-const Filters = ({ filters, handleUpdate, handleClose }) => {
+const mapStateToProps = state => ({
+    filters: state.filters
+});
+
+const mapDispatchToProps = dispatch => ({
+    handleUpdate: filters => { dispatch(setFilters(filters)) }
+});
+
+const ConnectedFilters = ({ filters, handleUpdate }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
     const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
@@ -52,4 +62,6 @@ const Filters = ({ filters, handleUpdate, handleClose }) => {
         </div>
     );
 }
+
+const Filters = connect(mapStateToProps, mapDispatchToProps)(ConnectedFilters);
 export default Filters;

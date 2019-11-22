@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
 import Header from "./Header";
 import Record from "./Record";
 import RecordInfo from "./RecordInfo";
@@ -189,18 +188,12 @@ class App extends Component {
                 />
                 { showFilters &&
                     <Popup handleClose={() => this.setState({ showFilters: false })}>
-                        <Filters
-                            filters={filters}
-                            handleUpdate={this.setFilters}
-                        />
+                        <Filters />
                     </Popup>
                 }
                 { showOrders &&
                     <Popup handleClose={() => this.setState({ showOrders: false })}>
-                        <Orders
-                            orders={orders}
-                            handleUpdate={this.setOrders}
-                        />
+                        <Orders />
                     </Popup>
                 }
                 { status &&
@@ -209,36 +202,27 @@ class App extends Component {
                 { discogsUsername ?
                     <Fragment>
                         { activeArtist &&
-                            <ArtistInfo
-                                artist={activeArtist}
-                                handleArtistClick={this.handleArtistClick}
-                                handleCloseClick={this.handleArtistCloseClick}
-                            />
+                            <ArtistInfo />
                         }
                         { orderedFilteredCollection.length > 0  &&
                             <div className="collection">
                                 { orderedFilteredCollection &&
                                     orderedFilteredCollection.map(recId =>
-                                        <Record rec={collection[recId]} handleClick={this.handleRecordClick} key={recId} />, this)
+                                        <Record rec={collection[recId]} key={recId} />, this)
                                 }
                             </div>
                         }
                         { activeRecord &&
                             <Popup handleClose={this.handleCloseRecordInfo}>
-                                <RecordInfo
-                                    rec={activeRecord}
-                                    handleArtistClick={this.handleArtistClick}
-                                    handleYearClick={this.setYear}
-                                />
+                                <RecordInfo />
                             </Popup>
                         }
                     </Fragment>
                 :
-                    <UsernameInput handleSetUsername={this.setUsername} />
+                    <UsernameInput />
                 }
             </Fragment>
         )
     }
 }
-const wrapper = document.getElementById("app");
-wrapper ? ReactDOM.render(<App />, wrapper) : null;
+export default App;

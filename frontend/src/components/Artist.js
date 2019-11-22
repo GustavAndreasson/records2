@@ -1,7 +1,14 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { showArtist } from '../actions';
 import "./styling/Artist.scss";
 
-const Artist = ({ artist, handleClick, active=true }) =>
+const mapDispatchToProps = dispatch => ({
+    handleClick: artist => { dispatch(showArtist(artist)) }
+});
+
+const ConnectedArtist = ({ artist, handleClick, active=true }) =>
     <span className={"artist" + (!active ? " inactive" : "")} onClick={() => handleClick(artist)}>{artist.name}</span>
 
+const Artist = connect(null, mapDispatchToProps)(ConnectedArtist);
 export default Artist;

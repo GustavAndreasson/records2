@@ -1,7 +1,13 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { showRecord } from '../actions';
 import "./styling/Record.scss";
 
-const Record = ({ rec, handleClick }) => {
+const mapDispatchToProps = dispatch => ({
+    handleClick: rec => { dispatch(showRecord(rec)) }
+});
+
+const ConnectedRecord = ({ rec, handleClick }) => {
     let artists = rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ");
     let formats = "format-" + rec.format.replace(/ /, " format-");
 
@@ -13,4 +19,6 @@ const Record = ({ rec, handleClick }) => {
         </div>
     );
 }
+
+const Record = connect(null, mapDispatchToProps)(ConnectedRecord);
 export default Record;

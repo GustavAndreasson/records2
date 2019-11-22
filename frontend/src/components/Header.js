@@ -1,7 +1,24 @@
 import React, { Fragment } from "react";
+import { connect } from 'react-redux';
+import { updateSearch, showFilters, showOrders, updateCollection } from '../actions';
 import "./styling/Header.scss";
 
-const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilters, qtyFilters, handleShowOrders, qtyOrders,
+const mapStateToProps = state => ({
+    showControls: !!state.discogsUsername,
+    searchQuery: state.searchQuery,
+    qtyFilters: state.filters.length,
+    qtyOrders: state.orders.length,
+    collectionStats: {qty: 0, sum: 0, avg: 0}
+});
+
+const mapDispatchToProps = dispatch => ({
+    handleSearchUpdated: query => { dispatch(updateSearch(query)) },
+    handleShowFilters: () => { dispatch(showFilters(true)) },
+    handleShowOrders: () => { dispatch(showOrders(true)) },
+    handleUpdateCollection: () => { dispatch(updateCollection()) }
+});
+
+const ConnectedHeader = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilters, qtyFilters, handleShowOrders, qtyOrders,
     handleUpdateCollection, collectionStats }) => (
     <header>
         <h1>Skivorna</h1>
@@ -30,4 +47,6 @@ const Header = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilt
         }
     </header>
 )
+
+const Header = connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader);
 export default Header;

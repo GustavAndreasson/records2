@@ -1,13 +1,22 @@
 import React, { Fragment } from "react";
+import { connect } from 'react-redux';
+import { filterYear } from '../actions';
 import "./styling/RecordInfo.scss";
-
 import Artists from "./Artists";
 
-const RecordInfo = ({ rec, handleClick,  handleArtistClick, handleYearClick }) => (rec &&
+const mapStateToProps = state => ({
+    rec: state.activeRecord
+});
+
+const mapDispatchToProps = dispatch => ({
+    handleYearClick: year => { dispatch(filterYear(year)) }
+});
+
+const ConnectedRecordInfo = ({ rec, handleYearClick }) => (rec &&
     <div className="record-info" onClick={handleClick}>
         <img className="cover" src={rec.cover} />
         <div className="left">
-            <div className="artists"><Artists artists={rec.artists} handleClick={handleArtistClick} /></div>
+            <div className="artists"><Artists artists={rec.artists} /></div>
             <div className="name">{rec.name}</div>
             <div className="format">{rec.format}</div>
             <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div>
@@ -18,7 +27,7 @@ const RecordInfo = ({ rec, handleClick,  handleArtistClick, handleYearClick }) =
                         <span className="position">{track.position}</span> {track.name}
                         { track.artists && (
                             <Fragment>
-                                {" ("}<Artists artists={track.artists} handleClick={handleArtistClick} />{")"}
+                                {" ("}<Artists artists={track.artists} />{")"}
                             </Fragment>)
                         }
                     </div>
@@ -27,4 +36,6 @@ const RecordInfo = ({ rec, handleClick,  handleArtistClick, handleYearClick }) =
         </div>
     </div>
 )
+
+const RecordInfo = connect(mapStateToProps, mapDispatchToProps)(ConnectedRecordInfo);
 export default RecordInfo;

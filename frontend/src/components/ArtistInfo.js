@@ -1,8 +1,18 @@
 import React, { Fragment } from "react";
+import { connect } from 'react-redux';
+import { hideArtist } from '../actions';
 import Artist from "./Artist.js";
 import "./styling/ArtistInfo.scss";
 
-const ArtistInfo = ({ artist, handleArtistClick, handleCloseClick }) => (
+const mapStateToProps = state => ({
+    artist: state.activeArtist
+});
+
+const mapDispatchToProps = dispatch => ({
+    handleCloseClick: () => { dispatch(hideArtist()) }
+});
+
+const ConnectedArtistInfo = ({ artist, handleCloseClick }) => (
     <div className="artist-info" onClick={handleCloseClick}>
         <div className="name">{artist.name}</div>
         { artist.image && <img src={artist.image} /> }
@@ -13,7 +23,7 @@ const ArtistInfo = ({ artist, handleArtistClick, handleCloseClick }) => (
             { artist.members.map((member, index) => (
                 <Fragment key={member.artist.id}>
                     { index > 0 && ", " }
-                    <Artist artist={member.artist} handleClick={handleArtistClick} active={member.active} />
+                    <Artist artist={member.artist} active={member.active} />
                 </Fragment>
             ))}
         </div> }
@@ -21,10 +31,12 @@ const ArtistInfo = ({ artist, handleArtistClick, handleCloseClick }) => (
             { artist.groups.map((group, index) => (
                 <Fragment key={group.artist.id}>
                     { index > 0 && ", " }
-                    <Artist artist={group.artist} handleClick={handleArtistClick} active={group.active} />
+                    <Artist artist={group.artist} active={group.active} />
                 </Fragment>
             ))}
         </div> }
     </div>
 );
+
+const ArtistInfo = connect(mapStateToProps, mapDispatchToProps)(ConnectedArtistInfo);
 export default ArtistInfo;
