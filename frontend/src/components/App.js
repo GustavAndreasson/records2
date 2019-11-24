@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getCollection, hideArtist, hideRecord, showOrders, showFilters } from "../actions";
 import Header from "./Header";
+import Collection from "./Collection";
 import Record from "./Record";
 import RecordInfo from "./RecordInfo";
 import ArtistInfo from "./ArtistInfo";
@@ -11,8 +15,30 @@ import FilterUtil from "../util/Filter";
 import OrderUtil from "../util/Order";
 import "./styling/App.scss";
 
+const mapStateToProps = state => ({
+    status: state.status,
+    showFilters: state.showFilters,
+    showOrders:  state.showOrders,
+    activeRecord: state.activeRecord,
+    activeArtist: state.activeArtist,
+    discogsUsername: state.discogsUsername
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getCollection: getCollection,
+    hideRecord: hideRecord,
+    hideOrders: () => showOrders(false),
+    hideFilters: () => showFilters(false)
+}, dispatch);
+
 class App extends Component {
-    state = {
+    componentDidMount() {
+        if (this.props.discogsUsername) {
+            const { getCollection } = this.props;
+            getCollection();
+        }
+    }
+/*    state = {
         discogsUsername: "",
         collection: {},
         status: "Laddar samling...",
@@ -143,22 +169,19 @@ class App extends Component {
         })
         .catch(error => console.log(error));
     }
-    handleArtistCloseClick = () => this.setState({ activeArtist: null });
+    handleArtistCloseClick = () => this.setState({ activeArtist: null });*/
     render() {
         const {
-            discogsUsername,
-            collection,
             status,
-            placeholder,
-            activeRecord,
-            activeArtist,
-            searchQuery,
-            filters,
-            orders,
             showFilters,
-            showOrders
-        } = this.state;
-        let orderedFilteredCollection = orders.reduceRight((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
+            showOrders,
+            activeRecord,
+            hideRecord,
+            discogsUsername,
+            hideOrders,
+            hideFilters
+        } = this.props;
+        /*let orderedFilteredCollection = orders.reduceRight((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
             this.filterRecord(rec) ? col.concat(rec.id) : col,
             []
         );
@@ -166,57 +189,20 @@ class App extends Component {
             collection[recId].price ? prcs.concat(collection[recId].price) : prcs,
             []
         );
-        let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);
+        let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);*/
         return (
             <Fragment>
-                <Header
-                    showControls={discogsUsername}
-                    searchQuery={searchQuery}
-                    handleSearchUpdated={this.setSearch}
-                    handleShowFilters={() => this.setState({ showFilters: true })}
-                    qtyFilters={this.state.filters.length}
-                    handleShowOrders={() => this.setState({ showOrders: true })}
-                    qtyOrders={this.state.orders.length}
-                    handleUpdateCollection={this.updateCollection}
-                    collectionStats={
-                        orderedFilteredCollection.length > 0 && {
-                            qty: orderedFilteredCollection.length,
-                            sum: priceSum.toFixed(2),
-                            avg: (priceSum / prices.length).toFixed(2)
-                        }
-                    }
-                />
-                { showFilters &&
-                    <Popup handleClose={() => this.setState({ showFilters: false })}>
-                        <Filters />
-                    </Popup>
-                }
-                { showOrders &&
-                    <Popup handleClose={() => this.setState({ showOrders: false })}>
-                        <Orders />
-                    </Popup>
-                }
+                <Header />
+                <Filters />
+                <Orders />
                 { status &&
                     <div className="status">{status}</div>
                 }
                 { discogsUsername ?
                     <Fragment>
-                        { activeArtist &&
-                            <ArtistInfo />
-                        }
-                        { orderedFilteredCollection.length > 0  &&
-                            <div className="collection">
-                                { orderedFilteredCollection &&
-                                    orderedFilteredCollection.map(recId =>
-                                        <Record rec={collection[recId]} key={recId} />, this)
-                                }
-                            </div>
-                        }
-                        { activeRecord &&
-                            <Popup handleClose={this.handleCloseRecordInfo}>
-                                <RecordInfo />
-                            </Popup>
-                        }
+                        <ArtistInfo />
+                        <Collection />
+                        <RecordInfo />
                     </Fragment>
                 :
                     <UsernameInput />
@@ -225,4 +211,5 @@ class App extends Component {
         )
     }
 }
-export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ConnectedArtistInfo = ({ artist, handleCloseClick }) => (
+    artist &&
     <div className="artist-info" onClick={handleCloseClick}>
         <div className="name">{artist.name}</div>
         { artist.image && <img src={artist.image} /> }
