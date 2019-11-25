@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getCollection, hideArtist, hideRecord, showOrders, showFilters } from "../actions";
+import { hideArtist, hideRecord, showOrders, showFilters } from "../actions";
+import { getCollection } from "../api";
 import Header from "./Header";
 import Collection from "./Collection";
 import Record from "./Record";

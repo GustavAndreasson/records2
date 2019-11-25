@@ -12,7 +12,9 @@ import {
     SET_USERNAME,
     FILTER_YEAR,
     REQUEST_COLLECTION,
-    RECEIVE_COLLECTION
+    RECEIVE_COLLECTION,
+    REQUEST_ARTIST,
+    RECEIVE_ARTIST
 } from "../actions";
 
 function rootReducer(state, action) {
@@ -39,9 +41,13 @@ function rootReducer(state, action) {
         case UPDATE_COLLECTION:
             return state;
         case REQUEST_COLLECTION:
-            return state;
+            return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
             return Object.assign({}, state, { collection: action.collection, status: false });
+        case REQUEST_ARTIST:
+            return state;
+        case RECEIVE_ARTIST:
+            return Object.assign({}, state, { activeArtist: action.artist });
         case SET_USERNAME:
             return Object.assign({}, state, { discogsUsername: action.user });
         case FILTER_YEAR:

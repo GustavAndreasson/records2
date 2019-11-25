@@ -50,13 +50,6 @@ export const showOrders = show => ({
     show
 })
 
-export const getCollection = () => (dispatch, getState) => {
-    dispatch(requestCollection());
-    return fetch("records/collection/" + getState().discogsUsername + "/get/2")
-        .then(response => response.json())
-        .then(json => dispatch(receiveCollection(json)));
-}
-
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
 export const requestCollection = () => ({
     type: REQUEST_COLLECTION
@@ -65,6 +58,17 @@ export const requestCollection = () => ({
 export const RECEIVE_COLLECTION = "RECEIVE_COLLECTION";
 export const receiveCollection = json => ({
     type: RECEIVE_COLLECTION,
+    collection: json
+})
+
+export const REQUEST_ARTIST = "REQUEST_ARTIST";
+export const requestArtist = () => ({
+    type: REQUEST_ARTIST
+})
+
+export const RECEIVE_ARTIST = "RECEIVE_ARTIST";
+export const receiveArtist = json => ({
+    type: RECEIVE_ARTIST,
     collection: json
 })
 
