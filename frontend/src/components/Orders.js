@@ -24,8 +24,7 @@ const ConnectedOrders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
         e.preventDefault();
         handleUpdate(orders.concat({
             attribute: attribute,
-            reverse: reverse,
-            run: Order.getFunction(attribute, reverse)
+            reverse: reverse
         }));
         setReverse(false);
     };

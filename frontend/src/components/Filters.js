@@ -30,8 +30,7 @@ const ConnectedFilters = ({ showFilters, filters, hideFilters, handleUpdate }) =
         handleUpdate(filters.concat({
             attribute: attribute,
             compare: compare,
-            value:  value,
-            run: Filter.getFunction(attribute, compare, value)
+            value:  value
         }));
         setValue("");
     };

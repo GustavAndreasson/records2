@@ -31,11 +31,11 @@ const attributes = {
 
 export default {
     attributes : attributes,
-    getFunction: (attr, rev) => col => col.sort(
-        (recA, recB) => (rev ? -1 : 1) * (
-            attributes[attr].getValue(recA) > attributes[attr].getValue(recB)
+    run: ({ attribute, reverse }) => col => col.sort(
+        (recA, recB) => (reverse ? -1 : 1) * (
+            attributes[attribute].getValue(recA) > attributes[attribute].getValue(recB)
             ? 1
-            : (attributes[attr].getValue(recA) < attributes[attr].getValue(recB) ? -1 : 0)
+            : (attributes[attribute].getValue(recA) < attributes[attribute].getValue(recB) ? -1 : 0)
         )
     )
 }

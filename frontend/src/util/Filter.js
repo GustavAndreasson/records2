@@ -61,5 +61,5 @@ const attributes = {
 export default {
     attributes: attributes,
     compares:  compares,
-    getFunction: (attr, cmp, value) => rec => attributes[attr].getValues(rec).some(recVal => compares[cmp].func(recVal, value))
+    run: ({ attribute, compare, value }) => rec => attributes[attribute].getValues(rec).some(recVal => compares[compare].func(recVal, value))
 }

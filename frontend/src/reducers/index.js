@@ -1,4 +1,5 @@
 import FilterUtil from "../util/Filter";
+import OrderUtil from "../util/Order";
 import {
     SHOW_RECORD,
     HIDE_RECORD,
@@ -15,20 +16,6 @@ import {
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION
 } from "../actions";
-
-const initialState = {
-    discogsUsername: "gustav.andreasson",
-    collection: {},
-    orderedFilteredCollection: [],
-    status: "Laddar samling...",
-    activeRecord: null,
-    activeArtist: null,
-    searchQuery: "",
-    filters: [],
-    orders: [],
-    showFilters: false,
-    showOrders: false
-};
 
 function getOrderedFilteredCollection(state) {
     const { collection, orders, filters, activeArtist, searchQuery } = state;
@@ -56,13 +43,15 @@ function getOrderedFilteredCollection(state) {
         ) &&
         (
             !filters ||
-            filters.every(filter => filter.run(rec))
+            filters.every(filter => FilterUtil.run(filter)(rec))
         )
     );
-    let orderedFilteredCollection = orders.reduceRight((col, order) => order.run(col), Object.values(collection)).reduce((col, rec) =>
-        filterRecord(rec) ? col.concat(rec) : col,
-        []
-    );
+    let orderedFilteredCollection = orders
+        .reduceRight((col, order) => OrderUtil.run(order)(col), Object.values(collection))
+        .reduce((col, rec) =>
+            filterRecord(rec) ? col.concat(rec) : col,
+            []
+        );
     /*let prices = orderedFilteredCollection.reduce((prcs, recId) =>
         collection[recId].price ? prcs.concat(collection[recId].price) : prcs,
         []
@@ -71,7 +60,7 @@ function getOrderedFilteredCollection(state) {
     return orderedFilteredCollection;
 }
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state, action) {
     let newState = state;
     switch(action.type) {
         case SHOW_RECORD:
@@ -110,8 +99,7 @@ function rootReducer(state = initialState, action) {
                 filters: [ ...state.filters, {
                     attribute: "year",
                     compare: "eq",
-                    value: action.year,
-                    run: FilterUtil.getFunction("year", "eq", action.year)
+                    value: action.year
                 }]
             });
             return Object.assign({}, newState, { orderedFilteredCollection: getOrderedFilteredCollection(newState) });
