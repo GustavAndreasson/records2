@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
+import { selectOrderedFilteredCollection } from "../selectors";
 import Record from "./Record.js";
 
 const mapStateToProps = state => ({
-    collection: state.orderedFilteredCollection
+    collection: selectOrderedFilteredCollection(state)
 });
 
 const ConnectedCollection = ({ collection }) => (
