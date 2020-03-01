@@ -72,11 +72,6 @@ export const receiveArtist = json => ({
     collection: json
 })
 
-export const UPDATE_COLLECTION = "UPDATE_COLLECTION";
-export const updateCollection = () => ({
-    type: UPDATE_COLLECTION
-})
-
 export const SET_USERNAME = "SET_USERNAME";
 export const setUsername = user => ({
     type: UPDATE_COLLECTION,

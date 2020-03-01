@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
-import { updateSearch, showFilters, showOrders, updateCollection } from '../actions';
+import { updateSearch, showFilters, showOrders } from '../actions';
+import { updateCollection } from '../api';
 import "./styling/Header.scss";
 
 const mapStateToProps = state => ({

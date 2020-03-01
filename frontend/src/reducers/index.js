@@ -38,8 +38,6 @@ function rootReducer(state, action) {
             return Object.assign({}, state, { showFilters: action.show });
         case SHOW_ORDERS:
             return Object.assign({}, state, { showOrders: action.show });
-        case UPDATE_COLLECTION:
-            return state;
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
