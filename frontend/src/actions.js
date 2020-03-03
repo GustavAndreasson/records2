@@ -10,9 +10,9 @@ export const hideRecord = () => ({
 })
 
 export const SHOW_ARTIST = "SHOW_ARTIST";
-export const showArtist = record => ({
+export const showArtist = artist => ({
     type: SHOW_ARTIST,
-    record
+    artist
 })
 
 export const HIDE_ARTIST = "HIDE_ARTIST";
@@ -61,6 +61,17 @@ export const receiveCollection = json => ({
     collection: json
 })
 
+export const REQUEST_RECORD = "REQUEST_RECORD";
+export const requestRecord = () => ({
+    type: REQUEST_RECORD
+})
+
+export const RECEIVE_RECORD = "RECEIVE_RECORD";
+export const receiveRecord = json => ({
+    type: RECEIVE_RECORD,
+    record: json
+})
+
 export const REQUEST_ARTIST = "REQUEST_ARTIST";
 export const requestArtist = () => ({
     type: REQUEST_ARTIST
@@ -69,7 +80,7 @@ export const requestArtist = () => ({
 export const RECEIVE_ARTIST = "RECEIVE_ARTIST";
 export const receiveArtist = json => ({
     type: RECEIVE_ARTIST,
-    collection: json
+    artist: json
 })
 
 export const SET_USERNAME = "SET_USERNAME";

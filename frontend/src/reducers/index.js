@@ -25,7 +25,7 @@ function rootReducer(state, action) {
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
         case SHOW_ARTIST:
-            return Object.assign({}, state, { activeArtist: action.record });
+            return Object.assign({}, state, { activeArtist: action.artist });
         case HIDE_ARTIST:
             return Object.assign({}, state, { activeArtist: null });
         case SET_ORDERS:
