@@ -1,3 +1,5 @@
+import api from '../api';
+
 export const SHOW_RECORD = "SHOW_RECORD";
 export const showRecord = record => ({
     type: SHOW_RECORD,
@@ -94,3 +96,45 @@ export const filterYear = year => ({
     type: FILTER_YEAR,
     year
 })
+
+export const getCollection = () => (dispatch, getState) => {
+    dispatch(requestCollection());
+    api.getCollection(getState().discogsUsername)
+        .then(response => response.json())
+        .then(json => dispatch(receiveCollection(json)));
+}
+
+export const updateCollection = () => (dispatch, getState) => {
+    dispatch(requestCollection());
+    api.updateCollection(getState().discogsUsername)
+        .then(response => response.json())
+        .then(json => dispatch(receiveCollection(json)));
+}
+
+export const getRecord = () => (dispatch, getState) => {
+    dispatch(requestRecord());
+    api.getRecord(getState().activeRecord.id)
+        .then(response => response.json())
+        .then(json => dispatch(receiveRecord(json)));
+}
+
+export const updateRecord = () => (dispatch, getState) => {
+    dispatch(requestRecord());
+    api.updateRecord(getState().activeRecord.id)
+        .then(response => response.json())
+        .then(json => dispatch(receiveRecord(json)));
+}
+
+export const getArtist = () => (dispatch, getState) => {
+    dispatch(requestArtist());
+    api.getArtist(getState().activeArtist.id)
+        .then(response => response.json())
+        .then(json => dispatch(receiveArtist(json)));
+}
+
+export const updateArtist = () => (dispatch, getState) => {
+    dispatch(requestArtist());
+    api.updateArtist(getState().activeArtist.id)
+        .then(response => response.json())
+        .then(json => dispatch(receiveArtist(json)));
+}

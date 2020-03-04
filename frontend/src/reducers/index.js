@@ -13,6 +13,8 @@ import {
     FILTER_YEAR,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
+    REQUEST_RECORD,
+    RECEIVE_RECORD,
     REQUEST_ARTIST,
     RECEIVE_ARTIST
 } from "../actions";
@@ -41,7 +43,17 @@ function rootReducer(state, action) {
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
-            return Object.assign({}, state, { collection: action.collection, status: false });
+            return Object.assign({}, state, { 
+				collection: action.collection, 
+				status: false 
+			});
+        case REQUEST_RECORD:
+            return state;
+        case RECEIVE_RECORD:
+            return Object.assign({}, state, { 
+				collection: {...state.collection, [action.record.id]: action.record }, 
+				activeRecord: action.record 
+			});
         case REQUEST_ARTIST:
             return state;
         case RECEIVE_ARTIST:
