@@ -49,7 +49,7 @@ export const selectOrderedFilteredCollection = createSelector(
 export const selectActiveRecord = createSelector(
     state => state.collection,
     state => state.activeRecord,
-    (collection, activeRecord) => collection[activeRecord]
+    (collection, activeRecord) => activeRecord ? collection[activeRecord] : false
 );
 
 export const selectCollectionStats = createSelector(
