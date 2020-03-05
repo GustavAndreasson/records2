@@ -49,17 +49,17 @@ export const selectOrderedFilteredCollection = createSelector(
 export const selectActiveRecord = createSelector(
     state => state.collection,
     state => state.activeRecord,
-    (collection, activeRecord) => activeRecord ? collection[activeRecord] : false
+    (collection, activeRecord) => activeRecord && collection[activeRecord]
 );
 
 export const selectCollectionStats = createSelector(
     selectOrderedFilteredCollection,
     (orderedFilteredCollection) => {
-        let priceSum = orderedFilteredCollection.reduce((sum, rec) => sum + parseFloat(rec.price),  0);
+        let priceSum = orderedFilteredCollection.reduce((sum, rec) => sum + (rec.price ? parseFloat(rec.price) : 0), 0);
 		return {
 			qty: orderedFilteredCollection.length,
 			sum: priceSum.toFixed(2),
-			avg: (priceSum / orderedFilteredCollection.length).toFixed(2)
+			avg: (priceSum / orderedFilteredCollection.filter(rec => rec.price).length).toFixed(2)
 		};
 	}
 );

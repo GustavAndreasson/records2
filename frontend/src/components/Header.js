@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
 import { updateSearch, showFilters, showOrders, updateCollection } from '../actions';
+import { selectCollectionStats } from '../selectors';
 import "./styling/Header.scss";
 
 const mapStateToProps = state => ({
@@ -8,7 +9,7 @@ const mapStateToProps = state => ({
     searchQuery: state.searchQuery,
     qtyFilters: state.filters.length,
     qtyOrders: state.orders.length,
-    collectionStats: {qty: 0, sum: 0, avg: 0}
+    collectionStats: selectCollectionStats(state)
 });
 
 const mapDispatchToProps = dispatch => ({
