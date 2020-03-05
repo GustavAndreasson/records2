@@ -22,7 +22,7 @@ function rootReducer(state, action) {
     let newState = state;
     switch(action.type) {
         case SHOW_RECORD:
-            return Object.assign({}, state, { activeRecord: action.record });
+            return Object.assign({}, state, { activeRecord: action.record.id });
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
         case SHOW_ARTIST:
@@ -50,8 +50,7 @@ function rootReducer(state, action) {
             return state;
         case RECEIVE_RECORD:
             return Object.assign({}, state, { 
-				collection: {...state.collection, [action.record.id]: action.record }, 
-				activeRecord: action.record 
+				collection: {...state.collection, [action.record.id]: action.record }
 			});
         case REQUEST_ARTIST:
             return state;

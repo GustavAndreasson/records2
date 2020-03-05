@@ -22,16 +22,16 @@ export const receiveRecord = json => ({
     record: json
 })
 
-export const getRecord = () => (dispatch, getState) => {
+export const getRecord = (recordId) => (dispatch, getState) => {
     dispatch(requestRecord());
-    api.getRecord(getState().activeRecord.id)
+    api.getRecord(recordId)
         .then(response => response.json())
         .then(json => dispatch(receiveRecord(json)));
 }
 
-export const updateRecord = () => (dispatch, getState) => {
+export const updateRecord = (recordId) => (dispatch, getState) => {
     dispatch(requestRecord());
-    api.updateRecord(getState().activeRecord.id)
+    api.updateRecord(recordId)
         .then(response => response.json())
         .then(json => dispatch(receiveRecord(json)));
 }

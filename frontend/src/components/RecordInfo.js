@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
 import { hideRecord, filterYear } from '../actions';
+import { selectActiveRecord } from "../selectors"
 import "./styling/RecordInfo.scss";
 import Popup from "./Popup";
 import Artists from "./Artists";
 
 const mapStateToProps = state => ({
-    rec: state.activeRecord
+    rec: selectActiveRecord(state)
 });
 
 const mapDispatchToProps = dispatch => ({

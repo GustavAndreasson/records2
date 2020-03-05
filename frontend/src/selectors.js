@@ -42,11 +42,24 @@ export const selectOrderedFilteredCollection = createSelector(
                 filterRecord(rec) ? col.concat(rec) : col,
                 []
             );
-        /*let prices = orderedFilteredCollection.reduce((prcs, recId) =>
-            collection[recId].price ? prcs.concat(collection[recId].price) : prcs,
-            []
-        );
-        let priceSum = prices.reduce((sum, price) => sum + parseFloat(price),  0);*/
         return orderedFilteredCollection;
     }
+);
+
+export const selectActiveRecord = createSelector(
+    state => state.collection,
+    state => state.activeRecord,
+    (collection, activeRecord) => collection[activeRecord]
+);
+
+export const selectCollectionStats = createSelector(
+    selectOrderedFilteredCollection,
+    (orderedFilteredCollection) => {
+        let priceSum = orderedFilteredCollection.reduce((sum, rec) => sum + parseFloat(rec.price),  0);
+		return {
+			qty: orderedFilteredCollection.length,
+			sum: priceSum.toFixed(2),
+			avg: (priceSum / orderedFilteredCollection.length).toFixed(2)
+		};
+	}
 );
