@@ -1,8 +1,9 @@
 import api from '../api';
+import { hideRecord } from './recordActions';
 
-export const SHOW_ARTIST = "SHOW_ARTIST";
-export const showArtist = artist => ({
-    type: SHOW_ARTIST,
+export const SELECT_ARTIST = "SELECT_ARTIST";
+export const selectArtist = artist => ({
+    type: SELECT_ARTIST,
     artist
 })
 
@@ -22,16 +23,32 @@ export const receiveArtist = json => ({
     artist: json
 })
 
-export const getArtist = () => (dispatch, getState) => {
+export const showArtist = (artist) => (dispatch, getState) => {
+    dispatch(selectArtist(artist));
+    dispatch(hideRecord());
     dispatch(requestArtist());
     api.getArtist(getState().activeArtist.id)
+        .then(response => response.json())
+        .then(json => {
+            dispatch(receiveArtist(json))
+            let threeMonthsAgo = new Date();
+            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+            if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
+                dispatch(updateArtist(artist));
+            }
+        });
+}
+
+export const getArtist = (artist) => (dispatch, getState) => {
+    dispatch(requestArtist());
+    api.getArtist(artist.id)
         .then(response => response.json())
         .then(json => dispatch(receiveArtist(json)));
 }
 
-export const updateArtist = () => (dispatch, getState) => {
+export const updateArtist = (artist) => (dispatch, getState) => {
     dispatch(requestArtist());
-    api.updateArtist(getState().activeArtist.id)
+    api.updateArtist(artist.id)
         .then(response => response.json())
         .then(json => dispatch(receiveArtist(json)));
 }

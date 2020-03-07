@@ -1,7 +1,7 @@
 import {
-    SHOW_RECORD,
+    SELECT_RECORD,
     HIDE_RECORD,
-    SHOW_ARTIST,
+    SELECT_ARTIST,
     HIDE_ARTIST,
     SET_ORDERS,
     SET_FILTERS,
@@ -21,11 +21,11 @@ import {
 function rootReducer(state, action) {
     let newState = state;
     switch(action.type) {
-        case SHOW_RECORD:
+        case SELECT_RECORD:
             return Object.assign({}, state, { activeRecord: action.record.id });
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
-        case SHOW_ARTIST:
+        case SELECT_ARTIST:
             return Object.assign({}, state, { activeArtist: action.artist });
         case HIDE_ARTIST:
             return Object.assign({}, state, { activeArtist: null });
@@ -42,20 +42,20 @@ function rootReducer(state, action) {
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
-            return Object.assign({}, state, { 
-				collection: action.collection, 
-				status: false 
+            return Object.assign({}, state, {
+				collection: action.collection,
+				status: false
 			});
         case REQUEST_RECORD:
             return state;
         case RECEIVE_RECORD:
-            return Object.assign({}, state, { 
+            return Object.assign({}, state, {
 				collection: {...state.collection, [action.record.id]: action.record }
 			});
         case REQUEST_ARTIST:
             return state;
         case RECEIVE_ARTIST:
-            return Object.assign({}, state, { activeArtist: action.artist });
+            return Object.assign({}, state, { activeArtist: state.activeArtist ? action.artist : null });
         case SET_USERNAME:
             return Object.assign({}, state, { discogsUsername: action.user });
         case FILTER_YEAR:

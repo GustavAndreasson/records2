@@ -1,8 +1,8 @@
 import api from '../api';
 
-export const SHOW_RECORD = "SHOW_RECORD";
-export const showRecord = record => ({
-    type: SHOW_RECORD,
+export const SELECT_RECORD = "SELECT_RECORD";
+export const selectRecord = record => ({
+    type: SELECT_RECORD,
     record
 })
 
@@ -22,16 +22,25 @@ export const receiveRecord = json => ({
     record: json
 })
 
-export const getRecord = (recordId) => (dispatch, getState) => {
+export const showRecord = (record) => (dispatch, getState) => {
+    dispatch(selectRecord(record));
+    let threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    if (!record.updated || record.updated < threeMonthsAgo.toISOString()) {
+        dispatch(updateRecord(record));
+    }
+}
+
+export const getRecord = (record) => (dispatch, getState) => {
     dispatch(requestRecord());
-    api.getRecord(recordId)
+    api.getRecord(record.id)
         .then(response => response.json())
         .then(json => dispatch(receiveRecord(json)));
 }
 
-export const updateRecord = (recordId) => (dispatch, getState) => {
+export const updateRecord = (record) => (dispatch, getState) => {
     dispatch(requestRecord());
-    api.updateRecord(recordId)
+    api.updateRecord(record.id)
         .then(response => response.json())
         .then(json => dispatch(receiveRecord(json)));
 }

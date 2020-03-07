@@ -4,7 +4,7 @@ const api = {
 	getRecord: recordId => fetch("records/record/" + recordId + "/get"),
 	updateRecord: recordId => fetch("records/record/" + recordId + "/update"),
 	getArtist: artistId => fetch("records/artist/" + artistId + "/get"),
-	updateArtist: artistId => fetch("records/artist/" + getState().activeArtist.id + "/update")
+	updateArtist: artistId => fetch("records/artist/" + artistId + "/update")
 };
 
 export default api;
