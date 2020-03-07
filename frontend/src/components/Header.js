@@ -26,7 +26,7 @@ const ConnectedHeader = ({ showControls, searchQuery, handleSearchUpdated, handl
         { showControls &&
             <Fragment>
                 <div className="search">
-                    <input type="text" value={searchQuery} onChange={handleSearchUpdated} />
+                    <input type="text" value={searchQuery} onChange={e=>handleSearchUpdated(e.target.value)} />
                 </div>
                 <div className="buttons">
                     <button type="button" className="fas fa-filter" onClick={handleShowFilters}>
