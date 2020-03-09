@@ -19,14 +19,13 @@ import {
 } from "../actions";
 
 function rootReducer(state, action) {
-    let newState = state;
     switch(action.type) {
         case SELECT_RECORD:
             return Object.assign({}, state, { activeRecord: action.record.id });
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
         case SELECT_ARTIST:
-            return Object.assign({}, state, { activeArtist: action.artist });
+            return Object.assign({}, state, { activeArtist: action.artist, activeRecord: null });
         case HIDE_ARTIST:
             return Object.assign({}, state, { activeArtist: null });
         case SET_ORDERS:
@@ -36,9 +35,15 @@ function rootReducer(state, action) {
         case UPDATE_SEARCH:
             return Object.assign({}, state, { searchQuery: action.query });
         case SHOW_FILTERS:
-            return Object.assign({}, state, { showFilters: action.show });
+            return Object.assign({}, state, {
+                showFilters: action.show,
+                showOrders: state.showOrders && !action.show
+            });
         case SHOW_ORDERS:
-            return Object.assign({}, state, { showOrders: action.show });
+            return Object.assign({}, state, {
+                showOrders: action.show,
+                showFilters: state.showFilters && !action.show
+            });
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
@@ -55,7 +60,9 @@ function rootReducer(state, action) {
         case REQUEST_ARTIST:
             return state;
         case RECEIVE_ARTIST:
-            return Object.assign({}, state, { activeArtist: state.activeArtist ? action.artist : null });
+            return Object.assign({}, state, { 
+                activeArtist: state.activeArtist.id == action.artist.id ? action.artist : state.activeArtist
+            });
         case SET_USERNAME:
             return Object.assign({}, state, { discogsUsername: action.user });
         case FILTER_YEAR:

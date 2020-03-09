@@ -6,7 +6,6 @@ import rootReducer from "./reducers";
 const initialState = {
     discogsUsername: localStorage.getItem("discogs_username"),
     collection: {},
-    orderedFilteredCollection: [],
     status: "Laddar samling...",
     activeRecord: null,
     activeArtist: null,
