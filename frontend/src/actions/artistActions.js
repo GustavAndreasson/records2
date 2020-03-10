@@ -23,32 +23,29 @@ export const receiveArtist = json => ({
     artist: json
 })
 
-export const showArtist = (artist) => (dispatch, getState) => {
+export const showArtist = (artist) => async (dispatch, getState) => {
     dispatch(selectArtist(artist));
-    dispatch(hideRecord());
     dispatch(requestArtist());
-    api.getArtist(getState().activeArtist.id)
-        .then(response => response.json())
-        .then(json => {
-            dispatch(receiveArtist(json))
-            let threeMonthsAgo = new Date();
-            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-            if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
-                dispatch(updateArtist(artist));
-            }
-        });
+    let response = await api.getArtist(artist.id);
+    let json = await response.json();
+    dispatch(receiveArtist(json))
+    let threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
+        dispatch(updateArtist(artist));
+    }
 }
 
-export const getArtist = (artist) => (dispatch, getState) => {
+export const getArtist = (artist) => async (dispatch, getState) => {
     dispatch(requestArtist());
-    api.getArtist(artist.id)
-        .then(response => response.json())
-        .then(json => dispatch(receiveArtist(json)));
+    let response = await api.getArtist(artist.id);
+    let json = await response.json();
+    dispatch(receiveArtist(json));
 }
 
-export const updateArtist = (artist) => (dispatch, getState) => {
+export const updateArtist = (artist) => async (dispatch, getState) => {
     dispatch(requestArtist());
-    api.updateArtist(artist.id)
-        .then(response => response.json())
-        .then(json => dispatch(receiveArtist(json)));
+    let response = await api.updateArtist(artist.id);
+    let json = await response.json();
+    dispatch(receiveArtist(json));
 }

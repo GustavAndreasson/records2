@@ -31,16 +31,16 @@ export const showRecord = (record) => (dispatch, getState) => {
     }
 }
 
-export const getRecord = (record) => (dispatch, getState) => {
+export const getRecord = (record) => async (dispatch, getState) => {
     dispatch(requestRecord());
-    api.getRecord(record.id)
-        .then(response => response.json())
-        .then(json => dispatch(receiveRecord(json)));
+    let response = await api.getRecord(record.id);
+    let json = await response.json();
+    dispatch(receiveRecord(json));
 }
 
-export const updateRecord = (record) => (dispatch, getState) => {
+export const updateRecord = (record) => async (dispatch, getState) => {
     dispatch(requestRecord());
-    api.updateRecord(record.id)
-        .then(response => response.json())
-        .then(json => dispatch(receiveRecord(json)));
+    let response = await api.updateRecord(record.id);
+    let json = await response.json();
+    dispatch(receiveRecord(json));
 }

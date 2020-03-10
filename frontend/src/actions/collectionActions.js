@@ -17,16 +17,19 @@ export const setUsername = user => ({
     username
 })
 
-export const getCollection = () => (dispatch, getState) => {
-    dispatch(requestCollection());
-    api.getCollection(getState().discogsUsername)
-        .then(response => response.json())
-        .then(json => dispatch(receiveCollection(json)));
+export const getCollection = (user) => async (dispatch, getState) => {
+    dispatch(setUsername(user));
+    if (user) {
+        dispatch(requestCollection());
+        let response = await api.getCollection(user);
+        let json = await response.json();
+        dispatch(receiveCollection(json));
+    }
 }
 
-export const updateCollection = () => (dispatch, getState) => {
+export const updateCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
-    api.updateCollection(getState().discogsUsername)
-        .then(response => response.json())
-        .then(json => dispatch(receiveCollection(json)));
+    let response = await api.updateCollection(user)
+    let json = await response.json();
+    dispatch(receiveCollection(json));
 }

@@ -1,10 +1,10 @@
 const api = {
-	getCollection: discogsUsername => fetch("records/collection/" + discogsUsername + "/get/2"),
-	updateCollection: discogsUsername => fetch("records/collection/" + discogsUsername + "/update"),
-	getRecord: recordId => fetch("records/record/" + recordId + "/get"),
-	updateRecord: recordId => fetch("records/record/" + recordId + "/update"),
-	getArtist: artistId => fetch("records/artist/" + artistId + "/get"),
-	updateArtist: artistId => fetch("records/artist/" + artistId + "/update")
+	getCollection: async discogsUsername => fetch("records/collection/" + discogsUsername + "/get/2"),
+	updateCollection: async discogsUsername => fetch("records/collection/" + discogsUsername + "/update"),
+	getRecord: async recordId => fetch("records/record/" + recordId + "/get"),
+	updateRecord: async recordId => fetch("records/record/" + recordId + "/update"),
+	getArtist: async artistId => fetch("records/artist/" + artistId + "/get"),
+	updateArtist: async artistId => fetch("records/artist/" + artistId + "/update")
 };
 
 export default api;

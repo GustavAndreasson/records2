@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { setUsername } from '../actions';
+import { getCollection } from '../actions';
 import "./styling/UsernameInput.scss";
 
 const mapDispatchToProps = dispatch => ({
-    handleSetUsername: user => { dispatch(setUsername(user)) }
+    handleUpdateUsername: user => { dispatch(getCollection(user)) }
 });
 
-const ConnectedUsernameInput = ({ handleSetUsername }) => {
+const ConnectedUsernameInput = ({ handleUpdateUsername }) => {
     const [user, setUser] = useState("");
     const handleSubmit = e => {
         e.preventDefault();
-        handleSetUsername(user);
+        handleUpdateUsername(user);
     }
     return (
         <form className="username-input" onSubmit={handleSubmit}>

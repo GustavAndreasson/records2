@@ -22,9 +22,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 class App extends Component {
     componentDidMount() {
-        if (this.props.discogsUsername) {
-            const { getCollection } = this.props;
-            getCollection();
+        const { getCollection, discogsUsername } = this.props;
+        if (discogsUsername) {
+            getCollection(discogsUsername);
         }
     }
 
