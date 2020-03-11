@@ -14,7 +14,7 @@ export const receiveCollection = json => ({
 export const SET_USERNAME = "SET_USERNAME";
 export const setUsername = user => ({
     type: SET_USERNAME,
-    username
+    user
 })
 
 export const getCollection = (user) => async (dispatch, getState) => {
