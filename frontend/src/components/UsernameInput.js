@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import { getCollection } from '../actions';
 import "./styling/UsernameInput.scss";
 
+const mapStateToProps = state => ({
+    discogsUsername: state.discogsUsername
+});
+
 const mapDispatchToProps = dispatch => ({
     handleUpdateUsername: user => { dispatch(getCollection(user)) }
 });
 
-const ConnectedUsernameInput = ({ handleUpdateUsername }) => {
-    const [user, setUser] = useState("");
+const ConnectedUsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
+    const [user, setUser] = useState(discogsUsername);
     const handleSubmit = e => {
         e.preventDefault();
         handleUpdateUsername(user);
@@ -21,5 +25,5 @@ const ConnectedUsernameInput = ({ handleUpdateUsername }) => {
     );
 }
 
-const UsernameInput = connect(null, mapDispatchToProps)(ConnectedUsernameInput);
+const UsernameInput = connect(mapStateToProps, mapDispatchToProps)(ConnectedUsernameInput);
 export default UsernameInput;
