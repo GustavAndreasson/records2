@@ -37,6 +37,7 @@ export const selectOrderedFilteredCollection = createSelector(
             )
         );
         let orderedFilteredCollection = orders
+            .concat({ attribute: "id", reverse: false })
             .reduceRight((col, order) => OrderUtil.run(order)(col), Object.values(collection))
             .reduce((col, rec) =>
                 filterRecord(rec) ? col.concat(rec) : col,

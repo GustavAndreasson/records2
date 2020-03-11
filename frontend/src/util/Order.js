@@ -26,6 +26,11 @@ const attributes = {
         name: "Tillagd",
         key: "addedDate",
         getValue: rec => rec.addedDate
+    },
+    id: {
+        name: "ID",
+        key: "id",
+        getValue: rec => rec.id
     }
 };
 

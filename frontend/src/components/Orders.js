@@ -44,7 +44,7 @@ const ConnectedOrders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
                 </div>
                 <form className="new-order" onSubmit={handleAddClick}>
                     <select className="order-attribute" value={attribute.key} onChange={handleAttributeChange}>
-                        { Object.values(Order.attributes).map(attr =>
+                        { Object.values(Order.attributes).map(attr => attr.key !== "id" &&
                             <option value={attr.key} key={attr.key}>{attr.name}</option>
                         )}
                     </select>
