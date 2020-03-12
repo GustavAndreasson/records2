@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
-import { updateSearch, showFilters, showOrders, updateCollection } from '../actions';
+import { updateSearch, showFilters, showOrders, showUser, updateCollection } from '../actions';
 import { selectCollectionStats } from '../selectors';
 import "./styling/Header.scss";
 
@@ -16,11 +16,22 @@ const mapDispatchToProps = dispatch => ({
     handleSearchUpdated: query => { dispatch(updateSearch(query)) },
     handleShowFilters: () => { dispatch(showFilters(true)) },
     handleShowOrders: () => { dispatch(showOrders(true)) },
-    handleUpdateCollection: () => { dispatch(updateCollection()) }
+    handleUpdateCollection: () => { dispatch(updateCollection()) },
+    handleShowUser: () => { dispatch(showUser(true)) }
 });
 
-const ConnectedHeader = ({ showControls, searchQuery, handleSearchUpdated, handleShowFilters, qtyFilters, handleShowOrders, qtyOrders,
-    handleUpdateCollection, collectionStats }) => (
+const ConnectedHeader = ({
+    showControls,
+    searchQuery,
+    handleSearchUpdated,
+    handleShowFilters,
+    qtyFilters,
+    handleShowOrders,
+    qtyOrders,
+    handleUpdateCollection,
+    handleShowUser,
+    collectionStats
+}) => (
     <header>
         <h1>Skivorna</h1>
         { showControls &&
@@ -36,6 +47,7 @@ const ConnectedHeader = ({ showControls, searchQuery, handleSearchUpdated, handl
                         { qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span> }
                     </button>
                     <button type="button" className="fas fa-sync" onClick={handleUpdateCollection}></button>
+                    <button type="button" className="fas fa-user" onClick={handleShowUser}></button>
                 </div>
                 { collectionStats &&
                     <div className="stats">

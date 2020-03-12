@@ -9,6 +9,7 @@ import ArtistInfo from "./ArtistInfo";
 import UsernameInput from "./UsernameInput";
 import Filters from "./Filters";
 import Orders from "./Orders";
+import User from "./User";
 import "./styling/App.scss";
 
 const mapStateToProps = state => ({
@@ -39,6 +40,7 @@ class App extends Component {
                 <Header />
                 <Filters />
                 <Orders />
+                <User />
                 { status &&
                     <div className="status">{status}</div>
                 }

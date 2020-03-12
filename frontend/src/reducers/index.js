@@ -9,6 +9,7 @@ import {
     SHOW_FILTERS,
     SHOW_ORDERS,
     SET_USERNAME,
+    SHOW_USER,
     FILTER_YEAR,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
@@ -37,12 +38,20 @@ function rootReducer(state, action) {
         case SHOW_FILTERS:
             return Object.assign({}, state, {
                 showFilters: action.show,
-                showOrders: state.showOrders && !action.show
+                showOrders: state.showOrders && !action.show,
+                showUser: state.showUser && !action.show
             });
         case SHOW_ORDERS:
             return Object.assign({}, state, {
                 showOrders: action.show,
-                showFilters: state.showFilters && !action.show
+                showFilters: state.showFilters && !action.show,
+                showUser: state.showUser && !action.show
+            });
+        case SHOW_USER:
+            return Object.assign({}, state, {
+                showUser: action.show,
+                showFilters: state.showFilters && !action.show,
+                showOrders: state.showOrders && !action.show
             });
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
@@ -60,7 +69,7 @@ function rootReducer(state, action) {
         case REQUEST_ARTIST:
             return state;
         case RECEIVE_ARTIST:
-            return Object.assign({}, state, { 
+            return Object.assign({}, state, {
                 activeArtist: state.activeArtist.id == action.artist.id ? action.artist : state.activeArtist
             });
         case SET_USERNAME:

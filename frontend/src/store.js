@@ -13,7 +13,8 @@ const initialState = {
     filters: JSON.parse(localStorage.getItem("filters")) || [],
     orders: JSON.parse(localStorage.getItem("orders")) || [],
     showFilters: false,
-    showOrders: false
+    showOrders: false,
+    showUser: false
 };
 
 const middlewares = [thunk];

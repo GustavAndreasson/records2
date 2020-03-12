@@ -17,6 +17,12 @@ export const setUsername = user => ({
     user
 })
 
+export const SHOW_USER = "SHOW_USER";
+export const showUser = show => ({
+    type: SHOW_USER,
+    show
+})
+
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(setUsername(user));
     if (user) {
