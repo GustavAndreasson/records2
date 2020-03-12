@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
     handleUpdate: orders => { dispatch(setOrders(orders)) }
 });
 
-const ConnectedOrders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
+const Orders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
     const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0].key);
     const [reverse, setReverse] = useState(false);
     const handleAttributeChange = (event) => setAttribute(Order.attributes[event.target.value].key);
@@ -57,5 +57,4 @@ const ConnectedOrders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
     );
 }
 
-const Orders = connect(mapStateToProps, mapDispatchToProps)(ConnectedOrders);
-export default Orders;
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

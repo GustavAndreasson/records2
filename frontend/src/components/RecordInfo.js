@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
     handleYearClick: year => { dispatch(filterYear(year)) }
 });
 
-const ConnectedRecordInfo = ({ rec, hideRecord, handleYearClick }) => (rec &&
+const RecordInfo = ({ rec, hideRecord, handleYearClick }) => (rec &&
     <Popup handleClose={hideRecord}>
         <div className="record-info">
             <img className="cover" src={rec.cover} />
@@ -42,5 +42,4 @@ const ConnectedRecordInfo = ({ rec, hideRecord, handleYearClick }) => (rec &&
     </Popup>
 )
 
-const RecordInfo = connect(mapStateToProps, mapDispatchToProps)(ConnectedRecordInfo);
-export default RecordInfo;
+export default connect(mapStateToProps, mapDispatchToProps)(RecordInfo);

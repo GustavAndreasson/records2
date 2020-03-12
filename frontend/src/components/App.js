@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { getCollection } from "../actions";
 import Header from "./Header";
 import Collection from "./Collection";
@@ -17,45 +16,37 @@ const mapStateToProps = state => ({
     discogsUsername: state.discogsUsername
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-    getCollection: getCollection
-}, dispatch);
+const mapDispatchToProps = dispatch => ({
+    getCollection: user => { dispatch(getCollection(user)) }
+});
 
-class App extends Component {
-    componentDidMount() {
-        const { getCollection, discogsUsername } = this.props;
+const App = ({ status, discogsUsername,getCollection }) => {
+    useEffect(()=>{
         if (discogsUsername) {
             getCollection(discogsUsername);
         }
-    }
+    }, []);
 
-    render() {
-        const {
-            status,
-            discogsUsername
-        } = this.props;
-
-        return (
-            <Fragment>
-                <Header />
-                <Filters />
-                <Orders />
-                <User />
-                { status &&
-                    <div className="status">{status}</div>
-                }
-                { discogsUsername ?
-                    <Fragment>
-                        <ArtistInfo />
-                        <Collection />
-                        <RecordInfo />
-                    </Fragment>
-                :
-                    <UsernameInput />
-                }
-            </Fragment>
-        )
-    }
+    return (
+        <Fragment>
+            <Header />
+            <Filters />
+            <Orders />
+            <User />
+            { status &&
+                <div className="status">{status}</div>
+            }
+            { discogsUsername ?
+                <Fragment>
+                    <ArtistInfo />
+                    <Collection />
+                    <RecordInfo />
+                </Fragment>
+            :
+                <UsernameInput />
+            }
+        </Fragment>
+    )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

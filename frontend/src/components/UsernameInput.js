@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
     handleUpdateUsername: user => { dispatch(getCollection(user)) }
 });
 
-const ConnectedUsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
+const UsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
     const [user, setUser] = useState(discogsUsername);
     const handleSubmit = e => {
         e.preventDefault();
@@ -25,5 +25,4 @@ const ConnectedUsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
     );
 }
 
-const UsernameInput = connect(mapStateToProps, mapDispatchToProps)(ConnectedUsernameInput);
-export default UsernameInput;
+export default connect(mapStateToProps, mapDispatchToProps)(UsernameInput);

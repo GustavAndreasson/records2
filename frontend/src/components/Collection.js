@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
     collection: selectOrderedFilteredCollection(state)
 });
 
-const ConnectedCollection = ({ collection }) => (
+const Collection = ({ collection }) => (
     collection.length > 0  &&
     <div className="collection">
         { collection.map(rec =>
@@ -16,5 +16,4 @@ const ConnectedCollection = ({ collection }) => (
     </div>
 )
 
-const Collection = connect(mapStateToProps)(ConnectedCollection);
-export default Collection;
+export default connect(mapStateToProps)(Collection);

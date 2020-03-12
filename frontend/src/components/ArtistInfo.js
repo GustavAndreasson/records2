@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
     handleCloseClick: () => { dispatch(hideArtist()) }
 });
 
-const ConnectedArtistInfo = ({ artist, handleCloseClick }) => (
+const ArtistInfo = ({ artist, handleCloseClick }) => (
     artist &&
     <div className="artist-info" onClick={handleCloseClick}>
         <div className="name">{artist.name}</div>
@@ -39,5 +39,4 @@ const ConnectedArtistInfo = ({ artist, handleCloseClick }) => (
     </div>
 );
 
-const ArtistInfo = connect(mapStateToProps, mapDispatchToProps)(ConnectedArtistInfo);
-export default ArtistInfo;
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistInfo);

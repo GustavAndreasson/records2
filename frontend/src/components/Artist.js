@@ -7,8 +7,7 @@ const mapDispatchToProps = dispatch => ({
     handleClick: artist => { dispatch(showArtist(artist)) }
 });
 
-const ConnectedArtist = ({ artist, handleClick, active=true }) =>
+const Artist = ({ artist, handleClick, active=true }) =>
     <span className={"artist" + (!active ? " inactive" : "")} onClick={() => handleClick(artist)}>{artist.name}</span>
 
-const Artist = connect(null, mapDispatchToProps)(ConnectedArtist);
-export default Artist;
+export default connect(null, mapDispatchToProps)(Artist);

@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
     handleShowUser: () => { dispatch(showUser(true)) }
 });
 
-const ConnectedHeader = ({
+const Header = ({
     showControls,
     searchQuery,
     handleSearchUpdated,
@@ -61,5 +61,4 @@ const ConnectedHeader = ({
     </header>
 )
 
-const Header = connect(mapStateToProps, mapDispatchToProps)(ConnectedHeader);
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

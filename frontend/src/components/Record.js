@@ -7,7 +7,7 @@ const mapDispatchToProps = dispatch => ({
     handleClick: rec => { dispatch(showRecord(rec)) }
 });
 
-const ConnectedRecord = ({ rec, handleClick }) => {
+const Record = ({ rec, handleClick }) => {
     let artists = rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ");
     let formats = "format-" + rec.format.replace(/ /, " format-");
 
@@ -20,5 +20,4 @@ const ConnectedRecord = ({ rec, handleClick }) => {
     );
 }
 
-const Record = connect(null, mapDispatchToProps)(ConnectedRecord);
-export default Record;
+export default connect(null, mapDispatchToProps)(Record);

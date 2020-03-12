@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
     hideUser: () => { dispatch(showUser(false)) }
 });
 
-const ConnectedOrders = ({ showUser, hideUser }) => {
+const User = ({ showUser, hideUser }) => {
     return (
         showUser &&
         <Popup handleClose={hideUser}>
@@ -24,5 +24,4 @@ const ConnectedOrders = ({ showUser, hideUser }) => {
     );
 }
 
-const Orders = connect(mapStateToProps, mapDispatchToProps)(ConnectedOrders);
-export default Orders;
+export default connect(mapStateToProps, mapDispatchToProps)(User);

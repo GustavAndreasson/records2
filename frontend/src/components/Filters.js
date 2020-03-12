@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
     handleUpdate: filters => { dispatch(setFilters(filters)) }
 });
 
-const ConnectedFilters = ({ showFilters, filters, hideFilters, handleUpdate }) => {
+const Filters = ({ showFilters, filters, hideFilters, handleUpdate }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
     const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
@@ -68,5 +68,4 @@ const ConnectedFilters = ({ showFilters, filters, hideFilters, handleUpdate }) =
     );
 }
 
-const Filters = connect(mapStateToProps, mapDispatchToProps)(ConnectedFilters);
-export default Filters;
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);
