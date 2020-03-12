@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { setFilters, showFilters } from '../actions';
+import { setFilters } from '../actions';
 import Popup  from "./Popup";
 import Filter from "../util/Filter";
 import "./styling/Filters.scss";
 
 const mapStateToProps = state => ({
-    showFilters: state.showFilters,
     filters: state.filters
 });
 
 const mapDispatchToProps = dispatch => ({
-    hideFilters: () => { dispatch(showFilters(false)) },
     handleUpdate: filters => { dispatch(setFilters(filters)) }
 });
 
-const Filters = ({ showFilters, filters, hideFilters, handleUpdate }) => {
+const Filters = ({ filters, handleUpdate }) => {
     const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key);
     const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key);
     const [value, setValue] = useState("");
@@ -36,8 +34,7 @@ const Filters = ({ showFilters, filters, hideFilters, handleUpdate }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(filters.filter((_, i) => i !== index));
     return (
-        showFilters &&
-        <Popup handleClose={hideFilters}>
+        <Popup name="filters">
             <div className="filters">
                 <div className="current-filters">
                     { filters.map((filter, index) =>

@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { setOrders, showOrders } from '../actions';
+import { setOrders } from '../actions';
 import Popup from "./Popup";
 import Order from "../util/Order";
 import "./styling/Orders.scss";
 
 const mapStateToProps = state => ({
-    showOrders: state.showOrders,
     orders: state.orders
 });
 
 const mapDispatchToProps = dispatch => ({
-    hideOrders: () => { dispatch(showOrders(false)) },
     handleUpdate: orders => { dispatch(setOrders(orders)) }
 });
 
-const Orders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
+const Orders = ({ showOrders, orders, handleUpdate }) => {
     const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0].key);
     const [reverse, setReverse] = useState(false);
     const handleAttributeChange = (event) => setAttribute(Order.attributes[event.target.value].key);
@@ -30,8 +28,7 @@ const Orders = ({ showOrders, orders, hideOrders, handleUpdate }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(orders.filter((_, i) => i !== index));
     return (
-        showOrders &&
-        <Popup handleClose={hideOrders}>
+        <Popup name="orders">
             <div className="orders">
                 <div className="current-orders">
                     { orders.map((order, index) =>

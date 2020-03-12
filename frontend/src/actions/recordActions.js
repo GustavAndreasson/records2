@@ -1,4 +1,5 @@
 import api from '../api';
+import {showPopup} from './uiActions';
 
 export const SELECT_RECORD = "SELECT_RECORD";
 export const selectRecord = record => ({
@@ -24,6 +25,7 @@ export const receiveRecord = json => ({
 
 export const showRecord = (record) => (dispatch, getState) => {
     dispatch(selectRecord(record));
+    dispatch(showPopup("recordInfo"));
     let threeMonthsAgo = new Date();
     threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
     if (!record.updated || record.updated < threeMonthsAgo.toISOString()) {

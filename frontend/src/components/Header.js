@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
-import { updateSearch, showFilters, showOrders, showUser, updateCollection } from '../actions';
+import { updateSearch, showFilters, showOrders, showUser, updateCollection, showPopup } from '../actions';
 import { selectCollectionStats } from '../selectors';
 import "./styling/Header.scss";
 
@@ -14,10 +14,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     handleSearchUpdated: query => { dispatch(updateSearch(query)) },
-    handleShowFilters: () => { dispatch(showFilters(true)) },
-    handleShowOrders: () => { dispatch(showOrders(true)) },
+    handleShowFilters: () => { dispatch(showPopup("filters")) },
+    handleShowOrders: () => { dispatch(showPopup("orders")) },
     handleUpdateCollection: () => { dispatch(updateCollection()) },
-    handleShowUser: () => { dispatch(showUser(true)) }
+    handleShowUser: () => { dispatch(showPopup("user")) }
 });
 
 const Header = ({

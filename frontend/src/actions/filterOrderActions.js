@@ -16,18 +16,6 @@ export const updateSearch = query => ({
     query
 })
 
-export const SHOW_FILTERS = "SHOW_FILTERS";
-export const showFilters = show => ({
-    type: SHOW_FILTERS,
-    show
-})
-
-export const SHOW_ORDERS = "SHOW_ORDERS";
-export const showOrders = show => ({
-    type: SHOW_ORDERS,
-    show
-})
-
 export const FILTER_YEAR = "FILTER_YEAR";
 export const filterYear = year => ({
     type: FILTER_YEAR,

@@ -16,7 +16,9 @@ import {
     REQUEST_RECORD,
     RECEIVE_RECORD,
     REQUEST_ARTIST,
-    RECEIVE_ARTIST
+    RECEIVE_ARTIST,
+    SHOW_POPUP,
+    HIDE_POPUP
 } from "../actions";
 
 function rootReducer(state, action) {
@@ -35,24 +37,6 @@ function rootReducer(state, action) {
             return Object.assign({}, state, { filters: action.filters });
         case UPDATE_SEARCH:
             return Object.assign({}, state, { searchQuery: action.query });
-        case SHOW_FILTERS:
-            return Object.assign({}, state, {
-                showFilters: action.show,
-                showOrders: state.showOrders && !action.show,
-                showUser: state.showUser && !action.show
-            });
-        case SHOW_ORDERS:
-            return Object.assign({}, state, {
-                showOrders: action.show,
-                showFilters: state.showFilters && !action.show,
-                showUser: state.showUser && !action.show
-            });
-        case SHOW_USER:
-            return Object.assign({}, state, {
-                showUser: action.show,
-                showFilters: state.showFilters && !action.show,
-                showOrders: state.showOrders && !action.show
-            });
         case REQUEST_COLLECTION:
             return Object.assign({}, state, { status: "Hämtar skivor..." });
         case RECEIVE_COLLECTION:
@@ -81,6 +65,12 @@ function rootReducer(state, action) {
                     compare: "eq",
                     value: action.year
                 }]
+            });
+        case SHOW_POPUP:
+            return Object.assign({}, state, { popups: action.popup });
+        case HIDE_POPUP:
+            return Object.assign({}, state, { 
+                popups: state.popups === action.popup ? "" : state.popups
             });
         default:
             return state;

@@ -12,9 +12,7 @@ const initialState = {
     searchQuery: "",
     filters: JSON.parse(localStorage.getItem("filters")) || [],
     orders: JSON.parse(localStorage.getItem("orders")) || [],
-    showFilters: false,
-    showOrders: false,
-    showUser: false
+    popups: ""
 };
 
 const middlewares = [thunk];

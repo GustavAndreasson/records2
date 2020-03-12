@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from 'react-redux';
-import { hideRecord, filterYear } from '../actions';
+import { filterYear } from '../actions';
 import { selectActiveRecord } from "../selectors"
 import "./styling/RecordInfo.scss";
 import Popup from "./Popup";
@@ -11,12 +11,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    hideRecord: () => { dispatch(hideRecord()) },
     handleYearClick: year => { dispatch(filterYear(year)) }
 });
 
-const RecordInfo = ({ rec, hideRecord, handleYearClick }) => (rec &&
-    <Popup handleClose={hideRecord}>
+const RecordInfo = ({ rec, handleYearClick }) => (rec &&
+    <Popup name="recordInfo">
         <div className="record-info">
             <img className="cover" src={rec.cover} />
             <div className="left">
