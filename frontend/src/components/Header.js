@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import { connect } from 'react-redux';
-import { updateSearch, showFilters, showOrders, showUser, updateCollection, showPopup } from '../actions';
+import { connect } from "react-redux";
+import { updateSearch, updateCollection, showPopup } from "../actions";
 import { selectCollectionStats } from '../selectors';
 import "./styling/Header.scss";
 

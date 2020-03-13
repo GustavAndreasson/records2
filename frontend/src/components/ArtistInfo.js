@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import { connect } from 'react-redux';
-import { hideArtist } from '../actions';
+import { connect } from "react-redux";
+import { hideArtist } from "../actions";
 import Artist from "./Artist.js";
 import "./styling/ArtistInfo.scss";
 

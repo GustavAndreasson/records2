@@ -1,5 +1,5 @@
-import api from '../api';
-import { hideRecord } from './recordActions';
+import api from "../api";
+import { hideRecord } from "./recordActions";
 
 export const SELECT_ARTIST = "SELECT_ARTIST";
 export const selectArtist = artist => ({
@@ -24,6 +24,7 @@ export const receiveArtist = json => ({
 })
 
 export const showArtist = (artist) => async (dispatch, getState) => {
+    dispatch(hideRecord());
     dispatch(selectArtist(artist));
     dispatch(requestArtist());
     let response = await api.getArtist(artist.id);

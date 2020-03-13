@@ -1,5 +1,5 @@
-import api from '../api';
-import {showPopup} from './uiActions';
+import api from "../api";
+import { showPopup } from "./uiActions";
 
 export const SELECT_RECORD = "SELECT_RECORD";
 export const selectRecord = record => ({

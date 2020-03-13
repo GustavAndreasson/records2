@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
-import { getCollection } from '../actions';
+import { connect } from "react-redux";
+import { getCollection } from "../actions";
 import "./styling/UsernameInput.scss";
 
 const mapStateToProps = state => ({

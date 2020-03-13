@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
-import { setOrders } from '../actions';
+import { connect } from "react-redux";
+import { setOrders } from "../actions";
 import Popup from "./Popup";
 import Order from "../util/Order";
 import "./styling/Orders.scss";

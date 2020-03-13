@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
-import { setFilters } from '../actions';
+import { connect } from "react-redux";
+import { setFilters } from "../actions";
 import Popup  from "./Popup";
 import Filter from "../util/Filter";
 import "./styling/Filters.scss";

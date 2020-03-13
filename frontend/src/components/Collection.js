@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { selectOrderedFilteredCollection } from "../selectors";
 import Record from "./Record.js";
 

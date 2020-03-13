@@ -1,4 +1,4 @@
-import api from '../api';
+import api from "../api";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
 export const requestCollection = () => ({

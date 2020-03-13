@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { hidePopup } from '../actions';
+import { connect } from "react-redux";
+import { hidePopup } from "../actions";
 import "./styling/Popup.scss";
 
 const mapStateToProps = state => ({

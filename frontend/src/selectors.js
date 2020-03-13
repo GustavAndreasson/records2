@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 import FilterUtil from "./util/Filter";
 import OrderUtil from "./util/Order";
 
@@ -27,7 +27,7 @@ export const selectOrderedFilteredCollection = createSelector(
                             rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(group.artist.id)))))
             ) &&
             (
-                searchQuery == "" ||
+                searchQuery === "" ||
                 rec.name.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0 ||
                 rec.artists.map(artist => artist.artist.name).join().toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0
             ) &&
@@ -36,14 +36,13 @@ export const selectOrderedFilteredCollection = createSelector(
                 filters.every(filter => FilterUtil.run(filter)(rec))
             )
         );
-        let orderedFilteredCollection = orders
+        return orders
             .concat({ attribute: "id", reverse: false })
             .reduceRight((col, order) => OrderUtil.run(order)(col), Object.values(collection))
             .reduce((col, rec) =>
                 filterRecord(rec) ? col.concat(rec) : col,
                 []
             );
-        return orderedFilteredCollection;
     }
 );
 

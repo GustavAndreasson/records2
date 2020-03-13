@@ -6,10 +6,7 @@ import {
     SET_ORDERS,
     SET_FILTERS,
     UPDATE_SEARCH,
-    SHOW_FILTERS,
-    SHOW_ORDERS,
     SET_USERNAME,
-    SHOW_USER,
     FILTER_YEAR,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
@@ -28,7 +25,7 @@ function rootReducer(state, action) {
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
         case SELECT_ARTIST:
-            return Object.assign({}, state, { activeArtist: action.artist, activeRecord: null });
+            return Object.assign({}, state, { activeArtist: action.artist });
         case HIDE_ARTIST:
             return Object.assign({}, state, { activeArtist: null });
         case SET_ORDERS:
@@ -54,7 +51,7 @@ function rootReducer(state, action) {
             return state;
         case RECEIVE_ARTIST:
             return Object.assign({}, state, {
-                activeArtist: state.activeArtist.id == action.artist.id ? action.artist : state.activeArtist
+                activeArtist: state.activeArtist.id === action.artist.id ? action.artist : state.activeArtist
             });
         case SET_USERNAME:
             return Object.assign({}, state, { discogsUsername: action.user });

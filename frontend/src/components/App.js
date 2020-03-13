@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { getCollection } from "../actions";
 import Header from "./Header";
 import Collection from "./Collection";
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
     getCollection: user => { dispatch(getCollection(user)) }
 });
 
-const App = ({ status, discogsUsername,getCollection }) => {
+const App = ({ status, discogsUsername, getCollection }) => {
     useEffect(()=>{
         if (discogsUsername) {
             getCollection(discogsUsername);
