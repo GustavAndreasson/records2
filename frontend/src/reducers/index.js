@@ -1,6 +1,7 @@
 import {
     SELECT_RECORD,
     HIDE_RECORD,
+    SELECT_LISTEN,
     SELECT_ARTIST,
     HIDE_ARTIST,
     SET_ORDERS,
@@ -24,6 +25,8 @@ function rootReducer(state, action) {
             return Object.assign({}, state, { activeRecord: action.record.id });
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
+        case SELECT_LISTEN:
+            return Object.assign({}, state, { activeListen: action.listen });
         case SELECT_ARTIST:
             return Object.assign({}, state, { activeArtist: action.artist });
         case HIDE_ARTIST:
@@ -68,7 +71,7 @@ function rootReducer(state, action) {
             return Object.assign({}, state, { popups: action.popup });
         case HIDE_POPUP:
             return Object.assign({}, state, {
-                popups: state.popups === action.popup ? "" : state.popups
+                popups: state.popups.indexOf(action.popup) === 0 ? action.popup.substr(0, action.popup.lastIndexOf(".")) : state.popups
             });
         default:
             return state;

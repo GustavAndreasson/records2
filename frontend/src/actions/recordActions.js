@@ -12,6 +12,12 @@ export const hideRecord = () => ({
     type: HIDE_RECORD
 })
 
+export const SELECT_LISTEN = "SELECT_LISTEN";
+export const selectListen = listen => ({
+    type: SELECT_LISTEN,
+    listen
+})
+
 export const REQUEST_RECORD = "REQUEST_RECORD";
 export const requestRecord = () => ({
     type: REQUEST_RECORD
@@ -22,6 +28,11 @@ export const receiveRecord = json => ({
     type: RECEIVE_RECORD,
     record: json
 })
+
+export const showListen = (listen) => (dispatch, getState) => {
+    dispatch(selectListen(listen));
+    dispatch(showPopup("recordInfo.listen"));
+}
 
 export const showRecord = (record) => (dispatch, getState) => {
     dispatch(selectRecord(record));

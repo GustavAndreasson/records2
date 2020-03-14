@@ -13,6 +13,10 @@
     border: 1px solid #000000;
     box-shadow: 5px 5px 5px #888888;
 
+    &.level2 {
+        top: 70px;
+    }
+
     .close-button {
         position: absolute;
         top: 0;

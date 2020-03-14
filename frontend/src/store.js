@@ -9,6 +9,7 @@ const initialState = {
     status: "Laddar samling...",
     activeRecord: null,
     activeArtist: null,
+    activeListen: null,
     searchQuery: "",
     filters: JSON.parse(localStorage.getItem("filters")) || [],
     orders: JSON.parse(localStorage.getItem("orders")) || [],
