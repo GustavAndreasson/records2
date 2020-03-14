@@ -61,12 +61,13 @@ function rootReducer(state, action) {
                     attribute: "year",
                     compare: "eq",
                     value: action.year
-                }]
+                }],
+                activeRecord: null
             });
         case SHOW_POPUP:
             return Object.assign({}, state, { popups: action.popup });
         case HIDE_POPUP:
-            return Object.assign({}, state, { 
+            return Object.assign({}, state, {
                 popups: state.popups === action.popup ? "" : state.popups
             });
         default:

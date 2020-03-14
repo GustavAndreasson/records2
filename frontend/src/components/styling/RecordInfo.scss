@@ -5,7 +5,6 @@
 
     .left {
         float: left;
-        width: 300px;
     }
 
     .right {
@@ -20,9 +19,29 @@
 
     .track {
         font-size: 12px;
+        max-width: 350px;
 
         .position {
             font-weight: bold;
+        }
+    }
+
+    .listen-link {
+        text-align: right;
+        max-width: 250px;
+        height: 24px;
+        padding: 2px 0;
+        font-size: 13px;
+        line-height: 24px;
+        overflow: hidden;
+
+        button {
+            float: right;
+            margin-left: 2px;
+            padding: 3px 5px;
+            img {
+                height: 18px;
+            }
         }
     }
 

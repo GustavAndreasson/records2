@@ -37,6 +37,14 @@ const RecordInfo = ({ rec, handleYearClick }) => (rec &&
                     ))}
                 </div>
             </div>
+            <div className="right">
+                {rec.listens && rec.listens.map((listen, index) => (
+                    <div className="listen-link" key={index}>
+                        <button type="button"><img src={listen.icon} /></button>
+                        { listen.name || listen.type }
+                    </div>
+                ))}
+            </div>
         </div>
     </Popup>
 )
