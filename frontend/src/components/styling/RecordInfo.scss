@@ -7,6 +7,9 @@
 
     .left {
         float: left;
+        div {
+            max-width: 350px;
+        }
     }
 
     .right {
@@ -25,7 +28,6 @@
 
     .track {
         font-size: 12px;
-        max-width: 350px;
 
         .position {
             font-weight: bold;
