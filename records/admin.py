@@ -1,6 +1,7 @@
 from django.contrib import admin
 from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers
 from records.services import updateRecord, updateArtist
+from django.core.cache import cache
 # Register your models here.
 
 class ArtistInline(admin.TabularInline):
@@ -22,12 +23,16 @@ def update_record(modeladmin, request, queryset):
     for record in queryset:
         updateRecord(record)
 
+def clear_cache_item(modeladmin, request, queryset):
+    for record in queryset:
+        cache.delete(record.get_cache_key())
+
 class RecordAdmin(admin.ModelAdmin):
     fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'price', 'updated']
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']
-    actions = [reset_updated, update_record, ]
+    actions = [reset_updated, update_record, clear_cache_item, ]
 
 admin.site.register(Record, RecordAdmin)
 
