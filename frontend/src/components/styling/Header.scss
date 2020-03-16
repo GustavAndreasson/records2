@@ -1,4 +1,4 @@
-header {
+header, .header-push {
     overflow: hidden;
 
     h1 {
@@ -40,4 +40,18 @@ header {
         float: right;
         font-size: 0.8em;
     }
+}
+
+header {
+    position: fixed;
+    background: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 8px 0 0;
+    box-shadow: 0 5px 3px #fff;
+}
+
+.header-push {
+    visibility: hidden;
 }
