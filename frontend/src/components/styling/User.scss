@@ -1,3 +1,5 @@
 .user {
-
+    & > * + * {
+        margin-top: 10px;
+    }
 }

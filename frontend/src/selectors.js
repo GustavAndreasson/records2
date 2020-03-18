@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import * as qs  from "query-string";
 import FilterUtil from "./util/Filter";
 import OrderUtil from "./util/Order";
 
@@ -62,4 +63,20 @@ export const selectCollectionStats = createSelector(
 			avg: (priceSum / orderedFilteredCollection.filter(rec => rec.price).length).toFixed(2)
 		};
 	}
+);
+
+export const selectDirectLink = createSelector(
+    state => state.discogsUsername,
+    state => state.orders,
+    state => state.filters,
+    state => state.activeArtist,
+    (discogsUsername, orders, filters, activeArtist) => {
+        const query = {
+            user: discogsUsername,
+            artist: activeArtist,
+            filters: JSON.stringify(filters),
+            orders: JSON.stringify(orders)
+        }
+        return location.protocol + "//" + location.host + "?" + qs.stringify(query);
+    }
 );
