@@ -42,5 +42,16 @@ export default {
             ? 1
             : (attributes[attribute].getValue(recA) < attributes[attribute].getValue(recB) ? -1 : 0)
         )
-    )
+    ),
+    validate: orders => {
+        if (orders.every(
+            o =>
+            o.attribute && Object.keys(attributes).includes(o.attribute) &&
+            o.reverse !== undefined
+        )) {
+            return orders;
+        } else {
+            throw("Order syntax error");
+        }
+    }
 }

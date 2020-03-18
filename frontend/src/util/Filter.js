@@ -61,5 +61,17 @@ const attributes = {
 export default {
     attributes: attributes,
     compares:  compares,
-    run: ({ attribute, compare, value }) => rec => attributes[attribute].getValues(rec).some(recVal => compares[compare].func(recVal, value))
+    run: ({ attribute, compare, value }) => rec => attributes[attribute].getValues(rec).some(recVal => compares[compare].func(recVal, value)),
+    validate: filters => {
+        if (filters.every(
+            f =>
+            f.attribute && Object.keys(attributes).includes(f.attribute) &&
+            f.compare && attributes[f.attribute].compares.some(c => c.key === f.compare) &&
+            f.value !== undefined
+        )) {
+            return filters;
+        } else {
+            throw("Filter syntax error");
+        }
+    }
 }
