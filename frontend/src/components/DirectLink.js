@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const DirectLink = ({ directLink }) => {
-    const refInput = useRef(null);
+    const refInput = useRef();
     const copyLink = e => {
         e.preventDefault();
         refInput.current.select();
@@ -23,4 +23,4 @@ const DirectLink = ({ directLink }) => {
     );
 }
 
-export default connect(mapStateToProps, null)(DirectLink);
+export default connect(mapStateToProps)(DirectLink);

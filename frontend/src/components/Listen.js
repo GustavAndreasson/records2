@@ -13,4 +13,4 @@ const Listen = ({ listen }) => (listen &&
     </Popup>
 );
 
-export default connect(mapStateToProps, null)(Listen);
+export default connect(mapStateToProps)(Listen);
