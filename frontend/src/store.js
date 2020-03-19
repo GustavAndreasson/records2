@@ -18,13 +18,14 @@ try {
 } catch (e) {
     console.log(e);
 }
+/*const activeArtistId = queryString["artist"] || localStorage.getItem("active_artist");*/
 
 const initialState = {
     discogsUsername: queryString["user"] || localStorage.getItem("discogs_username"),
     collection: {},
     status: "Laddar samling...",
     activeRecord: null,
-    activeArtist: queryString["artist"] || null,
+    activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null,
     activeListen: null,
     searchQuery: "",
     filters: filters,
@@ -40,6 +41,7 @@ store.subscribe(() => {
     history.replaceState({}, document.title, location.protocol + "//" + location.host);
     localStorage.setItem("filters", JSON.stringify(store.getState().filters));
     localStorage.setItem("orders", JSON.stringify(store.getState().orders));
+    /*localStorage.setItem("active_artist", store.getState().activeArtist ? store.getState().activeArtist.id : "");*/
     localStorage.setItem("discogs_username", store.getState().discogsUsername);
 })
 

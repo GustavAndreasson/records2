@@ -69,11 +69,11 @@ export const selectDirectLink = createSelector(
     state => state.discogsUsername,
     state => state.orders,
     state => state.filters,
-    state => state.activeArtist,
-    (discogsUsername, orders, filters, activeArtist) => {
+    /*state => state.activeArtist,*/
+    (discogsUsername, orders, filters/*, activeArtist*/) => {
         const query = {
             user: discogsUsername,
-            artist: activeArtist,
+            /*artist: activeArtist ? activeArtist.id : null,*/
             filters: JSON.stringify(filters),
             orders: JSON.stringify(orders)
         }
