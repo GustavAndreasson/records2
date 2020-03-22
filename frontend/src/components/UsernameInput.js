@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { getCollection } from "../actions";
+import { updateUsername } from "../actions";
 import "./styling/UsernameInput.scss";
 
 const mapStateToProps = state => ({
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleUpdateUsername: user => { dispatch(getCollection(user)) }
+    handleUpdateUsername: user => { dispatch(updateUsername(user)) }
 });
 
 const UsernameInput = ({ discogsUsername, handleUpdateUsername }) => {

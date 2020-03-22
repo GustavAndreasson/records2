@@ -17,19 +17,23 @@ export const setUsername = user => ({
     user
 })
 
-export const getCollection = (user) => async (dispatch, getState) => {
+export const updateUsername = (user) => (dispatch, getState) => {
     dispatch(setUsername(user));
     if (user) {
-        dispatch(requestCollection());
-        let response = await api.getCollection(user);
-        let json = await response.json();
-        dispatch(receiveCollection(json));
+        dispatch(getCollection(user))
     }
 }
 
-export const updateCollection = (user) => async (dispatch, getState) => {
+export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
-    let response = await api.updateCollection(user)
+    let response = await api.getCollection(user);
+    let json = await response.json();
+    dispatch(receiveCollection(json));
+}
+
+export const updateCollection = () => async (dispatch, getState) => {
+    dispatch(requestCollection());
+    let response = await api.updateCollection(getState().discogsUsername)
     let json = await response.json();
     dispatch(receiveCollection(json));
 }
