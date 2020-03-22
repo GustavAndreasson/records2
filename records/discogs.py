@@ -56,12 +56,15 @@ def __readUri(uri):
     r = requests.get(url, params=params, headers=headers)
     try:
         data = r.json()
-    except JSONDecodeError:
-        data = {}
+    except JSONDecodeError as je:
+        raise DiscogsError(r.status_code, str(je))
     if r.status_code == 429:
         logger.error("Too many requests to Discogs\n" + data.get('message') + "\ntrying again after 60 seconds")
         time.sleep(60)
         r = requests.get(url, params=params, headers=headers)
     elif r.status_code != 200:
-        raise DiscogsError(r.status_code, data['error'].get('message'))
+        message = "Error calling " + url
+        if data.get('error'):
+            message = data['error'].get('message')
+        raise DiscogsError(r.status_code, message)
     return data
