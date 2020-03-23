@@ -8,8 +8,16 @@ header, .header-push {
     }
 
     .search {
+        position: relative;
         float: left;
         margin: 10px 15px 8px;
+
+        .clear-search {
+            position: absolute;
+            right: 5px;
+            top: 4px;
+            cursor: pointer;
+        }
     }
 
     .buttons {

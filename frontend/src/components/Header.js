@@ -39,6 +39,9 @@ const Header = ({
                 <Fragment>
                     <div className="search">
                         <input type="text" value={searchQuery} onChange={e => handleSearchUpdated(e.target.value)}/>
+                        {searchQuery &&
+                            <span className="clear-search fas fa-times" onClick={() => handleSearchUpdated("")}></span>
+                        }
                     </div>
                     <div className="buttons">
                         <button type="button" className="fas fa-filter" onClick={handleShowFilters}>
