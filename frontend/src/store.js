@@ -23,6 +23,7 @@ try {
 const initialState = {
     discogsUsername: queryString["user"] || localStorage.getItem("discogs_username"),
     collection: {},
+    collectionLoading: false,
     status: "Laddar samling...",
     activeRecord: null,
     activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null,

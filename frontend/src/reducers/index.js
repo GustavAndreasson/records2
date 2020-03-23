@@ -38,9 +38,13 @@ function rootReducer(state, action) {
         case UPDATE_SEARCH:
             return Object.assign({}, state, { searchQuery: action.query });
         case REQUEST_COLLECTION:
-            return Object.assign({}, state, { status: "Hämtar skivor..." });
+            return Object.assign({}, state, {
+                collectionLoading: true,
+                status: "Hämtar skivor..."
+            });
         case RECEIVE_COLLECTION:
             return Object.assign({}, state, {
+                collectionLoading: false,
 				collection: action.collection,
 				status: false
 			});

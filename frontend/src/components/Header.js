@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
     searchQuery: state.searchQuery,
     qtyFilters: state.filters.length,
     qtyOrders: state.orders.length,
+    collectionLoading: state.collectionLoading,
     collectionStats: selectCollectionStats(state)
 });
 
@@ -29,6 +30,7 @@ const Header = ({
     handleShowOrders,
     qtyOrders,
     handleUpdateCollection,
+    collectionLoading,
     handleShowUser,
     collectionStats
 }) => {
@@ -50,7 +52,12 @@ const Header = ({
                         <button type="button" className="fas fa-sort" onClick={handleShowOrders}>
                             {qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span>}
                         </button>
-                        <button type="button" className="fas fa-sync" onClick={handleUpdateCollection}></button>
+                        <button
+                            type="button"
+                            className="fas fa-sync"
+                            disabled={collectionLoading}
+                            onClick={handleUpdateCollection}
+                        ></button>
                         <button type="button" className="fas fa-user" onClick={handleShowUser}></button>
                     </div>
                     {collectionStats &&
