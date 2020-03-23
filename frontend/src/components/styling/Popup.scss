@@ -15,18 +15,43 @@
         top: 70px;
     }
 
-    .close-button {
-        position: absolute;
-        top: 0;
-        right: 4px;
-        cursor: pointer;
-        font-size: 26px;
+    .popup-header {
+        height: 30px;
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: 4px;
+            cursor: pointer;
+            font-size: 26px;
+        }
+
+        .popup-icon {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            font-size: 22px;
+            line-height: 22px;
+            img {
+                height: 22px;
+            }
+        }
+
+        .popup-title {
+            position: absolute;
+            left: 30px;
+            width: calc(100% - 60px);
+            height: 30px;
+            overflow: hidden;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: center;
+        }
     }
 
     .content {
         max-height: calc(100vh - 100px);
         overflow-y: auto;
-        margin-top: 30px;
         padding: 0 10px 10px;
     }
 }
