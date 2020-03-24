@@ -5,7 +5,7 @@ import DirectLink from "./DirectLink";
 import "./styling/User.scss";
 
 const User = () => (
-    <Popup name="user" icon={{icon: "fas fa-user"}}>
+    <Popup name="user" icon={{icon: "fas fa-user"}} title="Användare">
         <div className="user">
             <DirectLink />
             <UsernameInput />

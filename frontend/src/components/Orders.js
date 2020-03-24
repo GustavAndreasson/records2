@@ -28,7 +28,7 @@ const Orders = ({ showOrders, orders, handleUpdate }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(orders.filter((_, i) => i !== index));
     return (
-        <Popup name="orders" icon={{icon: "fas fa-sort"}}>
+        <Popup name="orders" icon={{icon: "fas fa-sort"}} title="Sortera">
             <div className="orders">
                 <div className="current-orders">
                     { orders.map((order, index) =>

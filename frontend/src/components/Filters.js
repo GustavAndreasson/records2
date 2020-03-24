@@ -34,7 +34,7 @@ const Filters = ({ filters, handleUpdate }) => {
     };
     const handleRemoveClick = (index) => handleUpdate(filters.filter((_, i) => i !== index));
     return (
-        <Popup name="filters" icon={{icon: "fas fa-filter"}}>
+        <Popup name="filters" icon={{icon: "fas fa-filter"}} title="Filter">
             <div className="filters">
                 <div className="current-filters">
                     { filters.map((filter, index) =>
