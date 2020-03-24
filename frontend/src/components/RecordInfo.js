@@ -18,11 +18,10 @@ const mapDispatchToProps = dispatch => ({
 
 const RecordInfo = ({ rec, handleYearClick, handleListenClick }) => (rec &&
     <Fragment>
-        <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}}>
+        <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}} title={rec.name}>
             <div className="record-info">
                 <img className="cover" src={rec.cover} />
                 <div className="artists"><Artists artists={rec.artists} /></div>
-                <div className="name">{rec.name}</div>
                 <div className="left">
                     <div className="format">{rec.format}</div>
                     <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div>
