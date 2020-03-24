@@ -21,7 +21,7 @@ try {
 /*const activeArtistId = queryString["artist"] || localStorage.getItem("active_artist");*/
 
 const initialState = {
-    discogsUsername: queryString["user"] || localStorage.getItem("discogs_username"),
+    discogsUsername: queryString["user"] || localStorage.getItem("discogs_username") || "",
     collection: {},
     collectionLoading: false,
     status: "Laddar samling...",
