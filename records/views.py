@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+from django.core.cache import cache
 import json
 
 from .models import *
 from . import services
+from . import progress
 
 def index(request):
     listen_list = Listen.objects.all()
@@ -12,15 +14,20 @@ def index(request):
 def getCollection(request, username, data_level):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
+        progress.init(request)
         if not services.updateCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
             return HttpResponse('{}')
     return HttpResponse(json.dumps(user.to_dict(int(data_level))))
 
 def updateCollection(request, username):
+    progress.init(request)
     user, created = DiscogsUser.objects.get_or_create(username=username)
     services.updateCollection(user)
     return HttpResponse(json.dumps(user.to_dict(2)))
+
+def getProgress(request):
+    return HttpResponse(json.dumps(progress.getProgress()))
 
 def getRecord(request, record_id):
     record = get_object_or_404(Record, id=record_id)

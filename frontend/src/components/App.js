@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getCollection } from "../actions";
 import Header from "./Header";
 import Collection from "./Collection";
+import Progress from "./Progress";
 import RecordInfo from "./RecordInfo";
 import ArtistInfo from "./ArtistInfo";
 import UsernameInput from "./UsernameInput";
@@ -41,6 +42,7 @@ const App = ({ status, discogsUsername, getCollection }) => {
                     <ArtistInfo />
                     <Collection />
                     <RecordInfo />
+                    <Progress />
                 </Fragment>
             :
                 <UsernameInput />

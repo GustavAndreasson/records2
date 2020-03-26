@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^record/(?P<record_id>\d+)/set/(?P<listen_name>\w+)/(?P<listen_key>\w+)$', views.setRecordListen, name='setRecordListen'),
     url(r'^artist/(?P<artist_id>\d+)/get$', views.getArtist, name='getArtist'),
     url(r'^artist/(?P<artist_id>\d+)/update$', views.updateArtist, name='updateArtist'),
+    url(r'^progress$', views.getProgress, name='getProgress'),
 ]

@@ -11,6 +11,7 @@ import {
     FILTER_YEAR,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
+    UPDATE_PROGRESS,
     REQUEST_RECORD,
     RECEIVE_RECORD,
     REQUEST_ARTIST,
@@ -40,6 +41,7 @@ function rootReducer(state, action) {
         case REQUEST_COLLECTION:
             return Object.assign({}, state, {
                 collectionLoading: true,
+                progress: { progress: 0 },
                 status: "Hämtar skivor..."
             });
         case RECEIVE_COLLECTION:
@@ -48,6 +50,8 @@ function rootReducer(state, action) {
 				collection: action.collection,
 				status: false
 			});
+        case UPDATE_PROGRESS:
+            return Object.assign({}, state, { progress: action.progress });
         case REQUEST_RECORD:
             return state;
         case RECEIVE_RECORD:

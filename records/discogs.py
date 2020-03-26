@@ -1,6 +1,7 @@
 import requests, time, logging
 from decouple import config
 from .models import DiscogsAccess
+from . import progress
 
 logger = logging.getLogger(__name__)
 
@@ -34,9 +35,11 @@ def __getPaginatedCollection(uri):
         response = __readUri(uri + "?page=" + str(page))
         collection.extend(response['releases'])
         while response['pagination']['pages'] > page:
+            progress.updateProgress(int((page * 100) / response['pagination']['pages']))
             page = page + 1
             response = __readUri(uri + "?page=" + str(page))
             collection.extend(response['releases'])
+        progress.updateProgress(100)
     except DiscogsError as de:
         logger.error("Not expected collection response from Discogs:\n" + str(de))
         if not collection:

@@ -17,6 +17,12 @@ export const setUsername = user => ({
     user
 })
 
+export const UPDATE_PROGRESS = "UPDATE_PROGRESS";
+export const updateProgress = progress => ({
+    type: UPDATE_PROGRESS,
+    progress
+})
+
 export const updateUsername = (user) => (dispatch, getState) => {
     dispatch(setUsername(user));
     if (user) {
@@ -26,14 +32,26 @@ export const updateUsername = (user) => (dispatch, getState) => {
 
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
+    let progressTimer = setInterval(async () => {
+        let progress = await api.getProgress();
+        let progressJSON = await progress.json();
+        dispatch(updateProgress(progressJSON));
+    }, 1000);
     let response = await api.getCollection(user);
     let json = await response.json();
+    clearInterval(progressTimer);
     dispatch(receiveCollection(json));
 }
 
 export const updateCollection = () => async (dispatch, getState) => {
     dispatch(requestCollection());
+    let progressTimer = setInterval(async () => {
+        let progress = await api.getProgress();
+        let progressJSON = await progress.json();
+        dispatch(updateProgress(progressJSON));
+    }, 1000);
     let response = await api.updateCollection(getState().discogsUsername)
     let json = await response.json();
+    clearInterval(progressTimer);
     dispatch(receiveCollection(json));
 }
