@@ -14,17 +14,23 @@ def index(request):
 def getCollection(request, username, data_level):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
-        progress.init(request)
+        progress.init(request, ['discogs', 'create', 'load'])
         if not services.updateCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
             return HttpResponse('{}')
-    return HttpResponse(json.dumps(user.to_dict(int(data_level))))
+    else :
+        progress.init(request, ['load'])
+    collection = user.to_dict(int(data_level))
+    progress.clearProcesses(['discogs', 'create', 'load'])
+    return HttpResponse(json.dumps(collection))
 
 def updateCollection(request, username):
-    progress.init(request)
+    progress.init(request, ['discogs', 'create', 'load'])
     user, created = DiscogsUser.objects.get_or_create(username=username)
     services.updateCollection(user)
-    return HttpResponse(json.dumps(user.to_dict(2)))
+    collection = user.to_dict(2)
+    progress.clearProcesses(['load', 'create', 'discogs'])
+    return HttpResponse(json.dumps(collection))
 
 def getProgress(request):
     return HttpResponse(json.dumps(progress.getProgress()))

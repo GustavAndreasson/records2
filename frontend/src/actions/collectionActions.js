@@ -32,11 +32,8 @@ export const updateUsername = (user) => (dispatch, getState) => {
 
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
-    let progressTimer = setInterval(async () => {
-        let progress = await api.getProgress();
-        let progressJSON = await progress.json();
-        dispatch(updateProgress(progressJSON));
-    }, 1000);
+    setTimeout(() => progress(dispatch), 100);
+    let progressTimer = setInterval(() => progress(dispatch), 1000);
     let response = await api.getCollection(user);
     let json = await response.json();
     clearInterval(progressTimer);
@@ -45,13 +42,16 @@ export const getCollection = (user) => async (dispatch, getState) => {
 
 export const updateCollection = () => async (dispatch, getState) => {
     dispatch(requestCollection());
-    let progressTimer = setInterval(async () => {
-        let progress = await api.getProgress();
-        let progressJSON = await progress.json();
-        dispatch(updateProgress(progressJSON));
-    }, 1000);
+    setTimeout(() => progress(dispatch), 100);
+    let progressTimer = setInterval(() => progress(dispatch), 1000);
     let response = await api.updateCollection(getState().discogsUsername)
     let json = await response.json();
     clearInterval(progressTimer);
     dispatch(receiveCollection(json));
+}
+
+const progress = async (dispatch) => {
+    let progressData = await api.getProgress();
+    let progressJSON = await progressData.json();
+    dispatch(updateProgress(progressJSON));
 }

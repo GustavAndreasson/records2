@@ -13,7 +13,6 @@ import User from "./User";
 import "./styling/App.scss";
 
 const mapStateToProps = state => ({
-    status: state.status,
     discogsUsername: state.discogsUsername
 });
 
@@ -21,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
     getCollection: user => { dispatch(getCollection(user)) }
 });
 
-const App = ({ status, discogsUsername, getCollection }) => {
+const App = ({ discogsUsername, getCollection }) => {
     useEffect(()=>{
         if (discogsUsername) {
             getCollection(discogsUsername);
@@ -34,9 +33,6 @@ const App = ({ status, discogsUsername, getCollection }) => {
             <Filters />
             <Orders />
             <User />
-            { status &&
-                <div className="status">{status}</div>
-            }
             { discogsUsername ?
                 <Fragment>
                     <ArtistInfo />

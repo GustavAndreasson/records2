@@ -7,8 +7,8 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 from django.core.cache import cache
-
 from django.db import models
+from . import progress
 
 
 class Artist(models.Model):
@@ -119,9 +119,16 @@ class DiscogsUser(models.Model):
     def to_dict(self, data_level):
         urs = UserRecords.objects.filter(user=self)
         dict = {}
+        progress.updateProgress('load', 0)
+        tot = len(urs)
+        nr = 0
         for ur in urs:
             dict[ur.record.id] = ur.record.to_dict(data_level)
             dict[ur.record.id]["addedDate"] = str(ur.added_date)
+            nr = nr + 1
+            if nr % 10 == 0:
+                progress.updateProgress('load', int((nr * 100) / tot))
+        progress.updateProgress('load', 100)
         return dict
 
 

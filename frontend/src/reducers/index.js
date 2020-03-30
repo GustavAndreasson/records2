@@ -41,7 +41,7 @@ function rootReducer(state, action) {
         case REQUEST_COLLECTION:
             return Object.assign({}, state, {
                 collectionLoading: true,
-                progress: { progress: 0 },
+                progress: {},
                 status: "Hämtar skivor..."
             });
         case RECEIVE_COLLECTION:

@@ -31,19 +31,20 @@ def getArtistReleases(artist_id):
 def __getPaginatedCollection(uri):
     page = 1
     collection = []
+    progress.updateProgress('discogs', 0)
     try:
-        response = __readUri(uri + "?page=" + str(page))
+        response = __readUri(uri + "?per_page=25&page=" + str(page))
         collection.extend(response['releases'])
         while response['pagination']['pages'] > page:
-            progress.updateProgress(int((page * 100) / response['pagination']['pages']))
+            progress.updateProgress('discogs', int((page * 100) / response['pagination']['pages']))
             page = page + 1
-            response = __readUri(uri + "?page=" + str(page))
+            response = __readUri(uri + "?per_page=25&page=" + str(page))
             collection.extend(response['releases'])
-        progress.updateProgress(100)
     except DiscogsError as de:
         logger.error("Not expected collection response from Discogs:\n" + str(de))
         if not collection:
             raise
+    progress.updateProgress('discogs', 100)
     return collection
 
 def __readUri(uri):
