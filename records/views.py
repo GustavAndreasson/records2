@@ -33,6 +33,7 @@ def updateCollection(request, username):
     return HttpResponse(json.dumps(collection))
 
 def getProgress(request):
+    process.init(request)
     return HttpResponse(json.dumps(progress.getProgress()))
 
 def getRecord(request, record_id):
