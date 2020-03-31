@@ -8,19 +8,22 @@ def init(request, processes=[]):
     for process in processes:
         updateProgress(process, 0)
 
-def clearProcesses(processes):
+def clearProcesses(processes=None):
     global session
     if session:
-        progress = cache.get(session + '_progress', {})
-        for process in processes:
-            if process in progress:
-                del(progress[process])
+        progress = getProgress()
+        if processes:
+            for process in processes:
+                if process in progress:
+                    del(progress[process])
+        else:
+            progress = {}
         cache.set(session + '_progress', progress)
 
 def updateProgress(process, percent):
     global session
     if session:
-        progress = cache.get(session + '_progress', {})
+        progress = getProgress()
         progress[process] = percent
         cache.set(session + '_progress', progress)
 
