@@ -54,6 +54,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'records2.urls'
 
+SESSION_SAVE_EVERY_REQUEST = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

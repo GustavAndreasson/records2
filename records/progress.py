@@ -5,8 +5,9 @@ session = None
 def init(request, processes=[]):
     global session
     session = request.session.session_key
-    for process in processes:
-        updateProgress(process, 0)
+    request.session['progress'] = 1 # Create session cookie if it does not exist
+    if len(processes) > 0:
+        cache.set(__cacheKey(), { k: 0 for k in processes })
 
 def clearProcesses(processes=None):
     global session
@@ -16,19 +17,25 @@ def clearProcesses(processes=None):
             for process in processes:
                 if process in progress:
                     del(progress[process])
-        else:
-            progress = {}
-        cache.set(session + '_progress', progress)
+            if len(progress) > 0:
+                cache.set(__cacheKey(), progress)
+                return
+        cache.delete(__cacheKey())
+        session = None
 
 def updateProgress(process, percent):
     global session
     if session:
         progress = getProgress()
         progress[process] = percent
-        cache.set(session + '_progress', progress)
+        cache.set(__cacheKey(), progress)
 
 def getProgress():
     global session
     if session:
-        return cache.get(session + '_progress', {})
+        return cache.get(__cacheKey(), {})
     return {}
+
+def __cacheKey():
+    global session
+    return 'progress-' + session
