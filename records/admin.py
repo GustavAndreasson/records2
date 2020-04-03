@@ -24,8 +24,7 @@ def update_record(modeladmin, request, queryset):
         updateRecord(record)
 
 def clear_cache_item(modeladmin, request, queryset):
-    for record in queryset:
-        cache.delete(record.get_cache_key())
+    cache.delete_many([record.get_cache_key() for record in queryset])
 
 class RecordAdmin(admin.ModelAdmin):
     fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'price', 'updated']
