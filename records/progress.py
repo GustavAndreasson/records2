@@ -4,19 +4,20 @@ session = None
 
 def init(request, processes=[]):
     global session
+    if request.session.is_empty():
+        request.session.create() # Create session cookie if it does not exist
     session = request.session.session_key
-    request.session['progress'] = 1 # Create session cookie if it does not exist
     if len(processes) > 0:
         cache.set(__cacheKey(), { k: 0 for k in processes })
 
 def clearProcesses(processes=None):
     global session
     if session:
-        progress = getProgress()
         if processes:
+            progress = getProgress()
             for process in processes:
                 if process in progress:
-                    del(progress[process])
+                    del progress[process]
             if len(progress) > 0:
                 cache.set(__cacheKey(), progress)
                 return
