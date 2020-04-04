@@ -11,11 +11,14 @@ import {
     FILTER_YEAR,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
+    COLLECTION_ERROR,
     UPDATE_PROGRESS,
     REQUEST_RECORD,
     RECEIVE_RECORD,
+    RECORD_ERROR,
     REQUEST_ARTIST,
     RECEIVE_ARTIST,
+    ARTIST_ERROR,
     SHOW_POPUP,
     HIDE_POPUP
 } from "../actions";
@@ -50,6 +53,11 @@ function rootReducer(state, action) {
 				collection: action.collection,
 				status: false
 			});
+        case COLLECTION_ERROR:
+            return Object.assign({}, state, {
+                collectionLoading: false,
+                status: "Något gick fel..."
+            });
         case UPDATE_PROGRESS:
             return Object.assign({}, state, { progress: action.progress });
         case REQUEST_RECORD:
@@ -58,12 +66,18 @@ function rootReducer(state, action) {
             return Object.assign({}, state, {
 				collection: {...state.collection, [action.record.id]: action.record }
 			});
+        case RECORD_ERROR:
+            return state;
         case REQUEST_ARTIST:
             return state;
         case RECEIVE_ARTIST:
             return Object.assign({}, state, {
-                activeArtist: state.activeArtist.id === action.artist.id ? action.artist : state.activeArtist
+                activeArtist: state.activeArtist.id === action.artist.id
+                    ? action.artist
+                    : state.activeArtist
             });
+        case ARTIST_ERROR:
+            return state;
         case SET_USERNAME:
             return Object.assign({}, state, { discogsUsername: action.user });
         case FILTER_YEAR:
@@ -79,7 +93,9 @@ function rootReducer(state, action) {
             return Object.assign({}, state, { popups: action.popup });
         case HIDE_POPUP:
             return Object.assign({}, state, {
-                popups: state.popups.indexOf(action.popup) === 0 ? action.popup.substr(0, action.popup.lastIndexOf(".")) : state.popups
+                popups: state.popups.indexOf(action.popup) === 0
+                    ? action.popup.substr(0, action.popup.lastIndexOf("."))
+                    : state.popups
             });
         default:
             return state;

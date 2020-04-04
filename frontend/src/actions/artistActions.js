@@ -23,30 +23,59 @@ export const receiveArtist = json => ({
     artist: json
 })
 
+export const ARTIST_ERROR = "ARTIST_ERROR";
+export const artistError = () => ({
+    type: ARTIST_ERROR
+})
+
 export const showArtist = (artist) => async (dispatch, getState) => {
     dispatch(hideRecord());
     dispatch(selectArtist(artist));
     dispatch(requestArtist());
-    let response = await api.getArtist(artist.id);
-    let json = await response.json();
-    dispatch(receiveArtist(json))
-    let threeMonthsAgo = new Date();
-    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
-        dispatch(updateArtist(artist));
+    try {
+        let response = await api.getArtist(artist.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveArtist(json))
+        let threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
+            dispatch(updateArtist(artist));
+        }
+    } catch (error) {
+        dispatch(artistError());
+        console.log(error);
     }
 }
 
 export const getArtist = (artist) => async (dispatch, getState) => {
-    dispatch(requestArtist());
-    let response = await api.getArtist(artist.id);
-    let json = await response.json();
-    dispatch(receiveArtist(json));
+    try {
+        dispatch(requestArtist());
+        let response = await api.getArtist(artist.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveArtist(json));
+    } catch (error) {
+        dispatch(artistError());
+        console.log(error);
+    }
 }
 
 export const updateArtist = (artist) => async (dispatch, getState) => {
     dispatch(requestArtist());
-    let response = await api.updateArtist(artist.id);
-    let json = await response.json();
-    dispatch(receiveArtist(json));
+    try {
+        let response = await api.updateArtist(artist.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveArtist(json));
+    } catch (error) {
+        dispatch(artistError());
+        console.log(error);
+    }
 }

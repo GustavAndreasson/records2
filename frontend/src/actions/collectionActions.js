@@ -11,6 +11,11 @@ export const receiveCollection = json => ({
     collection: json
 })
 
+export const COLLECTION_ERROR = "COLLECTION_ERROR";
+export const collectionError = () => ({
+    type: COLLECTION_ERROR
+})
+
 export const SET_USERNAME = "SET_USERNAME";
 export const setUsername = user => ({
     type: SET_USERNAME,
@@ -34,24 +39,47 @@ export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
-    let response = await api.getCollection(user);
-    let json = await response.json();
-    clearInterval(progressTimer);
-    dispatch(receiveCollection(json));
+    try {
+        let response = await api.getCollection(user);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveCollection(json));
+    } catch (error) {
+        dispatch(collectionError());
+        console.log(error);
+    } finally {
+        clearInterval(progressTimer);
+    }
 }
 
 export const updateCollection = () => async (dispatch, getState) => {
     dispatch(requestCollection());
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
-    let response = await api.updateCollection(getState().discogsUsername)
-    let json = await response.json();
-    clearInterval(progressTimer);
-    dispatch(receiveCollection(json));
+    try {
+        let response = await api.updateCollection(getState().discogsUsername);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveCollection(json));
+    } catch (error) {
+        dispatch(collectionError());
+        console.log(error);
+    } finally {
+        clearInterval(progressTimer);
+    }
 }
 
 const progress = async (dispatch) => {
-    let progressData = await api.getProgress();
-    let progressJSON = await progressData.json();
-    dispatch(updateProgress(progressJSON));
+    try {
+        let progressData = await api.getProgress();
+        let progressJSON = await progressData.json();
+        dispatch(updateProgress(progressJSON));
+    } catch (error) {
+        dispatch(updateProgress({}));
+        console.log(error);
+    }
 }

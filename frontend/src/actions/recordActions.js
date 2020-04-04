@@ -29,6 +29,11 @@ export const receiveRecord = json => ({
     record: json
 })
 
+export const RECORD_ERROR = "RECORD_ERROR";
+export const recordError = () => ({
+    type: RECORD_ERROR
+})
+
 export const showListen = (listen) => (dispatch, getState) => {
     dispatch(selectListen(listen));
     dispatch(showPopup("recordInfo.listen"));
@@ -46,14 +51,30 @@ export const showRecord = (record) => (dispatch, getState) => {
 
 export const getRecord = (record) => async (dispatch, getState) => {
     dispatch(requestRecord());
-    let response = await api.getRecord(record.id);
-    let json = await response.json();
-    dispatch(receiveRecord(json));
+    try {
+        let response = await api.getRecord(record.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveRecord(json));
+    } catch (error) {
+        dispatch(recordError());
+        console.log(error);
+    }
 }
 
 export const updateRecord = (record) => async (dispatch, getState) => {
     dispatch(requestRecord());
-    let response = await api.updateRecord(record.id);
-    let json = await response.json();
-    dispatch(receiveRecord(json));
+    try {
+        let response = await api.updateRecord(record.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveRecord(json));
+    } catch (error) {
+        dispatch(recordError());
+        console.log(error);
+    }
 }
