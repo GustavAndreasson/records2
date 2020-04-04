@@ -25,18 +25,15 @@ def clearProcesses(processes=None):
         session = None
 
 def updateProgress(process, percent):
-    global session
     if session:
         progress = getProgress()
         progress[process] = percent
         cache.set(__cacheKey(), progress)
 
 def getProgress():
-    global session
     if session:
         return cache.get(__cacheKey(), {})
     return {}
 
 def __cacheKey():
-    global session
     return 'progress-' + session
