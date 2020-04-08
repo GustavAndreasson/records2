@@ -43,12 +43,13 @@ const initialState = {
     }
 };
 
+history.replaceState({}, document.title, location.protocol + "//" + location.host);
+
 const middlewares = [thunk];
 
 const store = createStore(rootReducer, initialState, applyMiddleware(...middlewares));
 
 store.subscribe(() => {
-    history.replaceState({}, document.title, location.protocol + "//" + location.host);
     localStorage.setItem("filters", JSON.stringify(store.getState().process.filters));
     localStorage.setItem("orders", JSON.stringify(store.getState().process.orders));
     /*localStorage.setItem("active_artist", store.getState().artist.activeArtist ? store.getState().artist.activeArtist.id : "");*/
