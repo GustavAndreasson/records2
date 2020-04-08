@@ -4,7 +4,7 @@ import Popup from "./Popup";
 import "./styling/Listen.scss";
 
 const mapStateToProps = state => ({
-    listen: state.activeListen
+    listen: state.collection.activeListen
 });
 
 const Listen = ({ listen }) => (listen &&

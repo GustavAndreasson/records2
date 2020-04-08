@@ -4,11 +4,11 @@ import FilterUtil from "./util/Filter";
 import OrderUtil from "./util/Order";
 
 export const selectOrderedFilteredCollection = createSelector(
-    state => state.collection,
-    state => state.orders,
-    state => state.filters,
-    state => state.activeArtist,
-    state => state.searchQuery,
+    state => state.collection.collection,
+    state => state.process.orders,
+    state => state.process.filters,
+    state => state.artist.activeArtist,
+    state => state.process.searchQuery,
     (collection, orders, filters, activeArtist, searchQuery) => {
         let filterRecord = (rec) => (
             (
@@ -48,8 +48,8 @@ export const selectOrderedFilteredCollection = createSelector(
 );
 
 export const selectActiveRecord = createSelector(
-    state => state.collection,
-    state => state.activeRecord,
+    state => state.collection.collection,
+    state => state.collection.activeRecord,
     (collection, activeRecord) => activeRecord && collection[activeRecord]
 );
 
@@ -66,9 +66,9 @@ export const selectCollectionStats = createSelector(
 );
 
 export const selectDirectLink = createSelector(
-    state => state.discogsUsername,
-    state => state.orders,
-    state => state.filters,
+    state => state.collection.discogsUsername,
+    state => state.process.orders,
+    state => state.process.filters,
     /*state => state.activeArtist,*/
     (discogsUsername, orders, filters/*, activeArtist*/) => {
         const query = {

@@ -21,18 +21,26 @@ try {
 /*const activeArtistId = queryString["artist"] || localStorage.getItem("active_artist");*/
 
 const initialState = {
-    discogsUsername: queryString["user"] || localStorage.getItem("discogs_username") || "",
-    collection: {},
-    collectionLoading: false,
-    progress: null,
-    status: "Laddar samling...",
-    activeRecord: null,
-    activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null,
-    activeListen: null,
-    searchQuery: "",
-    filters: filters,
-    orders: orders,
-    popups: ""
+    collection: {
+        discogsUsername: queryString["user"] || localStorage.getItem("discogs_username") || "",
+        collection: {},
+        activeRecord: null,
+        activeListen: null
+    },
+    artist: {
+        activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null
+    },
+    process: {
+        searchQuery: "",
+        filters: filters,
+        orders: orders
+    },
+    ui: {
+        collectionLoading: false,
+        progress: null,
+        status: "",
+        popups: ""
+    }
 };
 
 const middlewares = [thunk];
@@ -41,10 +49,10 @@ const store = createStore(rootReducer, initialState, applyMiddleware(...middlewa
 
 store.subscribe(() => {
     history.replaceState({}, document.title, location.protocol + "//" + location.host);
-    localStorage.setItem("filters", JSON.stringify(store.getState().filters));
-    localStorage.setItem("orders", JSON.stringify(store.getState().orders));
-    /*localStorage.setItem("active_artist", store.getState().activeArtist ? store.getState().activeArtist.id : "");*/
-    localStorage.setItem("discogs_username", store.getState().discogsUsername);
+    localStorage.setItem("filters", JSON.stringify(store.getState().process.filters));
+    localStorage.setItem("orders", JSON.stringify(store.getState().process.orders));
+    /*localStorage.setItem("active_artist", store.getState().artist.activeArtist ? store.getState().artist.activeArtist.id : "");*/
+    localStorage.setItem("discogs_username", store.getState().collection.discogsUsername);
 })
 
 export default store;

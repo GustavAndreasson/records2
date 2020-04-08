@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import "./styling/Progress.scss";
 
 const mapStateToProps = state => ({
-    collectionLoading: state.collectionLoading,
-    progress: state.progress,
-    status: state.status
+    collectionLoading: state.ui.collectionLoading,
+    progress: state.ui.progress,
+    status: state.ui.status
 });
 
 const Progress = ({ collectionLoading, progress, status }) => (collectionLoading && progress &&

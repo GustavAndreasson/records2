@@ -13,7 +13,7 @@ import User from "./User";
 import "./styling/App.scss";
 
 const mapStateToProps = state => ({
-    discogsUsername: state.discogsUsername
+    discogsUsername: state.collection.discogsUsername
 });
 
 const mapDispatchToProps = dispatch => ({

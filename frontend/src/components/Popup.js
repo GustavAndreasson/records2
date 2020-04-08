@@ -4,7 +4,7 @@ import { hidePopup } from "../actions";
 import "./styling/Popup.scss";
 
 const mapStateToProps = state => ({
-    popups: state.popups
+    popups: state.ui.popups
 });
 
 const mapDispatchToProps = dispatch => ({

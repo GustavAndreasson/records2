@@ -4,7 +4,7 @@ import { updateUsername } from "../actions";
 import "./styling/UsernameInput.scss";
 
 const mapStateToProps = state => ({
-    discogsUsername: state.discogsUsername
+    discogsUsername: state.collection.discogsUsername
 });
 
 const mapDispatchToProps = dispatch => ({

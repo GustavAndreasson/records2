@@ -5,11 +5,11 @@ import { selectCollectionStats } from '../selectors';
 import "./styling/Header.scss";
 
 const mapStateToProps = state => ({
-    showControls: !!state.discogsUsername,
-    searchQuery: state.searchQuery,
-    qtyFilters: state.filters.length,
-    qtyOrders: state.orders.length,
-    collectionLoading: state.collectionLoading,
+    showControls: !!state.collection.discogsUsername,
+    searchQuery: state.process.searchQuery,
+    qtyFilters: state.process.filters.length,
+    qtyOrders: state.process.orders.length,
+    collectionLoading: state.ui.collectionLoading,
     collectionStats: selectCollectionStats(state)
 });
 

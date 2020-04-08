@@ -6,7 +6,7 @@ import Filter from "../util/Filter";
 import "./styling/Filters.scss";
 
 const mapStateToProps = state => ({
-    filters: state.filters
+    filters: state.process.filters
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -5,7 +5,7 @@ import Artist from "./Artist.js";
 import "./styling/ArtistInfo.scss";
 
 const mapStateToProps = state => ({
-    artist: state.activeArtist
+    artist: state.artist.activeArtist
 });
 
 const mapDispatchToProps = dispatch => ({

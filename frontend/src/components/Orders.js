@@ -6,7 +6,7 @@ import Order from "../util/Order";
 import "./styling/Orders.scss";
 
 const mapStateToProps = state => ({
-    orders: state.orders
+    orders: state.process.orders
 });
 
 const mapDispatchToProps = dispatch => ({
