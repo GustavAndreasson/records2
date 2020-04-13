@@ -20,7 +20,7 @@ def getCollection(request, username, data_level):
             return HttpResponse('{}')
     else :
         progress.init(request, ['load'])
-    collection = user.to_dict(int(data_level))
+    collection = user.get_collection(int(data_level))
     progress.clearProcesses(['discogs', 'create', 'load'])
     return HttpResponse(json.dumps(collection))
 
@@ -28,7 +28,7 @@ def updateCollection(request, username):
     progress.init(request, ['discogs', 'create', 'load'])
     user, created = DiscogsUser.objects.get_or_create(username=username)
     services.updateCollection(user)
-    collection = user.to_dict(2)
+    collection = user.get_collection(2)
     progress.clearProcesses(['load', 'create', 'discogs'])
     return HttpResponse(json.dumps(collection))
 
@@ -59,3 +59,11 @@ def updateArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     services.updateArtist(artist)
     return HttpResponse(json.dumps(artist.to_dict()))
+
+def getArtistReleases(request, artist_id):
+    progress.init(request, ['discogs', 'create', 'load'])
+    artist = get_object_or_404(Artist, id=artist_id)
+    services.collectArtistReleases(artist)
+    artist_releases = artist.get_releases()
+    progress.clearProcesses(['load', 'create', 'discogs'])
+    return HttpResponse(json.dumps(artist_releases))

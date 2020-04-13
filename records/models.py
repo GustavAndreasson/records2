@@ -40,6 +40,20 @@ class Artist(models.Model):
             "updated": updated
         }
 
+    def get_releases(self):
+        ras = RecordArtists.objects.filter(artist=self)
+        releses = {}
+        progress.updateProgress('load', 0)
+        tot = len(urs)
+        nr = 0
+        for ra in ras:
+            releses[ra.record.id] = ra.record.to_dict()
+            nr = nr + 1
+            if nr % 10 == 0:
+                progress.updateProgress('load', int((nr * 100) / tot))
+        progress.updateProgress('load', 100)
+        return releases
+
 
 class Listen(models.Model):
     name = models.CharField(max_length=32, unique=True)
@@ -116,7 +130,7 @@ class DiscogsUser(models.Model):
     def __str__(self):
         return self.username
 
-    def to_dict(self, data_level):
+    def get_collection(self, data_level):
         urs = UserRecords.objects.filter(user=self)
         dict = {}
         progress.updateProgress('load', 0)

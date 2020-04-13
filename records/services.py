@@ -178,6 +178,41 @@ def updateArtist(artist):
         return False
     return True
 
+def collectArtistReleases(artist):
+    logger.info("Collecting releases for artist " + artist.name + " (" + str(artist.id) + ")")
+    try:
+        artist_releases = discogs.getArtistReleases(artist.id)
+        artist_main_releases = [release for release in artist_releases if release.get('role') == "Main"]
+        tot = len(artist_main_releases)
+        nr = 0
+        for release_data in artist_main_releases:
+            release_id = release_data.get('id')
+            if release_data.get('type') == "master":
+                release_id = release_data.get('main_release')
+            record, created = Record.objects.get_or_create(
+                id=release_id,
+                defaults={
+                    'name': release_data.get('title'),
+                    'cover': release_data.get('thumb'),
+                    'thumbnail': release_data.get('thumb'),
+                    'year': release_data.get('year')
+                })
+            if created:
+                logger.info("Created record " + record.name + " (" + str(record.id) + ")")
+                RecordArtists.objects.create(
+                    record=record,
+                    artist=artist,
+                    delimiter="",
+                    position=0)
+            nr = nr + 1
+            if nr % 10 == 0:
+                progress.updateProgress('create', int((nr * 100) / tot))
+        progress.updateProgress('create', 100)
+    except discogs.DiscogsError as de:
+        logger.info("Did not find releases for " + artist.name + " on discogs\n" + str(de))
+        return False
+    return True
+
 def __fixArtistName(name):
     myre = re.compile('\(\d+\)$')
     return myre.sub('', name)
