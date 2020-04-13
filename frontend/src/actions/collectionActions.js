@@ -59,7 +59,7 @@ export const updateCollection = () => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.updateCollection(getState().discogsUsername);
+        let response = await api.updateCollection(getState().collection.discogsUsername);
         if (!response.ok) {
             throw Error(response.statusText);
         }
