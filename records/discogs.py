@@ -26,9 +26,9 @@ def getArtist(artist_id):
     return __readUri("/artists/" + str(artist_id))
 
 def getArtistReleases(artist_id):
-    return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases")
+    return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases", True)
 
-def __getPaginatedCollection(uri):
+def __getPaginatedCollection(uri, check_main=False):
     page = 1
     collection = []
     progress.updateProgress('discogs', 0)
@@ -40,6 +40,8 @@ def __getPaginatedCollection(uri):
             page = page + 1
             response = __readUri(uri + "?per_page=25&page=" + str(page))
             collection.extend(response['releases'])
+            if check_main and response['releases'][-1].get('role') != "Main":
+                break
     except DiscogsError as de:
         logger.error("Not expected collection response from Discogs:\n" + str(de))
         if not collection:
