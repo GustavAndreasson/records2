@@ -79,12 +79,11 @@ class Record(models.Model):
     def __str__(self):
         return self.name
 
-    def to_dict(self, data_level=2):
-        if data_level > 1:
-            cached_data = cache.get(self.get_cache_key())
-            if cached_data:
-                cached_data['cached'] = True
-                return cached_data
+    def to_dict(self):
+        cached_data = cache.get(self.get_cache_key())
+        if cached_data:
+            cached_data['cached'] = True
+            return cached_data
         dict = {
             "id": self.id,
             "name": self.name,
@@ -93,16 +92,11 @@ class Record(models.Model):
             "year":  self.year,
             "thumbnail": self.thumbnail,
             "price": str(self.price) if self.price else None,
-            "updated": str(self.updated) if self.updated else None,
-            "data_level": data_level
+            "updated": str(self.updated) if self.updated else None
         }
-        if data_level == 0:
-            return dict
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
         dict["artists"] = artists
-        if data_level == 1:
-            return dict
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
         dict["listens"] = listens
@@ -130,14 +124,14 @@ class DiscogsUser(models.Model):
     def __str__(self):
         return self.username
 
-    def get_collection(self, data_level):
+    def get_collection(self):
         urs = UserRecords.objects.filter(user=self)
         dict = {}
         progress.updateProgress('load', 0)
         tot = len(urs)
         nr = 0
         for ur in urs:
-            dict[ur.record.id] = ur.record.to_dict(data_level)
+            dict[ur.record.id] = ur.record.to_dict()
             dict[ur.record.id]["addedDate"] = str(ur.added_date)
             nr = nr + 1
             if nr % 10 == 0:

@@ -11,7 +11,7 @@ def index(request):
     listen_list = Listen.objects.all()
     return render(request, 'records/index.html', {'listen_list': listen_list})
 
-def getCollection(request, username, data_level):
+def getCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
         progress.init(request, ['discogs', 'create', 'load'])
@@ -20,7 +20,7 @@ def getCollection(request, username, data_level):
             return HttpResponse('{}')
     else :
         progress.init(request, ['load'])
-    collection = user.get_collection(int(data_level))
+    collection = user.get_collection()
     progress.clearProcesses(['discogs', 'create', 'load'])
     return HttpResponse(json.dumps(collection))
 
@@ -28,7 +28,7 @@ def updateCollection(request, username):
     progress.init(request, ['discogs', 'create', 'load'])
     user, created = DiscogsUser.objects.get_or_create(username=username)
     services.updateCollection(user)
-    collection = user.get_collection(2)
+    collection = user.get_collection()
     progress.clearProcesses(['load', 'create', 'discogs'])
     return HttpResponse(json.dumps(collection))
 
