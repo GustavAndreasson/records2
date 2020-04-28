@@ -17,10 +17,15 @@ def updateCollection(user):
         nr = 0
         for release_data in collection_data:
             if release_data['basic_information']['id'] not in old_collection:
+                if release_data['basic_information'].get('master_id'):
+                    master_id = release_data['basic_information'].get('master_id')
+                else:
+                    master_id = release_data['basic_information']['id'] + 990000000
                 record, created = Record.objects.get_or_create(
                     id=release_data['basic_information']['id'],
                     defaults={
                         'name': release_data['basic_information'].get('title'),
+                        'master': master_id,
                         'cover': release_data['basic_information'].get('cover_image'),
                         'thumbnail': release_data['basic_information'].get('thumb'),
                         'year': release_data['basic_information'].get('year'),
@@ -65,6 +70,7 @@ def updateRecord(record):
     try:
         release_data = discogs.getRelease(record.id)
         if release_data.get('master_id'):
+            record.master = release_data.get('master_id')
             try:
                 master_data = discogs.getMaster(release_data.get('master_id'))
                 release_data['year'] = master_data.get('year')
@@ -76,6 +82,8 @@ def updateRecord(record):
                         release_data['videos'] = master_data.get('videos')
             except discogs.DiscogsError as de:
                 logger.info("Did not find master for record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
+        else:
+            record.master = record.id + 990000000
         record.track_set.all().delete()
         if release_data.get('tracklist'):
             for track_data in release_data.get('tracklist'):
@@ -187,12 +195,18 @@ def collectArtistReleases(artist):
         nr = 0
         for release_data in artist_main_releases:
             release_id = release_data.get('id')
+            master_id = release_id + 990000000
             if release_data.get('type') == "master":
-                release_id = release_data.get('main_release')
+                master_id = release_data.get('id')
+                try:
+                    release_id = Record.objects.filter(master=master_id)[0].id
+                except IndexError:
+                    release_id = release_data.get('main_release')
             record, created = Record.objects.get_or_create(
                 id=release_id,
                 defaults={
                     'name': release_data.get('title'),
+                    'master': master_id,
                     'cover': release_data.get('thumb'),
                     'thumbnail': release_data.get('thumb'),
                     'year': release_data.get('year')
@@ -203,7 +217,8 @@ def collectArtistReleases(artist):
                     record=record,
                     artist=artist,
                     delimiter="",
-                    position=0)
+                    position=0
+                )
             nr = nr + 1
             if nr % 10 == 0:
                 progress.updateProgress('create', int((nr * 100) / tot))

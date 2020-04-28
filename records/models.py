@@ -67,6 +67,7 @@ class Listen(models.Model):
 class Record(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
+    master = models.IntegerField(blank=True, null=True)
     cover = models.CharField(max_length=255, blank=True, null=True)
     format = models.CharField(max_length=255, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
@@ -87,6 +88,7 @@ class Record(models.Model):
         dict = {
             "id": self.id,
             "name": self.name,
+            "master": self.master,
             "cover": self.cover,
             "format": self.format,
             "year":  self.year,

@@ -27,7 +27,7 @@ def clear_cache_item(modeladmin, request, queryset):
     cache.delete_many([record.get_cache_key() for record in queryset])
 
 class RecordAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'year', 'format', 'cover', 'thumbnail', 'price', 'updated']
+    fields = ['id', 'name', 'master', 'year', 'format', 'cover', 'thumbnail', 'price', 'updated']
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ('id', 'get_artist', 'name', 'format', 'updated')
     search_fields = ['name']
