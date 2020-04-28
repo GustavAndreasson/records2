@@ -23,8 +23,8 @@ const RecordInfo = ({ rec, handleYearClick, handleListenClick }) => (rec &&
                 <img className="cover" src={rec.cover} />
                 <div className="artists"><Artists artists={rec.artists} /></div>
                 <div className="left">
-                    <div className="format">{rec.format}</div>
-                    <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div>
+                    { rec.format && <div className="format">{rec.format}</div> }
+                    { rec.year && <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div> }
                     { rec.price && <div className="price">{"(" + rec.price + ")"}</div> }
                     <div className="tracks">
                         {rec.tracks && rec.tracks.map((track, index) => (

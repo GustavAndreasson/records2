@@ -8,24 +8,29 @@ export const selectOrderedFilteredCollection = createSelector(
     state => state.process.orders,
     state => state.process.filters,
     state => state.artist.activeArtist,
+    state => state.artist.artistCollection,
+    state => state.artist.viewArtistCollection,
     state => state.process.searchQuery,
-    (collection, orders, filters, activeArtist, searchQuery) => {
+    (collection, orders, filters, activeArtist, artistCollection, viewArtistCollection, searchQuery) => {
         let filterRecord = (rec) => (
             (
-                !activeArtist ||
+                !activeArtist || viewArtistCollection ||
                 rec.artists.map(artist => artist.artist.id).includes(activeArtist.id) ||
                 (rec.tracks &&
-                    rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(activeArtist.id))) ||
+                    rec.tracks.some(track => track.artists &&
+                        track.artists.map(artist => artist.artist.id).includes(activeArtist.id))) ||
                 (activeArtist.members &&
                     activeArtist.members.some(member =>
                         rec.artists.map(artist => artist.artist.id).includes(member.artist.id) ||
                         (rec.tracks &&
-                            rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(member.artist.id))))) ||
+                            rec.tracks.some(track => track.artists &&
+                                track.artists.map(artist => artist.artist.id).includes(member.artist.id))))) ||
                 (activeArtist.groups &&
                     activeArtist.groups.some(group =>
                         rec.artists.map(artist => artist.artist.id).includes(group.artist.id) ||
                         (rec.tracks &&
-                            rec.tracks.some(track => track.artists && track.artists.map(artist => artist.artist.id).includes(group.artist.id)))))
+                            rec.tracks.some(track => track.artists &&
+                                track.artists.map(artist => artist.artist.id).includes(group.artist.id)))))
             ) &&
             (
                 searchQuery === "" ||
@@ -39,8 +44,10 @@ export const selectOrderedFilteredCollection = createSelector(
         );
         return orders
             .concat({ attribute: "id", reverse: false })
-            .reduceRight((col, order) => OrderUtil.run(order)(col), Object.values(collection))
-            .reduce((col, rec) =>
+            .reduceRight(
+                (col, order) => OrderUtil.run(order)(col),
+                Object.values(viewArtistCollection ? artistCollection : collection)
+            ).reduce((col, rec) =>
                 filterRecord(rec) ? col.concat(rec) : col,
                 []
             );
@@ -49,8 +56,14 @@ export const selectOrderedFilteredCollection = createSelector(
 
 export const selectActiveRecord = createSelector(
     state => state.collection.collection,
+    state => state.artist.artistCollection,
+    state => state.artist.viewArtistCollection,
     state => state.collection.activeRecord,
-    (collection, activeRecord) => activeRecord && collection[activeRecord]
+    (collection, artistCollection, viewArtistCollection, activeRecord) =>
+        activeRecord &&
+            (viewArtistCollection
+                ? activeRecord in artistCollection && artistCollection[activeRecord]
+                : activeRecord in collection && collection[activeRecord])
 );
 
 export const selectCollectionStats = createSelector(

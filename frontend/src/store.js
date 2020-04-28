@@ -28,7 +28,9 @@ const initialState = {
         activeListen: null
     },
     artist: {
-        activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null
+        activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null,
+        artistCollection: {},
+        viewArtistCollection: false
     },
     process: {
         searchQuery: "",

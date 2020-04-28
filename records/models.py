@@ -42,12 +42,12 @@ class Artist(models.Model):
 
     def get_releases(self):
         ras = RecordArtists.objects.filter(artist=self)
-        releses = {}
+        releases = {}
         progress.updateProgress('load', 0)
-        tot = len(urs)
+        tot = len(ras)
         nr = 0
         for ra in ras:
-            releses[ra.record.id] = ra.record.to_dict()
+            releases[ra.record.id] = ra.record.to_dict()
             nr = nr + 1
             if nr % 10 == 0:
                 progress.updateProgress('load', int((nr * 100) / tot))

@@ -13,7 +13,7 @@ import {
 
 function collection(state = {
     discogsUsername: "",
-    collection: {}, 
+    collection: {},
     activeRecord: null,
     activeListen: null
 }, action) {
@@ -34,7 +34,9 @@ function collection(state = {
             return state;
         case RECEIVE_RECORD:
             return Object.assign({}, state, {
-				collection: {...state.collection, [action.record.id]: action.record }
+				collection: action.record.id in state.collection
+                    ? {...state.collection, [action.record.id]: action.record }
+                    : state.collection
 			});
         case RECORD_ERROR:
             return state;

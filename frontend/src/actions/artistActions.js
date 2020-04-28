@@ -28,6 +28,28 @@ export const artistError = () => ({
     type: ARTIST_ERROR
 })
 
+export const REQUEST_ARTIST_COLLECTION = "REQUEST_ARTIST_COLLECTION";
+export const requestArtistCollection = () => ({
+    type: REQUEST_ARTIST_COLLECTION
+})
+
+export const RECEIVE_ARTIST_COLLECTION = "RECEIVE_ARTIST_COLLECTION";
+export const receiveArtistCollection = json => ({
+    type: RECEIVE_ARTIST_COLLECTION,
+    collection: json
+})
+
+export const ARTIST_COLLECTION_ERROR = "ARTIST_COLLECTION_ERROR";
+export const artistCollectionError = () => ({
+    type: ARTIST_COLLECTION_ERROR
+})
+
+export const VIEW_ARTIST_COLLECTION = "VIEW_ARTIST_COLLECTION";
+export const viewArtistCollection = view => ({
+    type: VIEW_ARTIST_COLLECTION,
+    view: view
+})
+
 export const showArtist = (artist) => async (dispatch, getState) => {
     dispatch(hideRecord());
     dispatch(selectArtist(artist));
@@ -78,4 +100,26 @@ export const updateArtist = (artist) => async (dispatch, getState) => {
         dispatch(artistError());
         console.log(error);
     }
+}
+
+export const getArtistCollection = (artist) => async (dispatch, getState) => {
+    try {
+        dispatch(requestArtistCollection());
+        let response = await api.getArtistReleases(artist.id);
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        let json = await response.json();
+        dispatch(receiveArtistCollection(json));
+    } catch (error) {
+        dispatch(artistCollectionError());
+        console.log(error);
+    }
+}
+
+export const toggleViewArtistCollection = () => (dispatch, getState) => {
+    if (!getState().artist.viewArtistCollection) {
+        dispatch(getArtistCollection(getState().artist.activeArtist));
+    }
+    dispatch(viewArtistCollection(!getState().artist.viewArtistCollection));
 }

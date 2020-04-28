@@ -1,20 +1,23 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { hideArtist } from "../actions";
+import { hideArtist, toggleViewArtistCollection } from "../actions";
 import Artist from "./Artist.js";
 import "./styling/ArtistInfo.scss";
 
 const mapStateToProps = state => ({
-    artist: state.artist.activeArtist
+    artist: state.artist.activeArtist,
+    viewArtistCollection: state.artist.viewArtistCollection,
+    collectionLoading: state.ui.collectionLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleCloseClick: () => { dispatch(hideArtist()) }
+    handleCloseClick: () => { dispatch(hideArtist()) },
+    handleShowCollectionClick: () => { dispatch(toggleViewArtistCollection()) }
 });
 
-const ArtistInfo = ({ artist, handleCloseClick }) => (
+const ArtistInfo = ({ artist, viewArtistCollection, collectionLoading, handleCloseClick, handleShowCollectionClick }) => (
     artist &&
-    <div className="artist-info" onClick={handleCloseClick}>
+    <div className="artist-info">
         <div className="name">{artist.name}</div>
         { artist.image && <img src={artist.image} /> }
         { artist.description && <div className="description">
@@ -36,6 +39,10 @@ const ArtistInfo = ({ artist, handleCloseClick }) => (
                 </Fragment>
             ))}
         </div> }
+        <div className="artist-buttons">
+            <button type="button" onClick={handleCloseClick}>Stäng</button>
+            <button type="button" disabled={collectionLoading} onClick={handleShowCollectionClick}>Visa alla</button>
+        </div>
     </div>
 );
 
