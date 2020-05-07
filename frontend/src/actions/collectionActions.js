@@ -1,4 +1,5 @@
 import api from "../api";
+import { progress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
 export const requestCollection = () => ({
@@ -20,12 +21,6 @@ export const SET_USERNAME = "SET_USERNAME";
 export const setUsername = user => ({
     type: SET_USERNAME,
     user
-})
-
-export const UPDATE_PROGRESS = "UPDATE_PROGRESS";
-export const updateProgress = progress => ({
-    type: UPDATE_PROGRESS,
-    progress
 })
 
 export const updateUsername = (user) => (dispatch, getState) => {
@@ -70,16 +65,5 @@ export const updateCollection = () => async (dispatch, getState) => {
         console.log(error);
     } finally {
         clearInterval(progressTimer);
-    }
-}
-
-const progress = async (dispatch) => {
-    try {
-        let progressData = await api.getProgress();
-        let progressJSON = await progressData.json();
-        dispatch(updateProgress(progressJSON));
-    } catch (error) {
-        dispatch(updateProgress({}));
-        console.log(error);
     }
 }

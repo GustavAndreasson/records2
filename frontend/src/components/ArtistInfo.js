@@ -15,7 +15,13 @@ const mapDispatchToProps = dispatch => ({
     handleShowCollectionClick: () => { dispatch(toggleViewArtistCollection()) }
 });
 
-const ArtistInfo = ({ artist, viewArtistCollection, collectionLoading, handleCloseClick, handleShowCollectionClick }) => (
+const ArtistInfo = ({
+    artist,
+    viewArtistCollection,
+    collectionLoading,
+    handleCloseClick,
+    handleShowCollectionClick
+}) => (
     artist &&
     <div className="artist-info">
         <div className="name">{artist.name}</div>
@@ -40,8 +46,15 @@ const ArtistInfo = ({ artist, viewArtistCollection, collectionLoading, handleClo
             ))}
         </div> }
         <div className="artist-buttons">
-            <button type="button" onClick={handleCloseClick}>Stäng</button>
-            <button type="button" disabled={collectionLoading} onClick={handleShowCollectionClick}>Visa alla</button>
+            <button type="button"
+                className="far fa-caret-square-left"
+                onClick={handleCloseClick}>
+            </button>
+            <button type="button"
+                className={"fas fa-list" + (viewArtistCollection ? " reversed" : "")}
+                disabled={collectionLoading}
+                onClick={handleShowCollectionClick}>
+            </button>
         </div>
     </div>
 );

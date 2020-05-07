@@ -1,5 +1,6 @@
 import api from "../api";
 import { hideRecord } from "./recordActions";
+import { progress } from "./uiActions";
 
 export const SELECT_ARTIST = "SELECT_ARTIST";
 export const selectArtist = artist => ({
@@ -103,8 +104,10 @@ export const updateArtist = (artist) => async (dispatch, getState) => {
 }
 
 export const getArtistCollection = (artist) => async (dispatch, getState) => {
+    dispatch(requestArtistCollection());
+    setTimeout(() => progress(dispatch), 100);
+    let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        dispatch(requestArtistCollection());
         let response = await api.getArtistReleases(artist.id);
         if (!response.ok) {
             throw Error(response.statusText);
@@ -114,6 +117,8 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);
+    } finally {
+        clearInterval(progressTimer);
     }
 }
 
