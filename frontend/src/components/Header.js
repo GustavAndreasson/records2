@@ -58,7 +58,7 @@ const Header = ({
                             disabled={collectionLoading}
                             onClick={handleUpdateCollection}
                         ></button>
-                        <button type="button" className="fas fa-user" onClick={handleShowUser}></button>
+                    <button type="button" className="fas fa-user-cog" onClick={handleShowUser}></button>
                     </div>
                     {collectionStats &&
                         <div className="stats">
