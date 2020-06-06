@@ -71,3 +71,11 @@ def getArtistReleases(request, artist_id):
     artist_releases = artist.get_releases()
     progress.clearProcesses(['load', 'create', 'discogs'])
     return HttpResponse(json.dumps(artist_releases))
+
+def updateArtistReleases(request, artist_id):
+    artist = get_object_or_404(Artist, id=artist_id)
+    progress.init(request, ['discogs', 'create', 'load'])
+    services.collectArtistReleases(artist)
+    artist_releases = artist.get_releases()
+    progress.clearProcesses(['load', 'create', 'discogs'])
+    return HttpResponse(json.dumps(artist_releases))
