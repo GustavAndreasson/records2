@@ -226,6 +226,8 @@ def collectArtistReleases(artist):
     except discogs.DiscogsError as de:
         logger.info("Did not find releases for " + artist.name + " on discogs\n" + str(de))
         return False
+    artist.collectionUpdated = date.today()
+    artist.save()
     return True
 
 def __fixArtistName(name):

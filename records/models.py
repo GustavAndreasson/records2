@@ -17,6 +17,7 @@ class Artist(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.CharField(max_length=255, blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
+    collectionUpdated = models.DateField(blank=True, null=True)
     members = models.ManyToManyField('self', through='ArtistMembers', symmetrical=False)
 
     def __str__(self):
@@ -30,6 +31,7 @@ class Artist(models.Model):
         group_relations = ArtistMembers.objects.filter(member=self)
         groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gr in group_relations]
         updated = str(self.updated) if self.updated else None
+        collectionUpdated = str(self.collectionUpdated) if self.collectionUpdated else None
         return {
             "id": self.id,
             "name": self.name,
@@ -37,7 +39,8 @@ class Artist(models.Model):
             "description": self.description,
             "members": members,
             "groups": groups,
-            "updated": updated
+            "updated": updated,
+            "collectionUpdated": collectionUpdated
         }
 
     def get_releases(self):

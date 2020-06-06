@@ -17,6 +17,7 @@ def getCollection(request, username):
         progress.init(request, ['discogs', 'create', 'load'])
         if not services.updateCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
+            progress.clearProcesses(['discogs', 'create', 'load'])
             return HttpResponse('{}')
     else :
         progress.init(request, ['load'])
@@ -61,9 +62,12 @@ def updateArtist(request, artist_id):
     return HttpResponse(json.dumps(artist.to_dict()))
 
 def getArtistReleases(request, artist_id):
-    progress.init(request, ['discogs', 'create', 'load'])
     artist = get_object_or_404(Artist, id=artist_id)
-    services.collectArtistReleases(artist)
+    if artist.collectionUpdated == None:
+        progress.init(request, ['discogs', 'create', 'load'])
+        services.collectArtistReleases(artist)
+    else:
+        progress.init(request, ['load'])
     artist_releases = artist.get_releases()
     progress.clearProcesses(['load', 'create', 'discogs'])
     return HttpResponse(json.dumps(artist_releases))

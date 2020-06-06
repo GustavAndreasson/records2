@@ -50,9 +50,9 @@ class GroupsInline(admin.TabularInline):
     fk_name = 'member'
 
 class ArtistAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'description', 'image', 'updated']
+    fields = ['id', 'name', 'description', 'image', 'updated', 'collectionUpdated']
     inlines = [MembersInline, GroupsInline]
-    list_display = ('id', 'name', 'description', 'image', 'updated')
+    list_display = ('id', 'name', 'description', 'image', 'updated', 'collectionUpdated')
     search_fields = ['name']
     actions = [reset_updated, update_artist, ]
 
