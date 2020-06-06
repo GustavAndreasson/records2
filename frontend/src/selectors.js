@@ -85,11 +85,10 @@ export const selectDirectLink = createSelector(
     /*state => state.activeArtist,*/
     (discogsUsername, orders, filters/*, activeArtist*/) => {
         const query = {
-            user: discogsUsername,
-            /*artist: activeArtist ? activeArtist.id : null,*/
-            filters: JSON.stringify(filters),
-            orders: JSON.stringify(orders)
-        }
+            user: discogsUsername
+        };
+        if (filters.length) query.filters = JSON.stringify(filters);
+        if (orders.length) query.orders = JSON.stringify(orders);
         return location.protocol + "//" + location.host + "?" + qs.stringify(query);
     }
 );
