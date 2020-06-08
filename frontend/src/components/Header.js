@@ -1,72 +1,31 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { updateSearch, updateCollection, showPopup } from "../actions";
-import { selectCollectionStats } from '../selectors';
+import Search from './Search';
+import FiltersButton from './FiltersButton';
+import OrdersButton from './OrdersButton';
+import UpdateButton from './UpdateButton';
+import UserButton from './UserButton';
+import CollectionStats from './CollectionStats';
 import "./styling/Header.scss";
 
 const mapStateToProps = state => ({
-    showControls: !!state.collection.discogsUsername,
-    searchQuery: state.process.searchQuery,
-    qtyFilters: state.process.filters.length,
-    qtyOrders: state.process.orders.length,
-    collectionLoading: state.ui.collectionLoading,
-    collectionStats: selectCollectionStats(state)
+    showControls: !!state.collection.discogsUsername
 });
 
-const mapDispatchToProps = dispatch => ({
-    handleSearchUpdated: query => { dispatch(updateSearch(query)) },
-    handleShowFilters: () => { dispatch(showPopup("filters")) },
-    handleShowOrders: () => { dispatch(showPopup("orders")) },
-    handleUpdateCollection: () => { dispatch(updateCollection()) },
-    handleShowUser: () => { dispatch(showPopup("user")) }
-});
-
-const Header = ({
-    showControls,
-    searchQuery,
-    handleSearchUpdated,
-    handleShowFilters,
-    qtyFilters,
-    handleShowOrders,
-    qtyOrders,
-    handleUpdateCollection,
-    collectionLoading,
-    handleShowUser,
-    collectionStats
-}) => {
+const Header = ({ showControls }) => {
     const headerContent = (
         <Fragment>
             <h1>Skivorna</h1>
             {showControls &&
                 <Fragment>
-                    <div className="search">
-                        <input type="text" value={searchQuery} onChange={e => handleSearchUpdated(e.target.value)}/>
-                        {searchQuery &&
-                            <span className="clear-search fas fa-times" onClick={() => handleSearchUpdated("")}></span>
-                        }
-                    </div>
+                    <Search />
                     <div className="buttons">
-                        <button type="button" className="fas fa-filter" onClick={handleShowFilters}>
-                            {qtyFilters > 0 && <span className="button-qty">{qtyFilters}</span>}
-                        </button>
-                        <button type="button" className="fas fa-sort" onClick={handleShowOrders}>
-                            {qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span>}
-                        </button>
-                        <button
-                            type="button"
-                            className="fas fa-sync"
-                            disabled={collectionLoading}
-                            onClick={handleUpdateCollection}
-                        ></button>
-                    <button type="button" className="fas fa-user-cog" onClick={handleShowUser}></button>
+                        <FiltersButton />
+                        <OrdersButton />
+                        <UpdateButton />
+                        <UserButton />
                     </div>
-                    {collectionStats &&
-                        <div className="stats">
-                            <div className="counter">{"Antal skivor: " + collectionStats.qty}</div>
-                            <div className="price-sum">{"Pris summa: " + collectionStats.sum}</div>
-                            <div className="price-avg">{"Pris medel: " + collectionStats.avg}</div>
-                        </div>
-                    }
+                    <CollectionStats />
                 </Fragment>
             }
         </Fragment>
@@ -83,4 +42,4 @@ const Header = ({
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

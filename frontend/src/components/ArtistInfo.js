@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { hideArtist, toggleViewArtistCollection } from "../actions";
-import Artist from "./Artist.js";
+import Artist from "./Artist";
 import "./styling/ArtistInfo.scss";
 
 const mapStateToProps = state => ({

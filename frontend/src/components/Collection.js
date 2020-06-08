@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { selectOrderedFilteredCollection } from "../selectors";
-import Record from "./Record.js";
+import Record from "./Record";
+import "./styling/Collection.scss";
 
 const mapStateToProps = state => ({
     collection: selectOrderedFilteredCollection(state)

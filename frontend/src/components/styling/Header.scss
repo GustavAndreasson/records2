@@ -7,19 +7,6 @@ header, .header-push {
         font-size: 24px;
     }
 
-    .search {
-        position: relative;
-        float: left;
-        margin: 10px 15px 8px;
-
-        .clear-search {
-            position: absolute;
-            right: 5px;
-            top: 4px;
-            cursor: pointer;
-        }
-    }
-
     .buttons {
         float: left;
         height: 26px;
@@ -42,11 +29,6 @@ header, .header-push {
                 width: 10px;
             }
         }
-    }
-
-    .stats {
-        float: right;
-        font-size: 0.8em;
     }
 }
 

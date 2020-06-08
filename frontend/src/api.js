@@ -6,6 +6,7 @@ const api = {
 	getArtist: async artistId => fetch("records/artist/" + artistId),
 	getArtistReleases: async artistId => fetch("records/artist/" + artistId + "/releases"),
 	updateArtist: async artistId => fetch("records/artist/" + artistId + "/update"),
+	updateArtistReleases: async artistId => fetch("records/artist/" + artistId + "/releases/update"),
 	getProgress: async () => fetch("records/progress")
 };
 

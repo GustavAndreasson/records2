@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Artist from "./Artist.js";
+import Artist from "./Artist";
 
 const Artists = ({ artists }) => (
     artists && artists.map((artist, index) => (
