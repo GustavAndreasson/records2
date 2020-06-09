@@ -122,12 +122,12 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     }
 }
 
-export const updateArtistCollection = (artist) => async (dispatch, getState) => {
+export const updateArtistCollection = () => async (dispatch, getState) => {
     dispatch(requestArtistCollection());
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.updateArtistReleases(artist.id);
+        let response = await api.updateArtistReleases(getState().artist.activeArtist.id);
         if (!response.ok) {
             throw Error(response.statusText);
         }

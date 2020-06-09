@@ -20,7 +20,7 @@ def updateCollection(user):
                 if release_data['basic_information'].get('master_id'):
                     master_id = release_data['basic_information'].get('master_id')
                 else:
-                    master_id = str(release_data['basic_information']['id']) + 990000000
+                    master_id = release_data['basic_information']['id'] + 990000000
                 record, created = Record.objects.get_or_create(
                     id=release_data['basic_information']['id'],
                     defaults={
