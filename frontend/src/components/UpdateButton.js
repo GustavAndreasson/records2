@@ -1,19 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateCollection, updateArtistCollection } from "../actions";
+import {
+    updateCollection,
+    updateRecord,
+    updateArtistCollection
+} from "../actions";
+import { selectActiveRecord } from "../selectors"
 
 const mapStateToProps = state => ({
     collectionLoading: state.ui.collectionLoading,
+    activeRecord: selectActiveRecord(state),
     viewArtistCollection: state.artist.viewArtistCollection
 });
 
 const mapDispatchToProps = dispatch => ({
     handleUpdateCollection: () => { dispatch(updateCollection()) },
+    handleUpdateRecord: (record) => { dispatch(updateRecord(record)) },
     handleUpdateArtistCollection: () => { dispatch(updateArtistCollection()) }
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-    handleUpdate: stateProps.viewArtistCollection ? dispatchProps.handleUpdateArtistCollection : dispatchProps.handleUpdateCollection,
+    handleUpdate: (stateProps.activeRecord
+        ? () => dispatchProps.handleUpdateRecord(stateProps.activeRecord)
+        : (stateProps.viewArtistCollection
+            ? dispatchProps.handleUpdateArtistCollection
+            : dispatchProps.handleUpdateCollection
+        )),
     collectionLoading: stateProps.collectionLoading
 })
 
