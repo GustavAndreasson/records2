@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import * as qs  from "query-string";
-import FilterUtil from "./util/Filter";
-import OrderUtil from "./util/Order";
+import FilterUtil from "./utils/Filter";
+import OrderUtil from "./utils/Order";
 
 export const selectOrderedFilteredCollection = createSelector(
     state => state.collection.collection,

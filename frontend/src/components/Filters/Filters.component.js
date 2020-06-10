@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Popup  from "../Popup";
-import Filter from "../../util/Filter";
+import Filter from "../../utils/Filter";
 import "./Filters.scss";
 
 const Filters = ({ filters, handleUpdate }) => {
