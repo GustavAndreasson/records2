@@ -4,8 +4,8 @@ import {
     updateCollection,
     updateRecord,
     updateArtistCollection
-} from "../../../actions";
-import { selectActiveRecord } from "../../../selectors";
+} from "Actions";
+import { selectActiveRecord } from "Selectors";
 import UpdateButton from "./UpdateButton.component";
 
 const mapStateToProps = state => ({

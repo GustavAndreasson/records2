@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { showArtist } from "../../actions";
+import { showArtist } from "Actions";
 import Artist from "./Artist.component";
 
 const mapDispatchToProps = dispatch => ({

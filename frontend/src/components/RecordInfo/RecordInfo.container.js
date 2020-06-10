@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { filterYear, showListen } from "../../actions";
-import { selectActiveRecord } from "../../selectors";
+import { filterYear, showListen } from "Actions";
+import { selectActiveRecord } from "Selectors";
 import RecordInfo from "./RecordInfo.component";
 
 const mapStateToProps = state => ({

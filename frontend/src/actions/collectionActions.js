@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "Api";
 import { progress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";

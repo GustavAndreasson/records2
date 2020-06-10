@@ -8,7 +8,7 @@ import {
     UPDATE_PROGRESS,
     SHOW_POPUP,
     HIDE_POPUP
-} from "../actions";
+} from "Actions";
 
 function ui(state = { collectionLoading: false, progress: {}, status: "", popups: "" }, action) {
     switch(action.type) {

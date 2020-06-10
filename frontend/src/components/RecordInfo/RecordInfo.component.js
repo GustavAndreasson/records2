@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Popup from "../Popup";
+import Popup from "Components/Popup";
 import Artists from "./Artists";
 import Listen from "./Listen";
 import "./RecordInfo.scss";

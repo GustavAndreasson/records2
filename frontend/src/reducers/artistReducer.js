@@ -9,7 +9,7 @@ import {
     VIEW_ARTIST_COLLECTION,
     RECEIVE_RECORD,
     FILTER_YEAR
-} from "../actions";
+} from "Actions";
 
 function artist(state={ activeArtist: null, artistCollection: {}, viewArtistCollection: false }, action) {
     switch(action.type) {

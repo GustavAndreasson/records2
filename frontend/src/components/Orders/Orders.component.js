@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Popup from "../Popup";
-import Order from "../../utils/Order";
+import Popup from "Components/Popup";
+import Order from "Utils/Order";
 import "./Orders.scss";
 
 const Orders = ({ showOrders, orders, handleUpdate }) => {

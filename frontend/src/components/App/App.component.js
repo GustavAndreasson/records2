@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from "react";
-import Header from "../Header";
-import Collection from "../Collection";
-import Progress from "../Progress";
-import RecordInfo from "../RecordInfo";
-import ArtistInfo from "../ArtistInfo";
-import UsernameInput from "../UsernameInput";
-import Filters from "../Filters";
-import Orders from "../Orders";
-import User from "../User";
+import Header from "Components/Header";
+import Collection from "Components/Collection";
+import Progress from "Components/Progress";
+import RecordInfo from "Components/RecordInfo";
+import ArtistInfo from "Components/ArtistInfo";
+import UsernameInput from "Components/UsernameInput";
+import Filters from "Components/Filters";
+import Orders from "Components/Orders";
+import User from "Components/User";
 import "./App.scss";
 
 const App = ({ discogsUsername, getCollection }) => {

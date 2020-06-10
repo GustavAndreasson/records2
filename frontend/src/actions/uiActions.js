@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "Api";
 
 export const SHOW_POPUP = "SHOW_POPUP";
 export const showPopup = popup => ({

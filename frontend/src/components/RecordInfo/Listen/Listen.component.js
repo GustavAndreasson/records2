@@ -1,5 +1,5 @@
 import React from "react";
-import Popup from "../../Popup";
+import Popup from "Components/Popup";
 import "./Listen.scss";
 
 const Listen = ({ listen }) => (listen &&

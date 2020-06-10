@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCollection } from "../../actions";
+import { getCollection } from "Actions";
 import App from "./App.component";
 
 const mapStateToProps = state => ({

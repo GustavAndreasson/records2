@@ -1,9 +1,9 @@
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import rootReducer from "Reducers";
 import * as qs  from "query-string";
-import Filter from "./utils/Filter";
-import Order from "./utils/Order";
+import Filter from "Utils/Filter";
+import Order from "Utils/Order";
 
 const queryString = qs.parse(location.search);
 let filters = [];

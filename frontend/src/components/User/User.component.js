@@ -1,6 +1,6 @@
 import React from "react";
-import Popup from "../Popup";
-import UsernameInput from "../UsernameInput";
+import Popup from "Components/Popup";
+import UsernameInput from "Components/UsernameInput";
 import DirectLink from "./DirectLink";
 import "./User.scss";
 

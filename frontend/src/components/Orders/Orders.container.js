@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setOrders } from "../../actions";
+import { setOrders } from "Actions";
 import Orders from "./Orders.component";
 
 const mapStateToProps = state => ({

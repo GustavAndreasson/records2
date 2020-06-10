@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectOrderedFilteredCollection } from "../../selectors";
+import { selectOrderedFilteredCollection } from "Selectors";
 import Collection from "./Collection.component";
 
 const mapStateToProps = state => ({

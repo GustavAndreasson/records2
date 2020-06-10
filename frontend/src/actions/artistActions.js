@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "Api";
 import { hideRecord } from "./recordActions";
 import { progress } from "./uiActions";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { hideArtist, toggleViewArtistCollection } from "../../actions";
+import { hideArtist, toggleViewArtistCollection } from "Actions";
 import ArtistInfo from "./ArtistInfo.component";
 
 const mapStateToProps = state => ({

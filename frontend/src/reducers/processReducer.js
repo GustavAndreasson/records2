@@ -3,7 +3,7 @@ import {
     SET_FILTERS,
     UPDATE_SEARCH,
     FILTER_YEAR
-} from "../actions";
+} from "Actions";
 
 function process(state = { orders: {}, filters: {}, searchQuery: "" }, action) {
     switch(action.type) {

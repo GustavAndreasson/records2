@@ -9,7 +9,7 @@ import {
     REQUEST_RECORD,
     RECEIVE_RECORD,
     RECORD_ERROR
-} from "../actions";
+} from "Actions";
 
 function collection(state = {
     discogsUsername: "",

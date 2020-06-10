@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { showPopup } from "../../../actions";
+import { showPopup } from "Actions";
 import FiltersButton from "./FiltersButton.component";
 
 const mapStateToProps = state => ({

@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "Api";
 import { showPopup } from "./uiActions";
 
 export const SELECT_RECORD = "SELECT_RECORD";
