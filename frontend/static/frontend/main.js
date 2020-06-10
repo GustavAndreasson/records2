@@ -170,454 +170,958 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction asyncGeneratorStep(g
 
 /***/ }),
 
-/***/ "./frontend/src/components/App.js":
-/*!****************************************!*\
-  !*** ./frontend/src/components/App.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ \"./frontend/src/components/Header.js\");\n/* harmony import */ var _Collection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Collection */ \"./frontend/src/components/Collection.js\");\n/* harmony import */ var _Progress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Progress */ \"./frontend/src/components/Progress.js\");\n/* harmony import */ var _RecordInfo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RecordInfo */ \"./frontend/src/components/RecordInfo.js\");\n/* harmony import */ var _ArtistInfo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ArtistInfo */ \"./frontend/src/components/ArtistInfo.js\");\n/* harmony import */ var _UsernameInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./UsernameInput */ \"./frontend/src/components/UsernameInput.js\");\n/* harmony import */ var _Filters__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Filters */ \"./frontend/src/components/Filters.js\");\n/* harmony import */ var _Orders__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Orders */ \"./frontend/src/components/Orders.js\");\n/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./User */ \"./frontend/src/components/User.js\");\n/* harmony import */ var _styling_App_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./styling/App.scss */ \"./frontend/src/components/styling/App.scss\");\n/* harmony import */ var _styling_App_scss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_styling_App_scss__WEBPACK_IMPORTED_MODULE_12__);\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    discogsUsername: state.collection.discogsUsername\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    getCollection: function getCollection(user) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"getCollection\"])(user));\n    }\n  };\n};\n\nvar App = function App(_ref) {\n  var discogsUsername = _ref.discogsUsername,\n      getCollection = _ref.getCollection;\n  Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useEffect\"])(function () {\n    if (discogsUsername) {\n      getCollection(discogsUsername);\n    }\n  }, []);\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filters__WEBPACK_IMPORTED_MODULE_9__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Orders__WEBPACK_IMPORTED_MODULE_10__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_User__WEBPACK_IMPORTED_MODULE_11__[\"default\"], null), discogsUsername ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ArtistInfo__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Collection__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecordInfo__WEBPACK_IMPORTED_MODULE_6__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Progress__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UsernameInput__WEBPACK_IMPORTED_MODULE_8__[\"default\"], null));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./frontend/src/components/App.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Artist.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Artist.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _styling_Artist_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/Artist.scss */ \"./frontend/src/components/styling/Artist.scss\");\n/* harmony import */ var _styling_Artist_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_Artist_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleClick: function handleClick(artist) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showArtist\"])(artist));\n    }\n  };\n};\n\nvar Artist = function Artist(_ref) {\n  var artist = _ref.artist,\n      handleClick = _ref.handleClick,\n      _ref$active = _ref.active,\n      active = _ref$active === void 0 ? true : _ref$active;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"artist\" + (!active ? \" inactive\" : \"\"),\n    onClick: function onClick() {\n      return handleClick(artist);\n    }\n  }, artist.name);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(Artist));\n\n//# sourceURL=webpack:///./frontend/src/components/Artist.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/ArtistInfo.js":
-/*!***********************************************!*\
-  !*** ./frontend/src/components/ArtistInfo.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Artist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Artist */ \"./frontend/src/components/Artist.js\");\n/* harmony import */ var _styling_ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styling/ArtistInfo.scss */ \"./frontend/src/components/styling/ArtistInfo.scss\");\n/* harmony import */ var _styling_ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styling_ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    artist: state.artist.activeArtist,\n    viewArtistCollection: state.artist.viewArtistCollection,\n    collectionLoading: state.ui.collectionLoading\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleCloseClick: function handleCloseClick() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"hideArtist\"])());\n    },\n    handleShowCollectionClick: function handleShowCollectionClick() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"toggleViewArtistCollection\"])());\n    }\n  };\n};\n\nvar ArtistInfo = function ArtistInfo(_ref) {\n  var artist = _ref.artist,\n      viewArtistCollection = _ref.viewArtistCollection,\n      collectionLoading = _ref.collectionLoading,\n      handleCloseClick = _ref.handleCloseClick,\n      handleShowCollectionClick = _ref.handleShowCollectionClick;\n  return artist && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artist-info\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"name\"\n  }, artist.name), artist.image && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    src: artist.image\n  }), artist.description && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"description\"\n  }, artist.description.split('\\n').map(function (p, i) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", {\n      key: i\n    }, p);\n  })), artist.members && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"members\"\n  }, artist.members.map(function (member, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: member.artist.id\n    }, index > 0 && \", \", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n      artist: member.artist,\n      active: member.active\n    }));\n  })), artist.groups && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"groups\"\n  }, artist.groups.map(function (group, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: group.artist.id\n    }, index > 0 && \", \", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n      artist: group.artist,\n      active: group.active\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artist-buttons\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"far fa-caret-square-left\",\n    onClick: handleCloseClick\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-list\" + (viewArtistCollection ? \" reversed\" : \"\"),\n    disabled: collectionLoading,\n    onClick: handleShowCollectionClick\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(ArtistInfo));\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Artists.js":
-/*!********************************************!*\
-  !*** ./frontend/src/components/Artists.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Artist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Artist */ \"./frontend/src/components/Artist.js\");\n\n\n\nvar Artists = function Artists(_ref) {\n  var artists = _ref.artists;\n  return artists && artists.map(function (artist, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: artist.artist.id\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      artist: artist.artist\n    }), index < artists.length - 1 && \" \" + artist.delimiter + \" \");\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Artists);\n\n//# sourceURL=webpack:///./frontend/src/components/Artists.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Collection.js":
-/*!***********************************************!*\
-  !*** ./frontend/src/components/Collection.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _Record__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Record */ \"./frontend/src/components/Record.js\");\n/* harmony import */ var _styling_Collection_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styling/Collection.scss */ \"./frontend/src/components/styling/Collection.scss\");\n/* harmony import */ var _styling_Collection_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styling_Collection_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collection: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectOrderedFilteredCollection\"])(state)\n  };\n};\n\nvar Collection = function Collection(_ref) {\n  var collection = _ref.collection;\n  return collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"collection\"\n  }, collection.map(function (rec) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Record__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n      rec: rec,\n      key: rec.id\n    });\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(Collection));\n\n//# sourceURL=webpack:///./frontend/src/components/Collection.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/CollectionStats.js":
-/*!****************************************************!*\
-  !*** ./frontend/src/components/CollectionStats.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _styling_CollectionStats_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/CollectionStats.scss */ \"./frontend/src/components/styling/CollectionStats.scss\");\n/* harmony import */ var _styling_CollectionStats_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_CollectionStats_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionStats: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectCollectionStats\"])(state)\n  };\n};\n\nvar CollectionStats = function CollectionStats(_ref) {\n  var collectionStats = _ref.collectionStats;\n  return collectionStats && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"collection-stats\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"counter\"\n  }, \"Antal skivor: \" + collectionStats.qty), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price-sum\"\n  }, \"Pris summa: \" + collectionStats.sum), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price-avg\"\n  }, \"Pris medel: \" + collectionStats.avg));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(CollectionStats));\n\n//# sourceURL=webpack:///./frontend/src/components/CollectionStats.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/DirectLink.js":
-/*!***********************************************!*\
-  !*** ./frontend/src/components/DirectLink.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _styling_DirectLink_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/DirectLink.scss */ \"./frontend/src/components/styling/DirectLink.scss\");\n/* harmony import */ var _styling_DirectLink_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_DirectLink_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    directLink: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectDirectLink\"])(state)\n  };\n};\n\nvar DirectLink = function DirectLink(_ref) {\n  var directLink = _ref.directLink;\n  var refInput = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useRef\"])();\n\n  var copyLink = function copyLink(e) {\n    e.preventDefault();\n    refInput.current.select();\n    refInput.current.setSelectionRange(0, 99999);\n    document.execCommand(\"copy\");\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"direct-link\",\n    onSubmit: copyLink\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    readOnly: true,\n    ref: refInput,\n    value: directLink\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"fas fa-copy\"\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(DirectLink));\n\n//# sourceURL=webpack:///./frontend/src/components/DirectLink.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Filters.js":
-/*!********************************************!*\
-  !*** ./frontend/src/components/Filters.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Popup */ \"./frontend/src/components/Popup.js\");\n/* harmony import */ var _util_Filter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/Filter */ \"./frontend/src/util/Filter.js\");\n/* harmony import */ var _styling_Filters_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styling/Filters.scss */ \"./frontend/src/components/styling/Filters.scss\");\n/* harmony import */ var _styling_Filters_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styling_Filters_scss__WEBPACK_IMPORTED_MODULE_5__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    filters: state.process.filters\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdate: function handleUpdate(filters) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"setFilters\"])(filters));\n    }\n  };\n};\n\nvar Filters = function Filters(_ref) {\n  var filters = _ref.filters,\n      handleUpdate = _ref.handleUpdate;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes)[0].key),\n      _useState2 = _slicedToArray(_useState, 2),\n      attribute = _useState2[0],\n      setAttribute = _useState2[1];\n\n  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes)[0].compares[0].key),\n      _useState4 = _slicedToArray(_useState3, 2),\n      compare = _useState4[0],\n      setCompare = _useState4[1];\n\n  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(\"\"),\n      _useState6 = _slicedToArray(_useState5, 2),\n      value = _useState6[0],\n      setValue = _useState6[1];\n\n  var handleAttributeChange = function handleAttributeChange(event) {\n    setAttribute(event.target.value);\n    setCompare(_util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes[event.target.value].compares[0].key);\n  };\n\n  var handleCompareChange = function handleCompareChange(event) {\n    return setCompare(event.target.value);\n  };\n\n  var handleValueChange = function handleValueChange(event) {\n    return setValue(event.target.value);\n  };\n\n  var handleAddClick = function handleAddClick(e) {\n    e.preventDefault();\n    handleUpdate(filters.concat({\n      attribute: attribute,\n      compare: compare,\n      value: value\n    }));\n    setValue(\"\");\n  };\n\n  var handleRemoveClick = function handleRemoveClick(index) {\n    return handleUpdate(filters.filter(function (_, i) {\n      return i !== index;\n    }));\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n    name: \"filters\",\n    icon: {\n      icon: \"fas fa-filter\"\n    },\n    title: \"Filter\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"filters\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"current-filters\"\n  }, filters.map(function (filter, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"filter\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"attribute\"\n    }, _util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes[filter.attribute].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"compare\"\n    }, _util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].compares[filter.compare].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"value\"\n    }, filter.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\",\n      className: \"remove-filter fas fa-minus\",\n      onClick: function onClick() {\n        return handleRemoveClick(index);\n      }\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"new-filter\",\n    onSubmit: handleAddClick\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"filter-attribute\",\n    value: attribute,\n    onChange: handleAttributeChange\n  }, Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes).map(function (attr) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: attr.key,\n      key: attr.key\n    }, attr.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"filter-compare\",\n    value: compare,\n    onChange: handleCompareChange\n  }, _util_Filter__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes[attribute].compares.map(function (cmp) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: cmp.key,\n      key: cmp.key\n    }, cmp.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    className: \"filter-value\",\n    value: value,\n    onChange: handleValueChange\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"add-filter fas fa-plus\"\n  }))));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(Filters));\n\n//# sourceURL=webpack:///./frontend/src/components/Filters.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/FiltersButton.js":
-/*!**************************************************!*\
-  !*** ./frontend/src/components/FiltersButton.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    qtyFilters: state.process.filters.length\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowFilters: function handleShowFilters() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"filters\"));\n    }\n  };\n};\n\nvar FiltersButton = function FiltersButton(_ref) {\n  var handleShowFilters = _ref.handleShowFilters,\n      qtyFilters = _ref.qtyFilters;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-filter\",\n    onClick: handleShowFilters\n  }, qtyFilters > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"button-qty\"\n  }, qtyFilters));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(FiltersButton));\n\n//# sourceURL=webpack:///./frontend/src/components/FiltersButton.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Header.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Header.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search */ \"./frontend/src/components/Search.js\");\n/* harmony import */ var _FiltersButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FiltersButton */ \"./frontend/src/components/FiltersButton.js\");\n/* harmony import */ var _OrdersButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OrdersButton */ \"./frontend/src/components/OrdersButton.js\");\n/* harmony import */ var _UpdateButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UpdateButton */ \"./frontend/src/components/UpdateButton.js\");\n/* harmony import */ var _UserButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./UserButton */ \"./frontend/src/components/UserButton.js\");\n/* harmony import */ var _CollectionStats__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CollectionStats */ \"./frontend/src/components/CollectionStats.js\");\n/* harmony import */ var _styling_Header_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styling/Header.scss */ \"./frontend/src/components/styling/Header.scss\");\n/* harmony import */ var _styling_Header_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styling_Header_scss__WEBPACK_IMPORTED_MODULE_8__);\n\n\n\n\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    showControls: !!state.collection.discogsUsername\n  };\n};\n\nvar Header = function Header(_ref) {\n  var showControls = _ref.showControls;\n  var headerContent = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"h1\", null, \"Skivorna\"), showControls && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Search__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"buttons\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FiltersButton__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OrdersButton__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateButton__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserButton__WEBPACK_IMPORTED_MODULE_6__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollectionStats__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null)));\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"header\", null, headerContent), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"header-push\"\n  }, headerContent));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(Header));\n\n//# sourceURL=webpack:///./frontend/src/components/Header.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Listen.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Listen.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Popup */ \"./frontend/src/components/Popup.js\");\n/* harmony import */ var _styling_Listen_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/Listen.scss */ \"./frontend/src/components/styling/Listen.scss\");\n/* harmony import */ var _styling_Listen_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_Listen_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    listen: state.collection.activeListen\n  };\n};\n\nvar Listen = function Listen(_ref) {\n  var listen = _ref.listen;\n  return listen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n    name: \"recordInfo.listen\",\n    icon: {\n      image: listen.icon\n    },\n    title: listen.name || listen.type\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"listen\",\n    dangerouslySetInnerHTML: {\n      __html: listen.html\n    }\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(Listen));\n\n//# sourceURL=webpack:///./frontend/src/components/Listen.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Orders.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Orders.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Popup */ \"./frontend/src/components/Popup.js\");\n/* harmony import */ var _util_Order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/Order */ \"./frontend/src/util/Order.js\");\n/* harmony import */ var _styling_Orders_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styling/Orders.scss */ \"./frontend/src/components/styling/Orders.scss\");\n/* harmony import */ var _styling_Orders_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styling_Orders_scss__WEBPACK_IMPORTED_MODULE_5__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    orders: state.process.orders\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdate: function handleUpdate(orders) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"setOrders\"])(orders));\n    }\n  };\n};\n\nvar Orders = function Orders(_ref) {\n  var showOrders = _ref.showOrders,\n      orders = _ref.orders,\n      handleUpdate = _ref.handleUpdate;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Order__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes)[0].key),\n      _useState2 = _slicedToArray(_useState, 2),\n      attribute = _useState2[0],\n      setAttribute = _useState2[1];\n\n  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(false),\n      _useState4 = _slicedToArray(_useState3, 2),\n      reverse = _useState4[0],\n      setReverse = _useState4[1];\n\n  var handleAttributeChange = function handleAttributeChange(event) {\n    return setAttribute(_util_Order__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes[event.target.value].key);\n  };\n\n  var handleReverseChange = function handleReverseChange(event) {\n    return setReverse(event.target.checked);\n  };\n\n  var handleAddClick = function handleAddClick(e) {\n    e.preventDefault();\n    handleUpdate(orders.concat({\n      attribute: attribute,\n      reverse: reverse\n    }));\n    setReverse(false);\n  };\n\n  var handleRemoveClick = function handleRemoveClick(index) {\n    return handleUpdate(orders.filter(function (_, i) {\n      return i !== index;\n    }));\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n    name: \"orders\",\n    icon: {\n      icon: \"fas fa-sort\"\n    },\n    title: \"Sortera\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"orders\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"current-orders\"\n  }, orders.map(function (order, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"order\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"attribute\"\n    }, _util_Order__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes[order.attribute].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"i\", {\n      className: \"direction fas \" + (order.reverse ? \"fa-sort-up\" : \"fa-sort-down\")\n    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\",\n      className: \"remove-order fas fa-minus\",\n      onClick: function onClick() {\n        return handleRemoveClick(index);\n      }\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"new-order\",\n    onSubmit: handleAddClick\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"order-attribute\",\n    value: attribute.key,\n    onChange: handleAttributeChange\n  }, Object.values(_util_Order__WEBPACK_IMPORTED_MODULE_4__[\"default\"].attributes).map(function (attr) {\n    return attr.key !== \"id\" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: attr.key,\n      key: attr.key\n    }, attr.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"checkbox\",\n    className: \"order-reverse\",\n    id: \"order-reverse\",\n    checked: reverse,\n    onChange: handleReverseChange\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"label\", {\n    htmlFor: \"order-reverse\",\n    className: \"button fas\"\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"add-order fas fa-plus\"\n  }))));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(Orders));\n\n//# sourceURL=webpack:///./frontend/src/components/Orders.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/OrdersButton.js":
-/*!*************************************************!*\
-  !*** ./frontend/src/components/OrdersButton.js ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    qtyOrders: state.process.orders.length\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowOrders: function handleShowOrders() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"orders\"));\n    }\n  };\n};\n\nvar OrdersButton = function OrdersButton(_ref) {\n  var handleShowOrders = _ref.handleShowOrders,\n      qtyOrders = _ref.qtyOrders;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-sort\",\n    onClick: handleShowOrders\n  }, qtyOrders > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"button-qty\"\n  }, qtyOrders));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(OrdersButton));\n\n//# sourceURL=webpack:///./frontend/src/components/OrdersButton.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Popup.js":
-/*!******************************************!*\
-  !*** ./frontend/src/components/Popup.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _styling_Popup_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/Popup.scss */ \"./frontend/src/components/styling/Popup.scss\");\n/* harmony import */ var _styling_Popup_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_Popup_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    popups: state.ui.popups\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    hidePopup: function hidePopup(name) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"hidePopup\"])(name));\n    }\n  };\n};\n\nvar Popup = function Popup(_ref) {\n  var children = _ref.children,\n      name = _ref.name,\n      icon = _ref.icon,\n      title = _ref.title,\n      popups = _ref.popups,\n      hidePopup = _ref.hidePopup;\n  return popups.indexOf(name) === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup \" + \"level\" + name.split(\".\").length\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-header\"\n  }, icon && (icon.image ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-icon\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    src: icon.image\n  })) : icon.icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-icon \" + icon.icon\n  })), title && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-title\"\n  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"close-button fas fa-times\",\n    onClick: function onClick() {\n      return hidePopup(name);\n    }\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"content\"\n  }, children));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(Popup));\n\n//# sourceURL=webpack:///./frontend/src/components/Popup.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Progress.js":
-/*!*********************************************!*\
-  !*** ./frontend/src/components/Progress.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _styling_Progress_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styling/Progress.scss */ \"./frontend/src/components/styling/Progress.scss\");\n/* harmony import */ var _styling_Progress_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styling_Progress_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionLoading: state.ui.collectionLoading,\n    progress: state.ui.progress,\n    status: state.ui.status\n  };\n};\n\nvar Progress = function Progress(_ref) {\n  var collectionLoading = _ref.collectionLoading,\n      progress = _ref.progress,\n      status = _ref.status;\n  return collectionLoading && progress && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress\"\n  }, status && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-title\"\n  }, status), Object.keys(progress).length ? Object.keys(progress).map(function (key) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-bar\",\n      key: key\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-label\"\n    }, key), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-meter\",\n      style: {\n        width: progress[key] + \"%\"\n      }\n    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-value\"\n    }, progress[key] + \"%\"));\n  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-bar\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-auto-meter\"\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(Progress));\n\n//# sourceURL=webpack:///./frontend/src/components/Progress.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Record.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Record.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _styling_Record_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/Record.scss */ \"./frontend/src/components/styling/Record.scss\");\n/* harmony import */ var _styling_Record_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_Record_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleClick: function handleClick(rec) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showRecord\"])(rec));\n    }\n  };\n};\n\nvar Record = function Record(_ref) {\n  var rec = _ref.rec,\n      handleClick = _ref.handleClick;\n  var artists = rec.artists.map(function (artist, index) {\n    return artist.artist.name + (index < rec.artists.length - 1 ? \" \" + artist.delimiter : \"\");\n  }).join(\" \");\n  var formats = rec.format ? \"format-\" + rec.format.replace(/ /, \" format-\") : \"format-none\";\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"record\",\n    onClick: function onClick() {\n      return handleClick(rec);\n    }\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    className: \"cover \".concat(formats),\n    src: rec.thumbnail,\n    alt: artists + \" - \" + rec.name,\n    title: artists + \" - \" + rec.name\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(Record));\n\n//# sourceURL=webpack:///./frontend/src/components/Record.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/RecordInfo.js":
-/*!***********************************************!*\
-  !*** ./frontend/src/components/RecordInfo.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _styling_RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styling/RecordInfo.scss */ \"./frontend/src/components/styling/RecordInfo.scss\");\n/* harmony import */ var _styling_RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styling_RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Popup */ \"./frontend/src/components/Popup.js\");\n/* harmony import */ var _Artists__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Artists */ \"./frontend/src/components/Artists.js\");\n/* harmony import */ var _Listen__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Listen */ \"./frontend/src/components/Listen.js\");\n\n\n\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    rec: Object(_selectors__WEBPACK_IMPORTED_MODULE_3__[\"selectActiveRecord\"])(state)\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleYearClick: function handleYearClick(year) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"filterYear\"])(year));\n    },\n    handleListenClick: function handleListenClick(listen) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showListen\"])(listen));\n    }\n  };\n};\n\nvar RecordInfo = function RecordInfo(_ref) {\n  var rec = _ref.rec,\n      handleYearClick = _ref.handleYearClick,\n      handleListenClick = _ref.handleListenClick;\n  return rec && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_5__[\"default\"], {\n    name: \"recordInfo\",\n    icon: {\n      icon: \"fas fa-record-vinyl\"\n    },\n    title: rec.name\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"record-info\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    className: \"cover\",\n    src: rec.cover\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artists\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artists__WEBPACK_IMPORTED_MODULE_6__[\"default\"], {\n    artists: rec.artists\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"left\"\n  }, rec.format && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"format\"\n  }, rec.format), rec.year && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"year\",\n    onClick: function onClick() {\n      return handleYearClick(rec.year);\n    }\n  }, rec.year), rec.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price\"\n  }, \"(\" + rec.price + \")\"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"tracks\"\n  }, rec.tracks && rec.tracks.map(function (track, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"track\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"position\"\n    }, track.position), \" \", track.name, track.artists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, \" (\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artists__WEBPACK_IMPORTED_MODULE_6__[\"default\"], {\n      artists: track.artists\n    }), \")\"));\n  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"right\"\n  }, rec.listens && rec.listens.map(function (listen, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"listen-link\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: listen.icon,\n      onClick: function onClick() {\n        return handleListenClick(listen);\n      }\n    })), listen.name || listen.type);\n  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Listen__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(RecordInfo));\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/Search.js":
-/*!*******************************************!*\
-  !*** ./frontend/src/components/Search.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _styling_Search_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/Search.scss */ \"./frontend/src/components/styling/Search.scss\");\n/* harmony import */ var _styling_Search_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_Search_scss__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    searchQuery: state.process.searchQuery\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleSearchUpdated: function handleSearchUpdated(query) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateSearch\"])(query));\n    }\n  };\n};\n\nvar Search = function Search(_ref) {\n  var searchQuery = _ref.searchQuery,\n      handleSearchUpdated = _ref.handleSearchUpdated;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"search\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    value: searchQuery,\n    onChange: function onChange(e) {\n      return handleSearchUpdated(e.target.value);\n    }\n  }), searchQuery && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"clear-search fas fa-times\",\n    onClick: function onClick() {\n      return handleSearchUpdated(\"\");\n    }\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(Search));\n\n//# sourceURL=webpack:///./frontend/src/components/Search.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/UpdateButton.js":
-/*!*************************************************!*\
-  !*** ./frontend/src/components/UpdateButton.js ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../selectors */ \"./frontend/src/selectors.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionLoading: state.ui.collectionLoading,\n    activeRecord: Object(_selectors__WEBPACK_IMPORTED_MODULE_3__[\"selectActiveRecord\"])(state),\n    viewArtistCollection: state.artist.viewArtistCollection\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdateCollection: function handleUpdateCollection() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateCollection\"])());\n    },\n    handleUpdateRecord: function handleUpdateRecord(record) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateRecord\"])(record));\n    },\n    handleUpdateArtistCollection: function handleUpdateArtistCollection() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateArtistCollection\"])());\n    }\n  };\n};\n\nvar mergeProps = function mergeProps(stateProps, dispatchProps, ownProps) {\n  return {\n    handleUpdate: stateProps.activeRecord ? function () {\n      return dispatchProps.handleUpdateRecord(stateProps.activeRecord);\n    } : stateProps.viewArtistCollection ? dispatchProps.handleUpdateArtistCollection : dispatchProps.handleUpdateCollection,\n    collectionLoading: stateProps.collectionLoading\n  };\n};\n\nvar UpdateButton = function UpdateButton(_ref) {\n  var handleUpdate = _ref.handleUpdate,\n      collectionLoading = _ref.collectionLoading;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-sync\",\n    disabled: collectionLoading,\n    onClick: handleUpdate\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps, mergeProps)(UpdateButton));\n\n//# sourceURL=webpack:///./frontend/src/components/UpdateButton.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/User.js":
-/*!*****************************************!*\
-  !*** ./frontend/src/components/User.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Popup */ \"./frontend/src/components/Popup.js\");\n/* harmony import */ var _UsernameInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UsernameInput */ \"./frontend/src/components/UsernameInput.js\");\n/* harmony import */ var _DirectLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DirectLink */ \"./frontend/src/components/DirectLink.js\");\n/* harmony import */ var _styling_User_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styling/User.scss */ \"./frontend/src/components/styling/User.scss\");\n/* harmony import */ var _styling_User_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styling_User_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nvar User = function User() {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"user\",\n    icon: {\n      icon: \"fas fa-user\"\n    },\n    title: \"Anv\\xE4ndare\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"user\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DirectLink__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UsernameInput__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null)));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (User);\n\n//# sourceURL=webpack:///./frontend/src/components/User.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/UserButton.js":
-/*!***********************************************!*\
-  !*** ./frontend/src/components/UserButton.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowUser: function handleShowUser() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"user\"));\n    }\n  };\n};\n\nvar UserButton = function UserButton(_ref) {\n  var handleShowUser = _ref.handleShowUser;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-user-cog\",\n    onClick: handleShowUser\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(UserButton));\n\n//# sourceURL=webpack:///./frontend/src/components/UserButton.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/UsernameInput.js":
-/*!**************************************************!*\
-  !*** ./frontend/src/components/UsernameInput.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _styling_UsernameInput_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styling/UsernameInput.scss */ \"./frontend/src/components/styling/UsernameInput.scss\");\n/* harmony import */ var _styling_UsernameInput_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styling_UsernameInput_scss__WEBPACK_IMPORTED_MODULE_3__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    discogsUsername: state.collection.discogsUsername\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdateUsername: function handleUpdateUsername(user) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateUsername\"])(user));\n    }\n  };\n};\n\nvar UsernameInput = function UsernameInput(_ref) {\n  var discogsUsername = _ref.discogsUsername,\n      handleUpdateUsername = _ref.handleUpdateUsername;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(discogsUsername),\n      _useState2 = _slicedToArray(_useState, 2),\n      user = _useState2[0],\n      setUser = _useState2[1];\n\n  var handleSubmit = function handleSubmit(e) {\n    e.preventDefault();\n    handleUpdateUsername(user);\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"username-input\",\n    onSubmit: handleSubmit\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    value: user,\n    onChange: function onChange(e) {\n      return setUser(e.target.value);\n    }\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\"\n  }, \"OK\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(UsernameInput));\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput.js?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/App.scss":
-/*!**************************************************!*\
-  !*** ./frontend/src/components/styling/App.scss ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./App.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/App.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/App.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Artist.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Artist.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Artist.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Artist.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Artist.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/ArtistInfo.scss":
-/*!*********************************************************!*\
-  !*** ./frontend/src/components/styling/ArtistInfo.scss ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./ArtistInfo.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/ArtistInfo.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/ArtistInfo.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Collection.scss":
-/*!*********************************************************!*\
-  !*** ./frontend/src/components/styling/Collection.scss ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Collection.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Collection.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Collection.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/CollectionStats.scss":
-/*!**************************************************************!*\
-  !*** ./frontend/src/components/styling/CollectionStats.scss ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./CollectionStats.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/CollectionStats.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/CollectionStats.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/DirectLink.scss":
-/*!*********************************************************!*\
-  !*** ./frontend/src/components/styling/DirectLink.scss ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./DirectLink.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/DirectLink.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/DirectLink.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Filters.scss":
+/***/ "./frontend/src/components/App/App.component.js":
 /*!******************************************************!*\
-  !*** ./frontend/src/components/styling/Filters.scss ***!
+  !*** ./frontend/src/components/App/App.component.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Filters.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Filters.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Filters.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Header.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Header.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Header.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Header.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Header.scss?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Header */ \"./frontend/src/components/Header/index.js\");\n/* harmony import */ var _Collection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Collection */ \"./frontend/src/components/Collection/index.js\");\n/* harmony import */ var _Progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Progress */ \"./frontend/src/components/Progress/index.js\");\n/* harmony import */ var _RecordInfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../RecordInfo */ \"./frontend/src/components/RecordInfo/index.js\");\n/* harmony import */ var _ArtistInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ArtistInfo */ \"./frontend/src/components/ArtistInfo/index.js\");\n/* harmony import */ var _UsernameInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../UsernameInput */ \"./frontend/src/components/UsernameInput/index.js\");\n/* harmony import */ var _Filters__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Filters */ \"./frontend/src/components/Filters/index.js\");\n/* harmony import */ var _Orders__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Orders */ \"./frontend/src/components/Orders/index.js\");\n/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../User */ \"./frontend/src/components/User/index.js\");\n/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./App.scss */ \"./frontend/src/components/App/App.scss\");\n/* harmony import */ var _App_scss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_App_scss__WEBPACK_IMPORTED_MODULE_10__);\n\n\n\n\n\n\n\n\n\n\n\n\nvar App = function App(_ref) {\n  var discogsUsername = _ref.discogsUsername,\n      getCollection = _ref.getCollection;\n  Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useEffect\"])(function () {\n    if (discogsUsername) {\n      getCollection(discogsUsername);\n    }\n  }, []);\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filters__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Orders__WEBPACK_IMPORTED_MODULE_8__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_User__WEBPACK_IMPORTED_MODULE_9__[\"default\"], null), discogsUsername ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ArtistInfo__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Collection__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RecordInfo__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Progress__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UsernameInput__WEBPACK_IMPORTED_MODULE_6__[\"default\"], null));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./frontend/src/components/App/App.component.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/Listen.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Listen.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./frontend/src/components/App/App.container.js":
+/*!******************************************************!*\
+  !*** ./frontend/src/components/App/App.container.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Listen.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Listen.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Listen.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Orders.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Orders.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Orders.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Orders.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Orders.scss?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _App_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App.component */ \"./frontend/src/components/App/App.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    discogsUsername: state.collection.discogsUsername\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    getCollection: function getCollection(user) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"getCollection\"])(user));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_App_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/App/App.container.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/Popup.scss":
+/***/ "./frontend/src/components/App/App.scss":
+/*!**********************************************!*\
+  !*** ./frontend/src/components/App/App.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./App.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/App/App.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/App/App.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/App/index.js":
+/*!**********************************************!*\
+  !*** ./frontend/src/components/App/index.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.container */ \"./frontend/src/components/App/App.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _App_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/App/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Artist/Artist.component.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Artist/Artist.component.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Artist_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Artist.scss */ \"./frontend/src/components/Artist/Artist.scss\");\n/* harmony import */ var _Artist_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Artist_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar Artist = function Artist(_ref) {\n  var artist = _ref.artist,\n      handleClick = _ref.handleClick,\n      _ref$active = _ref.active,\n      active = _ref$active === void 0 ? true : _ref$active;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"artist\" + (!active ? \" inactive\" : \"\"),\n    onClick: function onClick() {\n      return handleClick(artist);\n    }\n  }, artist.name);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Artist);\n\n//# sourceURL=webpack:///./frontend/src/components/Artist/Artist.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Artist/Artist.container.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Artist/Artist.container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Artist_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Artist.component */ \"./frontend/src/components/Artist/Artist.component.js\");\n\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleClick: function handleClick(artist) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showArtist\"])(artist));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(_Artist_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Artist/Artist.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Artist/Artist.scss":
 /*!****************************************************!*\
-  !*** ./frontend/src/components/styling/Popup.scss ***!
+  !*** ./frontend/src/components/Artist/Artist.scss ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Popup.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Popup.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Popup.scss?");
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Artist.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Artist/Artist.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Artist/Artist.scss?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/Progress.scss":
-/*!*******************************************************!*\
-  !*** ./frontend/src/components/styling/Progress.scss ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./frontend/src/components/Artist/index.js":
+/*!*************************************************!*\
+  !*** ./frontend/src/components/Artist/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Progress.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Progress.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Progress.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Record.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Record.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Record.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Record.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Record.scss?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Artist_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Artist.container */ \"./frontend/src/components/Artist/Artist.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Artist_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Artist/index.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/RecordInfo.scss":
-/*!*********************************************************!*\
-  !*** ./frontend/src/components/styling/RecordInfo.scss ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./frontend/src/components/ArtistInfo/ArtistInfo.component.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/ArtistInfo/ArtistInfo.component.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./RecordInfo.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/RecordInfo.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/RecordInfo.scss?");
-
-/***/ }),
-
-/***/ "./frontend/src/components/styling/Search.scss":
-/*!*****************************************************!*\
-  !*** ./frontend/src/components/styling/Search.scss ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Search.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Search.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Search.scss?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Artist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Artist */ \"./frontend/src/components/Artist/index.js\");\n/* harmony import */ var _ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ArtistInfo.scss */ \"./frontend/src/components/ArtistInfo/ArtistInfo.scss\");\n/* harmony import */ var _ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ArtistInfo_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar ArtistInfo = function ArtistInfo(_ref) {\n  var artist = _ref.artist,\n      viewArtistCollection = _ref.viewArtistCollection,\n      collectionLoading = _ref.collectionLoading,\n      handleCloseClick = _ref.handleCloseClick,\n      handleShowCollectionClick = _ref.handleShowCollectionClick;\n  return artist && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artist-info\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"name\"\n  }, artist.name), artist.image && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    src: artist.image\n  }), artist.description && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"description\"\n  }, artist.description.split('\\n').map(function (p, i) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", {\n      key: i\n    }, p);\n  })), artist.members && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"members\"\n  }, artist.members.map(function (member, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: member.artist.id\n    }, index > 0 && \", \", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      artist: member.artist,\n      active: member.active\n    }));\n  })), artist.groups && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"groups\"\n  }, artist.groups.map(function (group, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: group.artist.id\n    }, index > 0 && \", \", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      artist: group.artist,\n      active: group.active\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artist-buttons\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"far fa-caret-square-left\",\n    onClick: handleCloseClick\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-list\" + (viewArtistCollection ? \" reversed\" : \"\"),\n    disabled: collectionLoading,\n    onClick: handleShowCollectionClick\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ArtistInfo);\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo/ArtistInfo.component.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/User.scss":
-/*!***************************************************!*\
-  !*** ./frontend/src/components/styling/User.scss ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./frontend/src/components/ArtistInfo/ArtistInfo.container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/ArtistInfo/ArtistInfo.container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./User.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/User.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/User.scss?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _ArtistInfo_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ArtistInfo.component */ \"./frontend/src/components/ArtistInfo/ArtistInfo.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    artist: state.artist.activeArtist,\n    viewArtistCollection: state.artist.viewArtistCollection,\n    collectionLoading: state.ui.collectionLoading\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleCloseClick: function handleCloseClick() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"hideArtist\"])());\n    },\n    handleShowCollectionClick: function handleShowCollectionClick() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"toggleViewArtistCollection\"])());\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_ArtistInfo_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo/ArtistInfo.container.js?");
 
 /***/ }),
 
-/***/ "./frontend/src/components/styling/UsernameInput.scss":
+/***/ "./frontend/src/components/ArtistInfo/ArtistInfo.scss":
 /*!************************************************************!*\
-  !*** ./frontend/src/components/styling/UsernameInput.scss ***!
+  !*** ./frontend/src/components/ArtistInfo/ArtistInfo.scss ***!
   \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./UsernameInput.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/UsernameInput.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/styling/UsernameInput.scss?");
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./ArtistInfo.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/ArtistInfo/ArtistInfo.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo/ArtistInfo.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/ArtistInfo/index.js":
+/*!*****************************************************!*\
+  !*** ./frontend/src/components/ArtistInfo/index.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ArtistInfo_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArtistInfo.container */ \"./frontend/src/components/ArtistInfo/ArtistInfo.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _ArtistInfo_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Collection.component.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/Collection/Collection.component.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Record__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Record */ \"./frontend/src/components/Collection/Record/index.js\");\n/* harmony import */ var _Collection_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Collection.scss */ \"./frontend/src/components/Collection/Collection.scss\");\n/* harmony import */ var _Collection_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Collection_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar Collection = function Collection(_ref) {\n  var collection = _ref.collection;\n  return collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"collection\"\n  }, collection.map(function (rec) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Record__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      rec: rec,\n      key: rec.id\n    });\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Collection);\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Collection.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Collection.container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/Collection/Collection.container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _Collection_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Collection.component */ \"./frontend/src/components/Collection/Collection.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collection: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectOrderedFilteredCollection\"])(state)\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_Collection_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Collection.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Collection.scss":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Collection/Collection.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Collection.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Collection.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Collection.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Record/Record.component.js":
+/*!***********************************************************************!*\
+  !*** ./frontend/src/components/Collection/Record/Record.component.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Record_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Record.scss */ \"./frontend/src/components/Collection/Record/Record.scss\");\n/* harmony import */ var _Record_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Record_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar Record = function Record(_ref) {\n  var rec = _ref.rec,\n      handleClick = _ref.handleClick;\n  var artists = rec.artists.map(function (artist, index) {\n    return artist.artist.name + (index < rec.artists.length - 1 ? \" \" + artist.delimiter : \"\");\n  }).join(\" \");\n  var formats = rec.format ? \"format-\" + rec.format.replace(/ /, \" format-\") : \"format-none\";\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"record\",\n    onClick: function onClick() {\n      return handleClick(rec);\n    }\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    className: \"cover \".concat(formats),\n    src: rec.thumbnail,\n    alt: artists + \" - \" + rec.name,\n    title: artists + \" - \" + rec.name\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Record);\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Record/Record.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Record/Record.container.js":
+/*!***********************************************************************!*\
+  !*** ./frontend/src/components/Collection/Record/Record.container.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Record_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Record.component */ \"./frontend/src/components/Collection/Record/Record.component.js\");\n\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleClick: function handleClick(rec) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showRecord\"])(rec));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(_Record_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Record/Record.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Record/Record.scss":
+/*!***************************************************************!*\
+  !*** ./frontend/src/components/Collection/Record/Record.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Record.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Record/Record.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Record/Record.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/Record/index.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Collection/Record/index.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Record_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Record.container */ \"./frontend/src/components/Collection/Record/Record.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Record_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Record/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Collection/index.js":
+/*!*****************************************************!*\
+  !*** ./frontend/src/components/Collection/index.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Collection_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Collection.container */ \"./frontend/src/components/Collection/Collection.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Collection_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Filters/Filters.component.js":
+/*!**************************************************************!*\
+  !*** ./frontend/src/components/Filters/Filters.component.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Popup */ \"./frontend/src/components/Popup/index.js\");\n/* harmony import */ var _util_Filter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/Filter */ \"./frontend/src/util/Filter.js\");\n/* harmony import */ var _Filters_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Filters.scss */ \"./frontend/src/components/Filters/Filters.scss\");\n/* harmony import */ var _Filters_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Filters_scss__WEBPACK_IMPORTED_MODULE_3__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\nvar Filters = function Filters(_ref) {\n  var filters = _ref.filters,\n      handleUpdate = _ref.handleUpdate;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes)[0].key),\n      _useState2 = _slicedToArray(_useState, 2),\n      attribute = _useState2[0],\n      setAttribute = _useState2[1];\n\n  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes)[0].compares[0].key),\n      _useState4 = _slicedToArray(_useState3, 2),\n      compare = _useState4[0],\n      setCompare = _useState4[1];\n\n  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(\"\"),\n      _useState6 = _slicedToArray(_useState5, 2),\n      value = _useState6[0],\n      setValue = _useState6[1];\n\n  var handleAttributeChange = function handleAttributeChange(event) {\n    setAttribute(event.target.value);\n    setCompare(_util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes[event.target.value].compares[0].key);\n  };\n\n  var handleCompareChange = function handleCompareChange(event) {\n    return setCompare(event.target.value);\n  };\n\n  var handleValueChange = function handleValueChange(event) {\n    return setValue(event.target.value);\n  };\n\n  var handleAddClick = function handleAddClick(e) {\n    e.preventDefault();\n    handleUpdate(filters.concat({\n      attribute: attribute,\n      compare: compare,\n      value: value\n    }));\n    setValue(\"\");\n  };\n\n  var handleRemoveClick = function handleRemoveClick(index) {\n    return handleUpdate(filters.filter(function (_, i) {\n      return i !== index;\n    }));\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"filters\",\n    icon: {\n      icon: \"fas fa-filter\"\n    },\n    title: \"Filter\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"filters\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"current-filters\"\n  }, filters.map(function (filter, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"filter\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"attribute\"\n    }, _util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes[filter.attribute].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"compare\"\n    }, _util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].compares[filter.compare].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"value\"\n    }, filter.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\",\n      className: \"remove-filter fas fa-minus\",\n      onClick: function onClick() {\n        return handleRemoveClick(index);\n      }\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"new-filter\",\n    onSubmit: handleAddClick\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"filter-attribute\",\n    value: attribute,\n    onChange: handleAttributeChange\n  }, Object.values(_util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes).map(function (attr) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: attr.key,\n      key: attr.key\n    }, attr.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"filter-compare\",\n    value: compare,\n    onChange: handleCompareChange\n  }, _util_Filter__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes[attribute].compares.map(function (cmp) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: cmp.key,\n      key: cmp.key\n    }, cmp.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    className: \"filter-value\",\n    value: value,\n    onChange: handleValueChange\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"add-filter fas fa-plus\"\n  }))));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Filters);\n\n//# sourceURL=webpack:///./frontend/src/components/Filters/Filters.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Filters/Filters.container.js":
+/*!**************************************************************!*\
+  !*** ./frontend/src/components/Filters/Filters.container.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Filters_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Filters.component */ \"./frontend/src/components/Filters/Filters.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    filters: state.process.filters\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdate: function handleUpdate(filters) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"setFilters\"])(filters));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_Filters_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Filters/Filters.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Filters/Filters.scss":
+/*!******************************************************!*\
+  !*** ./frontend/src/components/Filters/Filters.scss ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Filters.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Filters/Filters.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Filters/Filters.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Filters/index.js":
+/*!**************************************************!*\
+  !*** ./frontend/src/components/Filters/index.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Filters_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Filters.container */ \"./frontend/src/components/Filters/Filters.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Filters_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Filters/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/CollectionStats/CollectionStats.component.js":
+/*!*************************************************************************************!*\
+  !*** ./frontend/src/components/Header/CollectionStats/CollectionStats.component.js ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _CollectionStats_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollectionStats.scss */ \"./frontend/src/components/Header/CollectionStats/CollectionStats.scss\");\n/* harmony import */ var _CollectionStats_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_CollectionStats_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar CollectionStats = function CollectionStats(_ref) {\n  var collectionStats = _ref.collectionStats;\n  return collectionStats && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"collection-stats\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"counter\"\n  }, \"Antal skivor: \" + collectionStats.qty), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price-sum\"\n  }, \"Pris summa: \" + collectionStats.sum), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price-avg\"\n  }, \"Pris medel: \" + collectionStats.avg));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (CollectionStats);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/CollectionStats/CollectionStats.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/CollectionStats/CollectionStats.container.js":
+/*!*************************************************************************************!*\
+  !*** ./frontend/src/components/Header/CollectionStats/CollectionStats.container.js ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _CollectionStats_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CollectionStats.component */ \"./frontend/src/components/Header/CollectionStats/CollectionStats.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionStats: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectCollectionStats\"])(state)\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_CollectionStats_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/CollectionStats/CollectionStats.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/CollectionStats/CollectionStats.scss":
+/*!*****************************************************************************!*\
+  !*** ./frontend/src/components/Header/CollectionStats/CollectionStats.scss ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./CollectionStats.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/CollectionStats/CollectionStats.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Header/CollectionStats/CollectionStats.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/CollectionStats/index.js":
+/*!*****************************************************************!*\
+  !*** ./frontend/src/components/Header/CollectionStats/index.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CollectionStats_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollectionStats.container */ \"./frontend/src/components/Header/CollectionStats/CollectionStats.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _CollectionStats_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/CollectionStats/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/FiltersButton/FiltersButton.component.js":
+/*!*********************************************************************************!*\
+  !*** ./frontend/src/components/Header/FiltersButton/FiltersButton.component.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar FiltersButton = function FiltersButton(_ref) {\n  var handleShowFilters = _ref.handleShowFilters,\n      qtyFilters = _ref.qtyFilters;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-filter\",\n    onClick: handleShowFilters\n  }, qtyFilters > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"button-qty\"\n  }, qtyFilters));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (FiltersButton);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/FiltersButton/FiltersButton.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/FiltersButton/FiltersButton.container.js":
+/*!*********************************************************************************!*\
+  !*** ./frontend/src/components/Header/FiltersButton/FiltersButton.container.js ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _FiltersButton_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FiltersButton.component */ \"./frontend/src/components/Header/FiltersButton/FiltersButton.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    qtyFilters: state.process.filters.length\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowFilters: function handleShowFilters() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"filters\"));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_FiltersButton_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/FiltersButton/FiltersButton.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/FiltersButton/index.js":
+/*!***************************************************************!*\
+  !*** ./frontend/src/components/Header/FiltersButton/index.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _FiltersButton_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FiltersButton.container */ \"./frontend/src/components/Header/FiltersButton/FiltersButton.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _FiltersButton_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/FiltersButton/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Header.component.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Header/Header.component.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Search */ \"./frontend/src/components/Header/Search/index.js\");\n/* harmony import */ var _FiltersButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FiltersButton */ \"./frontend/src/components/Header/FiltersButton/index.js\");\n/* harmony import */ var _OrdersButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OrdersButton */ \"./frontend/src/components/Header/OrdersButton/index.js\");\n/* harmony import */ var _UpdateButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UpdateButton */ \"./frontend/src/components/Header/UpdateButton/index.js\");\n/* harmony import */ var _UserButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserButton */ \"./frontend/src/components/Header/UserButton/index.js\");\n/* harmony import */ var _CollectionStats__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CollectionStats */ \"./frontend/src/components/Header/CollectionStats/index.js\");\n/* harmony import */ var _Header_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Header.scss */ \"./frontend/src/components/Header/Header.scss\");\n/* harmony import */ var _Header_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_Header_scss__WEBPACK_IMPORTED_MODULE_7__);\n\n\n\n\n\n\n\n\n\nvar Header = function Header(_ref) {\n  var showControls = _ref.showControls;\n  var headerContent = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"h1\", null, \"Skivorna\"), showControls && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Search__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"buttons\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FiltersButton__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OrdersButton__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UpdateButton__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserButton__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollectionStats__WEBPACK_IMPORTED_MODULE_6__[\"default\"], null)));\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"header\", null, headerContent), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"header-push\"\n  }, headerContent));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Header);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Header.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Header.container.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Header/Header.container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _Header_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Header.component */ \"./frontend/src/components/Header/Header.component.js\");\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    showControls: !!state.collection.discogsUsername\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_Header_component__WEBPACK_IMPORTED_MODULE_2__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Header.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Header.scss":
+/*!****************************************************!*\
+  !*** ./frontend/src/components/Header/Header.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Header.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Header.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Header.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/OrdersButton/OrdersButton.component.js":
+/*!*******************************************************************************!*\
+  !*** ./frontend/src/components/Header/OrdersButton/OrdersButton.component.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar OrdersButton = function OrdersButton(_ref) {\n  var handleShowOrders = _ref.handleShowOrders,\n      qtyOrders = _ref.qtyOrders;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-sort\",\n    onClick: handleShowOrders\n  }, qtyOrders > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"button-qty\"\n  }, qtyOrders));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (OrdersButton);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/OrdersButton/OrdersButton.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/OrdersButton/OrdersButton.container.js":
+/*!*******************************************************************************!*\
+  !*** ./frontend/src/components/Header/OrdersButton/OrdersButton.container.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _OrdersButton_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OrdersButton.component */ \"./frontend/src/components/Header/OrdersButton/OrdersButton.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    qtyOrders: state.process.orders.length\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowOrders: function handleShowOrders() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"orders\"));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_OrdersButton_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/OrdersButton/OrdersButton.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/OrdersButton/index.js":
+/*!**************************************************************!*\
+  !*** ./frontend/src/components/Header/OrdersButton/index.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _OrdersButton_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrdersButton.container */ \"./frontend/src/components/Header/OrdersButton/OrdersButton.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _OrdersButton_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/OrdersButton/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Search/Search.component.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/src/components/Header/Search/Search.component.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Search_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Search.scss */ \"./frontend/src/components/Header/Search/Search.scss\");\n/* harmony import */ var _Search_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Search_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar Search = function Search(_ref) {\n  var searchQuery = _ref.searchQuery,\n      handleSearchUpdated = _ref.handleSearchUpdated;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"search\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    value: searchQuery,\n    onChange: function onChange(e) {\n      return handleSearchUpdated(e.target.value);\n    }\n  }), searchQuery && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n    className: \"clear-search fas fa-times\",\n    onClick: function onClick() {\n      return handleSearchUpdated(\"\");\n    }\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Search);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Search/Search.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Search/Search.container.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/src/components/Header/Search/Search.container.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Search_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search.component */ \"./frontend/src/components/Header/Search/Search.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    searchQuery: state.process.searchQuery\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleSearchUpdated: function handleSearchUpdated(query) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateSearch\"])(query));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_Search_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Search/Search.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Search/Search.scss":
+/*!***********************************************************!*\
+  !*** ./frontend/src/components/Header/Search/Search.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Search.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Search/Search.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Search/Search.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/Search/index.js":
+/*!********************************************************!*\
+  !*** ./frontend/src/components/Header/Search/index.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Search_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Search.container */ \"./frontend/src/components/Header/Search/Search.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Search_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Search/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UpdateButton/UpdateButton.component.js":
+/*!*******************************************************************************!*\
+  !*** ./frontend/src/components/Header/UpdateButton/UpdateButton.component.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar UpdateButton = function UpdateButton(_ref) {\n  var handleUpdate = _ref.handleUpdate,\n      collectionLoading = _ref.collectionLoading;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-sync\",\n    disabled: collectionLoading,\n    onClick: handleUpdate\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (UpdateButton);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UpdateButton/UpdateButton.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UpdateButton/UpdateButton.container.js":
+/*!*******************************************************************************!*\
+  !*** ./frontend/src/components/Header/UpdateButton/UpdateButton.container.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _UpdateButton_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UpdateButton.component */ \"./frontend/src/components/Header/UpdateButton/UpdateButton.component.js\");\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionLoading: state.ui.collectionLoading,\n    activeRecord: Object(_selectors__WEBPACK_IMPORTED_MODULE_3__[\"selectActiveRecord\"])(state),\n    viewArtistCollection: state.artist.viewArtistCollection\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdateCollection: function handleUpdateCollection() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateCollection\"])());\n    },\n    handleUpdateRecord: function handleUpdateRecord(record) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateRecord\"])(record));\n    },\n    handleUpdateArtistCollection: function handleUpdateArtistCollection() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateArtistCollection\"])());\n    }\n  };\n};\n\nvar mergeProps = function mergeProps(stateProps, dispatchProps, ownProps) {\n  return {\n    handleUpdate: stateProps.activeRecord ? function () {\n      return dispatchProps.handleUpdateRecord(stateProps.activeRecord);\n    } : stateProps.viewArtistCollection ? dispatchProps.handleUpdateArtistCollection : dispatchProps.handleUpdateCollection,\n    collectionLoading: stateProps.collectionLoading\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps, mergeProps)(_UpdateButton_component__WEBPACK_IMPORTED_MODULE_4__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UpdateButton/UpdateButton.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UpdateButton/index.js":
+/*!**************************************************************!*\
+  !*** ./frontend/src/components/Header/UpdateButton/index.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _UpdateButton_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UpdateButton.container */ \"./frontend/src/components/Header/UpdateButton/UpdateButton.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _UpdateButton_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UpdateButton/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UserButton/UserButton.component.js":
+/*!***************************************************************************!*\
+  !*** ./frontend/src/components/Header/UserButton/UserButton.component.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar UserButton = function UserButton(_ref) {\n  var handleShowUser = _ref.handleShowUser;\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"button\",\n    className: \"fas fa-user-cog\",\n    onClick: handleShowUser\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (UserButton);\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UserButton/UserButton.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UserButton/UserButton.container.js":
+/*!***************************************************************************!*\
+  !*** ./frontend/src/components/Header/UserButton/UserButton.container.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _UserButton_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserButton.component */ \"./frontend/src/components/Header/UserButton/UserButton.component.js\");\n\n\n\n\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleShowUser: function handleShowUser() {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showPopup\"])(\"user\"));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(null, mapDispatchToProps)(_UserButton_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UserButton/UserButton.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/UserButton/index.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Header/UserButton/index.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _UserButton_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserButton.container */ \"./frontend/src/components/Header/UserButton/UserButton.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _UserButton_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/UserButton/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Header/index.js":
+/*!*************************************************!*\
+  !*** ./frontend/src/components/Header/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Header_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header.container */ \"./frontend/src/components/Header/Header.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Header_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Orders/Orders.component.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Orders/Orders.component.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Popup */ \"./frontend/src/components/Popup/index.js\");\n/* harmony import */ var _util_Order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/Order */ \"./frontend/src/util/Order.js\");\n/* harmony import */ var _Orders_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Orders.scss */ \"./frontend/src/components/Orders/Orders.scss\");\n/* harmony import */ var _Orders_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Orders_scss__WEBPACK_IMPORTED_MODULE_3__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\nvar Orders = function Orders(_ref) {\n  var showOrders = _ref.showOrders,\n      orders = _ref.orders,\n      handleUpdate = _ref.handleUpdate;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(Object.values(_util_Order__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes)[0].key),\n      _useState2 = _slicedToArray(_useState, 2),\n      attribute = _useState2[0],\n      setAttribute = _useState2[1];\n\n  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(false),\n      _useState4 = _slicedToArray(_useState3, 2),\n      reverse = _useState4[0],\n      setReverse = _useState4[1];\n\n  var handleAttributeChange = function handleAttributeChange(event) {\n    return setAttribute(_util_Order__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes[event.target.value].key);\n  };\n\n  var handleReverseChange = function handleReverseChange(event) {\n    return setReverse(event.target.checked);\n  };\n\n  var handleAddClick = function handleAddClick(e) {\n    e.preventDefault();\n    handleUpdate(orders.concat({\n      attribute: attribute,\n      reverse: reverse\n    }));\n    setReverse(false);\n  };\n\n  var handleRemoveClick = function handleRemoveClick(index) {\n    return handleUpdate(orders.filter(function (_, i) {\n      return i !== index;\n    }));\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"orders\",\n    icon: {\n      icon: \"fas fa-sort\"\n    },\n    title: \"Sortera\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"orders\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"current-orders\"\n  }, orders.map(function (order, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"order\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"attribute\"\n    }, _util_Order__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes[order.attribute].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"i\", {\n      className: \"direction fas \" + (order.reverse ? \"fa-sort-up\" : \"fa-sort-down\")\n    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\",\n      className: \"remove-order fas fa-minus\",\n      onClick: function onClick() {\n        return handleRemoveClick(index);\n      }\n    }));\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"new-order\",\n    onSubmit: handleAddClick\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"select\", {\n    className: \"order-attribute\",\n    value: attribute.key,\n    onChange: handleAttributeChange\n  }, Object.values(_util_Order__WEBPACK_IMPORTED_MODULE_2__[\"default\"].attributes).map(function (attr) {\n    return attr.key !== \"id\" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"option\", {\n      value: attr.key,\n      key: attr.key\n    }, attr.name);\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"checkbox\",\n    className: \"order-reverse\",\n    id: \"order-reverse\",\n    checked: reverse,\n    onChange: handleReverseChange\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"label\", {\n    htmlFor: \"order-reverse\",\n    className: \"button fas\"\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"add-order fas fa-plus\"\n  }))));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Orders);\n\n//# sourceURL=webpack:///./frontend/src/components/Orders/Orders.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Orders/Orders.container.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/Orders/Orders.container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Orders_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Orders.component */ \"./frontend/src/components/Orders/Orders.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    orders: state.process.orders\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdate: function handleUpdate(orders) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"setOrders\"])(orders));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_Orders_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Orders/Orders.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Orders/Orders.scss":
+/*!****************************************************!*\
+  !*** ./frontend/src/components/Orders/Orders.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Orders.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Orders/Orders.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Orders/Orders.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Orders/index.js":
+/*!*************************************************!*\
+  !*** ./frontend/src/components/Orders/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Orders_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Orders.container */ \"./frontend/src/components/Orders/Orders.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Orders_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Orders/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Popup/Popup.component.js":
+/*!**********************************************************!*\
+  !*** ./frontend/src/components/Popup/Popup.component.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Popup.scss */ \"./frontend/src/components/Popup/Popup.scss\");\n/* harmony import */ var _Popup_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Popup_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar Popup = function Popup(_ref) {\n  var children = _ref.children,\n      name = _ref.name,\n      icon = _ref.icon,\n      title = _ref.title,\n      popups = _ref.popups,\n      hidePopup = _ref.hidePopup;\n  return popups.indexOf(name) === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup \" + \"level\" + name.split(\".\").length\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-header\"\n  }, icon && (icon.image ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-icon\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    src: icon.image\n  })) : icon.icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-icon \" + icon.icon\n  })), title && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"popup-title\"\n  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"close-button fas fa-times\",\n    onClick: function onClick() {\n      return hidePopup(name);\n    }\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"content\"\n  }, children));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Popup);\n\n//# sourceURL=webpack:///./frontend/src/components/Popup/Popup.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Popup/Popup.container.js":
+/*!**********************************************************!*\
+  !*** ./frontend/src/components/Popup/Popup.container.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _Popup_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Popup.component */ \"./frontend/src/components/Popup/Popup.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    popups: state.ui.popups\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    hidePopup: function hidePopup(name) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"hidePopup\"])(name));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_Popup_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Popup/Popup.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Popup/Popup.scss":
+/*!**************************************************!*\
+  !*** ./frontend/src/components/Popup/Popup.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Popup.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Popup/Popup.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Popup/Popup.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Popup/index.js":
+/*!************************************************!*\
+  !*** ./frontend/src/components/Popup/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Popup_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Popup.container */ \"./frontend/src/components/Popup/Popup.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Popup_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Popup/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Progress/Progress.component.js":
+/*!****************************************************************!*\
+  !*** ./frontend/src/components/Progress/Progress.component.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Progress_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Progress.scss */ \"./frontend/src/components/Progress/Progress.scss\");\n/* harmony import */ var _Progress_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Progress_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar Progress = function Progress(_ref) {\n  var collectionLoading = _ref.collectionLoading,\n      progress = _ref.progress,\n      status = _ref.status;\n  return collectionLoading && progress && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress\"\n  }, status && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-title\"\n  }, status), Object.keys(progress).length ? Object.keys(progress).map(function (key) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-bar\",\n      key: key\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-label\"\n    }, key), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-meter\",\n      style: {\n        width: progress[key] + \"%\"\n      }\n    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"progress-value\"\n    }, progress[key] + \"%\"));\n  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-bar\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"progress-auto-meter\"\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Progress);\n\n//# sourceURL=webpack:///./frontend/src/components/Progress/Progress.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Progress/Progress.container.js":
+/*!****************************************************************!*\
+  !*** ./frontend/src/components/Progress/Progress.container.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _Progress_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Progress.component */ \"./frontend/src/components/Progress/Progress.component.js\");\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    collectionLoading: state.ui.collectionLoading,\n    progress: state.ui.progress,\n    status: state.ui.status\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_Progress_component__WEBPACK_IMPORTED_MODULE_2__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/Progress/Progress.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Progress/Progress.scss":
+/*!********************************************************!*\
+  !*** ./frontend/src/components/Progress/Progress.scss ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./Progress.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Progress/Progress.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/Progress/Progress.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/Progress/index.js":
+/*!***************************************************!*\
+  !*** ./frontend/src/components/Progress/index.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Progress_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Progress.container */ \"./frontend/src/components/Progress/Progress.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Progress_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/Progress/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Artists/Artists.component.js":
+/*!*************************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Artists/Artists.component.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Artist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Artist */ \"./frontend/src/components/Artist/index.js\");\n\n\n\nvar Artists = function Artists(_ref) {\n  var artists = _ref.artists;\n  return artists && artists.map(function (artist, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], {\n      key: artist.artist.id\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artist__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      artist: artist.artist\n    }), index < artists.length - 1 && \" \" + artist.delimiter + \" \");\n  });\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Artists);\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Artists/Artists.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Artists/index.js":
+/*!*************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Artists/index.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Artists_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Artists.component */ \"./frontend/src/components/RecordInfo/Artists/Artists.component.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Artists_component__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Artists/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Listen/Listen.component.js":
+/*!***********************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Listen/Listen.component.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Popup */ \"./frontend/src/components/Popup/index.js\");\n/* harmony import */ var _Listen_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Listen.scss */ \"./frontend/src/components/RecordInfo/Listen/Listen.scss\");\n/* harmony import */ var _Listen_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Listen_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nvar Listen = function Listen(_ref) {\n  var listen = _ref.listen;\n  return listen && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"recordInfo.listen\",\n    icon: {\n      image: listen.icon\n    },\n    title: listen.name || listen.type\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"listen\",\n    dangerouslySetInnerHTML: {\n      __html: listen.html\n    }\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Listen);\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Listen/Listen.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Listen/Listen.container.js":
+/*!***********************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Listen/Listen.container.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _Listen_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Listen.component */ \"./frontend/src/components/RecordInfo/Listen/Listen.component.js\");\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    listen: state.collection.activeListen\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_Listen_component__WEBPACK_IMPORTED_MODULE_2__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Listen/Listen.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Listen/Listen.scss":
+/*!***************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Listen/Listen.scss ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./Listen.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/Listen/Listen.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Listen/Listen.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/Listen/index.js":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/Listen/index.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Listen_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listen.container */ \"./frontend/src/components/RecordInfo/Listen/Listen.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _Listen_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Listen/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/RecordInfo.component.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/RecordInfo.component.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Popup */ \"./frontend/src/components/Popup/index.js\");\n/* harmony import */ var _Artists__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Artists */ \"./frontend/src/components/RecordInfo/Artists/index.js\");\n/* harmony import */ var _Listen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Listen */ \"./frontend/src/components/RecordInfo/Listen/index.js\");\n/* harmony import */ var _RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RecordInfo.scss */ \"./frontend/src/components/RecordInfo/RecordInfo.scss\");\n/* harmony import */ var _RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_RecordInfo_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nvar RecordInfo = function RecordInfo(_ref) {\n  var rec = _ref.rec,\n      handleYearClick = _ref.handleYearClick,\n      handleListenClick = _ref.handleListenClick;\n  return rec && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"recordInfo\",\n    icon: {\n      icon: \"fas fa-record-vinyl\"\n    },\n    title: rec.name\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"record-info\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    className: \"cover\",\n    src: rec.cover\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"artists\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artists__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n    artists: rec.artists\n  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"left\"\n  }, rec.format && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"format\"\n  }, rec.format), rec.year && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"year\",\n    onClick: function onClick() {\n      return handleYearClick(rec.year);\n    }\n  }, rec.year), rec.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"price\"\n  }, \"(\" + rec.price + \")\"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"tracks\"\n  }, rec.tracks && rec.tracks.map(function (track, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"track\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"position\"\n    }, track.position), \" \", track.name, track.artists && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__[\"Fragment\"], null, \" (\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Artists__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n      artists: track.artists\n    }), \")\"));\n  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"right\"\n  }, rec.listens && rec.listens.map(function (listen, index) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"listen-link\",\n      key: index\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      type: \"button\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: listen.icon,\n      onClick: function onClick() {\n        return handleListenClick(listen);\n      }\n    })), listen.name || listen.type);\n  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Listen__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (RecordInfo);\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/RecordInfo.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/RecordInfo.container.js":
+/*!********************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/RecordInfo.container.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _RecordInfo_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RecordInfo.component */ \"./frontend/src/components/RecordInfo/RecordInfo.component.js\");\n\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    rec: Object(_selectors__WEBPACK_IMPORTED_MODULE_3__[\"selectActiveRecord\"])(state)\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleYearClick: function handleYearClick(year) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"filterYear\"])(year));\n    },\n    handleListenClick: function handleListenClick(listen) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"showListen\"])(listen));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_RecordInfo_component__WEBPACK_IMPORTED_MODULE_4__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/RecordInfo.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/RecordInfo.scss":
+/*!************************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/RecordInfo.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./RecordInfo.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/RecordInfo.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/RecordInfo.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/RecordInfo/index.js":
+/*!*****************************************************!*\
+  !*** ./frontend/src/components/RecordInfo/index.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _RecordInfo_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RecordInfo.container */ \"./frontend/src/components/RecordInfo/RecordInfo.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _RecordInfo_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/DirectLink/DirectLink.component.js":
+/*!*************************************************************************!*\
+  !*** ./frontend/src/components/User/DirectLink/DirectLink.component.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _DirectLink_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DirectLink.scss */ \"./frontend/src/components/User/DirectLink/DirectLink.scss\");\n/* harmony import */ var _DirectLink_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_DirectLink_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar DirectLink = function DirectLink(_ref) {\n  var directLink = _ref.directLink;\n  var refInput = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useRef\"])();\n\n  var copyLink = function copyLink(e) {\n    e.preventDefault();\n    refInput.current.select();\n    refInput.current.setSelectionRange(0, 99999);\n    document.execCommand(\"copy\");\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"direct-link\",\n    onSubmit: copyLink\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    readOnly: true,\n    ref: refInput,\n    value: directLink\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\",\n    className: \"fas fa-copy\"\n  }));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (DirectLink);\n\n//# sourceURL=webpack:///./frontend/src/components/User/DirectLink/DirectLink.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/DirectLink/DirectLink.container.js":
+/*!*************************************************************************!*\
+  !*** ./frontend/src/components/User/DirectLink/DirectLink.container.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../selectors */ \"./frontend/src/selectors.js\");\n/* harmony import */ var _DirectLink_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DirectLink.component */ \"./frontend/src/components/User/DirectLink/DirectLink.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    directLink: Object(_selectors__WEBPACK_IMPORTED_MODULE_2__[\"selectDirectLink\"])(state)\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(_DirectLink_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/User/DirectLink/DirectLink.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/DirectLink/DirectLink.scss":
+/*!*****************************************************************!*\
+  !*** ./frontend/src/components/User/DirectLink/DirectLink.scss ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/sass-loader/dist/cjs.js!./DirectLink.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/DirectLink/DirectLink.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/User/DirectLink/DirectLink.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/DirectLink/index.js":
+/*!**********************************************************!*\
+  !*** ./frontend/src/components/User/DirectLink/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _DirectLink_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DirectLink.container */ \"./frontend/src/components/User/DirectLink/DirectLink.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _DirectLink_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/User/DirectLink/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/User.component.js":
+/*!********************************************************!*\
+  !*** ./frontend/src/components/User/User.component.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Popup */ \"./frontend/src/components/Popup/index.js\");\n/* harmony import */ var _UsernameInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../UsernameInput */ \"./frontend/src/components/UsernameInput/index.js\");\n/* harmony import */ var _DirectLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DirectLink */ \"./frontend/src/components/User/DirectLink/index.js\");\n/* harmony import */ var _User_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./User.scss */ \"./frontend/src/components/User/User.scss\");\n/* harmony import */ var _User_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_User_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\nvar User = function User() {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Popup__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    name: \"user\",\n    icon: {\n      icon: \"fas fa-user\"\n    },\n    title: \"Anv\\xE4ndare\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"user\"\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DirectLink__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UsernameInput__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null)));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (User);\n\n//# sourceURL=webpack:///./frontend/src/components/User/User.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/User.scss":
+/*!************************************************!*\
+  !*** ./frontend/src/components/User/User.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./User.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/User.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/User/User.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/User/index.js":
+/*!***********************************************!*\
+  !*** ./frontend/src/components/User/index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _User_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./User.component */ \"./frontend/src/components/User/User.component.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _User_component__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/User/index.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/UsernameInput/UsernameInput.component.js":
+/*!**************************************************************************!*\
+  !*** ./frontend/src/components/UsernameInput/UsernameInput.component.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _UsernameInput_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UsernameInput.scss */ \"./frontend/src/components/UsernameInput/UsernameInput.scss\");\n/* harmony import */ var _UsernameInput_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_UsernameInput_scss__WEBPACK_IMPORTED_MODULE_1__);\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); }\n\nfunction _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === \"[object Arguments]\")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\nvar UsernameInput = function UsernameInput(_ref) {\n  var discogsUsername = _ref.discogsUsername,\n      handleUpdateUsername = _ref.handleUpdateUsername;\n\n  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__[\"useState\"])(discogsUsername),\n      _useState2 = _slicedToArray(_useState, 2),\n      user = _useState2[0],\n      setUser = _useState2[1];\n\n  var handleSubmit = function handleSubmit(e) {\n    e.preventDefault();\n    handleUpdateUsername(user);\n  };\n\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"form\", {\n    className: \"username-input\",\n    onSubmit: handleSubmit\n  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"input\", {\n    type: \"text\",\n    value: user,\n    onChange: function onChange(e) {\n      return setUser(e.target.value);\n    }\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n    type: \"submit\"\n  }, \"OK\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (UsernameInput);\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput/UsernameInput.component.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/UsernameInput/UsernameInput.container.js":
+/*!**************************************************************************!*\
+  !*** ./frontend/src/components/UsernameInput/UsernameInput.container.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions */ \"./frontend/src/actions/index.js\");\n/* harmony import */ var _UsernameInput_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UsernameInput.component */ \"./frontend/src/components/UsernameInput/UsernameInput.component.js\");\n\n\n\n\n\nvar mapStateToProps = function mapStateToProps(state) {\n  return {\n    discogsUsername: state.collection.discogsUsername\n  };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n  return {\n    handleUpdateUsername: function handleUpdateUsername(user) {\n      dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__[\"updateUsername\"])(user));\n    }\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(_UsernameInput_component__WEBPACK_IMPORTED_MODULE_3__[\"default\"]));\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput/UsernameInput.container.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/UsernameInput/UsernameInput.scss":
+/*!******************************************************************!*\
+  !*** ./frontend/src/components/UsernameInput/UsernameInput.scss ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/sass-loader/dist/cjs.js!./UsernameInput.scss */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/UsernameInput/UsernameInput.scss\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\nvar exported = content.locals ? content.locals : {};\n\n\n\nmodule.exports = exported;\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput/UsernameInput.scss?");
+
+/***/ }),
+
+/***/ "./frontend/src/components/UsernameInput/index.js":
+/*!********************************************************!*\
+  !*** ./frontend/src/components/UsernameInput/index.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _UsernameInput_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UsernameInput.container */ \"./frontend/src/components/UsernameInput/UsernameInput.container.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return _UsernameInput_container__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput/index.js?");
 
 /***/ }),
 
@@ -629,7 +1133,7 @@ eval("var api = __webpack_require__(/*! ../../../../node_modules/style-loader/di
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ \"./node_modules/@babel/polyfill/lib/index.js\");\n/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ \"./frontend/src/store.js\");\n/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/App */ \"./frontend/src/components/App.js\");\n\n\n\n\n\n\nObject(react_dom__WEBPACK_IMPORTED_MODULE_2__[\"render\"])(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__[\"Provider\"], {\n  store: _store__WEBPACK_IMPORTED_MODULE_4__[\"default\"]\n}, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)), document.getElementById(\"app\"));\n\n//# sourceURL=webpack:///./frontend/src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ \"./node_modules/@babel/polyfill/lib/index.js\");\n/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ \"./frontend/src/store.js\");\n/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/App */ \"./frontend/src/components/App/index.js\");\n\n\n\n\n\n\nObject(react_dom__WEBPACK_IMPORTED_MODULE_2__[\"render\"])(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__[\"Provider\"], {\n  store: _store__WEBPACK_IMPORTED_MODULE_4__[\"default\"]\n}, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)), document.getElementById(\"app\"));\n\n//# sourceURL=webpack:///./frontend/src/index.js?");
 
 /***/ }),
 
@@ -4232,190 +4736,190 @@ eval("__webpack_require__(/*! ../modules/web.timers */ \"./node_modules/core-js/
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/App.scss":
-/*!*******************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/App.scss ***!
-  \*******************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/App/App.scss":
+/*!***************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/App/App.scss ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"body {\\n  font-family: sans-serif; }\\n\\nbutton, select, .button {\\n  background: none;\\n  outline: inherit;\\n  display: inline-block;\\n  padding: 1px 5px;\\n  border: 1px solid #000;\\n  border-radius: 3px;\\n  background-color: #fff;\\n  cursor: pointer;\\n  vertical-align: bottom;\\n  height: 26px;\\n  box-sizing: border-box;\\n  min-width: 30px;\\n  text-align: center; }\\n  button:active, select:active, .button:active {\\n    color: #111; }\\n\\ninput {\\n  background: none;\\n  color: inherit;\\n  font: inherit;\\n  font-size: 0.9em;\\n  outline: inherit;\\n  display: inline-block;\\n  border: 1px solid #000;\\n  border-radius: 3px;\\n  padding: 3px; }\\n\\n.status {\\n  position: fixed;\\n  bottom: 0;\\n  right: 0;\\n  padding: 2px 10px 0 5px;\\n  background: #ddd; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/App.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"body {\\n  font-family: sans-serif; }\\n\\nbutton, select, .button {\\n  background: none;\\n  outline: inherit;\\n  display: inline-block;\\n  padding: 1px 5px;\\n  border: 1px solid #000;\\n  border-radius: 3px;\\n  background-color: #fff;\\n  cursor: pointer;\\n  vertical-align: bottom;\\n  height: 26px;\\n  box-sizing: border-box;\\n  min-width: 30px;\\n  text-align: center; }\\n  button:active, select:active, .button:active {\\n    color: #111; }\\n\\ninput {\\n  background: none;\\n  color: inherit;\\n  font: inherit;\\n  font-size: 0.9em;\\n  outline: inherit;\\n  display: inline-block;\\n  border: 1px solid #000;\\n  border-radius: 3px;\\n  padding: 3px; }\\n\\n.status {\\n  position: fixed;\\n  bottom: 0;\\n  right: 0;\\n  padding: 2px 10px 0 5px;\\n  background: #ddd; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/App/App.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Artist.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Artist.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".artist {\\n  color: #0000aa;\\n  cursor: pointer;\\n  font-weight: bold; }\\n  .artist.inactive {\\n    font-weight: normal; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Artist.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/ArtistInfo.scss":
-/*!**************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/ArtistInfo.scss ***!
-  \**************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/ArtistInfo.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Collection.scss":
-/*!**************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Collection.scss ***!
-  \**************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Collection.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/CollectionStats.scss":
-/*!*******************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/CollectionStats.scss ***!
-  \*******************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".collection-stats {\\n  float: right;\\n  font-size: 0.8em; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/CollectionStats.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/DirectLink.scss":
-/*!**************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/DirectLink.scss ***!
-  \**************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".username-input button {\\n  margin-left: 3px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/DirectLink.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Filters.scss":
-/*!***********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Filters.scss ***!
-  \***********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".filters .current-filters {\\n  margin-bottom: 10px; }\\n  .filters .current-filters .filter {\\n    border: 1px solid #000;\\n    border-radius: 5px;\\n    padding: 5px;\\n    margin-bottom: 5px;\\n    overflow: hidden;\\n    line-height: 26px; }\\n    .filters .current-filters .filter .compare {\\n      padding: 0 5px; }\\n    .filters .current-filters .filter .remove-filter {\\n      margin-left: 5px;\\n      float: right;\\n      line-height: 0.9em; }\\n\\n.filters .new-filter .filter-compare {\\n  margin: 0 3px; }\\n\\n.filters .new-filter .filter-value {\\n  width: 100px;\\n  margin-right: 5px; }\\n\\n.filters .new-filter .add-filter {\\n  float: right; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Filters.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Header.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Header.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"header, .header-push {\\n  overflow: hidden; }\\n  header h1, .header-push h1 {\\n    float: left;\\n    margin: 5px;\\n    font-size: 24px; }\\n  header .buttons, .header-push .buttons {\\n    float: left;\\n    height: 26px;\\n    margin: 8px 10px; }\\n    header .buttons button, .header-push .buttons button {\\n      margin-left: 5px;\\n      height: 100%;\\n      position: relative; }\\n      header .buttons button .button-qty, .header-push .buttons button .button-qty {\\n        background-color: #ff0000;\\n        border-radius: 5px;\\n        font-size: 9px;\\n        color: #ffffff;\\n        display: inline-block;\\n        position: absolute;\\n        bottom: -2px;\\n        right: -2px;\\n        width: 10px; }\\n\\nheader {\\n  position: fixed;\\n  background: #fff;\\n  left: 0;\\n  right: 0;\\n  top: 0;\\n  padding: 8px 8px 0 8px;\\n  box-shadow: 0 5px 3px #fff; }\\n\\n.header-push {\\n  visibility: hidden; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Header.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Listen.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Listen.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".listen iframe {\\n  max-width: 100%; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Listen.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Orders.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Orders.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".orders .current-orders {\\n  margin-bottom: 10px; }\\n  .orders .current-orders .order {\\n    border: 1px solid #000;\\n    border-radius: 5px;\\n    padding: 5px;\\n    margin-bottom: 5px;\\n    overflow: hidden;\\n    line-height: 26px; }\\n    .orders .current-orders .order .direction {\\n      margin-left: 10px; }\\n    .orders .current-orders .order .remove-order {\\n      margin-left: 5px;\\n      float: right;\\n      line-height: 0.9em; }\\n\\n.orders .new-order .order-reverse {\\n  display: none; }\\n  .orders .new-order .order-reverse + label {\\n    line-height: 1.5em;\\n    margin: 0 10px; }\\n  .orders .new-order .order-reverse + label:before {\\n    content: \\\"\\\\f0dd\\\"; }\\n  .orders .new-order .order-reverse:checked + label:before {\\n    content: \\\"\\\\f0de\\\"; }\\n\\n.orders .new-order .add-order {\\n  float: right; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Orders.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Popup.scss":
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Artist/Artist.scss":
 /*!*********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Popup.scss ***!
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Artist/Artist.scss ***!
   \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".popup {\\n  position: fixed;\\n  top: 50px;\\n  left: 50%;\\n  margin-right: calc(40px - 50%);\\n  transform: translate(-50%, 0);\\n  max-height: calc(100vh - 60px);\\n  max-width: 100%;\\n  background-color: #ffffff;\\n  overflow: hidden;\\n  border: 1px solid #000000;\\n  box-shadow: 5px 5px 5px #888888; }\\n  .popup.level2 {\\n    top: 70px; }\\n  .popup .popup-header {\\n    height: 30px; }\\n    .popup .popup-header .close-button {\\n      position: absolute;\\n      top: 0;\\n      right: 4px;\\n      cursor: pointer;\\n      font-size: 26px; }\\n    .popup .popup-header .popup-icon {\\n      position: absolute;\\n      top: 4px;\\n      left: 4px;\\n      font-size: 22px;\\n      line-height: 22px; }\\n      .popup .popup-header .popup-icon img {\\n        height: 22px; }\\n    .popup .popup-header .popup-title {\\n      position: absolute;\\n      left: 30px;\\n      width: calc(100% - 60px);\\n      height: 30px;\\n      overflow: hidden;\\n      font-size: 14px;\\n      line-height: 30px;\\n      text-align: center; }\\n  .popup .content {\\n    max-height: calc(100vh - 100px);\\n    overflow-y: auto;\\n    padding: 0 10px 10px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Popup.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".artist {\\n  color: #0000aa;\\n  cursor: pointer;\\n  font-weight: bold; }\\n  .artist.inactive {\\n    font-weight: normal; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Artist/Artist.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Progress.scss":
-/*!************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Progress.scss ***!
-  \************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".progress {\\n  position: absolute;\\n  top: 50%;\\n  left: 50%;\\n  margin-top: -50px;\\n  margin-left: -155px;\\n  width: 300px;\\n  max-width: calc(100% - 30px);\\n  padding: 4px;\\n  border: 1px solid  #000000;\\n  box-shadow: 5px 5px 5px #888888;\\n  background-color: #ffffff; }\\n  .progress .progress-title {\\n    text-align: center;\\n    margin-top: 5px; }\\n  .progress .progress-bar {\\n    position: relative;\\n    margin: 8px;\\n    border: 1px solid  #aaaaaa; }\\n    .progress .progress-bar .progress-meter {\\n      background-color: #aaaaaa;\\n      height: 20px; }\\n    .progress .progress-bar .progress-label {\\n      position: absolute;\\n      left: 4px;\\n      top: 0;\\n      line-height: 20px;\\n      font-size: 14px; }\\n    .progress .progress-bar .progress-value {\\n      position: absolute;\\n      right: 4px;\\n      top: 0;\\n      line-height: 20px;\\n      font-size: 14px; }\\n    .progress .progress-bar .progress-auto-meter {\\n      background-color: #aaaaaa;\\n      height: 20px;\\n      width: 40px;\\n      animation: move 2s linear infinite alternate; }\\n\\n@keyframes move {\\n  0% {\\n    margin-left: 0; }\\n  100% {\\n    margin-left: calc(100% - 40px); } }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Progress.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Record.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Record.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".record {\\n  display: inline-block;\\n  margin: 4px;\\n  box-shadow: 2px 2px 5px #888888;\\n  vertical-align: middle; }\\n  .record:hover {\\n    box-shadow: 5px 5px 5px #888888;\\n    margin: 1px 7px 7px 1px; }\\n  .record .cover {\\n    height: 40px;\\n    display: block; }\\n    .record .cover.format-CD {\\n      height: 40px; }\\n    .record .cover.format-Vinyl7 {\\n      height: 50px; }\\n    .record .cover.format-Vinyl10 {\\n      height: 70px; }\\n    .record .cover.format-Vinyl {\\n      height: 90px; }\\n    .record .cover.format-Vinyl12 {\\n      height: 90px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Record.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/RecordInfo.scss":
-/*!**************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/RecordInfo.scss ***!
-  \**************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".record-info {\\n  max-width: 605px; }\\n  .record-info .cover {\\n    width: 100%; }\\n  .record-info .left {\\n    float: left; }\\n    .record-info .left div {\\n      max-width: 350px; }\\n  .record-info .right {\\n    float: right; }\\n  .record-info .format {\\n    font-size: 14px; }\\n  .record-info .year {\\n    color: #0000aa;\\n    cursor: pointer;\\n    font-weight: bold; }\\n  .record-info .track {\\n    font-size: 12px; }\\n    .record-info .track .position {\\n      font-weight: bold; }\\n  .record-info .listen-link {\\n    text-align: right;\\n    max-width: 250px;\\n    height: 24px;\\n    padding: 2px 0;\\n    font-size: 13px;\\n    line-height: 24px;\\n    overflow: hidden; }\\n    .record-info .listen-link button {\\n      float: right;\\n      margin-left: 2px;\\n      padding: 3px 5px; }\\n      .record-info .listen-link button img {\\n        height: 18px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/RecordInfo.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Search.scss":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/Search.scss ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".search {\\n  position: relative;\\n  float: left;\\n  margin: 10px 15px 8px; }\\n  .search .clear-search {\\n    position: absolute;\\n    right: 5px;\\n    top: 4px;\\n    cursor: pointer; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/Search.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/User.scss":
-/*!********************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/User.scss ***!
-  \********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".user > * + * {\\n  margin-top: 10px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/User.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/UsernameInput.scss":
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/ArtistInfo/ArtistInfo.scss":
 /*!*****************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/styling/UsernameInput.scss ***!
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/ArtistInfo/ArtistInfo.scss ***!
   \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".direct-link button {\\n  margin-left: 3px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/styling/UsernameInput.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/ArtistInfo/ArtistInfo.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Collection.scss":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Collection.scss ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Collection.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Record/Record.scss":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Collection/Record/Record.scss ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".record {\\n  display: inline-block;\\n  margin: 4px;\\n  box-shadow: 2px 2px 5px #888888;\\n  vertical-align: middle; }\\n  .record:hover {\\n    box-shadow: 5px 5px 5px #888888;\\n    margin: 1px 7px 7px 1px; }\\n  .record .cover {\\n    height: 40px;\\n    display: block; }\\n    .record .cover.format-CD {\\n      height: 40px; }\\n    .record .cover.format-Vinyl7 {\\n      height: 50px; }\\n    .record .cover.format-Vinyl10 {\\n      height: 70px; }\\n    .record .cover.format-Vinyl {\\n      height: 90px; }\\n    .record .cover.format-Vinyl12 {\\n      height: 90px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Collection/Record/Record.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Filters/Filters.scss":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Filters/Filters.scss ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".filters .current-filters {\\n  margin-bottom: 10px; }\\n  .filters .current-filters .filter {\\n    border: 1px solid #000;\\n    border-radius: 5px;\\n    padding: 5px;\\n    margin-bottom: 5px;\\n    overflow: hidden;\\n    line-height: 26px; }\\n    .filters .current-filters .filter .compare {\\n      padding: 0 5px; }\\n    .filters .current-filters .filter .remove-filter {\\n      margin-left: 5px;\\n      float: right;\\n      line-height: 0.9em; }\\n\\n.filters .new-filter .filter-compare {\\n  margin: 0 3px; }\\n\\n.filters .new-filter .filter-value {\\n  width: 100px;\\n  margin-right: 5px; }\\n\\n.filters .new-filter .add-filter {\\n  float: right; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Filters/Filters.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/CollectionStats/CollectionStats.scss":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/CollectionStats/CollectionStats.scss ***!
+  \**********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".collection-stats {\\n  float: right;\\n  font-size: 0.8em; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/CollectionStats/CollectionStats.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Header.scss":
+/*!*********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Header.scss ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"header, .header-push {\\n  overflow: hidden; }\\n  header h1, .header-push h1 {\\n    float: left;\\n    margin: 5px;\\n    font-size: 24px; }\\n  header .buttons, .header-push .buttons {\\n    float: left;\\n    height: 26px;\\n    margin: 8px 10px; }\\n    header .buttons button, .header-push .buttons button {\\n      margin-left: 5px;\\n      height: 100%;\\n      position: relative; }\\n      header .buttons button .button-qty, .header-push .buttons button .button-qty {\\n        background-color: #ff0000;\\n        border-radius: 5px;\\n        font-size: 9px;\\n        color: #ffffff;\\n        display: inline-block;\\n        position: absolute;\\n        bottom: -2px;\\n        right: -2px;\\n        width: 10px; }\\n\\nheader {\\n  position: fixed;\\n  background: #fff;\\n  left: 0;\\n  right: 0;\\n  top: 0;\\n  padding: 8px 8px 0 8px;\\n  box-shadow: 0 5px 3px #fff; }\\n\\n.header-push {\\n  visibility: hidden; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Header.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Search/Search.scss":
+/*!****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Header/Search/Search.scss ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".search {\\n  position: relative;\\n  float: left;\\n  margin: 10px 15px 8px; }\\n  .search .clear-search {\\n    position: absolute;\\n    right: 5px;\\n    top: 4px;\\n    cursor: pointer; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Header/Search/Search.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Orders/Orders.scss":
+/*!*********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Orders/Orders.scss ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".orders .current-orders {\\n  margin-bottom: 10px; }\\n  .orders .current-orders .order {\\n    border: 1px solid #000;\\n    border-radius: 5px;\\n    padding: 5px;\\n    margin-bottom: 5px;\\n    overflow: hidden;\\n    line-height: 26px; }\\n    .orders .current-orders .order .direction {\\n      margin-left: 10px; }\\n    .orders .current-orders .order .remove-order {\\n      margin-left: 5px;\\n      float: right;\\n      line-height: 0.9em; }\\n\\n.orders .new-order .order-reverse {\\n  display: none; }\\n  .orders .new-order .order-reverse + label {\\n    line-height: 1.5em;\\n    margin: 0 10px; }\\n  .orders .new-order .order-reverse + label:before {\\n    content: \\\"\\\\f0dd\\\"; }\\n  .orders .new-order .order-reverse:checked + label:before {\\n    content: \\\"\\\\f0de\\\"; }\\n\\n.orders .new-order .add-order {\\n  float: right; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Orders/Orders.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Popup/Popup.scss":
+/*!*******************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Popup/Popup.scss ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".popup {\\n  position: fixed;\\n  top: 50px;\\n  left: 50%;\\n  margin-right: calc(40px - 50%);\\n  transform: translate(-50%, 0);\\n  max-height: calc(100vh - 60px);\\n  max-width: 100%;\\n  background-color: #ffffff;\\n  overflow: hidden;\\n  border: 1px solid #000000;\\n  box-shadow: 5px 5px 5px #888888; }\\n  .popup.level2 {\\n    top: 70px; }\\n  .popup .popup-header {\\n    height: 30px; }\\n    .popup .popup-header .close-button {\\n      position: absolute;\\n      top: 0;\\n      right: 4px;\\n      cursor: pointer;\\n      font-size: 26px; }\\n    .popup .popup-header .popup-icon {\\n      position: absolute;\\n      top: 4px;\\n      left: 4px;\\n      font-size: 22px;\\n      line-height: 22px; }\\n      .popup .popup-header .popup-icon img {\\n        height: 22px; }\\n    .popup .popup-header .popup-title {\\n      position: absolute;\\n      left: 30px;\\n      width: calc(100% - 60px);\\n      height: 30px;\\n      overflow: hidden;\\n      font-size: 14px;\\n      line-height: 30px;\\n      text-align: center; }\\n  .popup .content {\\n    max-height: calc(100vh - 100px);\\n    overflow-y: auto;\\n    padding: 0 10px 10px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Popup/Popup.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Progress/Progress.scss":
+/*!*************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/Progress/Progress.scss ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".progress {\\n  position: absolute;\\n  top: 50%;\\n  left: 50%;\\n  margin-top: -50px;\\n  margin-left: -155px;\\n  width: 300px;\\n  max-width: calc(100% - 30px);\\n  padding: 4px;\\n  border: 1px solid  #000000;\\n  box-shadow: 5px 5px 5px #888888;\\n  background-color: #ffffff; }\\n  .progress .progress-title {\\n    text-align: center;\\n    margin-top: 5px; }\\n  .progress .progress-bar {\\n    position: relative;\\n    margin: 8px;\\n    border: 1px solid  #aaaaaa; }\\n    .progress .progress-bar .progress-meter {\\n      background-color: #aaaaaa;\\n      height: 20px; }\\n    .progress .progress-bar .progress-label {\\n      position: absolute;\\n      left: 4px;\\n      top: 0;\\n      line-height: 20px;\\n      font-size: 14px; }\\n    .progress .progress-bar .progress-value {\\n      position: absolute;\\n      right: 4px;\\n      top: 0;\\n      line-height: 20px;\\n      font-size: 14px; }\\n    .progress .progress-bar .progress-auto-meter {\\n      background-color: #aaaaaa;\\n      height: 20px;\\n      width: 40px;\\n      animation: move 2s linear infinite alternate; }\\n\\n@keyframes move {\\n  0% {\\n    margin-left: 0; }\\n  100% {\\n    margin-left: calc(100% - 40px); } }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/Progress/Progress.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/Listen/Listen.scss":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/Listen/Listen.scss ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".listen iframe {\\n  max-width: 100%; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/Listen/Listen.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/RecordInfo.scss":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/RecordInfo/RecordInfo.scss ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".record-info {\\n  max-width: 605px; }\\n  .record-info .cover {\\n    width: 100%; }\\n  .record-info .left {\\n    float: left; }\\n    .record-info .left div {\\n      max-width: 350px; }\\n  .record-info .right {\\n    float: right; }\\n  .record-info .format {\\n    font-size: 14px; }\\n  .record-info .year {\\n    color: #0000aa;\\n    cursor: pointer;\\n    font-weight: bold; }\\n  .record-info .track {\\n    font-size: 12px; }\\n    .record-info .track .position {\\n      font-weight: bold; }\\n  .record-info .listen-link {\\n    text-align: right;\\n    max-width: 250px;\\n    height: 24px;\\n    padding: 2px 0;\\n    font-size: 13px;\\n    line-height: 24px;\\n    overflow: hidden; }\\n    .record-info .listen-link button {\\n      float: right;\\n      margin-left: 2px;\\n      padding: 3px 5px; }\\n      .record-info .listen-link button img {\\n        height: 18px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/RecordInfo/RecordInfo.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/DirectLink/DirectLink.scss":
+/*!**********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/DirectLink/DirectLink.scss ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".username-input button {\\n  margin-left: 3px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/User/DirectLink/DirectLink.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/User.scss":
+/*!*****************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/User/User.scss ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".user > * + * {\\n  margin-top: 10px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/User/User.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/UsernameInput/UsernameInput.scss":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./frontend/src/components/UsernameInput/UsernameInput.scss ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".direct-link button {\\n  margin-left: 3px; }\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./frontend/src/components/UsernameInput/UsernameInput.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
