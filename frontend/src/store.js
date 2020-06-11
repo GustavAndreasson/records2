@@ -1,41 +1,32 @@
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "Reducers";
-import * as qs  from "query-string";
 import Filter from "Utils/Filter";
 import Order from "Utils/Order";
+import Persistant from "Utils/Persistant";
 
-const queryString = qs.parse(location.search);
-let filters = [];
-try {
-    filters = Filter.validate(JSON.parse(queryString["filters"] || localStorage.getItem("filters")) || []);
-} catch (e) {
-    console.log(e);
-}
-let orders = [];
-try {
-    orders = Order.validate(JSON.parse(queryString["orders"] || localStorage.getItem("orders")) || []);
-} catch (e) {
-    console.log(e);
-}
-/*const activeArtistId = queryString["artist"] || localStorage.getItem("active_artist");*/
+Persistant.init([
+    { path: "process.filters", lsKey: "filters", qKey : "filters", validate: Filter.validate, default: [] },
+    { path: "process.orders", lsKey: "orders", qKey: "orders", validate: Order.validate, default: [] },
+    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "user", default: "" }
+]);
 
 const initialState = {
     collection: {
-        discogsUsername: queryString["user"] || localStorage.getItem("discogs_username") || "",
+        discogsUsername: "",
         collection: {},
         activeRecord: null,
         activeListen: null
     },
     artist: {
-        activeArtist: /*activeArtistId ? {id: activeArtistId} :*/ null,
+        activeArtist: null,
         artistCollection: {},
         viewArtistCollection: false
     },
     process: {
         searchQuery: "",
-        filters: filters,
-        orders: orders
+        filters: [],
+        orders: []
     },
     ui: {
         collectionLoading: false,
@@ -45,17 +36,14 @@ const initialState = {
     }
 };
 
+Persistant.update(initialState);
+
 history.replaceState({}, document.title, location.protocol + "//" + location.host);
 
 const middlewares = [thunk];
 
 const store = createStore(rootReducer, initialState, applyMiddleware(...middlewares));
 
-store.subscribe(() => {
-    localStorage.setItem("filters", JSON.stringify(store.getState().process.filters));
-    localStorage.setItem("orders", JSON.stringify(store.getState().process.orders));
-    /*localStorage.setItem("active_artist", store.getState().artist.activeArtist ? store.getState().artist.activeArtist.id : "");*/
-    localStorage.setItem("discogs_username", store.getState().collection.discogsUsername);
-})
+Persistant.subscribe(store);
 
 export default store;

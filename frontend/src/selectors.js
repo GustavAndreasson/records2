@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
-import * as qs  from "query-string";
 import FilterUtil from "Utils/Filter";
 import OrderUtil from "Utils/Order";
+import Persistant from "Utils/Persistant";
 
 export const selectOrderedFilteredCollection = createSelector(
     state => state.collection.collection,
@@ -83,12 +83,9 @@ export const selectDirectLink = createSelector(
     state => state.process.orders,
     state => state.process.filters,
     /*state => state.activeArtist,*/
-    (discogsUsername, orders, filters/*, activeArtist*/) => {
-        const query = {
-            user: discogsUsername
-        };
-        if (filters.length) query.filters = JSON.stringify(filters);
-        if (orders.length) query.orders = JSON.stringify(orders);
-        return location.protocol + "//" + location.host + "?" + qs.stringify(query);
-    }
+    (discogsUsername, orders, filters/*, activeArtist*/) =>  Persistant.query({
+        "collection.discogsUsername": discogsUsername,
+        "process.orders": orders,
+        "process.filters": filters
+    })
 );
