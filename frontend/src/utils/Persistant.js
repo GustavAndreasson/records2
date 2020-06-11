@@ -14,7 +14,7 @@ export default {
         persistantObjects.map(obj => {
             const res = { path: obj.path, val: obj.default}
             try {
-                res.val = queryString[obj.qKey] || localStorage.getItem(obj.lsKey);
+                res.val = (obj.qKey && queryString[obj.qKey]) || (obj.lsKey && localStorage.getItem(obj.lsKey));
                 if (typeof obj.default === "object") res.val = JSON.parse(res.val);
                 if (obj.validate) res.val = obj.validate(res.val);
             } catch (e) {
@@ -28,18 +28,20 @@ export default {
     },
     subscribe(store) {
         persistantObjects.forEach((obj) => {
-            store.subscribe(watch(store.getState, obj.path, isEqual)(val => {
-                localStorage.setItem(
-                    obj.lsKey,
-                    typeof obj.default === "object" ? JSON.stringify(val) : val
-                );
-            }));
+            if (obj.lsKey) {
+                store.subscribe(watch(store.getState, obj.path, isEqual)(val => {
+                    localStorage.setItem(
+                        obj.lsKey,
+                        typeof obj.default === "object" ? JSON.stringify(val) : val
+                    );
+                }));
+            }
         });
     },
     query(values) {
         const query = {};
         persistantObjects.forEach(obj => {
-            if (values[obj.path])
+            if (values[obj.path] && obj.qKey)
                 query[obj.qKey] = typeof obj.default === "object" ? JSON.stringify(values[obj.path]) : values[obj.path];
         });
         return location.protocol + "//" + location.host + "?" + qs.stringify(query);
