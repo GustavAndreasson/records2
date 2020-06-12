@@ -82,9 +82,11 @@ export const selectDirectLink = createSelector(
     state => state.collection.discogsUsername,
     state => state.process.orders,
     state => state.process.filters,
-    (discogsUsername, orders, filters) => Persistant.query({
+    state => state.artist.activeArtist,
+    (discogsUsername, orders, filters, activeArtist) => Persistant.query({
         "collection.discogsUsername": discogsUsername,
         "process.orders": orders,
-        "process.filters": filters
+        "process.filters": filters,
+        "artist.activeArtist": activeArtist
     })
 );

@@ -8,7 +8,8 @@ import Persistant from "Utils/Persistant";
 Persistant.init([
     { path: "process.filters", lsKey: "filters", qKey : "filters", validate: Filter.validate, default: [] },
     { path: "process.orders", lsKey: "orders", qKey: "orders", validate: Order.validate, default: [] },
-    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "user", default: "" }
+    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "user", default: "" },
+    { path: "artist.activeArtist", lsKey: "active_artist",  qKey: "artist", ref: true, default: null }
 ]);
 
 const initialState = {

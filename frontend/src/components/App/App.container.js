@@ -1,14 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCollection } from "Actions";
+import { getCollection, getArtist, getArtistCollection } from "Actions";
 import App from "./App.component";
 
 const mapStateToProps = state => ({
-    discogsUsername: state.collection.discogsUsername
+    discogsUsername: state.collection.discogsUsername,
+    activeArtist: state.artist.activeArtist,
+    viewArtistCollection: state.artist.viewArtistCollection
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCollection: user => { dispatch(getCollection(user)) }
+    getCollection: user => { dispatch(getCollection(user)) },
+    getArtist: artist => { dispatch(getArtist(artist)) },
+    getArtistCollection: artist => { dispatch(getArtistCollection(artist)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

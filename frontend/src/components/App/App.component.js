@@ -10,9 +10,21 @@ import Orders from "Components/Orders";
 import User from "Components/User";
 import "./App.scss";
 
-const App = ({ discogsUsername, getCollection }) => {
+const App = ({
+    discogsUsername,
+    activeArtist,
+    viewArtistCollection,
+    getCollection ,
+    getArtist,
+    getArtistCollection
+}) => {
     useEffect(()=>{
-        if (discogsUsername) {
+        if (activeArtist) {
+            getArtist(activeArtist);
+        }
+        if (viewArtistCollection && activeArtist) {
+            getArtistCollection(activeArtist);
+        } else if (discogsUsername) {
             getCollection(discogsUsername);
         }
     }, []);
@@ -23,7 +35,7 @@ const App = ({ discogsUsername, getCollection }) => {
             <Filters />
             <Orders />
             <User />
-            { discogsUsername ?
+            { discogsUsername || (activeArtist && viewArtistCollection) ?
                 <Fragment>
                     <ArtistInfo />
                     <Collection />
