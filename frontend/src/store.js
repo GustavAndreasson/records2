@@ -6,10 +6,11 @@ import Order from "Utils/Order";
 import Persistant from "Utils/Persistant";
 
 Persistant.init([
-    { path: "process.filters", lsKey: "filters", qKey : "filters", validate: Filter.validate, default: [] },
-    { path: "process.orders", lsKey: "orders", qKey: "orders", validate: Order.validate, default: [] },
-    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "user", default: "" },
-    { path: "artist.activeArtist", lsKey: "active_artist",  qKey: "artist", ref: true, default: null }
+    { path: "process.filters", lsKey: "filters", qKey : "f", validate: Filter.validate, default: [] },
+    { path: "process.orders", lsKey: "orders", qKey: "o", validate: Order.validate, default: [] },
+    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "u", default: "" },
+    { path: "artist.activeArtist", lsKey: "active_artist",  qKey: "a", ref: true, default: null },
+    { path: "artist.viewArtistCollection", lsKey: "view_artist_collection", qKey: "va", default: false }
 ]);
 
 const initialState = {
