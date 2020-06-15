@@ -1,6 +1,7 @@
 import api from "Api";
 import { hideRecord } from "./recordActions";
 import { progress } from "./uiActions";
+import { getCollection } from "./collectionActions";
 
 export const SELECT_ARTIST = "SELECT_ARTIST";
 export const selectArtist = artist => ({
@@ -51,7 +52,7 @@ export const viewArtistCollection = view => ({
     view: view
 })
 
-export const showArtist = (artist) => async (dispatch, getState) => {
+export const openArtist = (artist) => async (dispatch, getState) => {
     dispatch(hideRecord());
     dispatch(selectArtist(artist));
     dispatch(requestArtist());
@@ -70,6 +71,15 @@ export const showArtist = (artist) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(artistError());
         console.log(error);
+    }
+}
+
+export const closeArtist = () => (dispatch, getState) => {
+    dispatch(viewArtistCollection(false));
+    dispatch(hideArtist());
+    if (getState().collection.discogsUsername &&
+        Object.keys(getState().collection.collection).length === 0) {
+        dispatch(getCollection(getState().collection.discogsUsername));
     }
 }
 
@@ -144,6 +154,9 @@ export const updateArtistCollection = () => async (dispatch, getState) => {
 export const toggleViewArtistCollection = () => (dispatch, getState) => {
     if (!getState().artist.viewArtistCollection) {
         dispatch(getArtistCollection(getState().artist.activeArtist));
+    } else if (getState().collection.discogsUsername &&
+               Object.keys(getState().collection.collection).length === 0) {
+        dispatch(getCollection(getState().collection.discogsUsername));
     }
     dispatch(viewArtistCollection(!getState().artist.viewArtistCollection));
 }

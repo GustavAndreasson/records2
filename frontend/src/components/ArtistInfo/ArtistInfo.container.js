@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { hideArtist, toggleViewArtistCollection } from "Actions";
+import { closeArtist, toggleViewArtistCollection } from "Actions";
 import ArtistInfo from "./ArtistInfo.component";
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleCloseClick: () => { dispatch(hideArtist()) },
+    handleCloseClick: () => { dispatch(closeArtist()) },
     handleShowCollectionClick: () => { dispatch(toggleViewArtistCollection()) }
 });
 
