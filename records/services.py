@@ -84,6 +84,20 @@ def updateRecord(record):
                 logger.info("Did not find master for record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
         else:
             record.master = record.id + 990000000
+        RecordArtists.objects.filter(record=record).delete()
+        position = 0
+        for r_artist in release_data.get('artists'):
+            artist, created = Artist.objects.get_or_create(
+                id=r_artist['id'],
+                defaults={'name': __fixArtistName(r_artist['name'])})
+            if created:
+                logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
+            ra = RecordArtists.objects.create(
+                record=record,
+                artist=artist,
+                delimiter=r_artist['join'],
+                position=position)
+            position += 1
         record.track_set.all().delete()
         if release_data.get('tracklist'):
             for track_data in release_data.get('tracklist'):
@@ -143,6 +157,8 @@ def __createTrack(record, track_data):
             artist, created = Artist.objects.get_or_create(
                 id=t_artist['id'],
                 defaults={'name': __fixArtistName(t_artist['name'])})
+            if created:
+                logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
             ta = TrackArtists.objects.create(
                 track=track,
                 artist=artist,
