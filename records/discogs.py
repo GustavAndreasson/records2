@@ -27,8 +27,8 @@ def getMaster(master_id):
 def getArtist(artist_id):
     return __readUri("/artists/" + str(artist_id))
 
-def getArtistReleases(artist_id):
-    return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases", True)
+def getArtistReleases(artist_id, check_main=True):
+    return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases", check_main)
 
 def __getPaginatedCollection(uri, check_main=False):
     page = 1
