@@ -4,6 +4,7 @@ import FiltersButton from './FiltersButton';
 import OrdersButton from './OrdersButton';
 import UpdateButton from './UpdateButton';
 import UserButton from './UserButton';
+import ArtistViewButton from './ArtistViewButton';
 import CollectionStats from './CollectionStats';
 import "./Header.scss";
 
@@ -19,6 +20,7 @@ const Header = ({ showControls }) => {
                         <OrdersButton />
                         <UpdateButton />
                         <UserButton />
+                        <ArtistViewButton />
                     </div>
                     <CollectionStats />
                 </Fragment>

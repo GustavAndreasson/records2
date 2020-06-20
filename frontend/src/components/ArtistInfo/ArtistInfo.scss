@@ -1,3 +1,23 @@
 .artist-info {
-    
+    position: relative;
+
+    img {
+        float: left;
+        max-width: 50%;
+        padding-right: 3px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .members, .groups {
+        font-size: 14px;
+    }
+
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }

@@ -4,10 +4,7 @@ import "./ArtistInfo.scss";
 
 const ArtistInfo = ({
     artist,
-    viewArtistCollection,
-    collectionLoading,
     handleCloseClick,
-    handleShowCollectionClick
 }) => (
     artist &&
     <div className="artist-info">
@@ -34,13 +31,8 @@ const ArtistInfo = ({
         </div> }
         <div className="artist-buttons">
             <button type="button"
-                className="far fa-caret-square-left"
+                className="fas fa-times"
                 onClick={handleCloseClick}>
-            </button>
-            <button type="button"
-                className={"fas fa-list" + (viewArtistCollection ? " reversed" : "")}
-                disabled={collectionLoading}
-                onClick={handleShowCollectionClick}>
             </button>
         </div>
     </div>

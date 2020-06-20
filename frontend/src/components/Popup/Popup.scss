@@ -10,6 +10,7 @@
     overflow: hidden;
     border: 1px solid #000000;
     box-shadow: 5px 5px 5px #888888;
+    z-index: 20;
 
     &.level2 {
         top: 70px;
