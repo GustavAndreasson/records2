@@ -65,7 +65,7 @@ class ListenAdmin(admin.ModelAdmin):
 admin.site.register(Listen, ListenAdmin)
 
 class DiscogsUserAdmin(admin.ModelAdmin):
-    fields = ['id', 'username']
+    fields = ['username']
     list_display = ('id', 'username')
     search_fields = ['username']
 
