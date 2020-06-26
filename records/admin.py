@@ -1,5 +1,5 @@
 from django.contrib import admin
-from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers
+from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers, DiscogsUser
 from records.services import updateRecord, updateArtist
 from django.core.cache import cache
 # Register your models here.
@@ -63,3 +63,10 @@ class ListenAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Listen, ListenAdmin)
+
+class DiscogsUserAdmin(admin.ModelAdmin):
+    fields = ['id', 'username']
+    list_display = ('id', 'username')
+    search_fields = ['username']
+
+admin.site.register(DiscogsUser, DiscogsUserAdmin)
