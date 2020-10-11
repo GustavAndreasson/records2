@@ -18,7 +18,7 @@ const Filters = ({ filters, handleUpdate }) => {
         handleUpdate(filters.concat({
             attribute: attribute,
             compare: compare,
-            value:  value
+            value: value
         }));
         setValue("");
     };

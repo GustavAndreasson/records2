@@ -30,7 +30,7 @@ const Orders = ({ showOrders, orders, handleUpdate }) => {
                     )}
                 </div>
                 <form className="new-order" onSubmit={handleAddClick}>
-                    <select className="order-attribute" value={attribute.key} onChange={handleAttributeChange}>
+                    <select className="order-attribute" value={attribute} onChange={handleAttributeChange}>
                         { Object.values(Order.attributes).map(attr => attr.key !== "id" &&
                             <option value={attr.key} key={attr.key}>{attr.name}</option>
                         )}
