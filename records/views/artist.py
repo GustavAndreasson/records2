@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from urllib.parse import unquote
 import json
 
 from ..models import Artist
@@ -33,3 +34,10 @@ def updateArtistReleases(request, artist_id):
     artist_releases = artist.get_releases()
     progress.clearProcesses(['load', 'create', 'discogs'])
     return HttpResponse(json.dumps(artist_releases))
+
+def getArtistAutocomplete(request):
+    artist_start = unquote(request.GET.get('q', ''))
+    if len(artist_start) < 2:
+        return HttpResponse('[]')
+    artists = Artist.objects.filter(name__istartswith=artist_start).order_by('name')
+    return HttpResponse(json.dumps([artist.to_dict() for artist in artists[:5]]))

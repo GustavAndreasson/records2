@@ -7,6 +7,7 @@ const api = {
 	getArtistReleases: async artistId => fetch("records/artist/" + artistId + "/releases"),
 	updateArtist: async artistId => fetch("records/artist/" + artistId + "/update"),
 	updateArtistReleases: async artistId => fetch("records/artist/" + artistId + "/releases/update"),
+	getArtistAutocomplete: async artistStart => fetch("records/artist/autocomplete/q=" + artistStart),
 	getProgress: async () => fetch("records/progress")
 };
 
