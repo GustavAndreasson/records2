@@ -4,13 +4,7 @@ import api from "Api";
 import "./ArtistInput.scss";
 
 const ArtistInput = ({ handleSetArtist }) => {
-    const [artistList, setArtistList] = useState([
-        { name: "The Fall",  id: 2228 },
-        { name: "The Stooges",  id: 39770 },
-        { name: "The Birthday Party",  id: 40247 },
-        { name: "The Velvet Underground",  id: 39766 },
-        { name: "The Jesus Lizard",  id: 282081 },
-    ])
+    const [artistList, setArtistList] = useState([])
     const [artistName, setArtistName] = useState("");
     useEffect(() => {
         const getList = async () => {
@@ -28,7 +22,7 @@ const ArtistInput = ({ handleSetArtist }) => {
     }, [artistName])
     const handleSubmit = e => {
         e.preventDefault();
-        handleSetArtist(artistList.find(artist => artist.name.startsWith(artistName)));
+        artistList.length && handleSetArtist(artistList[0]);
     }
     return (
         <form className="artist-input" onSubmit={handleSubmit}>
