@@ -5,6 +5,7 @@ import Progress from "Components/Progress";
 import RecordInfo from "Components/RecordInfo";
 import ArtistInfo from "Components/ArtistInfo";
 import UsernameInput from "Components/UsernameInput";
+import ArtistInput from "Components/ArtistInput";
 import Filters from "Components/Filters";
 import Orders from "Components/Orders";
 import User from "Components/User";
@@ -43,7 +44,10 @@ const App = ({
                     <Progress />
                 </Fragment>
             :
-                <UsernameInput />
+                <Fragment>
+                    <UsernameInput />
+                    <ArtistInput />
+                </Fragment>
             }
         </Fragment>
     )

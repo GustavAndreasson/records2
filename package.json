@@ -49,6 +49,7 @@
     "is-equal": "^1.6.1",
     "object-path": "^0.11.5",
     "query-string": "^6.13.5",
-    "redux-watch": "^1.1.1"
+    "react-autocomplete": "^1.8.1",
+    "redux-watch": "^1.2.0"
   }
 }
