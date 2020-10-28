@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-import AutoComplete from "react-autocomplete";
+import AutoSuggest from "react-autosuggest";
 import api from "Api";
 import "./ArtistInput.scss";
 
 const ArtistInput = ({ handleSetArtist }) => {
-    const [artistList, setArtistList] = useState([])
+    const [artistList, setArtistList] = useState([]);
+    const [artist, setArtist] = useState(null);
     const [artistName, setArtistName] = useState("");
+    const [artistQuery, setArtistQuery] = useState("");
     useEffect(() => {
         const getList = async () => {
             try {
-                const response = await api.getArtistAutocomplete(artistName);
+                const response = await api.getArtistAutocomplete(artistQuery, 8);
                 const json = await response.json();
-                setArtistList(json)
+                setArtistList(json);
+                if (json.length && artistName.length) {
+                    setArtist(json.find(item => item.name.toLowerCase().startsWith(artistName.toLowerCase())));
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -19,25 +24,38 @@ const ArtistInput = ({ handleSetArtist }) => {
         if (artistName.length > 1) {
             getList();
         }
-    }, [artistName])
+    }, [artistQuery])
     const handleSubmit = e => {
         e.preventDefault();
-        artistList.length && handleSetArtist(artistList[0]);
+        artist && handleSetArtist(artist);
     }
     return (
         <form className="artist-input" onSubmit={handleSubmit}>
-            <AutoComplete
-                renderItem={item => (
-                    <div key={item.id}>
+            <AutoSuggest
+                renderSuggestion={(item, {isHighlighted}) => (
+                    <div className={isHighlighted ? "highlight" : ""}>
                         {item.name}
                     </div>)}
-                getItemValue={item => item.name}
-                items={artistList}
-                value={artistName}
-                onChange={e => setArtistName(e.target.value)}
-                onSelect={val => setArtistName(val)}
+                getSuggestionValue={item => item.name}
+                onSuggestionsFetchRequested={({value, reason}) => reason == 'input-changed' && setArtistQuery(value)}
+                onSuggestionsClearRequested={() => {
+                    setArtistList([]);
+                    setArtistQuery("");
+                }}
+                onSuggestionSelected={(e, {suggestionValue}) => setArtistQuery(suggestionValue)}
+                suggestions={artistList}
+                inputProps={{
+                    placeholder: 'Artist',
+                    value: artistName,
+                    onChange: (e, {newValue}) => {
+                        setArtistName(newValue || "");
+                        setArtist(newValue ? artistList.find(item => item.name.toLowerCase().startsWith(newValue.toLowerCase())) : null);
+                    }
+                }}
+                highlightFirstSuggestion={true}
+                alwaysRenderSuggestions={false}
             />
-            <button type="submit">OK</button>
+            <button type="submit" disabled={!artist}>OK</button>
         </form>
     );
 }

@@ -34,6 +34,30 @@ input {
     padding: 3px;
 }
 
+.react-autosuggest__container {
+    float: left;
+    position: relative;
+    .react-autosuggest__suggestions-container {
+        position: absolute;
+        width: 100%;
+        ul {
+            list-style-type: none;
+            padding: 1px;
+            margin: 0;
+            border: 1px solid #000;
+            font-size: 0.8em;
+            overflow: hidden;
+            div {
+                padding: 1px 0;
+                cursor: pointer;
+                &.highlight {
+                    background-color: #ddd;
+                }
+            }
+        }
+    }
+}
+
 .status {
     position: fixed;
     bottom: 0;

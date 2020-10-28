@@ -10,7 +10,7 @@ const UsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
     return (
         <form className="username-input" onSubmit={handleSubmit}>
             <input type="text" value={user} onChange={e => setUser(e.target.value)} />
-            <button type="submit">OK</button>
+            <button type="submit" disabled={!user.length}>OK</button>
         </form>
     );
 }

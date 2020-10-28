@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^artist/(?P<artist_id>\d+)/update$', artist.updateArtist, name='updateArtist'),
     url(r'^artist/(?P<artist_id>\d+)/releases$', artist.getArtistReleases, name='getArtistReleases'),
     url(r'^artist/(?P<artist_id>\d+)/releases/update$', artist.updateArtistReleases, name='updateArtistReleases'),
-    url(r'^artist/autocomplete/$', artist.getArtistAutocomplete, name='getArtistAutocomplete'),
+    url(r'^artist/autocomplete$', artist.getArtistAutocomplete, name='getArtistAutocomplete'),
     url(r'^progress$', progress.getProgress, name='getProgress'),
 ]

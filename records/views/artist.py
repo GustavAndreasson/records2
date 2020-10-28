@@ -37,7 +37,8 @@ def updateArtistReleases(request, artist_id):
 
 def getArtistAutocomplete(request):
     artist_start = unquote(request.GET.get('q', ''))
+    list_length = int(unquote(request.GET.get('l', '5')))
     if len(artist_start) < 2:
         return HttpResponse('[]')
     artists = Artist.objects.filter(name__istartswith=artist_start).order_by('name')
-    return HttpResponse(json.dumps([artist.to_dict(False) for artist in artists[:5]]))
+    return HttpResponse(json.dumps([artist.to_dict(False) for artist in artists[:list_length]]))
