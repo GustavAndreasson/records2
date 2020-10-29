@@ -35,7 +35,7 @@ input {
 }
 
 .react-autosuggest__container {
-    float: left;
+    display: inline-block;
     position: relative;
     .react-autosuggest__suggestions-container {
         position: absolute;
@@ -64,4 +64,8 @@ input {
     right: 0;
     padding: 2px 10px 0 5px;
     background: #ddd;
+}
+
+#app > form {
+    margin-bottom: 15px;
 }

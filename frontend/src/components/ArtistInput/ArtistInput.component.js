@@ -21,7 +21,7 @@ const ArtistInput = ({ handleSetArtist }) => {
                 console.log(error);
             }
         }
-        if (artistName.length > 1) {
+        if (artistQuery.length > 1) {
             getList();
         }
     }, [artistQuery])
@@ -31,6 +31,7 @@ const ArtistInput = ({ handleSetArtist }) => {
     }
     return (
         <form className="artist-input" onSubmit={handleSubmit}>
+            <i className="fas fa-guitar"></i>
             <AutoSuggest
                 renderSuggestion={(item, {isHighlighted}) => (
                     <div className={isHighlighted ? "highlight" : ""}>

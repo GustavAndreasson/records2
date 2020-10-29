@@ -8,7 +8,7 @@ import UsernameInput from "Components/UsernameInput";
 import ArtistInput from "Components/ArtistInput";
 import Filters from "Components/Filters";
 import Orders from "Components/Orders";
-import User from "Components/User";
+import Settings from "Components/Settings";
 import "./App.scss";
 
 const App = ({
@@ -35,7 +35,7 @@ const App = ({
             <Header />
             <Filters />
             <Orders />
-            <User />
+            <Settings />
             { discogsUsername || (activeArtist && viewArtistCollection) ?
                 <Fragment>
                     <ArtistInfo />

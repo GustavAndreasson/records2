@@ -3,7 +3,7 @@ import Search from './Search';
 import FiltersButton from './FiltersButton';
 import OrdersButton from './OrdersButton';
 import UpdateButton from './UpdateButton';
-import UserButton from './UserButton';
+import SettingsButton from './SettingsButton';
 import ArtistViewButton from './ArtistViewButton';
 import CollectionStats from './CollectionStats';
 import "./Header.scss";
@@ -19,7 +19,7 @@ const Header = ({ showControls }) => {
                         <FiltersButton />
                         <OrdersButton />
                         <UpdateButton />
-                        <UserButton />
+                        <SettingsButton />
                         <ArtistViewButton />
                     </div>
                     <CollectionStats />
