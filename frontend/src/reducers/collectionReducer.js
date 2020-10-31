@@ -35,7 +35,10 @@ function collection(state = {
         case RECEIVE_RECORD:
             return Object.assign({}, state, {
 				collection: action.record.id in state.collection
-                    ? {...state.collection, [action.record.id]: action.record }
+                    ? {...state.collection, [action.record.id]: {
+                        ...action.record,
+                        addedDate: state.collection[action.record.id].addedDate
+                    } }
                     : state.collection
 			});
         case RECORD_ERROR:
