@@ -30,10 +30,10 @@
                 margin: 0 10px;
             }
             & + label:before {
-                content: "\f0dd";
+                content: "\f0de";
             }
             &:checked + label:before {
-                content: "\f0de";
+                content: "\f0dd";
             }
         }
         .add-order {
