@@ -2,10 +2,11 @@ import React from "react";
 
 const ArtistViewButton = ({
     artist,
+    discogsUsername,
     viewArtistCollection,
     collectionLoading,
     handleShowCollectionClick
-}) => (artist &&
+}) => (artist && discogsUsername &&
     <button type="button"
         className={"fas " + (viewArtistCollection ? "fa-list" : "fa-guitar")}
         disabled={collectionLoading}

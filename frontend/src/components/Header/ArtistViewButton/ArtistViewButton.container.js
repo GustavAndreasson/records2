@@ -5,6 +5,7 @@ import ArtistViewButton from "./ArtistViewButton.component";
 
 const mapStateToProps = state => ({
     artist: state.artist.activeArtist,
+    discogsUsername: state.collection.discogsUsername,
     viewArtistCollection: state.artist.viewArtistCollection,
     collectionLoading: state.ui.collectionLoading
 });
