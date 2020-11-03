@@ -115,6 +115,7 @@ def updateRecord(record):
                 logger.error("Request to spotify failed:\n" + str(se))
         if release_data.get('videos'):
             youtube_listen = Listen.objects.get(name='youtube')
+            RecordListens.objects.filter(record=record,listen=youtube_listen).delete()
             for video in release_data.get('videos'):
                 if "youtube" in video['uri'] and "v=" in video['uri']:
                     youtube_key = video['uri'][video['uri'].find('v=')+2:]
