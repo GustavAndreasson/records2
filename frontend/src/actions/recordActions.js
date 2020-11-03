@@ -42,11 +42,6 @@ export const showListen = (listen) => (dispatch, getState) => {
 export const showRecord = (record) => (dispatch, getState) => {
     dispatch(selectRecord(record));
     dispatch(showPopup("recordInfo"));
-    let threeMonthsAgo = new Date();
-    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    if (!record.updated || record.updated < threeMonthsAgo.toISOString()) {
-        dispatch(updateRecord(record));
-    }
 }
 
 export const getRecord = (record) => async (dispatch, getState) => {

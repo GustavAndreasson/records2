@@ -20,9 +20,6 @@ const App = ({
     getArtistCollection
 }) => {
     useEffect(()=>{
-        if (activeArtist) {
-            getArtist(activeArtist);
-        }
         if (viewArtistCollection && activeArtist) {
             getArtistCollection(activeArtist);
         } else if (discogsUsername) {

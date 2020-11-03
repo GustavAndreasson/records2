@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { closeArtist } from "Actions";
+import { getArtist, updateArtist, closeArtist } from "Actions";
 import ArtistInfo from "./ArtistInfo.component";
 
 const mapStateToProps = state => ({
@@ -8,6 +8,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    getArtist: artist => { dispatch(getArtist(artist)) },
+    updateArtist: artist => { dispatch(updateArtist(artist)) },
     handleCloseClick: () => { dispatch(closeArtist()) }
 });
 

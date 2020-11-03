@@ -55,23 +55,6 @@ export const viewArtistCollection = view => ({
 export const openArtist = (artist) => async (dispatch, getState) => {
     dispatch(hideRecord());
     dispatch(selectArtist(artist));
-    dispatch(requestArtist());
-    try {
-        let response = await api.getArtist(artist.id);
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        let json = await response.json();
-        dispatch(receiveArtist(json))
-        let threeMonthsAgo = new Date();
-        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-        if (!json.updated || json.updated < threeMonthsAgo.toISOString()) {
-            dispatch(updateArtist(artist));
-        }
-    } catch (error) {
-        dispatch(artistError());
-        console.log(error);
-    }
 }
 
 export const closeArtist = () => (dispatch, getState) => {
