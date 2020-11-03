@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateUsername } from "Actions";
+import { setUsername } from "Actions";
 import UsernameInput from "./UsernameInput.component";
 
 const mapStateToProps = state => ({
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    handleUpdateUsername: user => { dispatch(updateUsername(user)) }
+    handleUpdateUsername: user => { dispatch(setUsername(user)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsernameInput);

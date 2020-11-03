@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCollection, getArtist, getArtistCollection } from "Actions";
 import App from "./App.component";
 
 const mapStateToProps = state => ({
@@ -9,10 +8,4 @@ const mapStateToProps = state => ({
     viewArtistCollection: state.artist.viewArtistCollection
 });
 
-const mapDispatchToProps = dispatch => ({
-    getCollection: user => { dispatch(getCollection(user)) },
-    getArtist: artist => { dispatch(getArtist(artist)) },
-    getArtistCollection: artist => { dispatch(getArtistCollection(artist)) }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

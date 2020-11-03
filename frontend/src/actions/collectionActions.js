@@ -1,4 +1,5 @@
 import api from "Api";
+import { getArtistCollection } from "./artistActions";
 import { progress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
@@ -22,13 +23,6 @@ export const setUsername = user => ({
     type: SET_USERNAME,
     user
 })
-
-export const updateUsername = (user) => (dispatch, getState) => {
-    dispatch(setUsername(user));
-    if (user) {
-        dispatch(getCollection(user))
-    }
-}
 
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());

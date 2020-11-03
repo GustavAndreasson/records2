@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { openArtist } from "Actions";
+import { showArtist } from "Actions";
 import Artist from "./Artist.component";
 
 const mapDispatchToProps = dispatch => ({
-    handleClick: artist => { dispatch(openArtist(artist)) }
+    handleClick: artist => { dispatch(showArtist(artist)) }
 });
 
 export default connect(null, mapDispatchToProps)(Artist);
