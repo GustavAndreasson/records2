@@ -3,9 +3,9 @@ import { hideRecord } from "./recordActions";
 import { progress } from "./uiActions";
 import { getCollection } from "./collectionActions";
 
-export const SELECT_ARTIST = "SELECT_ARTIST";
-export const selectArtist = artist => ({
-    type: SELECT_ARTIST,
+export const SHOW_ARTIST = "SHOW_ARTIST";
+export const showArtist = artist => ({
+    type: SHOW_ARTIST,
     artist
 })
 
@@ -52,19 +52,10 @@ export const viewArtistCollection = view => ({
     view: view
 })
 
-export const openArtist = (artist) => async (dispatch, getState) => {
-    dispatch(hideRecord());
-    dispatch(selectArtist(artist));
-}
-
-export const closeArtist = () => (dispatch, getState) => {
-    dispatch(viewArtistCollection(false));
-    dispatch(hideArtist());
-    if (getState().collection.discogsUsername &&
-        Object.keys(getState().collection.collection).length === 0) {
-        dispatch(getCollection(getState().collection.discogsUsername));
-    }
-}
+export const TOGGLE_VIEW_ARTIST_COLLECTION = "TOGGLE_VIEW_ARTIST_COLLECTION";
+export const toggleViewArtistCollection = () => ({
+    type: TOGGLE_VIEW_ARTIST_COLLECTION
+})
 
 export const getArtist = (artist) => async (dispatch, getState) => {
     try {
@@ -132,14 +123,4 @@ export const updateArtistCollection = () => async (dispatch, getState) => {
     } finally {
         clearInterval(progressTimer);
     }
-}
-
-export const toggleViewArtistCollection = () => (dispatch, getState) => {
-    if (!getState().artist.viewArtistCollection) {
-        dispatch(getArtistCollection(getState().artist.activeArtist));
-    } else if (getState().collection.discogsUsername &&
-               Object.keys(getState().collection.collection).length === 0) {
-        dispatch(getCollection(getState().collection.discogsUsername));
-    }
-    dispatch(viewArtistCollection(!getState().artist.viewArtistCollection));
 }

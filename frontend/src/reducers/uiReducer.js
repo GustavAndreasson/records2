@@ -7,7 +7,9 @@ import {
     ARTIST_COLLECTION_ERROR,
     UPDATE_PROGRESS,
     SHOW_POPUP,
-    HIDE_POPUP
+    HIDE_POPUP,
+    SHOW_RECORD,
+    SHOW_LISTEN
 } from "Actions";
 
 function ui(state = { collectionLoading: false, progress: {}, status: "", popups: "" }, action) {
@@ -41,6 +43,10 @@ function ui(state = { collectionLoading: false, progress: {}, status: "", popups
                     ? action.popup.substr(0, action.popup.lastIndexOf("."))
                     : state.popups
             });
+        case SHOW_RECORD:
+            return Object.assign({}, state, { popups: "recordInfo" });
+        case SHOW_LISTEN:
+            return Object.assign({}, state, { popups: "recordInfo.listen" });
         default:
             return state;
     }

@@ -1,28 +1,30 @@
 import {
-    SELECT_RECORD,
+    SHOW_RECORD,
     HIDE_RECORD,
-    SELECT_LISTEN,
+    SHOW_LISTEN,
     SET_USERNAME,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
     COLLECTION_ERROR,
     REQUEST_RECORD,
     RECEIVE_RECORD,
-    RECORD_ERROR
+    RECORD_ERROR,
+    SHOW_ARTIST
 } from "Actions";
 
 function collection(state = {
     discogsUsername: "",
-    collection: {},
+    collection: null,
     activeRecord: null,
     activeListen: null
 }, action) {
     switch(action.type) {
-        case SELECT_RECORD:
+        case SHOW_RECORD:
             return Object.assign({}, state, { activeRecord: action.record.id });
+        case SHOW_ARTIST:
         case HIDE_RECORD:
             return Object.assign({}, state, { activeRecord: null });
-        case SELECT_LISTEN:
+        case SHOW_LISTEN:
             return Object.assign({}, state, { activeListen: action.listen });
         case REQUEST_COLLECTION:
             return state;
@@ -33,7 +35,7 @@ function collection(state = {
         case REQUEST_RECORD:
             return state;
         case RECEIVE_RECORD:
-            return Object.assign({}, state, {
+            return Object.assign({}, state, state.collection && {
 				collection: action.record.id in state.collection
                     ? {...state.collection, [action.record.id]: {
                         ...action.record,
@@ -44,7 +46,10 @@ function collection(state = {
         case RECORD_ERROR:
             return state;
         case SET_USERNAME:
-            return Object.assign({}, state, { discogsUsername: action.user });
+            return Object.assign({}, state, {
+                discogsUsername: action.user,
+                collection: null
+            });
         default:
             return state;
     }

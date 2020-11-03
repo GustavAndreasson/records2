@@ -1,9 +1,8 @@
 import api from "Api";
-import { showPopup } from "./uiActions";
 
-export const SELECT_RECORD = "SELECT_RECORD";
-export const selectRecord = record => ({
-    type: SELECT_RECORD,
+export const SHOW_RECORD = "SHOW_RECORD";
+export const showRecord = record => ({
+    type: SHOW_RECORD,
     record
 })
 
@@ -12,9 +11,9 @@ export const hideRecord = () => ({
     type: HIDE_RECORD
 })
 
-export const SELECT_LISTEN = "SELECT_LISTEN";
-export const selectListen = listen => ({
-    type: SELECT_LISTEN,
+export const SHOW_LISTEN = "SHOW_LISTEN";
+export const showListen = listen => ({
+    type: SHOW_LISTEN,
     listen
 })
 
@@ -33,16 +32,6 @@ export const RECORD_ERROR = "RECORD_ERROR";
 export const recordError = () => ({
     type: RECORD_ERROR
 })
-
-export const showListen = (listen) => (dispatch, getState) => {
-    dispatch(selectListen(listen));
-    dispatch(showPopup("recordInfo.listen"));
-}
-
-export const showRecord = (record) => (dispatch, getState) => {
-    dispatch(selectRecord(record));
-    dispatch(showPopup("recordInfo"));
-}
 
 export const getRecord = (record) => async (dispatch, getState) => {
     dispatch(requestRecord());

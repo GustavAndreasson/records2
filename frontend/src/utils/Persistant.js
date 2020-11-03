@@ -1,4 +1,4 @@
-import * as qs  from "query-string";
+import * as qs from "query-string";
 import watch from "redux-watch";
 import isEqual from "is-equal";
 import objectPath from "object-path";
@@ -18,7 +18,7 @@ const getStorageValue = (val, obj) => {
 
 export default {
     init(po) {
-        persistantObjects = po
+        persistantObjects = po;
     },
     update(state) {
         const queryString = qs.parse(location.search);

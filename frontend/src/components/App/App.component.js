@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import Header from "Components/Header";
 import Collection from "Components/Collection";
 import Progress from "Components/Progress";
@@ -14,40 +14,27 @@ import "./App.scss";
 const App = ({
     discogsUsername,
     activeArtist,
-    viewArtistCollection,
-    getCollection ,
-    getArtist,
-    getArtistCollection
-}) => {
-    useEffect(()=>{
-        if (viewArtistCollection && activeArtist) {
-            getArtistCollection(activeArtist);
-        } else if (discogsUsername) {
-            getCollection(discogsUsername);
+    viewArtistCollection
+}) => (
+    <Fragment>
+        <Header />
+        <Filters />
+        <Orders />
+        <Settings />
+        { discogsUsername || (activeArtist && viewArtistCollection) ?
+            <Fragment>
+                <ArtistInfo />
+                <Collection />
+                <RecordInfo />
+                <Progress />
+            </Fragment>
+        :
+            <Fragment>
+                <UsernameInput />
+                <ArtistInput />
+            </Fragment>
         }
-    }, []);
-
-    return (
-        <Fragment>
-            <Header />
-            <Filters />
-            <Orders />
-            <Settings />
-            { discogsUsername || (activeArtist && viewArtistCollection) ?
-                <Fragment>
-                    <ArtistInfo />
-                    <Collection />
-                    <RecordInfo />
-                    <Progress />
-                </Fragment>
-            :
-                <Fragment>
-                    <UsernameInput />
-                    <ArtistInput />
-                </Fragment>
-            }
-        </Fragment>
-    )
-}
+    </Fragment>
+)
 
 export default App;

@@ -12,6 +12,9 @@ export const selectOrderedFilteredCollection = createSelector(
     state => state.artist.viewArtistCollection,
     state => state.process.searchQuery,
     (collection, orders, filters, activeArtist, artistCollection, viewArtistCollection, searchQuery) => {
+        if ((viewArtistCollection && !artistCollection) || (!viewArtistCollection && !collection)) {
+            return null;
+        }
         let filterRecord = (rec) => (
             (
                 !activeArtist || viewArtistCollection ||
@@ -69,6 +72,9 @@ export const selectActiveRecord = createSelector(
 export const selectCollectionStats = createSelector(
     selectOrderedFilteredCollection,
     (orderedFilteredCollection) => {
+        if (!orderedFilteredCollection) {
+            return null;
+        }
         let priceSum = orderedFilteredCollection.reduce((sum, rec) => sum + (rec.price ? parseFloat(rec.price) : 0), 0);
 		return {
 			qty: orderedFilteredCollection.length,

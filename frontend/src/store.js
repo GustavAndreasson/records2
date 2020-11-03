@@ -16,13 +16,13 @@ Persistant.init([
 const initialState = {
     collection: {
         discogsUsername: "",
-        collection: {},
+        collection: null,
         activeRecord: null,
         activeListen: null
     },
     artist: {
         activeArtist: null,
-        artistCollection: {},
+        artistCollection: null,
         viewArtistCollection: false
     },
     process: {
