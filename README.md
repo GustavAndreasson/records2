@@ -1,7 +1,7 @@
 # Records 2
 Browse records from Discogs by user or artist with advanced and fast filtering and sorting possibilities.
 
-#Installation
+## Installation
 Copy env.template to .env with the appropriate changes
 
 Production:
