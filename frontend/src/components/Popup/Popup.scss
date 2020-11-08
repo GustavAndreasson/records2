@@ -7,10 +7,17 @@
     max-height: calc(100vh - 60px);
     max-width: 100%;
     background-color: #ffffff;
-    overflow: hidden;
     border: 1px solid #000000;
     box-shadow: 5px 5px 5px #888888;
     z-index: 20;
+
+    &.scrolling {
+        overflow: hidden;
+
+        .content {
+            overflow-y: auto;
+        }
+    }
 
     &.level2 {
         top: 70px;
@@ -52,7 +59,6 @@
 
     .content {
         max-height: calc(100vh - 100px);
-        overflow-y: auto;
         padding: 0 10px 10px;
     }
 }

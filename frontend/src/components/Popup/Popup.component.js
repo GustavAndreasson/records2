@@ -1,8 +1,8 @@
 import React from "react";
 import "./Popup.scss";
 
-const Popup = ({ children, name, icon, title, popups, hidePopup }) => (popups.indexOf(name) === 0 &&
-    <div className={"popup " + "level" + name.split(".").length}>
+const Popup = ({ children, name, icon, title, scrolling=false, popups, hidePopup }) => (popups.indexOf(name) === 0 &&
+    <div className={"popup " + "level" + name.split(".").length + (scrolling ? " scrolling" : "")}>
         <div className="popup-header">
             { icon &&
                 (icon.image

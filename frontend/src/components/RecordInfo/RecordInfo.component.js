@@ -17,7 +17,7 @@ const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick }) =
 
     return (rec &&
         <Fragment>
-            <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}} title={rec.name}>
+            <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}} title={rec.name} scrolling={true}>
                 <div className="record-info">
                     <img className="cover" src={rec.cover} />
                     <div className="artists"><Artists artists={rec.artists} /></div>
