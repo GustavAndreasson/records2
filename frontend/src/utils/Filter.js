@@ -60,8 +60,10 @@ const attributes = {
 
 export default {
     attributes: attributes,
-    compares:  compares,
-    run: ({ attribute, compare, value }) => rec => attributes[attribute].getValues(rec).some(recVal => compares[compare].func(recVal, value)),
+    compares: compares,
+    run: ({ attribute, compare, value }) => rec => compare == "sneq" || compare == "neq"
+        ? attributes[attribute].getValues(rec).every(recVal => compares[compare].func(recVal, value))
+        : attributes[attribute].getValues(rec).some(recVal => compares[compare].func(recVal, value)),
     validate: filters => {
         if (filters.every(
             f =>
