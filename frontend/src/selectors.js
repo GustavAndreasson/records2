@@ -3,6 +3,13 @@ import FilterUtil from "Utils/Filter";
 import OrderUtil from "Utils/Order";
 import Persistant from "Utils/Persistant";
 
+export const selectCollection = createSelector(
+    state => state.collection.collection,
+    state => state.artist.artistCollection,
+    state => state.artist.viewArtistCollection,
+    (collection, artistCollection, viewArtistCollection) => Object.values(viewArtistCollection ? artistCollection : collection)
+);
+
 export const selectOrderedFilteredCollection = createSelector(
     state => state.collection.collection,
     state => state.process.orders,

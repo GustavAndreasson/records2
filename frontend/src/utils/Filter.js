@@ -11,13 +11,13 @@ const attributes = {
     name: {
         name: "Album",
         key: "name",
-        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
+        compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.name]
     },
     artist: {
         name: "Artist",
         key: "artist",
-        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
+        compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => (
             rec.artists ? rec.artists.map(artist => artist.artist.name) : []
         ).concat(
@@ -29,14 +29,14 @@ const attributes = {
     track: {
         name: "Spår",
         key: "track",
-        compares: ["sub", "seq"].map(cmp => compares[cmp]),
+        compares: ["seq", "sub"].map(cmp => compares[cmp]),
         getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : []
     },
     format: {
         name: "Format",
         key: "format",
-        compares: ["sub", "seq", "sneq"].map(cmp => compares[cmp]),
-        getValues: rec => [rec.format]
+        compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
+        getValues: rec => rec.format ? rec.format.split(" ") : [""]
     },
     year: {
         name: "År",

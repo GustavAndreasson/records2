@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Popup  from "Components/Popup";
+import FilterValue from "./FilterValue";
 import Filter from "Utils/Filter";
 import "./Filters.scss";
 
@@ -12,7 +13,7 @@ const Filters = ({ filters, handleUpdate }) => {
         setCompare(Filter.attributes[event.target.value].compares[0].key)
     }
     const handleCompareChange = (event) => setCompare(event.target.value);
-    const handleValueChange = (event) => setValue(event.target.value);
+    const handleValueChange = (val) => setValue(val);
     const handleAddClick = (e) => {
         e.preventDefault();
         handleUpdate(filters.concat({
@@ -47,7 +48,7 @@ const Filters = ({ filters, handleUpdate }) => {
                             <option value={cmp.key} key={cmp.key}>{cmp.name}</option>
                         )}
                     </select>
-                    <input type="text" className="filter-value"  value={value} onChange={handleValueChange}/>
+                    <FilterValue attribute={attribute} compare={compare} value={value} handleValueChange={handleValueChange}/>
                     <button type="submit" className="add-filter fas fa-plus"></button>
                 </form>
             </div>
