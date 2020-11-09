@@ -50,7 +50,7 @@ const attributes = {
         name: "År",
         key: "year",
         type: "number",
-        compares: ["eq", "neq", "lt", "gt"].map(cmp => compares[cmp]),
+        compares: ["gt", "lt", "eq", "neq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.year]
     },
     price: {

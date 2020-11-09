@@ -12,7 +12,6 @@ const FilterValue = ({ attribute, compare, value, handleValueChange, collection 
     return (
         Filter.attributes[attribute].type === "text" && (compare === "seq" || compare === "sneq")
         ? <AutoSuggest
-            className="filter-value"
             renderSuggestion={(item, {isHighlighted}) => (
                 <div className={isHighlighted ? "highlight" : ""}>
                     {item}
@@ -23,6 +22,7 @@ const FilterValue = ({ attribute, compare, value, handleValueChange, collection 
             onSuggestionSelected={(e, {suggestionValue}) => handleValueChange(suggestionValue)}
             suggestions={suggestedValues}
             inputProps={{
+                className: "filter-value",
                 placeholder: '',
                 value: value,
                 onChange: (e, {newValue}) => {
