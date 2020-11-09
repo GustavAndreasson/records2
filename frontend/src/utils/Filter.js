@@ -11,49 +11,60 @@ const attributes = {
     name: {
         name: "Album",
         key: "name",
+        type: "text",
         compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.name]
     },
     artist: {
         name: "Artist",
         key: "artist",
+        type: "text",
         compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => (
             rec.artists ? rec.artists.map(artist => artist.artist.name) : []
         ).concat(
-            rec.artists ? rec.artists.map((artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")).join(" ") : []
+            rec.artists ? rec.artists.map(
+                (artist, index) => artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
+            ).join(" ") : []
         ).concat(
-            rec.tracks ? rec.tracks.map(track => track.artists ? track.artists.map(artist => artist.artist.name) : []).flat() : []
+            rec.tracks ? rec.tracks.map(
+                track => track.artists ? track.artists.map(artist => artist.artist.name) : []
+            ).flat() : []
         )
     },
     track: {
         name: "Spår",
         key: "track",
+        type: "text",
         compares: ["seq", "sub"].map(cmp => compares[cmp]),
         getValues: rec => rec.tracks ? rec.tracks.map(track => track.name) : []
     },
     format: {
         name: "Format",
         key: "format",
+        type: "text",
         compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
         getValues: rec => rec.format ? rec.format.split(" ") : [""]
     },
     year: {
         name: "År",
         key: "year",
+        type: "number",
         compares: ["eq", "neq", "lt", "gt"].map(cmp => compares[cmp]),
         getValues: rec => [rec.year]
     },
     price: {
         name: "Pris",
         key: "price",
+        type: "number",
 	    compares: ["gt", "lt", "eq"].map(cmp => compares[cmp]),
         getValues: rec => [parseFloat(rec.price)]
     },
     addedDate: {
         name: "Tillagd",
         key: "addedDate",
-        compares: ["eq", "neq", "lt", "gt"].map(cmp => compares[cmp]),
+        type: "date",
+        compares: ["gt", "lt", "eq", "neq"].map(cmp => compares[cmp]),
         getValues: rec => [rec.addedDate]
     }
 };
