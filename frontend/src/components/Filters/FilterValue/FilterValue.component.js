@@ -8,9 +8,9 @@ const FilterValue = ({ attribute, compare, value, handleValueChange, collection 
     ).sort().filter(
         (item, pos, arr) => item && (!pos || item != arr[pos - 1])
     );
-    let suggestedValues = allValues && allValues.filter(v => v.toLowerCase().startsWith(value)).slice(0, 10);
+    const suggestedValues = allValues && allValues.filter(v => v.toLowerCase().startsWith(value)).slice(0, 10);
     return (
-        compare === "seq" || compare === "sneq"
+        Filter.attributes[attribute].type === "text" && (compare === "seq" || compare === "sneq")
         ? <AutoSuggest
             className="filter-value"
             renderSuggestion={(item, {isHighlighted}) => (
@@ -32,7 +32,12 @@ const FilterValue = ({ attribute, compare, value, handleValueChange, collection 
             highlightFirstSuggestion={true}
             alwaysRenderSuggestions={false}
         />
-        : <input type="text" className="filter-value" value={value} onChange={e => handleValueChange(e.target.value)}/>
+        : <input
+            type={Filter.attributes[attribute].type}
+            className="filter-value"
+            value={value}
+            onChange={e => handleValueChange(e.target.value)}
+        />
     );
 }
 
