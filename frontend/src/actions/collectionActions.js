@@ -1,5 +1,4 @@
 import api from "Api";
-import { getArtistCollection } from "./artistActions";
 import { progress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
