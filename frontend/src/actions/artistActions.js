@@ -1,7 +1,5 @@
 import api from "Api";
-import { hideRecord } from "./recordActions";
 import { progress } from "./uiActions";
-import { getCollection } from "./collectionActions";
 
 export const SHOW_ARTIST = "SHOW_ARTIST";
 export const showArtist = artist => ({
