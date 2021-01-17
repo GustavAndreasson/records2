@@ -1,6 +1,8 @@
 # Records 2
 Browse records from Discogs by user or artist with advanced and fast filtering and sorting possibilities.
 
+[skivsamling.se](http://skivsamling.se)
+
 ## Installation
 Copy env.template to .env with the appropriate changes
 
