@@ -1,4 +1,5 @@
 import requests, base64, time, logging
+from urllib.parse import quote
 from django.core.cache import cache
 from decouple import config
 
@@ -16,7 +17,7 @@ class SpotifyError(Exception):
 def getAlbum(artist, album):
     auth = "Bearer " + __getToken()
     headers = {"Authorization": auth}
-    query = "album:" + album + "%20artist:" + artist + "&type=album"
+    query = "album:" + quote(album) + "%20artist:" + quote(artist) + "&type=album"
     r = requests.get(config('SPOTIFY_API_URL') + "search?q=" + query, headers=headers)
     try:
         data = r.json()
