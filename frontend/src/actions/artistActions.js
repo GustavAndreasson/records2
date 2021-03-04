@@ -90,12 +90,16 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.getArtistReleases(artist.id);
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        let json = await response.json();
-        dispatch(receiveArtistCollection(json));
+        let page = 1;
+        let json = {};
+        do {
+            let response = await api.getArtistReleases(artist.id, page);
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            json = await response.json();
+            dispatch(receiveArtistCollection(json.data));
+        } while (page = json.pagination.nextpage);
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);
@@ -109,12 +113,13 @@ export const updateArtistCollection = () => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.updateArtistReleases(getState().artist.activeArtist.id);
+        const artistId = getState().artist.activeArtist.id;
+        let response = await api.updateArtistReleases(artistId);
         if (!response.ok) {
             throw Error(response.statusText);
         }
         let json = await response.json();
-        dispatch(receiveArtistCollection(json));
+        dispatch(getArtistCollection(artistId));
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);

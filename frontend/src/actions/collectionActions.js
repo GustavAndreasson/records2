@@ -28,12 +28,16 @@ export const getCollection = (user) => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.getCollection(user);
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        let json = await response.json();
-        dispatch(receiveCollection(json));
+        let page = 1;
+        let json = {};
+        do {
+            let response = await api.getCollection(user, page);
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            json = await response.json();
+            dispatch(receiveCollection(json.data));
+        } while (page = json.pagination.nextpage);
     } catch (error) {
         dispatch(collectionError());
         console.log(error);
@@ -47,12 +51,13 @@ export const updateCollection = () => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        let response = await api.updateCollection(getState().collection.discogsUsername);
+        const user = getState().collection.discogsUsername;
+        let response = await api.updateCollection(user);
         if (!response.ok) {
             throw Error(response.statusText);
         }
         let json = await response.json();
-        dispatch(receiveCollection(json));
+        dispatch(getCollection(user));
     } catch (error) {
         dispatch(collectionError());
         console.log(error);

@@ -40,7 +40,7 @@ function artist(state={
             return state;
         case RECEIVE_ARTIST_COLLECTION:
             return Object.assign({}, state, {
-                artistCollection: action.collection
+                artistCollection: {...state.artistCollection, ...action.collection}
             });
         case ARTIST_ERROR:
             return state;
@@ -51,11 +51,17 @@ function artist(state={
                     : state.artistCollection
 			});
         case VIEW_ARTIST_COLLECTION:
-            return Object.assign({}, state, { viewArtistCollection: action.view });
+            return Object.assign({}, state, {
+                viewArtistCollection: action.view
+            });
         case TOGGLE_VIEW_ARTIST_COLLECTION:
-            return Object.assign({}, state, { viewArtistCollection: !state.viewArtistCollection });
+            return Object.assign({}, state, {
+                viewArtistCollection: !state.viewArtistCollection
+            });
         case FILTER_YEAR:
-            return Object.assign({}, state, { activeRecord: null });
+            return Object.assign({}, state, {
+                activeRecord: null
+            });
         default:
             return state;
     }

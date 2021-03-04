@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 import json
 
 from ..models import DiscogsUser, UserRecords
@@ -16,29 +17,37 @@ def getCollection(request, username):
             return HttpResponse('{}')
     else :
         progress.init(request, ['load'])
-    collection = _createCollectionDict(user)
-    progress.clearProcesses(['discogs', 'create', 'load'])
-    return HttpResponse(json.dumps(collection))
-
-def updateCollection(request, username):
-    progress.init(request, ['discogs', 'create', 'load'])
-    user, created = DiscogsUser.objects.get_or_create(username=username)
-    services.updateCollection(user)
-    collection = _createCollectionDict(user)
-    progress.clearProcesses(['load', 'create', 'discogs'])
-    return HttpResponse(json.dumps(collection))
-
-def _createCollectionDict(user):
+    pagesize = request.GET.get('pagesize')
+    page = request.GET.get('page')
     urs = UserRecords.objects.filter(user=user)
-    dict = {}
+    records_paginator = Paginator(urs, pagesize)
+    records_page = records_paginator.get_page(page)
+    collection = {}
     progress.updateProgress('load', 0)
-    tot = len(urs)
-    nr = 0
-    for ur in urs:
-        dict[ur.record.id] = ur.record.to_dict()
-        dict[ur.record.id]["addedDate"] = str(ur.added_date)
+    tot = records_paginator.count
+    nr = records_page.start_index()
+    for ur in records_page.object_list:
+        collection[ur.record.id] = ur.record.to_dict()
+        collection[ur.record.id]["addedDate"] = str(ur.added_date)
         nr = nr + 1
         if nr % 10 == 0:
             progress.updateProgress('load', int((nr * 100) / tot))
     progress.updateProgress('load', 100)
-    return dict
+    progress.clearProcesses(['discogs', 'create', 'load'])
+    return HttpResponse(json.dumps({
+        'data': collection,
+        'pagination': {
+            'page': page,
+            'pagesize': pagesize,
+            'pagecount': records_paginator.num_pages,
+            'nextpage': records_page.next_page_number() if records_page.has_next() else None,
+            'previouspage': records_page.previous_page_number() if records_page.has_previous() else None
+        }
+    }))
+
+def updateCollection(request, username):
+    progress.init(request, ['discogs', 'create'])
+    user, created = DiscogsUser.objects.get_or_create(username=username)
+    services.updateCollection(user)
+    progress.clearProcesses(['create', 'discogs'])
+    return HttpResponse(json.dumps({'status': 'success'}))

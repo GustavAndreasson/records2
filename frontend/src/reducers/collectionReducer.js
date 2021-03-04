@@ -20,16 +20,24 @@ function collection(state = {
 }, action) {
     switch(action.type) {
         case SHOW_RECORD:
-            return Object.assign({}, state, { activeRecord: action.record.id });
+            return Object.assign({}, state, {
+                activeRecord: action.record.id
+            });
         case SHOW_ARTIST:
         case HIDE_RECORD:
-            return Object.assign({}, state, { activeRecord: null });
+            return Object.assign({}, state, {
+                activeRecord: null
+            });
         case SHOW_LISTEN:
-            return Object.assign({}, state, { activeListen: action.listen });
+            return Object.assign({}, state, {
+                activeListen: action.listen
+            });
         case REQUEST_COLLECTION:
             return state;
         case RECEIVE_COLLECTION:
-            return Object.assign({}, state, { collection: action.collection });
+            return Object.assign({}, state, {
+                collection: {...state.collection, ...action.collection}
+            });
         case COLLECTION_ERROR:
             return state;
         case REQUEST_RECORD:
