@@ -20,26 +20,17 @@ def updateArtist(request, artist_id):
 def getArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     if artist.collectionUpdated == None:
-        progress.init(request, ['discogs', 'create', 'load'])
+        progress.init(request, ['discogs', 'create'])
         services.collectArtistReleases(artist)
-    else:
-        progress.init(request, ['load'])
-    pagesize = request.GET.get('pagesize')
-    page = request.GET.get('page')
+        progress.clearProcesses(['discogs', 'create'])
+    pagesize = request.GET.get('pagesize', 100)
+    page = request.GET.get('page', 1)
     ras = RecordArtists.objects.filter(artist=artist)
     records_paginator = Paginator(ras, pagesize)
     records_page = records_paginator.get_page(page)
     collection = {}
-    progress.updateProgress('load', 0)
-    tot = records_paginator.count
-    nr = records_page.start_index()
     for ur in records_page.object_list:
         collection[ur.record.id] = ur.record.to_dict()
-        nr = nr + 1
-        if nr % 10 == 0:
-            progress.updateProgress('load', int((nr * 100) / tot))
-    progress.updateProgress('load', 100)
-    progress.clearProcesses(['discogs', 'create', 'load'])
     return HttpResponse(json.dumps({
         'data': collection,
         'pagination': {

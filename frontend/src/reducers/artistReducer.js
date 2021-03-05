@@ -5,6 +5,7 @@ import {
     RECEIVE_ARTIST,
     REQUEST_ARTIST_COLLECTION,
     RECEIVE_ARTIST_COLLECTION,
+    FINNISH_RECEIVE_ARTIST_COLLECTION,
     ARTIST_ERROR,
     VIEW_ARTIST_COLLECTION,
     TOGGLE_VIEW_ARTIST_COLLECTION,
@@ -42,6 +43,8 @@ function artist(state={
             return Object.assign({}, state, {
                 artistCollection: {...state.artistCollection, ...action.collection}
             });
+        case FINNISH_RECEIVE_ARTIST_COLLECTION:
+            return state;
         case ARTIST_ERROR:
             return state;
         case RECEIVE_RECORD:

@@ -1,5 +1,5 @@
 import api from "Api";
-import { progress } from "./uiActions";
+import { progress, updateProgress } from "./uiActions";
 
 export const SHOW_ARTIST = "SHOW_ARTIST";
 export const showArtist = artist => ({
@@ -37,6 +37,11 @@ export const RECEIVE_ARTIST_COLLECTION = "RECEIVE_ARTIST_COLLECTION";
 export const receiveArtistCollection = json => ({
     type: RECEIVE_ARTIST_COLLECTION,
     collection: json
+})
+
+export const FINNISH_RECEIVE_ARTIST_COLLECTION = "FINNISH_RECEIVE_ARTIST_COLLECTION";
+export const finnishReceiveArtistCollection = json => ({
+    type: FINNISH_RECEIVE_ARTIST_COLLECTION
 })
 
 export const ARTIST_COLLECTION_ERROR = "ARTIST_COLLECTION_ERROR";
@@ -92,14 +97,20 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     try {
         let page = 1;
         let json = {};
+        dispatch(updateProgress({load: 0}));
         do {
             let response = await api.getArtistReleases(artist.id, page);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
             json = await response.json();
+            clearInterval(progressTimer);
+            dispatch(updateProgress({
+                load: Math.round(page * 100 / json.pagination.pagecount)
+            }));
             dispatch(receiveArtistCollection(json.data));
         } while (page = json.pagination.nextpage);
+        dispatch(finnishReceiveArtistCollection());
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);

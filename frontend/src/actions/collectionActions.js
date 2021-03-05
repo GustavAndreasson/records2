@@ -1,5 +1,5 @@
 import api from "Api";
-import { progress } from "./uiActions";
+import { progress, updateProgress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
 export const requestCollection = () => ({
@@ -10,6 +10,11 @@ export const RECEIVE_COLLECTION = "RECEIVE_COLLECTION";
 export const receiveCollection = json => ({
     type: RECEIVE_COLLECTION,
     collection: json
+})
+
+export const FINNISH_RECEIVE_COLLECTION = "FINNISH_RECEIVE_COLLECTION";
+export const finnishReceiveCollection = json => ({
+    type: FINNISH_RECEIVE_COLLECTION
 })
 
 export const COLLECTION_ERROR = "COLLECTION_ERROR";
@@ -30,14 +35,20 @@ export const getCollection = (user) => async (dispatch, getState) => {
     try {
         let page = 1;
         let json = {};
+        dispatch(updateProgress({load: 0}));
         do {
             let response = await api.getCollection(user, page);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
             json = await response.json();
+            clearInterval(progressTimer);
+            dispatch(updateProgress({
+                load: Math.round(page * 100 / json.pagination.pagecount)
+            }));
             dispatch(receiveCollection(json.data));
         } while (page = json.pagination.nextpage);
+        dispatch(finnishReceiveCollection());
     } catch (error) {
         dispatch(collectionError());
         console.log(error);

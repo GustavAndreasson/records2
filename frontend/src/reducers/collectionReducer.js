@@ -5,6 +5,7 @@ import {
     SET_USERNAME,
     REQUEST_COLLECTION,
     RECEIVE_COLLECTION,
+    FINNISH_RECEIVE_COLLECTION,
     COLLECTION_ERROR,
     REQUEST_RECORD,
     RECEIVE_RECORD,
@@ -38,6 +39,8 @@ function collection(state = {
             return Object.assign({}, state, {
                 collection: {...state.collection, ...action.collection}
             });
+        case FINNISH_RECEIVE_COLLECTION:
+            return state;
         case COLLECTION_ERROR:
             return state;
         case REQUEST_RECORD:

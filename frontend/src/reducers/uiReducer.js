@@ -1,9 +1,9 @@
 import {
     REQUEST_COLLECTION,
-    RECEIVE_COLLECTION,
+    FINNISH_RECEIVE_COLLECTION,
     COLLECTION_ERROR,
     REQUEST_ARTIST_COLLECTION,
-    RECEIVE_ARTIST_COLLECTION,
+    FINNISH_RECEIVE_ARTIST_COLLECTION,
     ARTIST_COLLECTION_ERROR,
     UPDATE_PROGRESS,
     SHOW_POPUP,
@@ -21,8 +21,8 @@ function ui(state = { collectionLoading: false, progress: {}, status: "", popups
                 progress: {},
                 status: "Hämtar skivor..."
             });
-        case RECEIVE_COLLECTION:
-        case RECEIVE_ARTIST_COLLECTION:
+        case FINNISH_RECEIVE_COLLECTION:
+        case FINNISH_RECEIVE_ARTIST_COLLECTION:
             return Object.assign({}, state, {
                 collectionLoading: false,
 				status: false
