@@ -25,7 +25,7 @@ def getArtistReleases(request, artist_id):
         progress.clearProcesses(['discogs', 'create'])
     pagesize = int(request.GET.get('pagesize', 100))
     page = int(request.GET.get('page', 1))
-    ras = RecordArtists.objects.filter(artist=artist)
+    ras = RecordArtists.objects.filter(artist=artist).order_by('record__id')
     records_paginator = Paginator(ras, pagesize)
     records_page = records_paginator.get_page(page)
     collection = {}

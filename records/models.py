@@ -8,7 +8,6 @@
 from __future__ import unicode_literals
 from django.core.cache import cache
 from django.db import models
-from . import progress
 
 
 class Artist(models.Model):
@@ -120,6 +119,9 @@ class UserRecords(models.Model):
     user = models.ForeignKey(DiscogsUser, on_delete=models.CASCADE)
     record = models.ForeignKey(Record, on_delete=models.CASCADE)
     added_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['id']
 
 
 class Track(models.Model):

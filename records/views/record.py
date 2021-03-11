@@ -4,7 +4,6 @@ import json
 
 from ..models import Record
 from .. import services
-from .. import progress
 
 def getRecord(request, record_id):
     record = get_object_or_404(Record, id=record_id)
