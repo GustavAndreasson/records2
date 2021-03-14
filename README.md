@@ -8,7 +8,6 @@ Copy env.template to .env with the appropriate changes
 
 ### Production
 ```sh
-npm run build
 sh install/deploy.sh
 ```
 On server:
