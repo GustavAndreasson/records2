@@ -1,4 +1,4 @@
-import React, { Fragment,  useEffect } from "react";
+import React, { useEffect } from "react";
 import Popup from "Components/Popup";
 import Artists from "./Artists";
 import Listen from "./Listen";
@@ -16,7 +16,7 @@ const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick }) =
     }, [rec]);
 
     return (rec &&
-        <Fragment>
+        <>
             <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}} title={rec.name} scrolling={true}>
                 <div className="record-info">
                     <img className="cover" src={rec.cover} />
@@ -30,9 +30,9 @@ const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick }) =
                                 <div className="track" key={index}>
                                     <span className="position">{track.position}</span> {track.name}
                                     { track.artists && (
-                                        <Fragment>
+                                        <>
                                             {" ("}<Artists artists={track.artists} />{")"}
-                                        </Fragment>)
+                                        </>)
                                     }
                                 </div>
                             ))}
@@ -51,7 +51,7 @@ const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick }) =
                 </div>
             </Popup>
             <Listen />
-        </Fragment>
+        </>
     )
 }
 

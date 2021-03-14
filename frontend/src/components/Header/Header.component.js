@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Search from './Search';
 import FiltersButton from './FiltersButton';
 import OrdersButton from './OrdersButton';
@@ -10,10 +10,10 @@ import "./Header.scss";
 
 const Header = ({ showControls }) => {
     const headerContent = (
-        <Fragment>
+        <>
             <h1>Skivorna</h1>
             {showControls &&
-                <Fragment>
+                <>
                     <Search />
                     <div className="buttons">
                         <FiltersButton />
@@ -23,19 +23,19 @@ const Header = ({ showControls }) => {
                         <ArtistViewButton />
                     </div>
                     <CollectionStats />
-                </Fragment>
+                </>
             }
-        </Fragment>
+        </>
     );
     return (
-        <Fragment>
+        <>
             <header>
                 {headerContent}
             </header>
             <div className="header-push">
                 {headerContent}
             </div>
-        </Fragment>
+        </>
     )
 }
 
