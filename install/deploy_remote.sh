@@ -1,4 +1,5 @@
 #!/bin/bash
+npm run build || { echo 'npm build failed' ; exit 1; }
 SERVER_IP=$(grep SERVER_PUBLIC_IP $(dirname $0)/../.env | xargs)
 SERVER_IP=${SERVER_IP#*=}
 SERVER_USER=$(grep SERVER_USER $(dirname $0)/../.env | xargs)

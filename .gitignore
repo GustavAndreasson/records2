@@ -4,3 +4,4 @@ __pycache__/
 *.pot
 *.pyc
 node_modules/
+frontend/static/frontend/main.js
