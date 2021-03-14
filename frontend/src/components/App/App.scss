@@ -59,12 +59,17 @@ input {
     }
 }
 
-.status {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 2px 10px 0 5px;
-    background: #ddd;
+#app {
+    .intro-text {
+        max-width: 700px;
+    }
+    .status {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        padding: 2px 10px 0 5px;
+        background: #ddd;
+    }
 }
 
 #app > form {
