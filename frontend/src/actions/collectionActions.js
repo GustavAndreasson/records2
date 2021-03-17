@@ -30,8 +30,6 @@ export const setUsername = user => ({
 
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
-    setTimeout(() => progress(dispatch), 100);
-    let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
         let page = 1;
         let json = {};
@@ -42,7 +40,9 @@ export const getCollection = (user) => async (dispatch, getState) => {
                 throw Error(response.statusText);
             }
             json = await response.json();
-            clearInterval(progressTimer);
+            if (getState().collection.discogsUsername !== user) {
+                break;
+            }
             dispatch(updateProgress({
                 load: Math.round(page * 100 / json.pagination.pagecount)
             }));
@@ -52,8 +52,6 @@ export const getCollection = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(collectionError());
         console.log(error);
-    } finally {
-        clearInterval(progressTimer);
     }
 }
 
@@ -68,7 +66,9 @@ export const updateCollection = () => async (dispatch, getState) => {
             throw Error(response.statusText);
         }
         let json = await response.json();
-        dispatch(getCollection(user));
+        if (getState().collection.discogsUsername === user) {
+            dispatch(getCollection(user));
+        }
     } catch (error) {
         dispatch(collectionError());
         console.log(error);

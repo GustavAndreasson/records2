@@ -92,8 +92,6 @@ export const updateArtist = (artist) => async (dispatch, getState) => {
 
 export const getArtistCollection = (artist) => async (dispatch, getState) => {
     dispatch(requestArtistCollection());
-    setTimeout(() => progress(dispatch), 100);
-    let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
         let page = 1;
         let json = {};
@@ -104,7 +102,9 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
                 throw Error(response.statusText);
             }
             json = await response.json();
-            clearInterval(progressTimer);
+            if (getState().artist.activeArtist && getState().artist.activeArtist.id !== artist.id) {
+                break;
+            }
             dispatch(updateProgress({
                 load: Math.round(page * 100 / json.pagination.pagecount)
             }));
@@ -114,8 +114,6 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);
-    } finally {
-        clearInterval(progressTimer);
     }
 }
 
@@ -124,13 +122,15 @@ export const updateArtistCollection = () => async (dispatch, getState) => {
     setTimeout(() => progress(dispatch), 100);
     let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
-        const artistId = getState().artist.activeArtist.id;
-        let response = await api.updateArtistReleases(artistId);
+        const artist = getState().artist.activeArtist;
+        let response = await api.updateArtistReleases(artist.id);
         if (!response.ok) {
             throw Error(response.statusText);
         }
         let json = await response.json();
-        dispatch(getArtistCollection(artistId));
+        if (getState().artist.activeArtist && getState().artist.activeArtist.id === artist.id) {
+            dispatch(getArtistCollection(artist));
+        }
     } catch (error) {
         dispatch(artistCollectionError());
         console.log(error);
