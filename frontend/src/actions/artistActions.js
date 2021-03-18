@@ -71,7 +71,7 @@ export const getArtist = (artist) => async (dispatch, getState) => {
         dispatch(receiveArtist(json));
     } catch (error) {
         dispatch(artistError());
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -86,7 +86,7 @@ export const updateArtist = (artist) => async (dispatch, getState) => {
         dispatch(receiveArtist(json));
     } catch (error) {
         dispatch(artistError());
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -113,7 +113,7 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
         dispatch(finnishReceiveArtistCollection());
     } catch (error) {
         dispatch(artistCollectionError());
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -133,7 +133,7 @@ export const updateArtistCollection = () => async (dispatch, getState) => {
         }
     } catch (error) {
         dispatch(artistCollectionError());
-        console.log(error);
+        console.error(error);
     } finally {
         clearInterval(progressTimer);
     }

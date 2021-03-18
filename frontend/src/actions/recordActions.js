@@ -44,7 +44,7 @@ export const getRecord = (record) => async (dispatch, getState) => {
         dispatch(receiveRecord(json));
     } catch (error) {
         dispatch(recordError());
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -59,6 +59,6 @@ export const updateRecord = (record) => async (dispatch, getState) => {
         dispatch(receiveRecord(json));
     } catch (error) {
         dispatch(recordError());
-        console.log(error);
+        console.error(error);
     }
 }

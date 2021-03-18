@@ -25,6 +25,6 @@ export const progress = async (dispatch) => {
         dispatch(updateProgress(progressJSON));
     } catch (error) {
         dispatch(updateProgress({}));
-        console.log(error);
+        console.error(error);
     }
 }

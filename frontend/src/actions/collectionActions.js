@@ -51,7 +51,7 @@ export const getCollection = (user) => async (dispatch, getState) => {
         dispatch(finnishReceiveCollection());
     } catch (error) {
         dispatch(collectionError());
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -71,7 +71,7 @@ export const updateCollection = () => async (dispatch, getState) => {
         }
     } catch (error) {
         dispatch(collectionError());
-        console.log(error);
+        console.error(error);
     } finally {
         clearInterval(progressTimer);
     }
