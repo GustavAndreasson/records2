@@ -4,14 +4,14 @@ from django.core.paginator import Paginator
 import json
 
 from ..models import DiscogsUser, UserRecords
-from .. import services
+import records.services.collection as collectionService
 from .. import progress
 
 def getCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
         progress.init(request, ['discogs', 'create'])
-        if not services.updateCollection(user):
+        if not collectionService.updateCollection(user):
             DiscogsUser.objects.filter(username=username).delete()
             return HttpResponse('{}')
         progress.clearProcesses(['discogs', 'create'])
@@ -38,6 +38,6 @@ def getCollection(request, username):
 def updateCollection(request, username):
     progress.init(request, ['discogs', 'create'])
     user, created = DiscogsUser.objects.get_or_create(username=username)
-    services.updateCollection(user)
+    collectionService.updateCollection(user)
     progress.clearProcesses(['create', 'discogs'])
     return HttpResponse(json.dumps({'status': 'success'}))

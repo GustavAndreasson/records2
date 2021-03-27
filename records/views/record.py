@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import json
 
 from ..models import Record
-from .. import services
+import records.services.record as recordService
 
 def getRecord(request, record_id):
     record = get_object_or_404(Record, id=record_id)
@@ -11,7 +11,7 @@ def getRecord(request, record_id):
 
 def updateRecord(request, record_id):
     record = get_object_or_404(Record, id=record_id)
-    services.updateRecord(record)
+    recordService.updateRecord(record)
     return HttpResponse(json.dumps(record.to_dict()))
 
 def setRecordListen(request, record_id, listen_name, listen_key):

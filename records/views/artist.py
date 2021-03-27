@@ -5,7 +5,7 @@ from urllib.parse import unquote
 import json
 
 from ..models import Artist, RecordArtists
-from .. import services
+import records.services.artist as artistService
 from .. import progress
 
 def getArtist(request, artist_id):
@@ -14,14 +14,14 @@ def getArtist(request, artist_id):
 
 def updateArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
-    services.updateArtist(artist)
+    artistService.updateArtist(artist)
     return HttpResponse(json.dumps(artist.to_dict()))
 
 def getArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     if artist.collectionUpdated == None:
         progress.init(request, ['discogs', 'create'])
-        services.collectArtistReleases(artist)
+        artistService.collectArtistReleases(artist)
         progress.clearProcesses(['discogs', 'create'])
     pagesize = int(request.GET.get('pagesize', 100))
     page = int(request.GET.get('page', 1))
@@ -45,7 +45,7 @@ def getArtistReleases(request, artist_id):
 def updateArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     progress.init(request, ['discogs', 'create'])
-    services.collectArtistReleases(artist)
+    artistService.collectArtistReleases(artist)
     progress.clearProcesses(['create', 'discogs'])
     return HttpResponse(json.dumps({'status': 'success'}))
 
