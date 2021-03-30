@@ -5,6 +5,7 @@ import {
     REQUEST_ARTIST_COLLECTION,
     FINNISH_RECEIVE_ARTIST_COLLECTION,
     ARTIST_COLLECTION_ERROR,
+    SET_PROGRESS,
     UPDATE_PROGRESS,
     SHOW_POPUP,
     HIDE_POPUP,
@@ -33,6 +34,8 @@ function ui(state = { collectionLoading: false, progress: {}, status: "", popups
                 collectionLoading: false,
                 status: "Något gick fel..."
             });
+        case SET_PROGRESS:
+            return Object.assign({}, state, { progress: action.progress });
         case UPDATE_PROGRESS:
             return Object.assign({}, state, { progress: action.progress });
         case SHOW_POPUP:

@@ -1,5 +1,5 @@
 import api from "Api";
-import { progress, updateProgress } from "./uiActions";
+import { progress, setProgress, updateProgress } from "./uiActions";
 
 export const SHOW_ARTIST = "SHOW_ARTIST";
 export const showArtist = artist => ({
@@ -92,15 +92,18 @@ export const updateArtist = (artist) => async (dispatch, getState) => {
 
 export const getArtistCollection = (artist) => async (dispatch, getState) => {
     dispatch(requestArtistCollection());
+    setTimeout(() => progress(dispatch), 100);
+    let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
         let page = 1;
         let json = {};
-        dispatch(updateProgress({load: 0}));
+        dispatch(setProgress({load: 0}));
         do {
             let response = await api.getArtistReleases(artist.id, page);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
+            clearInterval(progressTimer);
             json = await response.json();
             if (getState().artist.activeArtist && getState().artist.activeArtist.id !== artist.id) {
                 break;
@@ -114,6 +117,8 @@ export const getArtistCollection = (artist) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(artistCollectionError());
         console.error(error);
+    } finally {
+        clearInterval(progressTimer);
     }
 }
 

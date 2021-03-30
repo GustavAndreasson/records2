@@ -12,6 +12,12 @@ export const hidePopup = popup => ({
     popup
 })
 
+export const SET_PROGRESS = "SET_PROGRESS";
+export const setProgress = progress => ({
+    type: SET_PROGRESS,
+    progress
+})
+
 export const UPDATE_PROGRESS = "UPDATE_PROGRESS";
 export const updateProgress = progress => ({
     type: UPDATE_PROGRESS,
@@ -24,7 +30,6 @@ export const progress = async (dispatch) => {
         let progressJSON = await progressData.json();
         dispatch(updateProgress(progressJSON));
     } catch (error) {
-        dispatch(updateProgress({}));
         console.error(error);
     }
 }

@@ -1,5 +1,5 @@
 import api from "Api";
-import { progress, updateProgress } from "./uiActions";
+import { progress, setProgress, updateProgress } from "./uiActions";
 
 export const REQUEST_COLLECTION = "REQUEST_COLLECTION";
 export const requestCollection = () => ({
@@ -30,15 +30,18 @@ export const setUsername = user => ({
 
 export const getCollection = (user) => async (dispatch, getState) => {
     dispatch(requestCollection());
+    setTimeout(() => progress(dispatch), 100);
+    let progressTimer = setInterval(() => progress(dispatch), 1000);
     try {
         let page = 1;
         let json = {};
-        dispatch(updateProgress({load: 0}));
+        dispatch(setProgress({load: 0}));
         do {
             let response = await api.getCollection(user, page);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
+            clearInterval(progressTimer);
             json = await response.json();
             if (getState().collection.discogsUsername !== user) {
                 break;
@@ -52,6 +55,8 @@ export const getCollection = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch(collectionError());
         console.error(error);
+    } finally {
+        clearInterval(progressTimer);
     }
 }
 
