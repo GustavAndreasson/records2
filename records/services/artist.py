@@ -13,7 +13,7 @@ def createArtist(id, name):
         id=id,
         defaults={'name': __fixArtistName(name)})
     if created:
-        logger.info("Created artist " + member.name + " (" + str(member.id) + ")")
+        logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
     return artist
 
 def updateArtist(artist):
