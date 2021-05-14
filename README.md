@@ -12,15 +12,19 @@ sh install/deploy.sh
 ```
 On server:
 ```sh
-python3 manage.py createsuperuser
-python3 manage.py migrate
+cd /directory/of/records2/
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py createsuperuser
+python manage.py migrate
 sudo service apache restart
 ```
 
 Crontab:
 ```sh
-*/3 * * * * cd /directory/of/records2/;python3 manage.py updaterecords 30 >> /directory/of/records2/logs/updateRecords.log 2>&1
-0 2 * * * cd /directory/of/records2/;python3 manage.py updatecollections >> /directory/of/records2/logs/updateCollections.log 2>&1
+*/3 * * * * cd /directory/of/records2/ && /directory/of/records2/venv/bin/python manage.py updaterecords 30 >> /directory/of/records2/logs/updateRecords.log 2>&1
+0 2 * * * cd /directory/of/records2/ && /directory/of/records2/venv/bin/python manage.py updatecollections >> /directory/of/records2/logs/updateCollections.log 2>&1
 ```
 
 Apache configuration:
@@ -36,6 +40,9 @@ Alias /static /directory/of/records2/static
         </Files>
 </Directory>
 
+WSGIDaemonProcess records2 python-path=/directory/of/records2 python-home=/directory/of/records2/venv
+WSGIProcessGroup records2
+WSGIScriptAlias / /directory/of/records2/records2/wsgi.py
 ```
 
 ### Development
