@@ -7,8 +7,11 @@ const mapStateToProps = state => ({
     popups: state.ui.popups
 });
 
-const mapDispatchToProps = dispatch => ({
-    hidePopup: (name) => { dispatch(hidePopup(name)) }
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    hidePopup: (name) => {
+        ownProps.hide && ownProps.hide();
+        dispatch(hidePopup(name));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Popup);
