@@ -5,6 +5,7 @@ from .. import spotify
 from .. import progress
 import records.services.artist as artistService
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -116,12 +117,9 @@ def __getFormat(format_data):
     for format in format_data:
         format_string = format.get('name')
         if format.get('descriptions'):
-            if "7\"" in format.get('descriptions'):
-                format_string += "7"
-            if "10\"" in format.get('descriptions'):
-                format_string += "10"
-            if "12\"" in format.get('descriptions'):
-                format_string += "12"
+            inch = re.search('(\d+)"', " ".join(format.get('descriptions')))
+            if inch:
+                format_string += inch.group(1)
         formats.append(format_string.replace(" ", "-"))
     return " ".join(formats)
 

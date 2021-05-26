@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
 import "./Record.scss";
 
 const Record = ({ rec, handleClick }) => {
@@ -8,10 +9,12 @@ const Record = ({ rec, handleClick }) => {
     let formats = rec.format ? "format-" + rec.format.replace(/ /, " format-") : "format-none";
 
     return (
-        <div className="record" onClick={() => handleClick(rec)}>
-            <img className={`cover ${formats}`} src={rec.thumbnail}
-                alt={artists + " - " + rec.name}
-                title={artists + " - " + rec.name} />
+        <div className={`record ${formats}`} onClick={() => handleClick(rec)}>
+            <LazyLoad offset={300} once>
+                <img className="cover" src={rec.thumbnail}
+                    alt={artists + " - " + rec.name}
+                    title={artists + " - " + rec.name} />
+            </LazyLoad>
         </div>
     );
 }

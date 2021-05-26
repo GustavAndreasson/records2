@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { forceCheck } from "react-lazyload";
 import Record from "./Record";
 import "./Collection.scss";
 
@@ -8,6 +9,10 @@ const Collection = ({ collection, loadCollection }) => {
             loadCollection();
         }
     });
+
+    useEffect(() => {
+        forceCheck();
+    }, [collection]);
 
     return (
         collection &&

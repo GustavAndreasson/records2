@@ -1,3 +1,23 @@
+$formats: (
+    Memory-stick: (20, 5),
+    Cassette: (30, 15),
+    Vinyl5: (35, 30),
+    none: (40, 35),
+    CD: (40, 35),
+    CDr: (40, 35),
+    Vinyl7: (50, 45),
+    Flexi-disc7: (50, 45),
+    VHS: (60, 35),
+    DVD: (60, 35),
+    DVDr: (60, 35),
+    Blue-ray: (60, 35),
+    Vinyl10: (70, 65),
+    Vinyl12: (90, 85),
+    Vinyl: (90, 85),
+    Laserdisc12: (90, 85),
+    Lathe-Cut: (90, 85)
+);
+
 .record {
     display: inline-block;
     margin: 4px;
@@ -9,28 +29,16 @@
         margin: 1px 7px 7px 1px;
     }
 
+    @each $format, $sizes in $formats {
+        &.format-#{$format}, &.format-#{$format} .cover {
+            height: nth($sizes, 1) + 0px;
+            min-width: nth($sizes, 2) + 0px;
+        }
+    }
+
     .cover {
         height: 40px;
+        min-width: 35px;
         display: block;
-
-        &.format-CD {
-            height: 40px;
-        }
-
-        &.format-Vinyl7 {
-            height: 50px;
-        }
-
-        &.format-Vinyl10 {
-            height: 70px;
-        }
-
-        &.format-Vinyl {
-            height: 90px;
-        }
-
-        &.format-Vinyl12 {
-            height: 90px;
-        }
     }
 }
