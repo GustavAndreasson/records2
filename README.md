@@ -16,8 +16,9 @@ cd /directory/of/records2/
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python manage.py createsuperuser
 python manage.py migrate
+python manage.py createsuperuser
+python manage.py createcachetable
 sudo service apache restart
 ```
 
@@ -47,8 +48,10 @@ WSGIScriptAlias / /directory/of/records2/records2/wsgi.py
 
 ### Development
 ```sh
+npm install
 npm run dev
-python3 manage.py createsuperuser
 python3 manage.py migrate
+python3 manage.py createsuperuser
+python3 manage.py createcachetable
 python3 manage.py runserver
 ```
