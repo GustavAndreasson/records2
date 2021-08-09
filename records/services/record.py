@@ -2,7 +2,6 @@ from datetime import date
 from ..models import Record, RecordArtists, Listen, RecordListens, Track, TrackArtists, Artist
 from .. import discogs
 from .. import spotify
-from .. import progress
 import records.services.artist as artistService
 import logging
 import re
@@ -30,16 +29,18 @@ def createRecord(id, data):
             'format': __getFormat(data.get('format')) if data.get('format') else None
         })
     if created:
-        logger.info("Created record " + record.name + " (" + str(record.id) + ")")
+        logger.info("Created record " + record.name +
+                    " (" + str(record.id) + ")")
         position = 0
         for r_artist in data.get('artists'):
             delimiter = None
             if type(r_artist) is Artist:
                 artist = r_artist
             else:
-                artist = artistService.createArtist(r_artist['id'], r_artist['name'])
+                artist = artistService.createArtist(
+                    r_artist['id'], r_artist['name'])
                 delimiter = r_artist.get('join')
-            ra = RecordArtists.objects.create(
+            RecordArtists.objects.create(
                 record=record,
                 artist=artist,
                 delimiter=delimiter,
@@ -64,14 +65,16 @@ def updateRecord(record):
                     if master_data.get('videos'):
                         release_data['videos'] = master_data.get('videos')
             except discogs.DiscogsError as de:
-                logger.info("Did not find master for record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
+                logger.info("Did not find master for record " + record.name +
+                            " (" + str(record.id) + ") on discogs\n" + str(de))
         else:
             record.master = record.id + 990000000
         RecordArtists.objects.filter(record=record).delete()
         position = 0
         for r_artist in release_data.get('artists'):
-            artist = artistService.createArtist(r_artist['id'], r_artist['name'])
-            ra = RecordArtists.objects.create(
+            artist = artistService.createArtist(
+                r_artist['id'], r_artist['name'])
+            RecordArtists.objects.create(
                 record=record,
                 artist=artist,
                 delimiter=r_artist['join'],
@@ -85,21 +88,25 @@ def updateRecord(record):
             record.cover = release_data['images'][0].get('uri')
             record.thumbnail = release_data['images'][0].get('uri150')
         spotify_listen = Listen.objects.get(name="spotify")
-        if RecordListens.objects.filter(record=record,listen=spotify_listen).count() == 0:
+        if RecordListens.objects.filter(record=record, listen=spotify_listen).count() == 0:
             try:
-                spotify_id = spotify.getAlbumId(record.get_artist(), record.name)
+                spotify_id = spotify.getAlbumId(
+                    record.get_artist(), record.name)
                 if spotify_id:
-                    RecordListens.objects.create(record=record,listen=spotify_listen, listen_key=spotify_id)
+                    RecordListens.objects.create(
+                        record=record, listen=spotify_listen, listen_key=spotify_id)
             except spotify.SpotifyError as se:
                 logger.error("Request to spotify failed:\n" + str(se))
         if release_data.get('videos'):
             youtube_listen = Listen.objects.get(name='youtube')
-            RecordListens.objects.filter(record=record,listen=youtube_listen).delete()
+            RecordListens.objects.filter(
+                record=record, listen=youtube_listen).delete()
             for video in release_data.get('videos'):
                 if "youtube" in video['uri'] and "v=" in video['uri']:
                     youtube_key = video['uri'][video['uri'].find('v=')+2:]
-                    if RecordListens.objects.filter(record=record,listen=youtube_listen, listen_key=youtube_key).count() == 0:
-                        RecordListens.objects.create(record=record, listen=youtube_listen, listen_key=youtube_key, name=video.get('title'))
+                    if RecordListens.objects.filter(record=record, listen=youtube_listen, listen_key=youtube_key).count() == 0:
+                        RecordListens.objects.create(
+                            record=record, listen=youtube_listen, listen_key=youtube_key, name=video.get('title'))
         record.year = release_data.get('year')
         if release_data.get('formats'):
             record.format = __getFormat(release_data.get('formats'))
@@ -108,9 +115,11 @@ def updateRecord(record):
         record.updated = date.today()
         record.save()
     except discogs.DiscogsError as de:
-        logger.info("Did not find record " + record.name + " (" + str(record.id) + ") on discogs\n" + str(de))
+        logger.info("Did not find record " + record.name +
+                    " (" + str(record.id) + ") on discogs\n" + str(de))
         return False
     return True
+
 
 def __getFormat(format_data):
     formats = []
@@ -131,8 +140,9 @@ def __createTrack(record, track_data):
     if track_data.get('artists'):
         position = 0
         for t_artist in track_data.get('artists'):
-            artist = artistService.createArtist(t_artist['id'], t_artist['name'])
-            ta = TrackArtists.objects.create(
+            artist = artistService.createArtist(
+                t_artist['id'], t_artist['name'])
+            TrackArtists.objects.create(
                 track=track,
                 artist=artist,
                 delimiter=t_artist['join'],

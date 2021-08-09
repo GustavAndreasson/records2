@@ -2,13 +2,15 @@ from django.core.cache import cache
 
 session = None
 
+
 def init(request, processes=[]):
     global session
     if request.session.is_empty():
-        request.session.create() # Create session cookie if it does not exist
+        request.session.create()  # Create session cookie if it does not exist
     session = request.session.session_key
     if len(processes) > 0:
-        cache.set(__cacheKey(), { k: 0 for k in processes })
+        cache.set(__cacheKey(), {k: 0 for k in processes})
+
 
 def clearProcesses(processes=None):
     global session
@@ -24,16 +26,19 @@ def clearProcesses(processes=None):
         cache.delete(__cacheKey())
         session = None
 
+
 def updateProgress(process, percent):
     if session:
         progress = getProgress()
         progress[process] = percent
         cache.set(__cacheKey(), progress)
 
+
 def getProgress():
     if session:
         return cache.get(__cacheKey(), {})
     return {}
+
 
 def __cacheKey():
     return 'progress-' + session

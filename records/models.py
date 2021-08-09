@@ -17,7 +17,8 @@ class Artist(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     collectionUpdated = models.DateField(blank=True, null=True)
-    members = models.ManyToManyField('self', through='ArtistMembers', symmetrical=False)
+    members = models.ManyToManyField(
+        'self', through='ArtistMembers', symmetrical=False)
 
     def __str__(self):
         return self.name
@@ -26,11 +27,14 @@ class Artist(models.Model):
         if not full:
             return {"id": self.id, "name": self.name}
         member_relations = ArtistMembers.objects.filter(group=self)
-        members = [{"artist": mr.member.to_dict(False), "active": mr.active} for mr in member_relations]
+        members = [{"artist": mr.member.to_dict(
+            False), "active": mr.active} for mr in member_relations]
         group_relations = ArtistMembers.objects.filter(member=self)
-        groups = [{"artist": gr.group.to_dict(False), "active": gr.active} for gr in group_relations]
+        groups = [{"artist": gr.group.to_dict(
+            False), "active": gr.active} for gr in group_relations]
         updated = str(self.updated) if self.updated else None
-        collectionUpdated = str(self.collectionUpdated) if self.collectionUpdated else None
+        collectionUpdated = str(
+            self.collectionUpdated) if self.collectionUpdated else None
         return {
             "id": self.id,
             "name": self.name,
@@ -61,7 +65,8 @@ class Record(models.Model):
     year = models.IntegerField(blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    price = models.DecimalField(
+        max_digits=7, decimal_places=2, blank=True, null=True)
     listens = models.ManyToManyField(Listen, through='RecordListens')
     artists = models.ManyToManyField(Artist, through='RecordArtists')
 
@@ -85,7 +90,8 @@ class Record(models.Model):
             "updated": str(self.updated) if self.updated else None
         }
         ras = RecordArtists.objects.filter(record=self)
-        artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
+        artists = [{"artist": ra.artist.to_dict(
+            False), "delimiter": ra.delimiter} for ra in ras]
         dict["artists"] = artists
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
@@ -106,6 +112,7 @@ class Record(models.Model):
             artists += ra.artist.name + " "
         return artists
     get_artist.short_description = "Artist"
+
 
 class DiscogsUser(models.Model):
     username = models.CharField(max_length=255)
@@ -135,10 +142,11 @@ class Track(models.Model):
 
     def to_dict(self):
         tas = TrackArtists.objects.filter(track=self)
-        artists = [{"artist": ta.artist.to_dict(False), "delimiter": ta.delimiter} for ta in tas]
+        artists = [{"artist": ta.artist.to_dict(
+            False), "delimiter": ta.delimiter} for ta in tas]
         if len(artists) == 0:
             artists = None
-        return {"position": self.position, "name": self.name, "artists" : artists}
+        return {"position": self.position, "name": self.name, "artists": artists}
 
 
 class RecordListens(models.Model):
@@ -167,8 +175,10 @@ class RecordArtists(models.Model):
 
 
 class ArtistMembers(models.Model):
-    group = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='group')
-    member = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='member')
+    group = models.ForeignKey(
+        Artist, on_delete=models.CASCADE, related_name='group')
+    member = models.ForeignKey(
+        Artist, on_delete=models.CASCADE, related_name='member')
     active = models.IntegerField(blank=True, null=True)
 
 

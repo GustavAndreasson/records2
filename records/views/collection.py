@@ -7,6 +7,7 @@ from ..models import DiscogsUser, UserRecords
 import records.services.collection as collectionService
 from .. import progress
 
+
 def getCollection(request, username):
     user, created = DiscogsUser.objects.get_or_create(username=username)
     if created:
@@ -35,9 +36,10 @@ def getCollection(request, username):
         }
     }))
 
+
 def updateCollection(request, username):
     progress.init(request, ['discogs', 'create'])
-    user, created = DiscogsUser.objects.get_or_create(username=username)
+    user, created = get_object_or_404(DiscogsUser, username=username)
     collectionService.updateCollection(user)
     progress.clearProcesses(['create', 'discogs'])
     return HttpResponse(json.dumps({'status': 'success'}))

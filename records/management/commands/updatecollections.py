@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from records.models import DiscogsUser
 from records.services.collection import updateCollection
 
+
 class Command(BaseCommand):
     help = "Updates collections for all users"
 

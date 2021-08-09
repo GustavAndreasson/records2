@@ -8,14 +8,17 @@ from ..models import Artist, RecordArtists
 import records.services.artist as artistService
 from .. import progress
 
+
 def getArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     return HttpResponse(json.dumps(artist.to_dict()))
+
 
 def updateArtist(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     artistService.updateArtist(artist)
     return HttpResponse(json.dumps(artist.to_dict()))
+
 
 def getArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
@@ -42,6 +45,7 @@ def getArtistReleases(request, artist_id):
         }
     }))
 
+
 def updateArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
     progress.init(request, ['discogs', 'create'])
@@ -49,10 +53,12 @@ def updateArtistReleases(request, artist_id):
     progress.clearProcesses(['create', 'discogs'])
     return HttpResponse(json.dumps({'status': 'success'}))
 
+
 def getArtistAutocomplete(request):
     artist_start = unquote(request.GET.get('q', ''))
     list_length = int(unquote(request.GET.get('l', '5')))
     if len(artist_start) < 2:
         return HttpResponse('[]')
-    artists = Artist.objects.filter(name__istartswith=artist_start).order_by('name')
+    artists = Artist.objects.filter(
+        name__istartswith=artist_start).order_by('name')
     return HttpResponse(json.dumps([artist.to_dict(False) for artist in artists[:list_length]]))

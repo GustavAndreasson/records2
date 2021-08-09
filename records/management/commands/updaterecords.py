@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from records.models import Record
 from records.services.record import updateRecord
 
+
 class Command(BaseCommand):
     help = "Loads extra info to all records"
 

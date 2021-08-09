@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.core.cache import cache
 from .models import Record
 
+
 @receiver(post_save, sender=Record)
 def save_record(sender, instance, created, **kwargs):
     if not created:

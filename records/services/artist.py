@@ -8,13 +8,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def createArtist(id, name):
     artist, created = Artist.objects.get_or_create(
         id=id,
         defaults={'name': __fixArtistName(name)})
     if created:
-        logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
+        logger.info("Created artist " + artist.name +
+                    " (" + str(artist.id) + ")")
     return artist
+
 
 def updateArtist(artist):
     logger.info("Updating artist " + artist.name + " (" + str(artist.id) + ")")
@@ -29,8 +32,9 @@ def updateArtist(artist):
                     id=member_data['id'],
                     defaults={'name': __fixArtistName(member_data['name'])})
                 if created:
-                    logger.info("Created artist " + member.name + " (" + str(member.id) + ")")
-                am = ArtistMembers.objects.update_or_create(
+                    logger.info("Created artist " + member.name +
+                                " (" + str(member.id) + ")")
+                ArtistMembers.objects.update_or_create(
                     group=artist,
                     member=member,
                     defaults={'active': member_data['active']})
@@ -40,27 +44,32 @@ def updateArtist(artist):
                     id=group_data['id'],
                     defaults={'name': __fixArtistName(group_data['name'])})
                 if created:
-                    logger.info("Created artist " + group.name + " (" + str(group.id) + ")")
-                am = ArtistMembers.objects.update_or_create(
+                    logger.info("Created artist " + group.name +
+                                " (" + str(group.id) + ")")
+                ArtistMembers.objects.update_or_create(
                     group=group,
                     member=artist,
                     defaults={'active': group_data['active']})
         artist.updated = date.today()
         artist.save()
     except discogs.DiscogsError as de:
-        logger.info("Did not find artist " + artist.name + " (" + str(artist.id) + ") on discogs\n" + str(de))
+        logger.info("Did not find artist " + artist.name +
+                    " (" + str(artist.id) + ") on discogs\n" + str(de))
         return False
     return True
 
+
 def collectArtistReleases(artist):
-    logger.info("Collecting releases for artist " + artist.name + " (" + str(artist.id) + ")")
+    logger.info("Collecting releases for artist " +
+                artist.name + " (" + str(artist.id) + ")")
     try:
         artist_releases = discogs.getArtistReleases(artist.id)
-        artist_main_releases = [release for release in artist_releases if release.get('role') == "Main"]
+        artist_main_releases = [
+            release for release in artist_releases if release.get('role') == "Main"]
         tot = len(artist_main_releases)
         nr = 0
         for release_data in artist_main_releases:
-            record = recordService.createRecord(release_data['id'], {
+            recordService.createRecord(release_data['id'], {
                 'name': release_data.get('title'),
                 'cover': release_data.get('thumb'),
                 'thumbnail': release_data.get('thumb'),
@@ -74,11 +83,13 @@ def collectArtistReleases(artist):
                 progress.updateProgress('create', int((nr * 100) / tot))
         progress.updateProgress('create', 100)
     except discogs.DiscogsError as de:
-        logger.info("Did not find releases for " + artist.name + " on discogs\n" + str(de))
+        logger.info("Did not find releases for " +
+                    artist.name + " on discogs\n" + str(de))
         return False
     artist.collectionUpdated = date.today()
     artist.save()
     return True
+
 
 def __fixArtistName(name):
     myre = re.compile('\(\d+\)$')
