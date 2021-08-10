@@ -14,8 +14,8 @@ def createArtist(id, name):
         id=id,
         defaults={'name': __fixArtistName(name)})
     if created:
-        logger.info("Created artist " + artist.name +
-                    " (" + str(artist.id) + ")")
+        logger.info("Created artist " + artist.name
+                    + " (" + str(artist.id) + ")")
     return artist
 
 
@@ -32,8 +32,8 @@ def updateArtist(artist):
                     id=member_data['id'],
                     defaults={'name': __fixArtistName(member_data['name'])})
                 if created:
-                    logger.info("Created artist " + member.name +
-                                " (" + str(member.id) + ")")
+                    logger.info("Created artist " + member.name
+                                + " (" + str(member.id) + ")")
                 ArtistMembers.objects.update_or_create(
                     group=artist,
                     member=member,
@@ -44,8 +44,8 @@ def updateArtist(artist):
                     id=group_data['id'],
                     defaults={'name': __fixArtistName(group_data['name'])})
                 if created:
-                    logger.info("Created artist " + group.name +
-                                " (" + str(group.id) + ")")
+                    logger.info("Created artist " + group.name
+                                + " (" + str(group.id) + ")")
                 ArtistMembers.objects.update_or_create(
                     group=group,
                     member=artist,
@@ -53,19 +53,20 @@ def updateArtist(artist):
         artist.updated = date.today()
         artist.save()
     except discogs.DiscogsError as de:
-        logger.info("Did not find artist " + artist.name +
-                    " (" + str(artist.id) + ") on discogs\n" + str(de))
+        logger.info("Did not find artist " + artist.name
+                    + " (" + str(artist.id) + ") on discogs\n" + str(de))
         return False
     return True
 
 
 def collectArtistReleases(artist):
-    logger.info("Collecting releases for artist " +
-                artist.name + " (" + str(artist.id) + ")")
+    logger.info("Collecting releases for artist "
+                + artist.name + " (" + str(artist.id) + ")")
     try:
         artist_releases = discogs.getArtistReleases(artist.id)
         artist_main_releases = [
-            release for release in artist_releases if release.get('role') == "Main"]
+            release for release in artist_releases
+            if release.get('role') == "Main"]
         tot = len(artist_main_releases)
         nr = 0
         for release_data in artist_main_releases:
@@ -83,8 +84,8 @@ def collectArtistReleases(artist):
                 progress.updateProgress('create', int((nr * 100) / tot))
         progress.updateProgress('create', 100)
     except discogs.DiscogsError as de:
-        logger.info("Did not find releases for " +
-                    artist.name + " on discogs\n" + str(de))
+        logger.info("Did not find releases for "
+                    + artist.name + " on discogs\n" + str(de))
         return False
     artist.collectionUpdated = date.today()
     artist.save()
@@ -92,5 +93,5 @@ def collectArtistReleases(artist):
 
 
 def __fixArtistName(name):
-    myre = re.compile('\(\d+\)$')
+    myre = re.compile('\\(\\d+\\)$')
     return myre.sub('', name)

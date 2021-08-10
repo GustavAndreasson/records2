@@ -23,10 +23,10 @@ class SpotifyError(Exception):
 def getAlbum(artist, album):
     auth = "Bearer " + __getToken()
     headers = {"Authorization": auth}
-    query = "album:" + quote(album) + "%20artist:" + \
-        quote(artist) + "&type=album"
-    r = requests.get(config('SPOTIFY_API_URL') +
-                     "search?q=" + query, headers=headers)
+    query = "album:" + quote(album) + "%20artist:" + quote(artist) \
+            + "&type=album"
+    r = requests.get(config('SPOTIFY_API_URL')
+                     + "search?q=" + query, headers=headers)
     try:
         data = r.json()
     except JSONDecodeError:
@@ -50,8 +50,8 @@ def __getToken():
     token_info = cache.get(TOKEN_KEY)
     if not token_info or time.time() > token_info[1]:
         token_info = __renewToken()
-        logger.debug("Renewed Spotify token, expires " +
-                     time.asctime(time.localtime(token_info[1])))
+        logger.debug("Renewed Spotify token, expires "
+                     + time.asctime(time.localtime(token_info[1])))
     return token_info[0]
 
 
@@ -63,8 +63,8 @@ def __renewToken():
         "Content-Type": "application/x-www-form-urlencoded"
     }
     data = {"grant_type": "client_credentials"}
-    r = requests.post(config('SPOTIFY_ACCOUNT_URL') +
-                      "token", data=data, headers=headers)
+    r = requests.post(config('SPOTIFY_ACCOUNT_URL')
+                      + "token", data=data, headers=headers)
     token_info = (r.json()['access_token'], r.json()
                   ['expires_in'] + time.time())
     cache.set(TOKEN_KEY, token_info)

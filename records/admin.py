@@ -1,5 +1,14 @@
 from django.contrib import admin
-from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers, DiscogsUser
+from records.models import (
+    Record,
+    Artist,
+    RecordArtists,
+    Track,
+    Listen,
+    RecordListens,
+    ArtistMembers,
+    DiscogsUser
+)
 from records.services.record import updateRecord
 from records.services.artist import updateArtist
 from django.core.cache import cache

@@ -1,5 +1,13 @@
 from datetime import date
-from ..models import Record, RecordArtists, Listen, RecordListens, Track, TrackArtists, Artist
+from ..models import (
+    Record,
+    RecordArtists,
+    Listen,
+    RecordListens,
+    Track,
+    TrackArtists,
+    Artist
+)
 from .. import discogs
 from .. import spotify
 import records.services.artist as artistService
@@ -29,8 +37,8 @@ def createRecord(id, data):
             'format': __getFormat(data.get('format')) if data.get('format') else None
         })
     if created:
-        logger.info("Created record " + record.name +
-                    " (" + str(record.id) + ")")
+        logger.info("Created record " + record.name
+                    + " (" + str(record.id) + ")")
         position = 0
         for r_artist in data.get('artists'):
             delimiter = None
@@ -53,33 +61,9 @@ def updateRecord(record):
     logger.info("Updating record " + record.name + " (" + str(record.id) + ")")
     try:
         release_data = discogs.getRelease(record.id)
-        if release_data.get('master_id'):
-            record.master = release_data.get('master_id')
-            try:
-                master_data = discogs.getMaster(release_data.get('master_id'))
-                release_data['year'] = master_data.get('year')
-                if not release_data.get('images'):
-                    if master_data.get('images'):
-                        release_data['images'] = master_data.get('images')
-                if not release_data.get('videos'):
-                    if master_data.get('videos'):
-                        release_data['videos'] = master_data.get('videos')
-            except discogs.DiscogsError as de:
-                logger.info("Did not find master for record " + record.name +
-                            " (" + str(record.id) + ") on discogs\n" + str(de))
-        else:
-            record.master = record.id + 990000000
-        RecordArtists.objects.filter(record=record).delete()
-        position = 0
-        for r_artist in release_data.get('artists'):
-            artist = artistService.createArtist(
-                r_artist['id'], r_artist['name'])
-            RecordArtists.objects.create(
-                record=record,
-                artist=artist,
-                delimiter=r_artist['join'],
-                position=position)
-            position += 1
+        __updateDataWithMasterData(release_data)
+        record.master = release_data.get('master_id')
+        __updateArtists(record, release_data.get('artists'))
         record.track_set.all().delete()
         if release_data.get('tracklist'):
             for track_data in release_data.get('tracklist'):
@@ -87,26 +71,7 @@ def updateRecord(record):
         if release_data.get('images'):
             record.cover = release_data['images'][0].get('uri')
             record.thumbnail = release_data['images'][0].get('uri150')
-        spotify_listen = Listen.objects.get(name="spotify")
-        if RecordListens.objects.filter(record=record, listen=spotify_listen).count() == 0:
-            try:
-                spotify_id = spotify.getAlbumId(
-                    record.get_artist(), record.name)
-                if spotify_id:
-                    RecordListens.objects.create(
-                        record=record, listen=spotify_listen, listen_key=spotify_id)
-            except spotify.SpotifyError as se:
-                logger.error("Request to spotify failed:\n" + str(se))
-        if release_data.get('videos'):
-            youtube_listen = Listen.objects.get(name='youtube')
-            RecordListens.objects.filter(
-                record=record, listen=youtube_listen).delete()
-            for video in release_data.get('videos'):
-                if "youtube" in video['uri'] and "v=" in video['uri']:
-                    youtube_key = video['uri'][video['uri'].find('v=')+2:]
-                    if RecordListens.objects.filter(record=record, listen=youtube_listen, listen_key=youtube_key).count() == 0:
-                        RecordListens.objects.create(
-                            record=record, listen=youtube_listen, listen_key=youtube_key, name=video.get('title'))
+        __updateListens(record, release_data.get('videos'))
         record.year = release_data.get('year')
         if release_data.get('formats'):
             record.format = __getFormat(release_data.get('formats'))
@@ -115,10 +80,76 @@ def updateRecord(record):
         record.updated = date.today()
         record.save()
     except discogs.DiscogsError as de:
-        logger.info("Did not find record " + record.name +
-                    " (" + str(record.id) + ") on discogs\n" + str(de))
+        logger.info("Did not find record " + record.name
+                    + " (" + str(record.id) + ") on discogs\n" + str(de))
         return False
     return True
+
+
+def __updateDataWithMasterData(release_data):
+    if release_data.get('master_id'):
+        try:
+            master_data = discogs.getMaster(release_data.get('master_id'))
+            release_data['year'] = master_data.get('year')
+            if not release_data.get('images'):
+                if master_data.get('images'):
+                    release_data['images'] = master_data.get('images')
+            if not release_data.get('videos'):
+                if master_data.get('videos'):
+                    release_data['videos'] = master_data.get('videos')
+        except discogs.DiscogsError as de:
+            logger.info("Did not find master for record "
+                        + release_data.get('title')
+                        + " (" + str(release_data.get('id')) + ") on discogs\n"
+                        + str(de))
+    else:
+        release_data['master_id'] = release_data.get('id') + 990000000
+
+
+def __updateArtists(record, artists):
+    RecordArtists.objects.filter(record=record).delete()
+    position = 0
+    for r_artist in artists:
+        artist = artistService.createArtist(
+            r_artist['id'], r_artist['name'])
+        RecordArtists.objects.create(
+            record=record,
+            artist=artist,
+            delimiter=r_artist['join'],
+            position=position)
+        position += 1
+
+
+def __updateListens(record, videos):
+    spotify_listen = Listen.objects.get(name="spotify")
+    if RecordListens.objects.filter(record=record,
+                                    listen=spotify_listen).count() == 0:
+        try:
+            spotify_id = spotify.getAlbumId(
+                record.get_artist(), record.name)
+            if spotify_id:
+                RecordListens.objects.create(
+                    record=record,
+                    listen=spotify_listen,
+                    listen_key=spotify_id)
+        except spotify.SpotifyError as se:
+            logger.error("Request to spotify failed:\n" + str(se))
+    if videos:
+        youtube_listen = Listen.objects.get(name='youtube')
+        RecordListens.objects.filter(
+            record=record, listen=youtube_listen).delete()
+        for video in videos:
+            if "youtube" in video['uri'] and "v=" in video['uri']:
+                youtube_key = video['uri'][video['uri'].find('v=')+2:]
+                if RecordListens.objects.filter(record=record,
+                                                listen=youtube_listen,
+                                                listen_key=youtube_key)\
+                        .count() == 0:
+                    RecordListens.objects.create(
+                        record=record,
+                        listen=youtube_listen,
+                        listen_key=youtube_key,
+                        name=video.get('title'))
 
 
 def __getFormat(format_data):
@@ -126,7 +157,7 @@ def __getFormat(format_data):
     for format in format_data:
         format_string = format.get('name')
         if format.get('descriptions'):
-            inch = re.search('(\d+)"', " ".join(format.get('descriptions')))
+            inch = re.search('(\\d+)"', " ".join(format.get('descriptions')))
             if inch:
                 format_string += inch.group(1)
         formats.append(format_string.replace(" ", "-"))

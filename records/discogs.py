@@ -21,11 +21,13 @@ class DiscogsError(Exception):
 
 
 def getCollection(user_name):
-    return __getPaginatedCollection("users/" + user_name + "/collection/folders/0/releases")
+    return __getPaginatedCollection("users/" + user_name
+                                    + "/collection/folders/0/releases")
 
 
 def getRelease(release_id):
-    return __readUri("/releases/" + str(release_id) + "?curr_abbr=SEK")
+    return __readUri("/releases/" + str(release_id)
+                     + "?curr_abbr=SEK")
 
 
 def getMaster(master_id):
@@ -37,7 +39,8 @@ def getArtist(artist_id):
 
 
 def getArtistReleases(artist_id, check_main=True):
-    return __getPaginatedCollection("/artists/" + str(artist_id) + "/releases", check_main)
+    return __getPaginatedCollection("/artists/" + str(artist_id)
+                                    + "/releases", check_main)
 
 
 def __getPaginatedCollection(uri, check_main=False):
@@ -68,10 +71,11 @@ def __readUri(uri):
     accesses = DiscogsAccess.objects.filter(
         timestamp__gt=int(time.time()) - time_discogs_accesses - 1)
     if len(accesses) >= max_discogs_accesses - 1:
-        wait = max(time_discogs_accesses + 1 -
-                   (int(time.time()) - accesses[0].timestamp), 0)
-        logger.debug("Limit reached on discogs accesses with " + str(len(accesses)) +
-                     " in last " + time_discogs_accesses + " seconds. Waiting " + str(wait) + " seconds")
+        wait = max(time_discogs_accesses + 1
+                   - (int(time.time()) - accesses[0].timestamp), 0)
+        logger.debug("Limit reached on discogs accesses with "
+                     + str(len(accesses)) + " in last " + time_discogs_accesses
+                     + " seconds. Waiting " + str(wait) + " seconds")
         time.sleep(wait)
     DiscogsAccess.objects.create(timestamp=time.time())
     headers = {"User-Agent": config('DISCOGS_AGENT')}
@@ -83,8 +87,9 @@ def __readUri(uri):
     except JSONDecodeError as je:
         raise DiscogsError(r.status_code, str(je))
     if r.status_code == 429:
-        logger.error("Too many requests to Discogs\n" + data.get('message') +
-                     "\ntrying again after " + time_discogs_accesses + " seconds")
+        logger.error("Too many requests to Discogs\n" + data.get('message')
+                     + "\ntrying again after " + time_discogs_accesses
+                     + " seconds")
         time.sleep(time_discogs_accesses)
         r = requests.get(url, params=params, headers=headers)
     elif r.status_code != 200:
