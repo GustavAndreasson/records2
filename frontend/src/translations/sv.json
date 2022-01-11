@@ -18,5 +18,10 @@
       "sum": "Pris summa: ",
       "avg": "Pris medel: "
     }
+  },
+  "progress": {
+    "load": "Laddar skivor",
+    "discogs": "Hämtar från discogs",
+    "create": "Skapar skivor"
   }
 }
