@@ -1,0 +1,22 @@
+{
+  "app": {
+    "intro": "Här kan du titta på din eller andras skivsamlingar. Du kan sortera eller filtrera på flera olika attribut.",
+    "startuser1": "Skriv in användarnamn från ",
+    "startuser2": " i fältet för användarnamn för att hämta en skivsamling (första gången en skivsamling hämtas kan det ta några minuter).",
+    "startartist": "Du kan också titta på en artist och vilka skivor den har släppt. Fyll då in artistens namn i fältet för artist (artisten måste finnas i databasen för att den ska komma upp som alternativ)."
+  },
+  "artistinput": {
+    "artist": "Artist"
+  },
+  "common": {
+    "ok": "OK"
+  },
+  "header": {
+    "title": "Skivorna",
+    "collectionstats": {
+      "counter": "Antal skivor: ",
+      "sum": "Pris summa: ",
+      "avg": "Pris medel: "
+    }
+  }
+}

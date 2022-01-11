@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Header from "Components/Header";
 import Collection from "Components/Collection";
 import Progress from "Components/Progress";
@@ -12,40 +13,37 @@ import Settings from "Components/Settings";
 import "./App.scss";
 
 const App = ({
-    discogsUsername,
-    activeArtist,
-    viewArtistCollection
-}) => (
+  discogsUsername,
+  activeArtist,
+  viewArtistCollection
+}) => {
+  const { t, i18n } = useTranslation();
+  return (
     <>
-        <Header />
-        <Filters />
-        <Orders />
-        <Settings />
-        { discogsUsername || (activeArtist && viewArtistCollection) ?
-            <>
-                <ArtistInfo />
-                <Collection />
-                <RecordInfo />
-                <Progress />
-            </>
+      <Header />
+      <Filters />
+      <Orders />
+      <Settings />
+      {discogsUsername || (activeArtist && viewArtistCollection) ?
+        <>
+          <ArtistInfo />
+          <Collection />
+          <RecordInfo />
+          <Progress />
+        </>
         :
-            <>
-                <div className="intro-text">
-                    <p>
-                        Här kan du titta på din eller andras skivsamlingar. Du kan sortera eller filtrera på flera olika attribut.
-                    </p>
-                    <p>
-                        Skriv in användarnamn från <a href="https://discogs.com">discogs.com</a> i fältet för användarnamn för att hämta en skivsamling (första gången en skivsamling hämtas kan det ta några minuter).
-                    </p>
-                    <p>
-                        Du kan också titta på en artist och vilka skivor den har släppt. Fyll då in artistens namn i fältet för artist (artisten måste finnas i databasen för att den ska komma upp som alternativ).
-                    </p>
-                </div>
-                <UsernameInput />
-                <ArtistInput />
-            </>
-        }
+        <>
+          <div className="intro-text">
+            <p>{t('app.intro')}</p>
+            <p>{t('app.startuser1')}<a href="httpd://discogs.com">discogs.com</a>{t('app.startuser2')}</p>
+            <p>{t('app.startartist')}</p>
+          </div>
+          <UsernameInput />
+          <ArtistInput />
+        </>
+      }
     </>
-)
+  )
+}
 
 export default App;
