@@ -121,35 +121,41 @@ def __updateArtists(record, artists):
 
 
 def __updateListens(record, videos):
-    spotify_listen = Listen.objects.get(name="spotify")
-    if RecordListens.objects.filter(record=record,
-                                    listen=spotify_listen).count() == 0:
-        try:
-            spotify_id = spotify.getAlbumId(
-                record.get_artist(), record.name)
-            if spotify_id:
-                RecordListens.objects.create(
-                    record=record,
-                    listen=spotify_listen,
-                    listen_key=spotify_id)
-        except spotify.SpotifyError as se:
-            logger.error("Request to spotify failed:\n" + str(se))
-    if videos:
-        youtube_listen = Listen.objects.get(name='youtube')
-        RecordListens.objects.filter(
-            record=record, listen=youtube_listen).delete()
-        for video in videos:
-            if "youtube" in video['uri'] and "v=" in video['uri']:
-                youtube_key = video['uri'][video['uri'].find('v=')+2:]
-                if RecordListens.objects.filter(record=record,
-                                                listen=youtube_listen,
-                                                listen_key=youtube_key)\
-                        .count() == 0:
+    try:
+        spotify_listen = Listen.objects.get(name="spotify")
+        if RecordListens.objects.filter(record=record,
+                                        listen=spotify_listen).count() == 0:
+            try:
+                spotify_id = spotify.getAlbumId(
+                    record.get_artist(), record.name)
+                if spotify_id:
                     RecordListens.objects.create(
                         record=record,
-                        listen=youtube_listen,
-                        listen_key=youtube_key,
-                        name=video.get('title'))
+                        listen=spotify_listen,
+                        listen_key=spotify_id)
+            except spotify.SpotifyError as se:
+                logger.error("Request to spotify failed:\n" + str(se))
+    except Listen.DoesNotExist:
+        logger.error("Spotify listen does not exist")
+    if videos:
+        try:
+            youtube_listen = Listen.objects.get(name='youtube')
+            RecordListens.objects.filter(
+                record=record, listen=youtube_listen).delete()
+            for video in videos:
+                if "youtube" in video['uri'] and "v=" in video['uri']:
+                    youtube_key = video['uri'][video['uri'].find('v=')+2:]
+                    if RecordListens.objects.filter(record=record,
+                                                    listen=youtube_listen,
+                                                    listen_key=youtube_key)\
+                            .count() == 0:
+                        RecordListens.objects.create(
+                            record=record,
+                            listen=youtube_listen,
+                            listen_key=youtube_key,
+                            name=video.get('title'))
+        except Listen.DoesNotExist:
+            logger.error("Youtube listen does not exist")
 
 
 def __getFormat(format_data):

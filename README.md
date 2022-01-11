@@ -19,6 +19,7 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py createcachetable
+python manage.py loaddata listens
 sudo service apache restart
 ```
 
@@ -53,5 +54,6 @@ npm run dev
 python3 manage.py migrate
 python3 manage.py createsuperuser
 python3 manage.py createcachetable
+python3 manage.py loaddata listens
 python3 manage.py runserver
 ```
