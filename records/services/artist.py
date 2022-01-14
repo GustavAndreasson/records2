@@ -1,4 +1,5 @@
 import re
+from django.db import DatabaseError
 from datetime import date
 from ..models import Artist, ArtistMembers
 from .. import discogs
@@ -56,6 +57,10 @@ def updateArtist(artist):
         logger.info("Did not find artist " + artist.name
                     + " (" + str(artist.id) + ") on discogs\n" + str(de))
         return False
+    except DatabaseError as de:
+        logger.error("Could not update artist " + artist.name
+                     + " (" + str(artist.id) + ")\n" + str(de))
+        return False
     return True
 
 
@@ -70,15 +75,22 @@ def collectArtistReleases(artist):
         tot = len(artist_main_releases)
         nr = 0
         for release_data in artist_main_releases:
-            recordService.createRecord(release_data['id'], {
-                'name': release_data.get('title'),
-                'cover': release_data.get('thumb'),
-                'thumbnail': release_data.get('thumb'),
-                'year': release_data.get('year'),
-                'type': release_data.get('type'),
-                'main_release': release_data.get('main_release'),
-                'artists': [artist]
-            })
+            try:
+                recordService.createRecord(release_data['id'], {
+                    'name': release_data.get('title'),
+                    'cover': release_data.get('thumb'),
+                    'thumbnail': release_data.get('thumb'),
+                    'year': release_data.get('year'),
+                    'type': release_data.get('type'),
+                    'main_release': release_data.get('main_release'),
+                    'artists': [artist]
+                })
+            except DatabaseError as de:
+                logger.error(
+                    "Could not create record "
+                    + release_data.get('title')
+                    + " (" + release_data['id'] + ")\n"
+                    + str(de))
             nr = nr + 1
             if nr % 10 == 0:
                 progress.updateProgress('create', int((nr * 100) / tot))

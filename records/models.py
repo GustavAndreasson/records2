@@ -146,7 +146,11 @@ class Track(models.Model):
             False), "delimiter": ta.delimiter} for ta in tas]
         if len(artists) == 0:
             artists = None
-        return {"position": self.position, "name": self.name, "artists": artists}
+        return {
+            "position": self.position,
+            "name": self.name,
+            "artists": artists
+        }
 
 
 class RecordListens(models.Model):

@@ -1,6 +1,7 @@
 from ..models import UserRecords
 from .. import discogs
 from .. import progress
+from django.db import DatabaseError
 import records.services.record as recordService
 import logging
 
@@ -16,26 +17,35 @@ def updateCollection(user):
         tot = len(collection_data)
         nr = 0
         for release_data in collection_data:
-            if release_data['basic_information']['id'] not in old_collection:
-                record = recordService.createRecord(
-                    release_data['basic_information']['id'], {
-                        'name': release_data['basic_information'].get('title'),
-                        'master': release_data['basic_information'].get('master_id'),
-                        'cover': release_data['basic_information'].get('cover_image'),
-                        'thumbnail': release_data['basic_information'].get('thumb'),
-                        'year': release_data['basic_information'].get('year'),
-                        'format': release_data['basic_information'].get('formats'),
-                        'artists': release_data['basic_information']['artists']
-                    })
-                ur = UserRecords.objects\
-                    .create(user=user,
-                            record=record,
-                            added_date=release_data['date_added'][0:10])
-                logger.info("Added record " + record.name
-                            + " (" + str(record.id) + ") to collection for "
-                            + user.username)
+            basic_information = release_data['basic_information']
+            if basic_information['id'] not in old_collection:
+                try:
+                    record = recordService.createRecord(
+                        basic_information['id'], {
+                            'name': basic_information.get('title'),
+                            'master': basic_information.get('master_id'),
+                            'cover': basic_information.get('cover_image'),
+                            'thumbnail': basic_information.get('thumb'),
+                            'year': basic_information.get('year'),
+                            'format': basic_information.get('formats'),
+                            'artists': basic_information['artists']
+                        })
+                    ur = UserRecords.objects\
+                        .create(user=user,
+                                record=record,
+                                added_date=release_data['date_added'][0:10])
+                    logger.info(
+                        "Added record " + record.name
+                        + " (" + str(record.id) + ") to collection for "
+                        + user.username)
+                except DatabaseError as de:
+                    logger.error(
+                        "Could not create record "
+                        + basic_information.get('title')
+                        + " (" + basic_information['id'] + ")\n"
+                        + str(de))
             else:
-                old_collection.remove(release_data['basic_information']['id'])
+                old_collection.remove(basic_information['id'])
             nr = nr + 1
             if nr % 10 == 0:
                 progress.updateProgress('create', int((nr * 100) / tot))

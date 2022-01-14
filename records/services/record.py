@@ -1,4 +1,5 @@
 from datetime import date
+from django.db import DatabaseError
 from ..models import (
     Record,
     RecordArtists,
@@ -82,6 +83,10 @@ def updateRecord(record):
     except discogs.DiscogsError as de:
         logger.info("Did not find record " + record.name
                     + " (" + str(record.id) + ") on discogs\n" + str(de))
+        return False
+    except DatabaseError as de:
+        logger.error("Could not update record " + record.name
+                     + " (" + str(record.id) + ")\n" + str(de))
         return False
     return True
 
