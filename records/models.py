@@ -12,7 +12,7 @@ from django.db import models
 
 class Artist(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=1024, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.CharField(max_length=255, blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
@@ -58,7 +58,7 @@ class Listen(models.Model):
 
 class Record(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=1024)
     master = models.IntegerField(blank=True, null=True)
     cover = models.CharField(max_length=255, blank=True, null=True)
     format = models.CharField(max_length=255, blank=True, null=True)
@@ -133,7 +133,7 @@ class UserRecords(models.Model):
 
 class Track(models.Model):
     position = models.CharField(max_length=255, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=1024, blank=True, null=True)
     record = models.ForeignKey(Record, on_delete=models.CASCADE)
     artists = models.ManyToManyField(Artist, through='TrackArtists')
 
