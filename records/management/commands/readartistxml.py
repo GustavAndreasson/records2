@@ -24,8 +24,9 @@ class Command(BaseCommand):
             self.stdout.write("No artists in range")
             return
         if options['start'] or options['end']:
-            self.stdout.write("Importing " + str(end - start + 1) + " of "
-                              + str(nr_artists) + " artists")
+            self.stdout.write("Importing artists " + str(start) + " to "
+                              + str(end) + " of " + str(nr_artists)
+                              + " artists")
             nr_artists = end - start + 1
         else:
             self.stdout.write("Importing " + str(nr_artists) + " artists")
@@ -35,15 +36,18 @@ class Command(BaseCommand):
             options['file'], events=('end',), tag='artist')
         for event, elem in context:
             if loop_counter >= start:
-                if not elem.find('data_quality').text in ('Needs Major Changes',
-                                                          'Entirely Incorrect'):
+                if elem.find('name').text and elem.find('id').text and \
+                        not elem.find('data_quality').text in \
+                        ('Needs Major Changes', 'Entirely Incorrect'):
                     createArtist(elem.find('id').text, elem.find('name').text)
                 artist_counter += 1
                 progress = (artist_counter / nr_artists) * 100
                 self.stdout.write(
-                    "[{0}] {1}%".format('#'*int(progress/2)
-                                        + ' '*(50-int(progress/2)),
-                                        int(progress)),
+                    "[{0}] {1}% {2}/{3}".format('#'*int(progress/2)
+                                                + ' '*(50-int(progress/2)),
+                                                int(progress),
+                                                artist_counter,
+                                                nr_artists),
                     ending='\r')
                 self.stdout.flush()
             elem.clear()
