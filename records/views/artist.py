@@ -60,5 +60,5 @@ def getArtistAutocomplete(request):
     if len(artist_start) < 2:
         return HttpResponse('[]')
     artists = Artist.objects.filter(
-        name__istartswith=artist_start).order_by('name')
+        sname__istartswith=artist_start[:20]).order_by('sname')
     return HttpResponse(json.dumps([artist.to_dict(False) for artist in artists[:list_length]]))

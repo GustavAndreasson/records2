@@ -13,6 +13,7 @@ from django.db import models
 class Artist(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
+    sname = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.CharField(max_length=255, blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
@@ -45,6 +46,13 @@ class Artist(models.Model):
             "updated": updated,
             "collectionUpdated": collectionUpdated
         }
+
+    def save(self, *args, **kwargs):
+        self.sname = self.name[:20].lower()
+        super(Artist, self).save(*args, **kwargs)
+
+    class Meta:
+        indexes = [models.Index(fields=['sname'])]
 
 
 class Listen(models.Model):
