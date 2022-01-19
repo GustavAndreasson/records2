@@ -106,4 +106,4 @@ def collectArtistReleases(artist):
 
 def __fixArtistName(name):
     myre = re.compile('\\(\\d+\\)$')
-    return myre.sub('', name)
+    return myre.sub('', name).strip()
