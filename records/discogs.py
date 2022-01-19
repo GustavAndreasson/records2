@@ -74,8 +74,9 @@ def __readUri(uri):
         wait = max(time_discogs_accesses + 1
                    - (int(time.time()) - accesses[0].timestamp), 0)
         logger.debug("Limit reached on discogs accesses with "
-                     + str(len(accesses)) + " in last " + time_discogs_accesses
-                     + " seconds. Waiting " + str(wait) + " seconds")
+                     + str(len(accesses)) + " in last "
+                     + str(time_discogs_accesses) + " seconds. Waiting "
+                     + str(wait) + " seconds")
         time.sleep(wait)
     DiscogsAccess.objects.create(timestamp=time.time())
     headers = {"User-Agent": config('DISCOGS_AGENT')}
