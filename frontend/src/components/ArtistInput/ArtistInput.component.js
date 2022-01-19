@@ -37,7 +37,7 @@ const ArtistInput = ({ handleSetArtist }) => {
       <AutoSuggest
         renderSuggestion={(item, { isHighlighted }) => (
           <div className={isHighlighted ? "highlight" : ""}>
-            {item.name}
+            {item.name + (artistList.filter(a => a.name == item.name).length > 1 ? " (" + item.id + ")" : "")}
           </div>)}
         getSuggestionValue={item => item.name}
         onSuggestionsFetchRequested={({ value, reason }) => reason == 'input-changed' && setArtistQuery(value)}
@@ -45,14 +45,19 @@ const ArtistInput = ({ handleSetArtist }) => {
           setArtistList([]);
           setArtistQuery("");
         }}
-        onSuggestionSelected={(e, { suggestionValue }) => setArtistQuery(suggestionValue)}
+        onSuggestionSelected={(e, { suggestion, suggestionValue }) => {
+          setArtistQuery(suggestionValue);
+          setArtist(suggestion);
+        }}
         suggestions={artistList}
         inputProps={{
           placeholder: t('artistinput.artist'),
           value: artistName,
           onChange: (e, { newValue }) => {
             setArtistName(newValue || "");
-            setArtist(newValue ? artistList.find(item => item.name.toLowerCase().startsWith(newValue.toLowerCase())) : null);
+            setArtist(newValue
+              ? artistList.find(item => item.name.toLowerCase().startsWith(newValue.toLowerCase()))
+              : null);
           }
         }}
         highlightFirstSuggestion={true}
