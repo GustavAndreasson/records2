@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 def createArtist(id, name):
     artist, created = Artist.objects.get_or_create(
         id=id,
-        defaults={'name': __fixArtistName(name)})
+        defaults={'name': fixArtistName(name)})
     if created:
         logger.info("Created artist " + artist.name
                     + " (" + str(artist.id) + ")")
@@ -31,7 +31,7 @@ def updateArtist(artist):
             for member_data in artist_data.get('members'):
                 member, created = Artist.objects.get_or_create(
                     id=member_data['id'],
-                    defaults={'name': __fixArtistName(member_data['name'])})
+                    defaults={'name': fixArtistName(member_data['name'])})
                 if created:
                     logger.info("Created artist " + member.name
                                 + " (" + str(member.id) + ")")
@@ -43,7 +43,7 @@ def updateArtist(artist):
             for group_data in artist_data.get('groups'):
                 group, created = Artist.objects.get_or_create(
                     id=group_data['id'],
-                    defaults={'name': __fixArtistName(group_data['name'])})
+                    defaults={'name': fixArtistName(group_data['name'])})
                 if created:
                     logger.info("Created artist " + group.name
                                 + " (" + str(group.id) + ")")
@@ -104,6 +104,6 @@ def collectArtistReleases(artist):
     return True
 
 
-def __fixArtistName(name):
+def fixArtistName(name):
     myre = re.compile('\\(\\d+\\)$')
     return myre.sub('', name).strip()
