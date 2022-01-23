@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { updateRecord, filterYear, showListen, hideRecord } from "Actions";
 import { selectActiveRecord } from "Selectors";
@@ -12,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
     updateRecord: record => { dispatch(updateRecord(record)) },
     handleYearClick: year => { dispatch(filterYear(year)) },
     handleListenClick: listen => { dispatch(showListen(listen)) },
-    hideRecord: listen => { dispatch(hideRecord()) }
+    hideRecord: () => { dispatch(hideRecord()) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordInfo);

@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { selectDirectLink } from "Selectors";
 import DirectLink from "./DirectLink.component";

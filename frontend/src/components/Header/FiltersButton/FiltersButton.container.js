@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { showPopup } from "Actions";
 import FiltersButton from "./FiltersButton.component";

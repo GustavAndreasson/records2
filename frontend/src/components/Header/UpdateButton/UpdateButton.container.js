@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import {
     updateCollection,
@@ -27,7 +26,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
             ? dispatchProps.handleUpdateArtistCollection
             : dispatchProps.handleUpdateCollection
         )),
-    collectionLoading: stateProps.collectionLoading
+    collectionLoading: stateProps.collectionLoading,
+    ...ownProps
 })
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(UpdateButton);

@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { showRecord } from "Actions";
 import Record from "./Record.component";

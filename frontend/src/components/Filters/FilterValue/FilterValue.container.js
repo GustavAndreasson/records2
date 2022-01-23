@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { selectCollection } from "Selectors";
 import FilterValue from "./FilterValue.component";
