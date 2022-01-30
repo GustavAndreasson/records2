@@ -89,7 +89,7 @@ def __readUri(uri):
         raise DiscogsError(r.status_code, str(je))
     if r.status_code == 429:
         logger.error("Too many requests to Discogs\n" + data.get('message')
-                     + "\ntrying again after " + time_discogs_accesses
+                     + "\ntrying again after " + str(time_discogs_accesses)
                      + " seconds")
         time.sleep(time_discogs_accesses)
         r = requests.get(url, params=params, headers=headers)
