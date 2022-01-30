@@ -39,7 +39,7 @@ def getCollection(request, username):
 
 def updateCollection(request, username):
     progress.init(request, ['discogs', 'create'])
-    user, created = get_object_or_404(DiscogsUser, username=username)
+    user = get_object_or_404(DiscogsUser, username=username)
     collectionService.updateCollection(user)
     progress.clearProcesses(['create', 'discogs'])
     return HttpResponse(json.dumps({'status': 'success'}))
