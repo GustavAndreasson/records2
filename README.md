@@ -36,6 +36,11 @@ Alias /static /directory/of/records2/static
         Require all granted
 </Directory>
 
+Alias /media /directory/of/records2/media
+<Directory /directory/of/records2/media>
+        Require all granted
+</Directory>
+
 <Directory /directory/of/records2/records2>
         <Files wsgi.py>
                 Require all granted
@@ -51,9 +56,23 @@ WSGIScriptAlias / /directory/of/records2/records2/wsgi.py
 ```sh
 npm install
 npm run dev
-python3 manage.py migrate
-python3 manage.py createsuperuser
-python3 manage.py createcachetable
-python3 manage.py loaddata listens
-python3 manage.py runserver
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py createcachetable
+python manage.py loaddata listens
+python manage.py runserver
 ```
+
+## Import artists
+```sh
+wget http://discogs-data.s3-us-west-2.amazonaws.com/data/2022/discogs_20220101_artists.xml.gz
+gunzip discogs_20220101_artists.xml.gz
+python manage.py importartistxml discogs_20220101_artists.xml
+```
+Adjust file name to get most current artists dump.
+
+## Download covers for created, but not updated records
+```sh
+python manage.py downloadcovers 100
+```
+Number limits number of covers that will be downloaded.

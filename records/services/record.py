@@ -1,5 +1,8 @@
 from datetime import date
 from django.db import DatabaseError
+from django.core import files
+import requests
+from io import BytesIO
 from ..models import (
     Record,
     RecordArtists,
@@ -70,8 +73,15 @@ def updateRecord(record):
             for track_data in release_data.get('tracklist'):
                 __createTrack(record, track_data)
         if release_data.get('images'):
+            old_cover = record.cover
             record.cover = release_data['images'][0].get('uri')
             record.thumbnail = release_data['images'][0].get('uri150')
+            if old_cover != record.cover:
+                try:
+                    downloadCover(record)
+                except requests.exceptions.RequestException as e:
+                    logger.error("Error when downloading cover art for " + record.name
+                                 + " (" + str(record.id) + ")\n" + str(e))
         __updateListens(record, release_data.get('videos'))
         record.year = release_data.get('year')
         if release_data.get('formats'):
@@ -190,3 +200,14 @@ def __createTrack(record, track_data):
                 delimiter=t_artist['join'],
                 position=position)
             position += 1
+
+
+def downloadCover(record):
+    if not record.cover:
+        return False
+    resp = requests.get(record.cover)
+    resp.raise_for_status()
+    fp = BytesIO()
+    fp.write(resp.content)
+    record.cover_file.save(str(record.id) + ".jpg",  files.File(fp))
+    return True

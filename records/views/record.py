@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 import json
 
 from ..models import Record, Listen, RecordListens
@@ -13,7 +13,8 @@ def getRecord(request, record_id):
 
 def updateRecord(request, record_id):
     record = get_object_or_404(Record, id=record_id)
-    recordService.updateRecord(record)
+    if not recordService.updateRecord(record):
+        raise Http404
     return HttpResponse(json.dumps(record.to_dict()))
 
 

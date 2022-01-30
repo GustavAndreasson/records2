@@ -8,6 +8,8 @@
 from __future__ import unicode_literals
 from django.core.cache import cache
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 
 class Artist(models.Model):
@@ -77,6 +79,11 @@ class Record(models.Model):
         max_digits=7, decimal_places=2, blank=True, null=True)
     listens = models.ManyToManyField(Listen, through='RecordListens')
     artists = models.ManyToManyField(Artist, through='RecordArtists')
+    cover_file = models.ImageField(
+        upload_to="records", blank=True, null=True)
+    thumbnail_file = ImageSpecField(
+        source='cover_file', processors=[ResizeToFit(200, 90)],
+        format='JPEG', options={'quality': 60})
 
     def __str__(self):
         return self.name
@@ -90,10 +97,10 @@ class Record(models.Model):
             "id": self.id,
             "name": self.name,
             "master": self.master,
-            "cover": self.cover,
+            "cover": self.cover_file.url if self.cover_file else self.cover,
             "format": self.format,
             "year":  self.year,
-            "thumbnail": self.thumbnail,
+            "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,
             "price": str(self.price) if self.price else None,
             "updated": str(self.updated) if self.updated else None
         }
