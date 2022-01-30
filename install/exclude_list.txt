@@ -8,3 +8,4 @@ node_modules
 logs
 frontend/src
 datadump
+media
