@@ -17,7 +17,8 @@ class Command(BaseCommand):
         for record in records:
             self.stdout.write("Downloading cover for record " + record.name)
             try:
-                downloadCover(record)
+                if downloadCover(record):
+                    record.save()
             except HTTPError as e:
                 if e.response.status_code == 429:
                     self.stdout.write("Discogs download limit reached. Wait"

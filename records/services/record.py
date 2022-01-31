@@ -205,9 +205,12 @@ def __createTrack(record, track_data):
 def downloadCover(record):
     if not record.cover:
         return False
+    if record.cover[-10:] == "spacer.gif":
+        record.cover = None
+        return True
     resp = requests.get(record.cover)
     resp.raise_for_status()
     fp = BytesIO()
     fp.write(resp.content)
     record.cover_file.save(str(record.id) + ".jpg",  files.File(fp))
-    return True
+    return False
