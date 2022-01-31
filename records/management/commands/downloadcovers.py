@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from records.models import Record
-from records.services.record import downloadCover
+from records.services.record import downloadCover, updateRecord
 from requests.exceptions import RequestException, HTTPError
 
 
@@ -24,6 +24,12 @@ class Command(BaseCommand):
                     self.stdout.write("Discogs download limit reached. Wait"
                                       + " for a minute before running again")
                     break
+                elif e.response.status_code == 404:
+                    self.stdout.write("Cover file for record " + record.name
+                                      + " is missing on discogs. Updating "
+                                      + "record.\n")
+                    updateRecord(record)
+                    continue
                 else:
                     self.stdout.write("Error downloading cover for record "
                                       + record.name + "\n" + str(e))

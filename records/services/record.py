@@ -80,8 +80,9 @@ def updateRecord(record):
                 try:
                     downloadCover(record)
                 except requests.exceptions.RequestException as e:
-                    logger.error("Error when downloading cover art for " + record.name
-                                 + " (" + str(record.id) + ")\n" + str(e))
+                    logger.error("Error when downloading cover art for "
+                                 + record.name + " (" + str(record.id) + ")\n"
+                                 + str(e))
         __updateListens(record, release_data.get('videos'))
         record.year = release_data.get('year')
         if release_data.get('formats'):
