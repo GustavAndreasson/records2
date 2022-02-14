@@ -4,7 +4,9 @@ import { selectActiveRecord } from "Selectors";
 import RecordInfo from "./RecordInfo.component";
 
 const mapStateToProps = state => ({
-    rec: selectActiveRecord(state)
+    rec: selectActiveRecord(state),
+    rate: state.collection.rate,
+    currency: state.collection.currency
 });
 
 const mapDispatchToProps = dispatch => ({

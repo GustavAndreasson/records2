@@ -4,7 +4,7 @@ import Artists from "./Artists";
 import Listen from "./Listen";
 import "./RecordInfo.scss";
 
-const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick, hideRecord }) => {
+const RecordInfo = ({ rec, rate, currency, updateRecord, handleYearClick, handleListenClick, hideRecord }) => {
     useEffect(() => {
         if (rec) {
             let threeMonthsAgo = new Date();
@@ -24,7 +24,9 @@ const RecordInfo = ({ rec, updateRecord, handleYearClick, handleListenClick, hid
                     <div className="left">
                         { rec.format && <div className="format">{rec.format}</div> }
                         { rec.year && <div className="year" onClick={() => handleYearClick(rec.year)}>{rec.year}</div> }
-                        { rec.price && <div className="price">{"(" + rec.price + ")"}</div> }
+                        { rec.price && rate && <div className="price">
+                          {"(" + (rec.price * rate).toFixed(2) + " " + currency + ")"}
+                        </div> }
                         <div className="tracks">
                             {rec.tracks && rec.tracks.map((track, index) => (
                                 <div className="track" key={index}>

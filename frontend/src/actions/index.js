@@ -3,3 +3,4 @@ export * from "./recordActions";
 export * from "./artistActions";
 export * from "./processActions";
 export * from "./uiActions";
+export * from "./currencyActions";

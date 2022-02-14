@@ -8,7 +8,8 @@ const api = {
 	updateArtist: async artistId => fetch("records/artist/" + artistId + "/update"),
 	updateArtistReleases: async artistId => fetch("records/artist/" + artistId + "/releases/update"),
 	getArtistAutocomplete: async (artistStart, length) => fetch("records/artist/autocomplete?q=" + encodeURIComponent(artistStart) + "&l=" + length),
-	getProgress: async () => fetch("records/progress")
+	getProgress: async () => fetch("records/progress"),
+	getRate: async currency => fetch("records/rate/" + currency)
 };
 
 export default api;

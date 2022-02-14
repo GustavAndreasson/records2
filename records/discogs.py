@@ -26,12 +26,11 @@ def getCollection(user_name):
 
 
 def getRelease(release_id):
-    return __readUri("/releases/" + str(release_id)
-                     + "?curr_abbr=SEK")
+    return __readUri("/releases/" + str(release_id))
 
 
 def getMaster(master_id):
-    return __readUri("/masters/" + str(master_id) + "?curr_abbr=SEK")
+    return __readUri("/masters/" + str(master_id))
 
 
 def getArtist(artist_id):
@@ -82,9 +81,11 @@ def __readUri(uri):
     headers = {"User-Agent": config('DISCOGS_AGENT')}
     params = {"key": config('DISCOGS_KEY'), "secret": config('DISCOGS_SECRET')}
     url = config('DISCOGS_BASE_URL') + uri
-    r = requests.get(url, params=params, headers=headers)
     try:
+        r = requests.get(url, params=params, headers=headers)
         data = r.json()
+    except requests.exceptions.RequestException as re:
+        raise DiscogsError(re.response.status_code, str(re))
     except JSONDecodeError as je:
         raise DiscogsError(r.status_code, str(je))
     if r.status_code == 429:

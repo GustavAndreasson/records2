@@ -19,6 +19,10 @@
       "avg": "Pris medel: "
     }
   },
+  "settings": {
+    "title": "Inställningar",
+    "currency": "Valuta"
+  },
   "progress": {
     "load": "Laddar skivor",
     "discogs": "Hämtar från discogs",

@@ -10,14 +10,18 @@ import {
     REQUEST_RECORD,
     RECEIVE_RECORD,
     RECORD_ERROR,
-    SHOW_ARTIST
+    SHOW_ARTIST,
+    SET_CURRENCY,
+    RECEIVE_RATE
 } from "Actions";
 
 function collection(state = {
     discogsUsername: "",
     collection: null,
     activeRecord: null,
-    activeListen: null
+    activeListen: null,
+    currency: "SEK",
+    rate: 0
 }, action) {
     switch(action.type) {
         case SHOW_RECORD:
@@ -47,13 +51,13 @@ function collection(state = {
             return state;
         case RECEIVE_RECORD:
             return Object.assign({}, state, state.collection && {
-				collection: action.record.id in state.collection
-                    ? {...state.collection, [action.record.id]: {
-                        ...action.record,
-                        addedDate: state.collection[action.record.id].addedDate
-                    } }
-                    : state.collection
-			});
+      				collection: action.record.id in state.collection
+                          ? {...state.collection, [action.record.id]: {
+                              ...action.record,
+                              addedDate: state.collection[action.record.id].addedDate
+                          } }
+                          : state.collection
+            });
         case RECORD_ERROR:
             return state;
         case SET_USERNAME:
@@ -61,6 +65,14 @@ function collection(state = {
                 discogsUsername: action.user,
                 collection: null
             });
+        case SET_CURRENCY:
+          return Object.assign({}, state, {
+              currency: action.currency
+          });
+        case RECEIVE_RATE:
+          return Object.assign({}, state, {
+              rate: action.rate.currency == state.currency ? action.rate.rate : state.rate
+          });
         default:
             return state;
     }

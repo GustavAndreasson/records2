@@ -4,6 +4,7 @@ from .views import collection
 from .views import record
 from .views import artist
 from .views import progress
+from .views import rates
 
 app_name = 'records'
 urlpatterns = [
@@ -29,4 +30,6 @@ urlpatterns = [
         artist.getArtistAutocomplete, name='getArtistAutocomplete'),
     url(r'^progress$',
         progress.getProgress, name='getProgress'),
+    url(r'^rate/(?P<currency>\w+)$',
+        rates.getRate, name='getRate'),
 ]

@@ -40,7 +40,7 @@ export const receiveArtistCollection = json => ({
 })
 
 export const FINNISH_RECEIVE_ARTIST_COLLECTION = "FINNISH_RECEIVE_ARTIST_COLLECTION";
-export const finnishReceiveArtistCollection = json => ({
+export const finnishReceiveArtistCollection = () => ({
     type: FINNISH_RECEIVE_ARTIST_COLLECTION
 })
 

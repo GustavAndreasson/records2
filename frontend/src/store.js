@@ -8,7 +8,8 @@ import Persistant from "Utils/Persistant";
 Persistant.init([
     { path: "process.filters", lsKey: "filters", qKey : "f", validate: Filter.validate, default: [] },
     { path: "process.orders", lsKey: "orders", qKey: "o", validate: Order.validate, default: [] },
-    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "u", default: "" },
+    { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "u", default: "" },,
+    { path: "collection.currency", lsKey: "currency", default: "SEK" },
     { path: "artist.activeArtist", lsKey: "active_artist",  qKey: "a", ref: true, default: null },
     { path: "artist.viewArtistCollection", lsKey: "view_artist_collection", qKey: "va", default: false }
 ]);
@@ -18,7 +19,9 @@ const initialState = {
         discogsUsername: "",
         collection: null,
         activeRecord: null,
-        activeListen: null
+        activeListen: null,
+        currency: "SEK",
+        rate: 0
     },
     artist: {
         activeArtist: null,

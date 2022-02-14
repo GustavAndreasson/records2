@@ -78,11 +78,12 @@ export const selectActiveRecord = createSelector(
 
 export const selectCollectionStats = createSelector(
     selectOrderedFilteredCollection,
-    (orderedFilteredCollection) => {
-        if (!orderedFilteredCollection) {
+    state => state.collection.rate,
+    (orderedFilteredCollection, rate) => {
+        if (!orderedFilteredCollection || !rate) {
             return null;
         }
-        let priceSum = orderedFilteredCollection.reduce((sum, rec) => sum + (rec.price ? parseFloat(rec.price) : 0), 0);
+        let priceSum = rate * orderedFilteredCollection.reduce((sum, rec) => sum + (rec.price ? parseFloat(rec.price) : 0), 0);
 		return {
 			qty: orderedFilteredCollection.length,
 			sum: priceSum.toFixed(2),

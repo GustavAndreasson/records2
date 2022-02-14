@@ -13,7 +13,7 @@ export const receiveCollection = json => ({
 })
 
 export const FINNISH_RECEIVE_COLLECTION = "FINNISH_RECEIVE_COLLECTION";
-export const finnishReceiveCollection = json => ({
+export const finnishReceiveCollection = () => ({
     type: FINNISH_RECEIVE_COLLECTION
 })
 

@@ -3,10 +3,13 @@ import { forceCheck } from "react-lazyload";
 import Record from "./Record";
 import "./Collection.scss";
 
-const Collection = ({ collection, collectionId, loadCollection }) => {
+const Collection = ({ collection, collectionId, rate, loadCollection, loadRate }) => {
   useEffect(() => {
     if (!collection) {
       loadCollection();
+    }
+    if (!rate) {
+      loadRate();
     }
   }, [collectionId]);
 
