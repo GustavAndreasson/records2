@@ -83,7 +83,7 @@ class Record(models.Model):
         upload_to="records", blank=True, null=True)
     thumbnail_file = ImageSpecField(
         source='cover_file', processors=[ResizeToFit(200, 90)],
-        format='JPEG', options={'quality': 60})
+        format='JPEG', options={'quality': 100})
 
     def __str__(self):
         return self.name
