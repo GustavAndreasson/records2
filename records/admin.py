@@ -17,11 +17,13 @@ from django.core.cache import cache
 
 class ArtistInline(admin.TabularInline):
     model = RecordArtists
+    readonly_fields = ('artist',)
     extra = 0
 
 
 class TrackInline(admin.TabularInline):
     model = Track
+    readonly_fields = ('position', 'name')
     extra = 0
 
 
@@ -62,12 +64,14 @@ def update_artist(modeladmin, request, queryset):
 
 class MembersInline(admin.TabularInline):
     model = ArtistMembers
+    readonly_fields = ('member',)
     extra = 0
     fk_name = 'group'
 
 
 class GroupsInline(admin.TabularInline):
     model = ArtistMembers
+    readonly_fields = ('group',)
     extra = 0
     fk_name = 'member'
 
