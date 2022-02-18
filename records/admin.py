@@ -23,7 +23,6 @@ class ArtistInline(admin.TabularInline):
 
 class TrackInline(admin.TabularInline):
     model = Track
-    readonly_fields = ('position', 'name')
     extra = 0
 
 
