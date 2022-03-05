@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Helmet } from 'react-helmet';
 import Header from "Components/Header";
 import Collection from "Components/Collection";
 import Progress from "Components/Progress";
@@ -20,6 +21,9 @@ const App = ({
   const { t, i18n } = useTranslation();
   return (
     <>
+      <Helmet>
+        <title>{t('app.title')}</title>
+      </Helmet>
       <Header />
       <Filters />
       <Orders />

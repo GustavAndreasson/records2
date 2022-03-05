@@ -1,5 +1,6 @@
 {
   "app": {
+    "title": "Sortera skivorna",
     "intro": "Här kan du titta på din eller andras skivsamlingar. Du kan sortera eller filtrera på flera olika attribut.",
     "startuser1": "Skriv in användarnamn från ",
     "startuser2": " i fältet för användarnamn för att hämta en skivsamling (första gången en skivsamling hämtas kan det ta några minuter).",
@@ -19,9 +20,28 @@
       "avg": "Pris medel: "
     }
   },
+  "process": {
+    "sort": "Sortera",
+    "filter": "Filtrera",
+    "attributes": {
+      "name": "Namn",
+      "year": "År",
+      "artist": "Artist",
+      "track": "Spår",
+      "format": "Format",
+      "price": "Pris",
+      "addedDate": "Tillagd",
+      "id": "ID"
+    }
+  },
   "settings": {
     "title": "Inställningar",
-    "currency": "Valuta"
+    "currency": "Valuta",
+    "language": "Språk",
+    "lang": {
+      "sv": "Svenska",
+      "en": "Engelska"
+    }
   },
   "progress": {
     "load": "Laddar skivor",

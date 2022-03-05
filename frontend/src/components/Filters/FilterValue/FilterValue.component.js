@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Filter from "Utils/Filter";
 import AutoSuggest from "react-autosuggest";
 

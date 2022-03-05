@@ -5,6 +5,7 @@ import UsernameInput from "Components/UsernameInput";
 import ArtistInput from "Components/ArtistInput";
 import DirectLink from "./DirectLink";
 import CurrencySelect from "./CurrencySelect";
+import LanguageSelect from "./LanguageSelect";
 import "./Settings.scss";
 
 const Settings = () => {
@@ -16,6 +17,7 @@ const Settings = () => {
             <UsernameInput />
             <ArtistInput />
             <CurrencySelect />
+            <LanguageSelect />
         </div>
     </Popup>
 )};

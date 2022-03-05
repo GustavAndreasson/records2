@@ -1,22 +1,23 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import en from './en.json';
 import sv from './sv.json';
 
-let language = localStorage.getItem('language');
-
-if (language === undefined) {
-  language = 'sv';
-}
-
-i18n.use(initReactI18next).init({
+i18n.use(initReactI18next).use(LanguageDetector).init({
+  detection: {
+    order: ['querystring', 'localStorage', 'sessionStorage', 'navigator'],
+    lookupQuerystring: 'lng',
+    lookupLocalStorage: 'i18nextLng',
+    lookupSessionStorage: 'i18nextLng',
+  },
   resources: {
     en: { translations: en },
     sv: { translations: sv },
   },
   fallbackLng: 'sv',
-  lng: language,
+  //lng: language,
   // debug only when not in production
   debug: process.env.NODE_ENV !== 'production',
   ns: ['translations'],

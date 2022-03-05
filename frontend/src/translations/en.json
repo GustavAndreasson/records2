@@ -1,3 +1,51 @@
 {
-  
+  "app": {
+    "title": "Sort you records",
+    "intro": "You can look at your or others record collections. You can sort or filter on several different attributes.",
+    "startuser1": "Input you user name from ",
+    "startuser2": " in the user name field to fetch a record collection (the first time a collection is fetched it might take several minutes).",
+    "startartist": "You can also look at an artist and the records it has released. Enter the artists name it the field for artist."
+  },
+  "artistinput": {
+    "artist": "Artist"
+  },
+  "common": {
+    "ok": "OK"
+  },
+  "header": {
+    "title": "The records",
+    "collectionstats": {
+      "counter": "Number of records: ",
+      "sum": "Price sum: ",
+      "avg": "Price average: "
+    }
+  },
+  "process": {
+    "sort": "Sort",
+    "filter": "Filter",
+    "attributes": {
+      "name": "Name",
+      "year": "Year",
+      "artist": "Artist",
+      "track": "Track",
+      "format": "Format",
+      "price": "Price",
+      "addedDate": "Added date",
+      "id": "ID"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "currency": "Currency",
+    "language": "Language",
+    "lang": {
+      "sv": "Swedish",
+      "en": "English"
+    }
+  },
+  "progress": {
+    "load": "Loading records",
+    "discogs": "Fetching from discogs",
+    "create": "Creating records"
+  }
 }
