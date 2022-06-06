@@ -24,7 +24,23 @@
     }
 
     .popup-header {
+        position: relative;
         height: 30px;
+
+        .loader {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30px;
+            right: 30px;
+
+            .bar {
+                background-color: #aaaaaa;
+                height: 30px;
+                width: 15%;
+                animation: move 2s linear infinite alternate;
+            }
+        }
 
         .close-button {
             position: absolute;
@@ -61,4 +77,9 @@
         max-height: calc(100vh - 100px);
         padding: 0 10px 10px;
     }
+}
+
+@keyframes move {
+    0% { margin-left: 0; }
+    100% { margin-left: 85%; }
 }

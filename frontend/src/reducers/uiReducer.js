@@ -5,6 +5,9 @@ import {
     REQUEST_ARTIST_COLLECTION,
     FINNISH_RECEIVE_ARTIST_COLLECTION,
     ARTIST_COLLECTION_ERROR,
+    REQUEST_RECORD,
+    RECEIVE_RECORD,
+    RECORD_ERROR,
     SET_PROGRESS,
     UPDATE_PROGRESS,
     SHOW_POPUP,
@@ -13,7 +16,12 @@ import {
     SHOW_LISTEN
 } from "Actions";
 
-function ui(state = { collectionLoading: false, progress: {}, status: "", popups: "" }, action) {
+function ui(state = { collectionLoading: false,
+                      recordsLoading: [],
+                      progress: {},
+                      status: "",
+                      popups: "" },
+            action) {
     switch(action.type) {
         case REQUEST_COLLECTION:
         case REQUEST_ARTIST_COLLECTION:
@@ -26,14 +34,19 @@ function ui(state = { collectionLoading: false, progress: {}, status: "", popups
         case FINNISH_RECEIVE_ARTIST_COLLECTION:
             return Object.assign({}, state, {
                 collectionLoading: false,
-				status: false
-			});
+        				status: false
+        		});
         case COLLECTION_ERROR:
         case ARTIST_COLLECTION_ERROR:
             return Object.assign({}, state, {
                 collectionLoading: false,
                 status: "Något gick fel..."
             });
+        case REQUEST_RECORD:
+            return Object.assign({}, state, { recordsLoading: [...state.recordsLoading, action.recordId] });
+        case RECEIVE_RECORD:
+        case RECORD_ERROR:
+            return Object.assign({}, state, { recordsLoading: state.recordsLoading.filter(r => r !== action.recordId) });
         case SET_PROGRESS:
             return Object.assign({}, state, { progress: action.progress });
         case UPDATE_PROGRESS:

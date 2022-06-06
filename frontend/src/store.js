@@ -35,6 +35,7 @@ const initialState = {
     },
     ui: {
         collectionLoading: false,
+        recordsLoading: [],
         progress: null,
         status: "",
         popups: ""

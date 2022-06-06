@@ -5,6 +5,7 @@ import RecordInfo from "./RecordInfo.component";
 
 const mapStateToProps = state => ({
     rec: selectActiveRecord(state),
+    recordsLoading: state.ui.recordsLoading,
     rate: state.collection.rate,
     currency: state.collection.currency
 });

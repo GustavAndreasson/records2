@@ -4,7 +4,14 @@ import Artists from "./Artists";
 import Listen from "./Listen";
 import "./RecordInfo.scss";
 
-const RecordInfo = ({ rec, rate, currency, updateRecord, handleYearClick, handleListenClick, hideRecord }) => {
+const RecordInfo = ({ rec,
+                      recordsLoading,
+                      rate,
+                      currency,
+                      updateRecord,
+                      handleYearClick,
+                      handleListenClick,
+                      hideRecord }) => {
     useEffect(() => {
         if (rec) {
             let threeMonthsAgo = new Date();
@@ -17,8 +24,14 @@ const RecordInfo = ({ rec, rate, currency, updateRecord, handleYearClick, handle
 
     return (rec &&
         <>
-            <Popup name="recordInfo" icon={{icon: "fas fa-record-vinyl"}} title={rec.name} scrolling={true} hide={hideRecord}>
-                <div className="record-info">
+            <Popup
+                name="recordInfo"
+                icon={{icon: "fas fa-record-vinyl"}}
+                title={rec.name} scrolling={true}
+                loading={recordsLoading.includes(rec.id)}
+                hide={hideRecord}
+            >
+                <div className={"record-info"}>
                     <img className="cover" src={rec.cover} />
                     <div className="artists"><Artists artists={rec.artists} /></div>
                     <div className="left">
