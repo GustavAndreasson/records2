@@ -1,55 +1,55 @@
 .record-info {
-    max-width: 605px;
+  max-width: 605px;
 
-    .cover {
-        width: 100%;
+  .cover {
+    width: 100%;
+  }
+
+  .left {
+    float: left;
+    div {
+      max-width: 350px;
     }
+  }
 
-    .left {
-        float: left;
-        div {
-            max-width: 350px;
-        }
+  .right {
+    float: right;
+  }
+
+  .format {
+    font-size: 14px;
+  }
+
+  .year {
+    color: #0000aa;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .track {
+    font-size: 12px;
+
+    .position {
+      font-weight: bold;
     }
+  }
 
-    .right {
-        float: right;
+  .listen-link {
+    text-align: right;
+    max-width: 250px;
+    height: 24px;
+    padding: 2px 0;
+    font-size: 13px;
+    line-height: 24px;
+    overflow: hidden;
+
+    button {
+      float: right;
+      margin-left: 2px;
+      padding: 3px 5px;
+      img {
+        height: 18px;
+      }
     }
-
-    .format {
-        font-size: 14px;
-    }
-
-    .year {
-        color: #0000aa;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .track {
-        font-size: 12px;
-
-        .position {
-            font-weight: bold;
-        }
-    }
-
-    .listen-link {
-        text-align: right;
-        max-width: 250px;
-        height: 24px;
-        padding: 2px 0;
-        font-size: 13px;
-        line-height: 24px;
-        overflow: hidden;
-
-        button {
-            float: right;
-            margin-left: 2px;
-            padding: 3px 5px;
-            img {
-                height: 18px;
-            }
-        }
-    }
+  }
 }

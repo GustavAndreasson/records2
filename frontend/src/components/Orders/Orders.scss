@@ -1,43 +1,43 @@
 .orders {
-    .current-orders {
-        margin-bottom: 10px;
+  .current-orders {
+    margin-bottom: 10px;
 
-        .order {
-            border: 1px solid #000;
-            border-radius: 5px;
-            padding: 5px;
-            margin-bottom: 5px;
-            overflow: hidden;
-            line-height: 26px;
+    .order {
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 5px;
+      overflow: hidden;
+      line-height: 26px;
 
-            .direction {
-                margin-left: 10px;
-            }
+      .direction {
+        margin-left: 10px;
+      }
 
-            .remove-order {
-                margin-left: 5px;
-                float: right;
-                line-height: 0.9em;
-            }
-        }
+      .remove-order {
+        margin-left: 5px;
+        float: right;
+        line-height: 0.9em;
+      }
     }
-    .new-order {
-        .order-reverse {
-            display:none;
+  }
+  .new-order {
+    .order-reverse {
+      display: none;
 
-            & + label {
-                line-height: 1.5em;
-                margin: 0 10px;
-            }
-            & + label:before {
-                content: "\f0de";
-            }
-            &:checked + label:before {
-                content: "\f0dd";
-            }
-        }
-        .add-order {
-            float: right;
-        }
+      & + label {
+        line-height: 1.5em;
+        margin: 0 10px;
+      }
+      & + label:before {
+        content: "\f0de";
+      }
+      &:checked + label:before {
+        content: "\f0dd";
+      }
     }
+    .add-order {
+      float: right;
+    }
+  }
 }

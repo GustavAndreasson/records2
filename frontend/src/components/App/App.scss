@@ -1,77 +1,79 @@
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
-button, select, .button {
-    background: none;
-    outline: inherit;
-    display: inline-block;
-    padding: 1px 5px;
-    border: 1px solid #000;
-    border-radius: 3px;
-    background-color: #fff;
-    cursor: pointer;
-    vertical-align: bottom;
-    height: 26px;
-    box-sizing: border-box;
-    min-width: 30px;
-    text-align: center;
+button,
+select,
+.button {
+  background: none;
+  outline: inherit;
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  vertical-align: bottom;
+  height: 26px;
+  box-sizing: border-box;
+  min-width: 30px;
+  text-align: center;
 
-    &:active {
-        color: #111;
-    }
+  &:active {
+    color: #111;
+  }
 }
 
 input {
-    background: none;
-    color: inherit;
-    font: inherit;
-    font-size: 0.9em;
-    outline: inherit;
-    display: inline-block;
-    border: 1px solid #000;
-    border-radius: 3px;
-    padding: 3px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9em;
+  outline: inherit;
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 3px;
 }
 
 .react-autosuggest__container {
-    display: inline-block;
-    position: relative;
-    .react-autosuggest__suggestions-container {
-        position: absolute;
-        width: 100%;
-        background-color: #fff;
-        ul {
-            list-style-type: none;
-            padding: 1px;
-            margin: 0;
-            border: 1px solid #000;
-            font-size: 0.8em;
-            overflow: hidden;
-            div {
-                padding: 1px 0;
-                cursor: pointer;
-                &.highlight {
-                    background-color: #ddd;
-                }
-            }
+  display: inline-block;
+  position: relative;
+  .react-autosuggest__suggestions-container {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    ul {
+      list-style-type: none;
+      padding: 1px;
+      margin: 0;
+      border: 1px solid #000;
+      font-size: 0.8em;
+      overflow: hidden;
+      div {
+        padding: 1px 0;
+        cursor: pointer;
+        &.highlight {
+          background-color: #ddd;
         }
+      }
     }
+  }
 }
 
 #app {
-    .intro-text {
-        max-width: 700px;
-    }
-    .status {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        padding: 2px 10px 0 5px;
-        background: #ddd;
-    }
+  .intro-text {
+    max-width: 700px;
+  }
+  .status {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 2px 10px 0 5px;
+    background: #ddd;
+  }
 }
 
 #app > form {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }

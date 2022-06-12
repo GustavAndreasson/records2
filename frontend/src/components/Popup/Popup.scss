@@ -1,85 +1,89 @@
 .popup {
-    position: fixed;
-    top: 50px;
-    left: 50%;
-    margin-right: calc(40px - 50%);
-    transform: translate(-50%, 0);
-    max-height: calc(100vh - 60px);
-    max-width: 100%;
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    box-shadow: 5px 5px 5px #888888;
-    z-index: 20;
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  margin-right: calc(40px - 50%);
+  transform: translate(-50%, 0);
+  max-height: calc(100vh - 60px);
+  max-width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 5px 5px 5px #888888;
+  z-index: 20;
 
-    &.scrolling {
-        overflow: hidden;
-
-        .content {
-            overflow-y: auto;
-        }
-    }
-
-    &.level2 {
-        top: 70px;
-    }
-
-    .popup-header {
-        position: relative;
-        height: 30px;
-
-        .loader {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 30px;
-            right: 30px;
-
-            .bar {
-                background-color: #aaaaaa;
-                height: 30px;
-                width: 15%;
-                animation: move 2s linear infinite alternate;
-            }
-        }
-
-        .close-button {
-            position: absolute;
-            top: 0;
-            right: 4px;
-            cursor: pointer;
-            font-size: 26px;
-        }
-
-        .popup-icon {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            font-size: 22px;
-            line-height: 22px;
-            img {
-                height: 22px;
-            }
-        }
-
-        .popup-title {
-            position: absolute;
-            left: 30px;
-            width: calc(100% - 60px);
-            height: 30px;
-            overflow: hidden;
-            font-size: 14px;
-            line-height: 30px;
-            text-align: center;
-        }
-    }
+  &.scrolling {
+    overflow: hidden;
 
     .content {
-        max-height: calc(100vh - 100px);
-        padding: 0 10px 10px;
+      overflow-y: auto;
     }
+  }
+
+  &.level2 {
+    top: 70px;
+  }
+
+  .popup-header {
+    position: relative;
+    height: 30px;
+
+    .loader {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 30px;
+      right: 30px;
+
+      .bar {
+        background-color: #aaaaaa;
+        height: 30px;
+        width: 15%;
+        animation: move 2s linear infinite alternate;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 0;
+      right: 4px;
+      cursor: pointer;
+      font-size: 26px;
+    }
+
+    .popup-icon {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      font-size: 22px;
+      line-height: 22px;
+      img {
+        height: 22px;
+      }
+    }
+
+    .popup-title {
+      position: absolute;
+      left: 30px;
+      width: calc(100% - 60px);
+      height: 30px;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+
+  .content {
+    max-height: calc(100vh - 100px);
+    padding: 0 10px 10px;
+  }
 }
 
 @keyframes move {
-    0% { margin-left: 0; }
-    100% { margin-left: 85%; }
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 85%;
+  }
 }

@@ -1,36 +1,36 @@
 .filters {
-    .current-filters {
-        margin-bottom: 10px;
+  .current-filters {
+    margin-bottom: 10px;
 
-        .filter {
-            border: 1px solid #000;
-            border-radius: 5px;
-            padding: 5px 5px 5px 10px;
-            margin-bottom: 5px;
-            overflow: hidden;
-            line-height: 26px;
-            max-width: 300px;
+    .filter {
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px 5px 5px 10px;
+      margin-bottom: 5px;
+      overflow: hidden;
+      line-height: 26px;
+      max-width: 300px;
 
-            .compare {
-                padding: 0 5px;
-            }
-            .remove-filter {
-                margin-left: 5px;
-                float: right;
-                line-height: 0.9em;
-            }
-        }
+      .compare {
+        padding: 0 5px;
+      }
+      .remove-filter {
+        margin-left: 5px;
+        float: right;
+        line-height: 0.9em;
+      }
     }
-    .new-filter {
-        .filter-compare {
-            margin: 0 3px;
-        }
-        .filter-value {
-            width: 135px;
-            margin-right: 5px;
-        }
-        .add-filter {
-            float: right;
-        }
+  }
+  .new-filter {
+    .filter-compare {
+      margin: 0 3px;
     }
+    .filter-value {
+      width: 135px;
+      margin-right: 5px;
+    }
+    .add-filter {
+      float: right;
+    }
+  }
 }

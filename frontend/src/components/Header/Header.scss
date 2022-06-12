@@ -1,49 +1,50 @@
-header, .header-push {
-    overflow: hidden;
-    margin-bottom: 5px;
+header,
+.header-push {
+  overflow: hidden;
+  margin-bottom: 5px;
 
-    h1 {
-        float: left;
-        margin: 5px;
-        font-size: 24px;
+  h1 {
+    float: left;
+    margin: 5px;
+    font-size: 24px;
+  }
+
+  .buttons {
+    float: left;
+    height: 26px;
+    margin: 8px 10px;
+
+    button {
+      margin-left: 5px;
+      height: 100%;
+      position: relative;
+
+      .button-qty {
+        background-color: #ff0000;
+        border-radius: 5px;
+        font-size: 9px;
+        color: #ffffff;
+        display: inline-block;
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 10px;
+      }
     }
-
-    .buttons {
-        float: left;
-        height: 26px;
-        margin: 8px 10px;
-
-        button {
-            margin-left: 5px;
-            height: 100%;
-            position: relative;
-
-            .button-qty {
-                background-color: #ff0000;
-                border-radius: 5px;
-                font-size: 9px;
-                color: #ffffff;
-                display: inline-block;
-                position: absolute;
-                bottom: -2px;
-                right: -2px;
-                width: 10px;
-            }
-        }
-    }
+  }
 }
 
 header {
-    position: fixed;
-    background: #fff;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding: 8px 8px 0 8px;
-    box-shadow: 0 5px 3px #fff;
-    z-index: 10;
+  position: fixed;
+  background: #fff;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 8px 8px 0 8px;
+  box-shadow: 0 5px 3px #fff;
+  z-index: 10;
 }
 
 .header-push {
-    visibility: hidden;
+  visibility: hidden;
 }
