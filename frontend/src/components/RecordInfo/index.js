@@ -1,1 +1,1 @@
-export {default} from "./RecordInfo.container";
+export { default } from "./RecordInfo.container"

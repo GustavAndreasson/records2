@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 const SettingsButton = ({ handleShowSettings }) => (
-    <button type="button" className="fas fa-cog" onClick={handleShowSettings}></button>
+  <button type="button" className="fas fa-cog" onClick={handleShowSettings}></button>
 )
 
-export default SettingsButton;
+export default SettingsButton

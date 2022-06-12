@@ -1,1 +1,1 @@
-export {default} from "./ArtistInput.container";
+export { default } from "./ArtistInput.container"

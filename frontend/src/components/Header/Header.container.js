@@ -1,8 +1,11 @@
-import { connect } from "react-redux";
-import Header from "./Header.component";
+import { connect } from "react-redux"
+import Header from "./Header.component"
 
 const mapStateToProps = state => ({
-    showControls: !!(state.collection.discogsUsername || (state.artist.activeArtist && state.artist.viewArtistCollection))
-});
+  showControls: !!(
+    state.collection.discogsUsername ||
+    (state.artist.activeArtist && state.artist.viewArtistCollection)
+  ),
+})
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Header)

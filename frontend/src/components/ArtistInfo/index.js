@@ -1,1 +1,1 @@
-export {default} from "./ArtistInfo.container";
+export { default } from "./ArtistInfo.container"

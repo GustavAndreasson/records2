@@ -1,1 +1,1 @@
-export {default} from "./CurrencySelect.container";
+export { default } from "./CurrencySelect.container"

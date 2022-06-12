@@ -1,1 +1,1 @@
-export {default} from "./Progress.container";
+export { default } from "./Progress.container"

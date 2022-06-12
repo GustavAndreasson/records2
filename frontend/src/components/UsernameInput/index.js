@@ -1,1 +1,1 @@
-export {default} from "./UsernameInput.container";
+export { default } from "./UsernameInput.container"

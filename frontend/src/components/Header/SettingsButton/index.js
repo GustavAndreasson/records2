@@ -1,1 +1,1 @@
-export {default} from "./SettingsButton.container";
+export { default } from "./SettingsButton.container"

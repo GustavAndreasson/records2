@@ -1,1 +1,1 @@
-export {default} from "./DirectLink.container";
+export { default } from "./DirectLink.container"

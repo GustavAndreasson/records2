@@ -1,1 +1,1 @@
-export {default} from "./LanguageSelect.component";
+export { default } from "./LanguageSelect.component"

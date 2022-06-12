@@ -1,1 +1,1 @@
-export {default} from "./FilterValue.container";
+export { default } from "./FilterValue.container"

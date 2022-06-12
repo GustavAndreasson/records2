@@ -1,1 +1,1 @@
-export {default} from "./CollectionStats.container";
+export { default } from "./CollectionStats.container"

@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 const OrdersButton = ({ handleShowOrders, qtyOrders }) => (
-    <button type="button" className="fas fa-sort" onClick={handleShowOrders}>
-        {qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span>}
-    </button>
-);
+  <button type="button" className="fas fa-sort" onClick={handleShowOrders}>
+    {qtyOrders > 0 && <span className="button-qty">{qtyOrders}</span>}
+  </button>
+)
 
-export default OrdersButton;
+export default OrdersButton

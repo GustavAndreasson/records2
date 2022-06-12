@@ -1,1 +1,1 @@
-export {default} from "./ArtistViewButton.container";
+export { default } from "./ArtistViewButton.container"
