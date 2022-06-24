@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import Search from "./Search"
 import FiltersButton from "./FiltersButton"
@@ -10,13 +10,15 @@ import CollectionStats from "./CollectionStats"
 import "./Header.scss"
 
 const Header = ({ showControls }) => {
+  const [showSearch, setShowSearch] = useState(false)
+  const toggleShowSearch = () => setShowSearch(!showSearch)
   const { t, i18n } = useTranslation()
   const headerContent = (
     <>
       <h1>{t("header.title")}</h1>
       {showControls && (
         <>
-          <Search />
+          <Search showSearch={showSearch} toggleShowSearch={toggleShowSearch} />
           <div className="buttons">
             <FiltersButton />
             <OrdersButton />

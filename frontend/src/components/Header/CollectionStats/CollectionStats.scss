@@ -1,4 +1,20 @@
 .collection-stats {
   float: right;
   font-size: 0.8em;
+
+  @media screen and (max-width: 635px) {
+    float: left;
+
+    div {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+
+        &::after {
+          content: " -";
+        }
+      }
+    }
+  }
 }
