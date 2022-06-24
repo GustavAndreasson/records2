@@ -7,3 +7,4 @@ node_modules/
 datadump/
 frontend/static/frontend/main.js
 media/
+.vscode/

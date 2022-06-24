@@ -1,12 +1,44 @@
 .search {
   position: relative;
   float: left;
-  margin: 10px 15px 8px;
+  margin: 8px 15px 8px;
+
+  button {
+    display: none;
+  }
+
+  input {
+    padding: 4px;
+  }
 
   .clear-search {
     position: absolute;
     right: 5px;
     top: 4px;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-right: -10px;
+
+    input,
+    span {
+      display: none;
+    }
+
+    input {
+      margin-left: 5px;
+    }
+
+    button {
+      display: inline-block;
+    }
+
+    &.show-search {
+      input,
+      span {
+        display: inline-block;
+      }
+    }
   }
 }
