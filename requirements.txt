@@ -1,7 +1,7 @@
 asgiref==3.3.2
 certifi==2023.7.22
 chardet==4.0.0
-Django==3.2.19
+Django==3.2.20
 django-redis==5.2.0
 django-appconf==1.0.5
 django-imagekit==4.1.0
