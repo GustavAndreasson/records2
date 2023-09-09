@@ -83,12 +83,14 @@ WSGI_APPLICATION = 'records2.wsgi.application'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'cache',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': config('REDIS_LOCATION'),
         'TIMEOUT': None,
         'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             'MAX_ENTRIES': 100000
-        }
+        },
+        'KEY_PREFIX': 'records'
     }
 }
 
