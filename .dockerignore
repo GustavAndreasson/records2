@@ -1,0 +1,11 @@
+.git
+.gitignore
+.docker
+__pycache__/
+*.log
+*.pot
+*.pyc
+node_modules/
+datadump/
+media/
+.vscode/

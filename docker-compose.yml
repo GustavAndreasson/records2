@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:alpine3.16
+    ports:
+      - "6378:6379"
+  db:
+    image: mysql:8.0.31
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+  web:
+    build: .
+    command: sh start.sh
+    env_file:
+      - .env
+    ports:
+      - "8600:8600"
+    volumes:
+      - .:/app
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis

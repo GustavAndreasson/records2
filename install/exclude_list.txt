@@ -9,3 +9,7 @@ logs
 frontend/src
 datadump
 media
+.dockerignore
+Dockerfile
+docker-compose.yml
+start.sh
