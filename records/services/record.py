@@ -209,7 +209,12 @@ def downloadCover(record):
     if record.cover[-10:] == "spacer.gif":
         record.cover = None
         return True
-    resp = requests.get(record.cover)
+    headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+            '(KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+    }
+    resp = requests.get(record.cover, headers=headers)
     resp.raise_for_status()
     fp = BytesIO()
     fp.write(resp.content)

@@ -12,7 +12,7 @@ class Command(BaseCommand):
                             help="Limit number of downloaded covers")
 
     def handle(self, *args, **options):
-        records = Record.objects.filter(cover_file__isnull=True)[
+        records = Record.objects.filter(cover_file__exact='')[
             :options['limit']]
         for record in records:
             self.stdout.write("Downloading cover for record " + record.name)
