@@ -13,6 +13,7 @@ export const selectCollection = createSelector(
 
 export const selectOrderedFilteredCollection = createSelector(
   state => state.collection.collection,
+  state => state.collection.rate,
   state => state.process.orders,
   state => state.process.filters,
   state => state.artist.activeArtist,
@@ -21,6 +22,7 @@ export const selectOrderedFilteredCollection = createSelector(
   state => state.process.searchQuery,
   (
     collection,
+    rate,
     orders,
     filters,
     activeArtist,
@@ -70,7 +72,10 @@ export const selectOrderedFilteredCollection = createSelector(
           .join()
           .toLowerCase()
           .indexOf(searchQuery.toLowerCase()) >= 0) &&
-      (!filters || filters.every(filter => FilterUtil.run(filter)(rec)))
+      (!filters ||
+        filters.every(filter =>
+          FilterUtil.run(filter)({ ...rec, price: rec.price && rate && rec.price * rate })
+        ))
     return orders
       .concat({ attribute: "id", reverse: false })
       .reduceRight(
