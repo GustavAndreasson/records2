@@ -1,7 +1,16 @@
 #!/bin/bash
 npm run build || { echo 'npm build failed' ; exit 1; }
 SERVER_IP=$(grep SERVER_PRIVATE_IP $(dirname $0)/../.env | xargs)
+while getopts r option
+do
+  case $option in
+  r) SERVER_IP=$(grep SERVER_PUBLIC_IP $(dirname $0)/../.env | xargs);;
+  ?) printf "Usage: %s: [-r] (-r for remote deploy)\n" $0
+    exit 2;;
+  esac
+done
 SERVER_IP=${SERVER_IP#*=}
+echo $SERVER_IP
 SERVER_USER=$(grep SERVER_USER $(dirname $0)/../.env | xargs)
 SERVER_USER=${SERVER_USER#*=}
 SYNC=$(rsync -avze ssh --exclude-from "$(dirname $0)/exclude_list.txt" $(dirname $0)/../ $SERVER_USER@$SERVER_IP:records2/)
