@@ -125,14 +125,14 @@ def __readUri(uri):
             )
             DiscogsAccess.objects.create(timestamp=time.time())
     except requests.exceptions.RequestException as re:
-        raise DiscogsError(re.response.status_code, str(re))
+        raise DiscogsError(re.response.status_code if re.response is not None else -1, str(re))
     except JSONDecodeError as je:
         raise DiscogsError(r.status_code, str(je))
     if r.status_code == 429 or data.get("message") == "You are making requests too quickly.":
         logger.error(
-            "Too many requests to Discogs\n"
+            "Too many requests to Discogs "
             + data.get("message")
-            + "\ntrying again after "
+            + " trying again after "
             + str(time_discogs_accesses)
             + " seconds"
         )
