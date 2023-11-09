@@ -41,4 +41,4 @@ def getProgress():
 
 
 def __cacheKey():
-    return 'progress-' + session
+    return "progress-" + session

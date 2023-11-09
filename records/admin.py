@@ -1,23 +1,15 @@
 from django.contrib import admin
-from records.models import (
-    Record,
-    Artist,
-    RecordArtists,
-    Track,
-    Listen,
-    RecordListens,
-    ArtistMembers,
-    DiscogsUser
-)
+from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers, DiscogsUser
 from records.services.record import updateRecord
 from records.services.artist import updateArtist
 from django.core.cache import cache
+
 # Register your models here.
 
 
 class ArtistInline(admin.TabularInline):
     model = RecordArtists
-    readonly_fields = ('artist',)
+    readonly_fields = ("artist",)
     extra = 0
 
 
@@ -45,12 +37,15 @@ def clear_cache_item(modeladmin, request, queryset):
 
 
 class RecordAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'master', 'year', 'format',
-              'cover', 'thumbnail', 'price', 'updated']
+    fields = ["id", "name", "master", "year", "format", "cover", "thumbnail", "price", "updated"]
     inlines = [ArtistInline, TrackInline, ListenInline]
-    list_display = ('id', 'get_artist', 'name', 'format', 'updated')
-    search_fields = ['name']
-    actions = [reset_updated, update_record, clear_cache_item, ]
+    list_display = ("id", "get_artist", "name", "format", "updated")
+    search_fields = ["name"]
+    actions = [
+        reset_updated,
+        update_record,
+        clear_cache_item,
+    ]
 
 
 admin.site.register(Record, RecordAdmin)
@@ -63,43 +58,44 @@ def update_artist(modeladmin, request, queryset):
 
 class MembersInline(admin.TabularInline):
     model = ArtistMembers
-    readonly_fields = ('member',)
+    readonly_fields = ("member",)
     extra = 0
-    fk_name = 'group'
+    fk_name = "group"
 
 
 class GroupsInline(admin.TabularInline):
     model = ArtistMembers
-    readonly_fields = ('group',)
+    readonly_fields = ("group",)
     extra = 0
-    fk_name = 'member'
+    fk_name = "member"
 
 
 class ArtistAdmin(admin.ModelAdmin):
-    fields = ['id', 'name', 'description',
-              'image', 'updated', 'collectionUpdated']
+    fields = ["id", "name", "description", "image", "updated", "collectionUpdated"]
     inlines = [MembersInline, GroupsInline]
-    list_display = ('id', 'name', 'description', 'image',
-                    'updated', 'collectionUpdated')
-    search_fields = ['name']
-    actions = [reset_updated, update_artist, ]
+    list_display = ("id", "name", "description", "image", "updated", "collectionUpdated")
+    search_fields = ["name"]
+    actions = [
+        reset_updated,
+        update_artist,
+    ]
 
 
 admin.site.register(Artist, ArtistAdmin)
 
 
 class ListenAdmin(admin.ModelAdmin):
-    list_display = ('name', 'icon', 'template')
-    search_fields = ['name']
+    list_display = ("name", "icon", "template")
+    search_fields = ["name"]
 
 
 admin.site.register(Listen, ListenAdmin)
 
 
 class DiscogsUserAdmin(admin.ModelAdmin):
-    fields = ['username']
-    list_display = ('id', 'username')
-    search_fields = ['username']
+    fields = ["username"]
+    list_display = ("id", "username")
+    search_fields = ["username"]
 
 
 admin.site.register(DiscogsUser, DiscogsUserAdmin)

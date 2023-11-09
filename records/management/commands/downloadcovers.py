@@ -8,12 +8,10 @@ class Command(BaseCommand):
     help = "Downloads covers to all records"
 
     def add_arguments(self, parser):
-        parser.add_argument('limit', type=int,
-                            help="Limit number of downloaded covers")
+        parser.add_argument("limit", type=int, help="Limit number of downloaded covers")
 
     def handle(self, *args, **options):
-        records = Record.objects.filter(cover_file__exact='')[
-            :options['limit']]
+        records = Record.objects.filter(cover_file__exact="")[: options["limit"]]
         for record in records:
             self.stdout.write("Downloading cover for record " + record.name)
             try:
@@ -21,20 +19,17 @@ class Command(BaseCommand):
                     record.save()
             except HTTPError as e:
                 if e.response.status_code == 429:
-                    self.stdout.write("Discogs download limit reached. Wait"
-                                      + " for a minute before running again")
+                    self.stdout.write("Discogs download limit reached. Wait" + " for a minute before running again")
                     break
                 elif e.response.status_code == 404:
-                    self.stdout.write("Cover file for record " + record.name
-                                      + " is missing on discogs. Updating "
-                                      + "record.\n")
+                    self.stdout.write(
+                        "Cover file for record " + record.name + " is missing on discogs. Updating " + "record.\n"
+                    )
                     updateRecord(record)
                     continue
                 else:
-                    self.stdout.write("Error downloading cover for record "
-                                      + record.name + "\n" + str(e))
+                    self.stdout.write("Error downloading cover for record " + record.name + "\n" + str(e))
                     continue
             except RequestException as e:
-                self.stdout.write("Error downloading cover for record "
-                                  + record.name + "\n" + str(e))
+                self.stdout.write("Error downloading cover for record " + record.name + "\n" + str(e))
                 break

@@ -21,6 +21,5 @@ def updateRecord(request, record_id):
 def setRecordListen(request, record_id, listen_name, listen_key):
     record = get_object_or_404(Record, id=record_id)
     listen = get_object_or_404(Listen, name=listen_name)
-    RecordListens.objects.create(
-        record=record, listen=listen, listen_key=listen_key)
+    RecordListens.objects.create(record=record, listen=listen, listen_key=listen_key)
     return HttpResponse(json.dumps(record.to_dict()))

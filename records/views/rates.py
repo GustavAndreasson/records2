@@ -1,13 +1,15 @@
 from django.http import HttpResponse, Http404
 import json
+import re
 import records.services.rates as ratesService
 
 
 def getRate(request, currency):
-    if not (currency.isupper() and len(currency) == 3):
+    cur = re.sub(r"[\W_]+", "", currency)
+    if not (cur.isupper() and len(cur) == 3):
         return Http404
-    rate = ratesService.getRate(currency)
+    rate = ratesService.getRate(cur)
     if not rate:
         return Http404
     else:
-        return HttpResponse(json.dumps({"currency": currency, "rate": rate}))
+        return HttpResponse(json.dumps({"currency": cur, "rate": rate}))

@@ -5,4 +5,4 @@ from django.shortcuts import render
 def index(request):
     if request.session.is_empty():
         request.session.create()  # Create session cookie if it does not exist
-    return render(request, 'frontend/index.html')
+    return render(request, "frontend/index.html")
