@@ -21,13 +21,13 @@ const GridSettings = ({ gridView, gridColumns, setGridView, setGridColumns }) =>
           type="button"
           className={"fas fa-grip-horizontal" + (!gridView ? " selected" : "")}
           onClick={() => setGridView(false)}
-          enabled={gridView.toString()}
+          disabled={!gridView}
         ></button>
         <button
           type="button"
           className={"fas fa-list" + (gridView ? " selected" : "")}
           onClick={() => setGridView(true)}
-          enabled={(!gridView).toString()}
+          disabled={gridView}
         ></button>
       </div>
       {gridView && (

@@ -52,11 +52,12 @@ const RecordInfo = ({
                     .join(" ")}
                 </div>
               )}
-              {rec.year && (
+              {(rec.year && (
                 <div className="year" onClick={() => handleYearClick(rec.year)}>
                   {rec.year}
                 </div>
-              )}
+              )) ||
+                null}
               {rec.price && rate && (
                 <div className="price">
                   {"(" + (rec.price * rate).toFixed(2) + " " + currency + ")"}
