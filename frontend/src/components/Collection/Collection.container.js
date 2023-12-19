@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   viewArtistCollection: state.artist.viewArtistCollection,
   activeArtist: state.artist.activeArtist,
   discogsUsername: state.collection.discogsUsername,
+  gridView: state.ui.gridView,
   rate: state.collection.rate,
   currency: state.collection.currency,
 })
@@ -31,6 +32,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       ? stateProps.activeArtist.id
       : null
     : stateProps.discogsUsername,
+  gridView: stateProps.gridView,
   rate: stateProps.rate,
   loadCollection: stateProps.viewArtistCollection
     ? () => dispatchProps.getArtistCollection(stateProps.activeArtist)

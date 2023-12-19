@@ -1,9 +1,4 @@
 const attributes = {
-  year: {
-    name: "År",
-    key: "year",
-    getValue: rec => rec.year,
-  },
   artist: {
     name: "Artist",
     key: "artist",
@@ -19,6 +14,16 @@ const attributes = {
     name: "Album",
     key: "name",
     getValue: rec => rec.name,
+  },
+  year: {
+    name: "År",
+    key: "year",
+    getValue: rec => rec.year,
+  },
+  format: {
+    name: "Format",
+    key: "format",
+    getValue: rec => rec.format,
   },
   price: {
     name: "Pris",

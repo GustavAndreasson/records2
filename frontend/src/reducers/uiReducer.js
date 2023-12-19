@@ -14,10 +14,20 @@ import {
   HIDE_POPUP,
   SHOW_RECORD,
   SHOW_LISTEN,
+  SET_GRID_VIEW,
+  SET_GRID_COLUMNS,
 } from "Actions"
 
 function ui(
-  state = { collectionLoading: false, recordsLoading: [], progress: {}, status: "", popups: "" },
+  state = {
+    collectionLoading: false,
+    recordsLoading: [],
+    progress: {},
+    status: "",
+    popups: "",
+    gridView: false,
+    gridColumns: [],
+  },
   action
 ) {
   switch (action.type) {
@@ -66,6 +76,10 @@ function ui(
       return Object.assign({}, state, { popups: "recordInfo" })
     case SHOW_LISTEN:
       return Object.assign({}, state, { popups: "recordInfo.listen" })
+    case SET_GRID_VIEW:
+      return Object.assign({}, state, { gridView: action.gridView })
+    case SET_GRID_COLUMNS:
+      return Object.assign({}, state, { gridColumns: action.gridColumns })
     default:
       return state
   }

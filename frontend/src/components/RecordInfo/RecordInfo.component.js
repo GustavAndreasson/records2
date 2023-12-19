@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import Popup from "Components/Popup"
-import Artists from "./Artists"
+import Artists from "Components/Artists"
 import Listen from "./Listen"
 import "./RecordInfo.scss"
 
@@ -14,6 +15,7 @@ const RecordInfo = ({
   handleListenClick,
   hideRecord,
 }) => {
+  const { t, i18n } = useTranslation()
   useEffect(() => {
     if (rec) {
       let threeMonthsAgo = new Date()
@@ -41,7 +43,15 @@ const RecordInfo = ({
               <Artists artists={rec.artists} />
             </div>
             <div className="left">
-              {rec.format && <div className="format">{rec.format}</div>}
+              {rec.format && (
+                <div className="format">
+                  {rec.format
+                    .split(" ")
+                    .filter((f, i, a) => a.indexOf(f) === i && f !== "All-Media")
+                    .map(f => t("format." + f, f))
+                    .join(" ")}
+                </div>
+              )}
               {rec.year && (
                 <div className="year" onClick={() => handleYearClick(rec.year)}>
                   {rec.year}

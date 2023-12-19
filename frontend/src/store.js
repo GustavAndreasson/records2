@@ -9,7 +9,6 @@ Persistant.init([
   { path: "process.filters", lsKey: "filters", qKey: "f", validate: Filter.validate, default: [] },
   { path: "process.orders", lsKey: "orders", qKey: "o", validate: Order.validate, default: [] },
   { path: "collection.discogsUsername", lsKey: "discogs_username", qKey: "u", default: "" },
-  ,
   { path: "collection.currency", lsKey: "currency", default: "SEK" },
   { path: "artist.activeArtist", lsKey: "active_artist", qKey: "a", ref: true, default: null },
   {
@@ -18,6 +17,8 @@ Persistant.init([
     qKey: "va",
     default: false,
   },
+  { path: "ui.gridView", lsKey: "grid_view", default: false },
+  { path: "ui.gridColumns", lsKey: "grid_columns", default: ["artist", "name"] },
 ])
 
 const initialState = {
@@ -45,6 +46,8 @@ const initialState = {
     progress: null,
     status: "",
     popups: "",
+    gridView: false,
+    gridColumns: [],
   },
 }
 

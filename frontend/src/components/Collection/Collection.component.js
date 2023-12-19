@@ -1,9 +1,10 @@
 import React, { useEffect } from "react"
 import { forceCheck } from "react-lazyload"
 import Record from "./Record"
+import GridHeader from "./GridHeader"
 import "./Collection.scss"
 
-const Collection = ({ collection, collectionId, rate, loadCollection, loadRate }) => {
+const Collection = ({ collection, collectionId, gridView, rate, loadCollection, loadRate }) => {
   useEffect(() => {
     if (!collection) {
       loadCollection()
@@ -19,7 +20,8 @@ const Collection = ({ collection, collectionId, rate, loadCollection, loadRate }
 
   return (
     collection && (
-      <div className="collection">
+      <div className={"collection" + (gridView && " grid-view")}>
+        {gridView && <GridHeader />}
         {collection.map(rec => (
           <Record rec={rec} key={rec.id} />
         ))}

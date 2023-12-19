@@ -1,0 +1,17 @@
+.grid-header {
+  .column-title {
+    text-align: center;
+    height: 32px;
+    vertical-align: middle;
+    padding: 2px;
+    font-weight: bold;
+
+    &:not(:first-child) {
+      cursor: pointer;
+    }
+
+    .direction {
+      margin-left: 3px;
+    }
+  }
+}

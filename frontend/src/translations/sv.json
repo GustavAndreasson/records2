@@ -41,11 +41,26 @@
     "lang": {
       "sv": "Svenska",
       "en": "Engelska"
-    }
+    },
+    "layout": "Layout",
+    "columns": "Kolumner"
   },
   "progress": {
     "load": "Laddar skivor",
     "discogs": "Hämtar från discogs",
     "create": "Skapar skivor"
+  },
+  "format": {
+    "Box-Set": "Box",
+    "CD": "CD",
+    "Cassette": "Kassett",
+    "DVD":"DVD",
+    "Vinyl":"Vinyl",
+    "Vinyl12": "12\"",
+    "Vinyl10": "10\"",
+    "Vinyl7": "7\"",
+    "Vinyl5": "5\"",
+    "VHS": "VHS",
+    "Flexi-disc7": "Flexi-disc"
   }
 }

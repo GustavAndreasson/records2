@@ -41,11 +41,26 @@
     "lang": {
       "sv": "Swedish",
       "en": "English"
-    }
+    },
+    "layout": "Layout",
+    "columns": "Columns"
   },
   "progress": {
     "load": "Loading records",
     "discogs": "Fetching from discogs",
     "create": "Creating records"
+  },
+  "format": {
+    "Box-Set": "Box-Set",
+    "CD": "CD",
+    "Cassette": "Cassette",
+    "DVD":"DVD",
+    "Vinyl":"Vinyl",
+    "Vinyl12": "12\"",
+    "Vinyl10": "10\"",
+    "Vinyl7": "7\"",
+    "Vinyl5": "5\"",
+    "VHS": "VHS",
+    "Flexi-disc7": "Flexi-disc"
   }
 }

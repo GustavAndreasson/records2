@@ -1,2 +1,16 @@
 .collection {
+  &.grid-view {
+    display: table;
+    margin: 3px auto 0;
+    border-collapse: collapse;
+
+    & > div {
+      display: table-row;
+
+      & > div {
+        display: table-cell;
+        border: solid 1px #dddddd;
+      }
+    }
+  }
 }

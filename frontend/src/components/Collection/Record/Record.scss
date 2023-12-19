@@ -69,6 +69,53 @@ $formats: (
   ),
 );
 
+.record-row {
+  cursor: pointer;
+  height: 40px;
+
+  &:hover {
+    background-color: #dddddd;
+  }
+
+  div {
+    vertical-align: middle;
+    &:not(:first-child) {
+      padding: 3px;
+    }
+  }
+
+  .record-image {
+    .cover {
+      max-width: 40px;
+      max-height: 40px;
+    }
+  }
+
+  .record-year {
+    text-align: center;
+    .year {
+      color: #0000aa;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+
+  .record-format {
+    text-align: center;
+  }
+
+  .record-price,
+  .record-format,
+  .record-addedDate,
+  .record-id {
+    font-size: 14px;
+  }
+
+  .record-addedDate {
+    text-wrap: nowrap;
+  }
+}
+
 .record {
   display: inline-block;
   margin: 4px;

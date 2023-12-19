@@ -33,3 +33,15 @@ export const progress = async dispatch => {
     console.error(error)
   }
 }
+
+export const SET_GRID_VIEW = "SET_GRID_VIEW"
+export const setGridView = gridView => ({
+  type: SET_GRID_VIEW,
+  gridView,
+})
+
+export const SET_GRID_COLUMNS = "SET_GRID_COLUMNS"
+export const setGridColumns = gridColumns => ({
+  type: SET_GRID_COLUMNS,
+  gridColumns,
+})
