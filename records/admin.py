@@ -1,5 +1,15 @@
 from django.contrib import admin
-from records.models import Record, Artist, RecordArtists, Track, Listen, RecordListens, ArtistMembers, DiscogsUser
+from records.models import (
+    Record,
+    Artist,
+    RecordArtists,
+    Track,
+    Genre,
+    Listen,
+    RecordListens,
+    ArtistMembers,
+    DiscogsUser,
+)
 from records.services.record import updateRecord
 from records.services.artist import updateArtist
 from django.core.cache import cache
@@ -23,6 +33,11 @@ class ListenInline(admin.TabularInline):
     extra = 0
 
 
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    pass
+
+
 def reset_updated(modeladmin, request, queryset):
     queryset.update(updated=None)
 
@@ -36,8 +51,10 @@ def clear_cache_item(modeladmin, request, queryset):
     cache.delete_many([record.get_cache_key() for record in queryset])
 
 
+@admin.register(Record)
 class RecordAdmin(admin.ModelAdmin):
-    fields = ["id", "name", "master", "year", "format", "cover", "thumbnail", "price", "updated"]
+    fields = ["id", "name", "master", "year", "format", "cover", "thumbnail", "price", "updated", "genres"]
+    filter_horizontal = ("genres",)
     inlines = [ArtistInline, TrackInline, ListenInline]
     list_display = ("id", "get_artist", "name", "format", "updated")
     search_fields = ["name"]
@@ -46,9 +63,6 @@ class RecordAdmin(admin.ModelAdmin):
         update_record,
         clear_cache_item,
     ]
-
-
-admin.site.register(Record, RecordAdmin)
 
 
 def update_artist(modeladmin, request, queryset):
@@ -70,6 +84,7 @@ class GroupsInline(admin.TabularInline):
     fk_name = "member"
 
 
+@admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
     fields = ["id", "name", "description", "image", "updated", "collectionUpdated"]
     inlines = [MembersInline, GroupsInline]
@@ -81,21 +96,14 @@ class ArtistAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Artist, ArtistAdmin)
-
-
+@admin.register(Listen)
 class ListenAdmin(admin.ModelAdmin):
     list_display = ("name", "icon", "template")
     search_fields = ["name"]
 
 
-admin.site.register(Listen, ListenAdmin)
-
-
+@admin.register(DiscogsUser)
 class DiscogsUserAdmin(admin.ModelAdmin):
     fields = ["username"]
     list_display = ("id", "username")
     search_fields = ["username"]
-
-
-admin.site.register(DiscogsUser, DiscogsUserAdmin)
