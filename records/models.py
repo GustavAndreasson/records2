@@ -62,6 +62,13 @@ class Listen(models.Model):
         return self.name
 
 
+class Genre(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Record(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=1024)
@@ -72,6 +79,7 @@ class Record(models.Model):
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    genres = models.ManyToManyField(to=Genre)
     listens = models.ManyToManyField(Listen, through="RecordListens")
     artists = models.ManyToManyField(Artist, through="RecordArtists")
     cover_file = models.ImageField(upload_to="records", blank=True, null=True)
@@ -96,6 +104,7 @@ class Record(models.Model):
             "year": self.year,
             "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,
             "price": str(self.price) if self.price else None,
+            "genres": [genre.name for genre in self.genres.all()],
             "updated": str(self.updated) if self.updated else None,
         }
         ras = RecordArtists.objects.filter(record=self)

@@ -3,7 +3,7 @@ from django.db import DatabaseError
 from django.core import files
 import requests
 from io import BytesIO
-from ..models import Record, RecordArtists, Listen, RecordListens, Track, TrackArtists, Artist
+from ..models import Record, RecordArtists, Listen, RecordListens, Genre, Track, TrackArtists, Artist
 from .. import discogs
 from .. import spotify
 import records.services.artist as artistService
@@ -45,6 +45,12 @@ def createRecord(id, data):
                 delimiter = r_artist.get("join")
             RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, position=position)
             position += 1
+        r_genres = (data.get("genres") or []) + (data.get("styles") or [])
+        for r_genre in r_genres:
+            genre, created = Genre.objects.get_or_create(name=r_genre)
+            if created:
+                genre.save()
+            record.genres.add(genre)
     return record
 
 
@@ -76,6 +82,15 @@ def updateRecord(record):
             record.format = __getFormat(release_data.get("formats"))
         if release_data.get("lowest_price"):
             record.price = release_data.get("lowest_price")
+        if release_data.get("genres") or release_data.get("styles"):
+            r_genres = (release_data.get("genres") or []) + (release_data.get("styles") or [])
+            if set(r_genres) != set(record.genres.all()):
+                record.genres.clear()
+                for r_genre in r_genres:
+                    genre, created = Genre.objects.get_or_create(name=r_genre)
+                    if created:
+                        genre.save()
+                    record.genres.add(genre)
         record.updated = date.today()
         record.save()
     except discogs.DiscogsError as de:
