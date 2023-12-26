@@ -25,6 +25,11 @@ const attributes = {
     key: "format",
     getValue: rec => rec.format,
   },
+  genres: {
+    name: "Genres",
+    key: "genres",
+    getValue: rec => rec.genres && rec.genres.join(" "),
+  },
   price: {
     name: "Pris",
     key: "price",

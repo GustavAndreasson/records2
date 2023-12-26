@@ -29,6 +29,7 @@
       "artist": "Artist",
       "track": "Track",
       "format": "Format",
+      "genres": "Genres",
       "price": "Price",
       "addedDate": "Added date",
       "id": "ID"

@@ -29,6 +29,7 @@
       "artist": "Artist",
       "track": "Spår",
       "format": "Format",
+      "genres": "Genrer",
       "price": "Pris",
       "addedDate": "Tillagd",
       "id": "ID"

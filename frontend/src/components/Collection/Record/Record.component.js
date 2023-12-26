@@ -52,6 +52,8 @@ const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick
                 .filter((f, i, a) => a.indexOf(f) === i && f !== "All-Media")
                 .map(f => t("format." + f, f))
                 .join(" ")
+            ) : column == "genres" ? (
+              rec.genres && rec.genres.join(", ")
             ) : (
               column in rec && rec[column]
             )}

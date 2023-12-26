@@ -61,6 +61,13 @@ const attributes = {
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
     getValues: rec => (rec.format ? rec.format.split(" ") : [""]),
   },
+  genres: {
+    name: "Genre",
+    key: "genres",
+    type: "text",
+    compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
+    getValues: rec => rec.genres || [],
+  },
   year: {
     name: "År",
     key: "year",

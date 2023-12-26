@@ -58,6 +58,7 @@ const RecordInfo = ({
                 </div>
               )) ||
                 null}
+              {rec.genres && <div className="genres">{rec.genres.join(", ")}</div>}
               {rec.price && rate && (
                 <div className="price">
                   {"(" + (rec.price * rate).toFixed(2) + " " + currency + ")"}
