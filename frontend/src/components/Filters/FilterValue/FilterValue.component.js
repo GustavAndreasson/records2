@@ -10,7 +10,7 @@ const FilterValue = ({ attribute, compare, value, handleValueChange, collection 
       .sort()
       .filter((item, pos, arr) => item && (!pos || item != arr[pos - 1]))
   const suggestedValues =
-    allValues && allValues.filter(v => v.toLowerCase().startsWith(value)).slice(0, 10)
+    allValues && allValues.filter(v => v.toLowerCase().startsWith(value.toLowerCase())).slice(0, 10)
   return Filter.attributes[attribute].type === "text" &&
     (compare === "seq" || compare === "sneq") ? (
     <AutoSuggest
