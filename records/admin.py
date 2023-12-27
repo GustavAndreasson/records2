@@ -5,6 +5,8 @@ from records.models import (
     RecordArtists,
     Track,
     Genre,
+    Format,
+    RecordFormats,
     Listen,
     RecordListens,
     ArtistMembers,
@@ -28,6 +30,11 @@ class TrackInline(admin.TabularInline):
     extra = 0
 
 
+class FormatInline(admin.TabularInline):
+    model = RecordFormats
+    extra = 0
+
+
 class ListenInline(admin.TabularInline):
     model = RecordListens
     extra = 0
@@ -35,6 +42,11 @@ class ListenInline(admin.TabularInline):
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Format)
+class FormatAdmin(admin.ModelAdmin):
     pass
 
 
@@ -53,10 +65,10 @@ def clear_cache_item(modeladmin, request, queryset):
 
 @admin.register(Record)
 class RecordAdmin(admin.ModelAdmin):
-    fields = ["id", "name", "master", "year", "format", "cover", "thumbnail", "price", "updated", "genres"]
+    fields = ["id", "name", "master", "year", "cover", "thumbnail", "price", "updated", "genres"]
     filter_horizontal = ("genres",)
-    inlines = [ArtistInline, TrackInline, ListenInline]
-    list_display = ("id", "get_artist", "name", "format", "updated")
+    inlines = [ArtistInline, TrackInline, FormatInline, ListenInline]
+    list_display = ("id", "get_artist", "name", "updated")
     search_fields = ["name"]
     actions = [
         reset_updated,

@@ -12,7 +12,7 @@ const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick
         artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
     )
     .join(" ")
-  let formats = rec.format ? "format-" + rec.format.replace(/ /, " format-") : "format-none"
+  let formats = rec.formats ? rec.formats.map(f => "format-" + f.name).join(" ") : "format-none"
 
   return gridView ? (
     <div className="record-row" onClick={() => handleClick(rec)}>
@@ -45,13 +45,12 @@ const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick
                   {rec.year}
                 </span>
               ) : null
-            ) : column == "format" ? (
-              rec.format &&
-              rec.format
-                .split(" ")
-                .filter((f, i, a) => a.indexOf(f) === i && f !== "All-Media")
-                .map(f => t("format." + f, f))
-                .join(" ")
+            ) : column == "formats" ? (
+              rec.formats &&
+              rec.formats
+                .filter(f => f.name !== "All-Media")
+                .map(f => (f.qty > 1 ? f.qty + "x" : "") + t("format." + f.name, f.name))
+                .join(", ")
             ) : column == "genres" ? (
               rec.genres && rec.genres.join(", ")
             ) : (

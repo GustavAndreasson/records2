@@ -55,6 +55,10 @@ $formats: (
     90,
     85,
   ),
+  VinylLP: (
+    90,
+    85,
+  ),
   Vinyl: (
     90,
     85,
@@ -100,12 +104,12 @@ $formats: (
     }
   }
 
-  .record-format {
+  .record-formats {
     text-align: center;
   }
 
   .record-price,
-  .record-format,
+  .record-formats,
   .record-genres,
   .record-addedDate,
   .record-id {

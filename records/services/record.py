@@ -3,7 +3,18 @@ from django.db import DatabaseError
 from django.core import files
 import requests
 from io import BytesIO
-from ..models import Record, RecordArtists, Listen, RecordListens, Genre, Track, TrackArtists, Artist
+from ..models import (
+    Record,
+    RecordArtists,
+    Format,
+    RecordFormats,
+    Listen,
+    RecordListens,
+    Genre,
+    Track,
+    TrackArtists,
+    Artist,
+)
 from .. import discogs
 from .. import spotify
 import records.services.artist as artistService
@@ -30,7 +41,6 @@ def createRecord(id, data):
             "cover": data.get("cover"),
             "thumbnail": data.get("thumbnail"),
             "year": data.get("year"),
-            "format": __getFormat(data.get("format")) if data.get("format") else None,
         },
     )
     if created:
@@ -45,6 +55,12 @@ def createRecord(id, data):
                 delimiter = r_artist.get("join")
             RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, position=position)
             position += 1
+        r_formats = __getFormats(data.get("format"))
+        for r_format in r_formats:
+            format, created = Format.objects.get_or_create(name=r_format.get("name"))
+            if created:
+                format.save()
+            RecordFormats.objects.create(record=record, format=format, qty=r_format.get("qty"))
         r_genres = (data.get("genres") or []) + (data.get("styles") or [])
         for r_genre in r_genres:
             genre, created = Genre.objects.get_or_create(name=r_genre)
@@ -79,7 +95,13 @@ def updateRecord(record):
         __updateListens(record, release_data.get("videos"))
         record.year = release_data.get("year")
         if release_data.get("formats"):
-            record.format = __getFormat(release_data.get("formats"))
+            RecordFormats.objects.filter(record=record).delete()
+            r_formats = __getFormats(release_data.get("formats"))
+            for r_format in r_formats:
+                format, created = Format.objects.get_or_create(name=r_format.get("name"))
+                if created:
+                    format.save()
+                RecordFormats.objects.create(record=record, format=format, qty=r_format.get("qty"))
         if release_data.get("lowest_price"):
             record.price = release_data.get("lowest_price")
         if release_data.get("genres") or release_data.get("styles"):
@@ -167,16 +189,23 @@ def __updateListens(record, videos):
             logger.error("Youtube listen does not exist")
 
 
-def __getFormat(format_data):
-    formats = []
+def __getFormats(format_data):
+    if not format_data:
+        return []
+    formats_dup = []
     for format in format_data:
         format_string = format.get("name")
         if format.get("descriptions"):
-            inch = re.search('(\\d+)"', " ".join(format.get("descriptions")))
-            if inch:
-                format_string += inch.group(1)
-        formats.append(format_string.replace(" ", "-"))
-    return " ".join(formats)
+            desc = re.search('(\\d+)"|(LP)', " ".join(format.get("descriptions")))
+            if desc:
+                format_string += desc.group(1) or desc.group(2)
+        formats_dup.append({"name": format_string.replace(" ", "-"), "qty": int(format.get("qty") or "0")})
+    formats = []
+    for format in formats_dup:
+        qty = sum(f.get("qty") if f.get("name") == format.get("name") else 0 for f in formats_dup)
+        if not any(f.get("name") == format.get("name") for f in formats):
+            formats.append({"name": format.get("name"), "qty": qty})
+    return formats
 
 
 def __createTrack(record, track_data):

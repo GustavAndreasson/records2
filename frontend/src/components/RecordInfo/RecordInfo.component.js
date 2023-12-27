@@ -43,13 +43,12 @@ const RecordInfo = ({
               <Artists artists={rec.artists} />
             </div>
             <div className="left">
-              {rec.format && (
-                <div className="format">
-                  {rec.format
-                    .split(" ")
-                    .filter((f, i, a) => a.indexOf(f) === i && f !== "All-Media")
-                    .map(f => t("format." + f, f))
-                    .join(" ")}
+              {rec.formats && (
+                <div className="formats">
+                  {rec.formats
+                    .filter(f => f.name !== "All-Media")
+                    .map(f => (f.qty > 1 ? f.qty + "x" : "") + t("format." + f.name, f.name))
+                    .join(", ")}
                 </div>
               )}
               {(rec.year && (

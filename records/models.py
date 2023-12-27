@@ -69,18 +69,25 @@ class Genre(models.Model):
         return self.name
 
 
+class Format(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Record(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=1024)
     master = models.IntegerField(blank=True, null=True)
     cover = models.CharField(max_length=255, blank=True, null=True)
-    format = models.CharField(max_length=255, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     genres = models.ManyToManyField(to=Genre)
     listens = models.ManyToManyField(Listen, through="RecordListens")
+    formats = models.ManyToManyField(Format, through="RecordFormats")
     artists = models.ManyToManyField(Artist, through="RecordArtists")
     cover_file = models.ImageField(upload_to="records", blank=True, null=True)
     thumbnail_file = ImageSpecField(
@@ -100,7 +107,6 @@ class Record(models.Model):
             "name": self.name,
             "master": self.master,
             "cover": self.cover_file.url if self.cover_file else self.cover,
-            "format": self.format,
             "year": self.year,
             "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,
             "price": str(self.price) if self.price else None,
@@ -110,6 +116,9 @@ class Record(models.Model):
         ras = RecordArtists.objects.filter(record=self)
         artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
         dict["artists"] = artists
+        rfs = RecordFormats.objects.filter(record=self)
+        formats = [rf.to_dict() for rf in rfs]
+        dict["formats"] = formats
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
         dict["listens"] = listens
@@ -178,6 +187,18 @@ class RecordListens(models.Model):
             "name": self.name,
             "icon": self.listen.icon,
             "html": self.listen.template.format(self.listen_key),
+        }
+
+
+class RecordFormats(models.Model):
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+    format = models.ForeignKey(Format, on_delete=models.CASCADE)
+    qty = models.IntegerField(blank=True, null=True)
+
+    def to_dict(self):
+        return {
+            "name": self.format.name,
+            "qty": self.qty,
         }
 
 

@@ -20,10 +20,10 @@ const attributes = {
     key: "year",
     getValue: rec => rec.year,
   },
-  format: {
+  formats: {
     name: "Format",
-    key: "format",
-    getValue: rec => rec.format,
+    key: "formats",
+    getValue: rec => rec.formats && rec.formats.map(f => f.name).join(" "),
   },
   genres: {
     name: "Genres",

@@ -54,12 +54,12 @@ const attributes = {
     compares: ["seq", "sub"].map(cmp => compares[cmp]),
     getValues: rec => (rec.tracks ? rec.tracks.map(track => track.name) : []),
   },
-  format: {
+  formats: {
     name: "Format",
-    key: "format",
+    key: "formats",
     type: "text",
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
-    getValues: rec => (rec.format ? rec.format.split(" ") : [""]),
+    getValues: rec => (rec.formats ? rec.formats.map(f => f.name) : [""]),
   },
   genres: {
     name: "Genre",
