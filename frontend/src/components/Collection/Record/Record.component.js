@@ -6,13 +6,15 @@ import "./Record.scss"
 
 const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick }) => {
   const { t, i18n } = useTranslation()
-  let artists = rec.artists
+  const artists = rec.artists
     .map(
       (artist, index) =>
         artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
     )
     .join(" ")
-  let formats = rec.formats ? rec.formats.map(f => "format-" + f.name).join(" ") : "format-none"
+  const format_classes = rec.formats
+    ? rec.formats.map(f => "format-" + f.name.replace(/[^0-9a-zA-Z\-]/g, "_")).join(" ")
+    : "format-none"
 
   return gridView ? (
     <div className="record-row" onClick={() => handleClick(rec)}>
@@ -60,7 +62,7 @@ const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick
         ))}
     </div>
   ) : (
-    <div className={`record ${formats}`} onClick={() => handleClick(rec)}>
+    <div className={`record ${format_classes}`} onClick={() => handleClick(rec)}>
       <LazyLoad offset={300} once>
         <img
           className="cover"
