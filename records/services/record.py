@@ -196,7 +196,7 @@ def __getFormats(format_data):
     for format in format_data:
         format_string = format.get("name")
         if format.get("descriptions"):
-            desc = re.search('(\\d+)"|(LP)', " ".join(format.get("descriptions")))
+            desc = re.search(r'(\d[\d\.\,½]*)"|(LP)', " ".join(format.get("descriptions")))
             if desc:
                 format_string += desc.group(1) or desc.group(2)
         formats_dup.append({"name": format_string.replace(" ", "-"), "qty": int(format.get("qty") or "0")})
