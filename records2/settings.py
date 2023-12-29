@@ -105,10 +105,16 @@ LOGGING = {
         },
     },
     "handlers": {
-        "file": {
+        "fileDebug": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": os.path.join(BASE_DIR, "logs/debug.log"),
+            "formatter": "verbose",
+        },
+        "fileError": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs/error.log"),
             "formatter": "verbose",
         },
         "console": {
@@ -124,7 +130,7 @@ LOGGING = {
             "propagate": True,
         },
         "records": {
-            "handlers": ["file"],
+            "handlers": ["fileDebug", "fileError"],
             "level": "DEBUG",
             "propagate": True,
         },
