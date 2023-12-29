@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from .views import collection
 from .views import record
@@ -8,20 +8,20 @@ from .views import rates
 
 app_name = "records"
 urlpatterns = [
-    url(r"^collection/(?P<username>[\w\.\-]+)$", collection.getCollection, name="getCollection"),
-    url(r"^collection/(?P<username>[\w\.\-]+)/update$", collection.updateCollection, name="updateCollection"),
-    url(r"^record/(?P<record_id>\d+)$", record.getRecord, name="getRecord"),
-    url(r"^record/(?P<record_id>\d+)/update$", record.updateRecord, name="updateRecord"),
-    url(
+    re_path(r"^collection/(?P<username>[\w\.\-]+)$", collection.getCollection, name="getCollection"),
+    re_path(r"^collection/(?P<username>[\w\.\-]+)/update$", collection.updateCollection, name="updateCollection"),
+    path("record/<int:record_id>", record.getRecord, name="getRecord"),
+    path("record/<int:record_id>/update", record.updateRecord, name="updateRecord"),
+    re_path(
         r"^record/(?P<record_id>\d+)/set/(?P<listen_name>\w+)/(?P<listen_key>\w+)$",
         record.setRecordListen,
         name="setRecordListen",
     ),
-    url(r"^artist/(?P<artist_id>\d+)$", artist.getArtist, name="getArtist"),
-    url(r"^artist/(?P<artist_id>\d+)/update$", artist.updateArtist, name="updateArtist"),
-    url(r"^artist/(?P<artist_id>\d+)/releases$", artist.getArtistReleases, name="getArtistReleases"),
-    url(r"^artist/(?P<artist_id>\d+)/releases/update$", artist.updateArtistReleases, name="updateArtistReleases"),
-    url(r"^artist/autocomplete$", artist.getArtistAutocomplete, name="getArtistAutocomplete"),
-    url(r"^progress$", progress.getProgress, name="getProgress"),
-    url(r"^rate/(?P<currency>\w+)$", rates.getRate, name="getRate"),
+    path("artist/<int:artist_id>", artist.getArtist, name="getArtist"),
+    path("artist/<int:artist_id>/update", artist.updateArtist, name="updateArtist"),
+    path("artist/<int:artist_id>/releases", artist.getArtistReleases, name="getArtistReleases"),
+    path("artist/<int:artist_id>/releases/update", artist.updateArtistReleases, name="updateArtistReleases"),
+    path("artist/autocomplete", artist.getArtistAutocomplete, name="getArtistAutocomplete"),
+    path("progress", progress.getProgress, name="getProgress"),
+    re_path(r"^rate/(?P<currency>\w+)$", rates.getRate, name="getRate"),
 ]
