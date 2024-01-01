@@ -1,7 +1,7 @@
 const attributes = {
-  artist: {
+  artists: {
     name: "Artist",
-    key: "artist",
+    key: "artists",
     getValue: rec =>
       rec.artists
         .map(

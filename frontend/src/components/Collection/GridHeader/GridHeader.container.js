@@ -3,7 +3,6 @@ import { setOrders } from "Actions"
 import GridHeader from "./GridHeader.component"
 
 const mapStateToProps = state => ({
-  gridHeader: state.ui.GridHeader,
   gridColumns: state.ui.gridColumns,
   currency: state.collection.currency,
   orders: state.process.orders,
@@ -16,7 +15,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  gridHeader: stateProps.gridHeader,
   gridColumns: stateProps.gridColumns,
   currency: stateProps.currency,
   orders: stateProps.orders,

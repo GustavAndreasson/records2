@@ -2,10 +2,10 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import "./GridHeader.scss"
 
-const GridHeader = ({ gridView, gridColumns, currency, orders, switchOrder }) => {
+const GridHeader = ({ gridColumns, currency, orders, switchOrder }) => {
   const { t, i18n } = useTranslation()
   return (
-    /*gridView &&*/ <div className="grid-header">
+    <div className="grid-header">
       <div className="column-title"></div>
       {gridColumns &&
         gridColumns.map(column => (

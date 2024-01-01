@@ -27,6 +27,7 @@
       "name": "Name",
       "year": "Year",
       "artist": "Artist",
+      "artists": "Artist",
       "track": "Track",
       "formats": "Formats",
       "genres": "Genres",
