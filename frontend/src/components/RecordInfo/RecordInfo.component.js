@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
-import { useTranslation } from "react-i18next"
 import Popup from "Components/Popup"
-import Artists from "Components/Artists"
+import { Artists, Formats, Genres, Price, Year } from "Components/Attributes"
 import Listen from "./Listen"
 import "./RecordInfo.scss"
 
@@ -11,11 +10,9 @@ const RecordInfo = ({
   rate,
   currency,
   updateRecord,
-  handleYearClick,
   handleListenClick,
   hideRecord,
 }) => {
-  const { t, i18n } = useTranslation()
   useEffect(() => {
     if (rec) {
       let threeMonthsAgo = new Date()
@@ -40,27 +37,30 @@ const RecordInfo = ({
           <div className={"record-info"}>
             <img className="cover" src={rec.cover} />
             <div className="artists">
-              <Artists artists={rec.artists} />
+              <Artists value={rec.artists} />
             </div>
             <div className="left">
               {rec.formats && (
                 <div className="formats">
-                  {rec.formats
-                    .filter(f => f.name !== "All-Media")
-                    .map(f => (f.qty > 1 ? f.qty + "x" : "") + t("format." + f.name, f.name))
-                    .join(", ")}
+                  <Formats value={rec.formats} />
                 </div>
               )}
               {(rec.year && (
-                <div className="year" onClick={() => handleYearClick(rec.year)}>
-                  {rec.year}
+                <div className="year">
+                  <Year value={rec.year} />
                 </div>
               )) ||
                 null}
-              {rec.genres && <div className="genres">{rec.genres.join(", ")}</div>}
+              {rec.genres && (
+                <div className="genres">
+                  <Genres value={rec.genres} />
+                </div>
+              )}
               {rec.price && rate && (
                 <div className="price">
-                  {"(" + (rec.price * rate).toFixed(2) + " " + currency + ")"}
+                  {"("}
+                  <Price value={rec.price} />
+                  {" " + currency + ")"}
                 </div>
               )}
               <div className="tracks">
@@ -71,7 +71,7 @@ const RecordInfo = ({
                       {track.artists && (
                         <>
                           {" ("}
-                          <Artists artists={track.artists} />
+                          <Artists value={track.artists} />
                           {")"}
                         </>
                       )}

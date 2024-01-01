@@ -13,6 +13,7 @@ import {
   SHOW_ARTIST,
   SET_CURRENCY,
   RECEIVE_RATE,
+  ADD_FILTER,
 } from "Actions"
 
 function collection(
@@ -83,6 +84,10 @@ function collection(
     case RECEIVE_RATE:
       return Object.assign({}, state, {
         rate: action.rate.currency == state.currency ? action.rate.rate : state.rate,
+      })
+    case ADD_FILTER:
+      return Object.assign({}, state, {
+        activeRecord: null,
       })
     default:
       return state

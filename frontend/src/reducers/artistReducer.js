@@ -10,7 +10,6 @@ import {
   VIEW_ARTIST_COLLECTION,
   TOGGLE_VIEW_ARTIST_COLLECTION,
   RECEIVE_RECORD,
-  FILTER_YEAR,
 } from "Actions"
 
 function artist(
@@ -67,10 +66,6 @@ function artist(
     case TOGGLE_VIEW_ARTIST_COLLECTION:
       return Object.assign({}, state, {
         viewArtistCollection: !state.viewArtistCollection,
-      })
-    case FILTER_YEAR:
-      return Object.assign({}, state, {
-        activeRecord: null,
       })
     default:
       return state

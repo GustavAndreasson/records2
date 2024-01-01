@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { updateRecord, filterYear, showListen, hideRecord } from "Actions"
+import { updateRecord, showListen, hideRecord } from "Actions"
 import { selectActiveRecord } from "Selectors"
 import RecordInfo from "./RecordInfo.component"
 
@@ -13,9 +13,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateRecord: record => {
     dispatch(updateRecord(record))
-  },
-  handleYearClick: year => {
-    dispatch(filterYear(year))
   },
   handleListenClick: listen => {
     dispatch(showListen(listen))

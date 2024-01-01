@@ -16,8 +16,8 @@ export const updateSearch = query => ({
   query,
 })
 
-export const FILTER_YEAR = "FILTER_YEAR"
-export const filterYear = year => ({
-  type: FILTER_YEAR,
-  year,
+export const ADD_FILTER = "ADD_FILTER"
+export const addFilter = filter => ({
+  type: ADD_FILTER,
+  filter,
 })

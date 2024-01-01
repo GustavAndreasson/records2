@@ -1,11 +1,16 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
 import LazyLoad from "react-lazyload"
-import Artists from "Components/Artists"
+import { Artists, Formats, Genres, Price, Year } from "Components/Attributes"
 import "./Record.scss"
 
-const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick }) => {
-  const { t, i18n } = useTranslation()
+const Record = ({ rec, gridView, gridColumns, handleClick }) => {
+  const attributes = {
+    artists: Artists,
+    formats: Formats,
+    genres: Genres,
+    price: Price,
+    year: Year,
+  }
   const artists = rec.artists
     .map(
       (artist, index) =>
@@ -29,37 +34,14 @@ const Record = ({ rec, gridView, gridColumns, rate, handleClick, handleYearClick
         </LazyLoad>
       </div>
       {gridColumns &&
-        gridColumns.map(column => (
-          <div className={`record-${column}`} key={column}>
-            {column == "artist" ? (
-              <Artists artists={rec.artists} />
-            ) : column == "price" ? (
-              rec.price && (rec.price * rate).toFixed(2)
-            ) : column == "year" ? (
-              rec.year ? (
-                <span
-                  className="year"
-                  onClick={e => {
-                    e.stopPropagation()
-                    handleYearClick(rec.year)
-                  }}
-                >
-                  {rec.year}
-                </span>
-              ) : null
-            ) : column == "formats" ? (
-              rec.formats &&
-              rec.formats
-                .filter(f => f.name !== "All-Media")
-                .map(f => (f.qty > 1 ? f.qty + "x" : "") + t("format." + f.name, f.name))
-                .join(", ")
-            ) : column == "genres" ? (
-              rec.genres && rec.genres.join(", ")
-            ) : (
-              column in rec && rec[column]
-            )}
-          </div>
-        ))}
+        gridColumns.map(column => {
+          const Attribute = attributes[column]
+          return (
+            <div className={`record-${column}`} key={column}>
+              {Attribute ? <Attribute value={rec[column]} /> : column in rec && rec[column]}
+            </div>
+          )
+        })}
     </div>
   ) : (
     <div className={`record ${format_classes}`} onClick={() => handleClick(rec)}>
