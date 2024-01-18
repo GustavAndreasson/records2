@@ -24,7 +24,7 @@ def getAlbum(artist, album):
     auth = "Bearer " + __getToken()
     headers = {"Authorization": auth}
     query = "album:" + quote(album) + "%20artist:" + quote(artist) + "&type=album"
-    r = requests.get(config("SPOTIFY_API_URL") + "search?q=" + query, headers=headers)
+    r = requests.get(str(config("SPOTIFY_API_URL")) + "search?q=" + query, headers=headers)
     try:
         data = r.json()
     except JSONDecodeError:
@@ -53,10 +53,10 @@ def __getToken():
 
 
 def __renewToken():
-    auth = base64.b64encode(bytes(config("SPOTIFY_ID") + ":" + config("SPOTIFY_SECRET"), "utf-8"))
+    auth = base64.b64encode(bytes(str(config("SPOTIFY_ID")) + ":" + str(config("SPOTIFY_SECRET")), "utf-8"))
     headers = {"Authorization": "Basic " + auth.decode(), "Content-Type": "application/x-www-form-urlencoded"}
     data = {"grant_type": "client_credentials"}
-    r = requests.post(config("SPOTIFY_ACCOUNT_URL") + "token", data=data, headers=headers)
+    r = requests.post(str(config("SPOTIFY_ACCOUNT_URL")) + "token", data=data, headers=headers)
     token_info = (r.json()["access_token"], r.json()["expires_in"] + time.time())
     cache.set(TOKEN_KEY, token_info)
     return token_info

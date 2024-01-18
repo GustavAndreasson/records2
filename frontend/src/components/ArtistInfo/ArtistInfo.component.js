@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react"
 import Artist from "Components/Artist"
+import Description from "./Description"
 import "./ArtistInfo.scss"
 
 const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
@@ -22,13 +23,7 @@ const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
       <div className="artist-info">
         <div className="name">{artist.name}</div>
         {artist.image && <img src={artist.image} />}
-        {artist.description && (
-          <div className="description">
-            {artist.description.split("\n").map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        )}
+        <Description description={artist.description} />
         {artist.members && (
           <div className="members">
             {artist.members.map((member, index) => (

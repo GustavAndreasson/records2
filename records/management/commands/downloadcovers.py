@@ -18,12 +18,12 @@ class Command(BaseCommand):
                 if downloadCover(record):
                     record.save()
             except HTTPError as e:
-                if e.response.status_code == 429:
-                    self.stdout.write("Discogs download limit reached. Wait" + " for a minute before running again")
+                if e.response and e.response.status_code == 429:
+                    self.stdout.write("Discogs download limit reached. Wait for a minute before running again")
                     break
-                elif e.response.status_code == 404:
+                elif e.response and e.response.status_code == 404:
                     self.stdout.write(
-                        "Cover file for record " + record.name + " is missing on discogs. Updating " + "record.\n"
+                        "Cover file for record " + record.name + " is missing on discogs. Updating record.\n"
                     )
                     updateRecord(record)
                     continue

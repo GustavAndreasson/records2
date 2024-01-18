@@ -108,17 +108,18 @@ def __readUri(uri):
         queue = cache.get(ACCESS_QUEUE_CACHE_KEY, 1)
         cache.set(ACCESS_QUEUE_CACHE_KEY, queue - 1)
     DiscogsAccess.objects.create(timestamp=time.time())
-    headers = {"User-Agent": config("DISCOGS_AGENT")}
-    params = {"key": config("DISCOGS_KEY"), "secret": config("DISCOGS_SECRET")}
-    url = config("DISCOGS_BASE_URL") + uri
+    headers = {"User-Agent": str(config("DISCOGS_AGENT"))}
+    params = {"key": str(config("DISCOGS_KEY")), "secret": str(config("DISCOGS_SECRET"))}
+    url = str(config("DISCOGS_BASE_URL")) + uri
     try:
         r = requests.get(url, params=params, headers=headers)
         data = r.json()
         max_discogs_accesses = int(r.headers.get("X-Discogs-Ratelimit", max_discogs_accesses))
-        if (max_discogs_accesses - len(accesses)) > int(r.headers.get("X-Discogs-Ratelimit-Remaining")):
+        remaining_discogs_accesses = r.headers.get("X-Discogs-Ratelimit-Remaining")
+        if remaining_discogs_accesses and ((max_discogs_accesses - len(accesses)) > int(remaining_discogs_accesses)):
             logger.debug(
                 "Rate limit remaining: "
-                + r.headers.get("X-Discogs-Ratelimit-Remaining")
+                + str(remaining_discogs_accesses)
                 + ", expected: "
                 + str(max_discogs_accesses - len(accesses))
                 + ". Adding dummy request to queue."
@@ -127,7 +128,7 @@ def __readUri(uri):
     except requests.exceptions.RequestException as re:
         raise DiscogsError(re.response.status_code if re.response is not None else -1, str(re))
     except JSONDecodeError as je:
-        raise DiscogsError(r.status_code, str(je))
+        raise DiscogsError(-1, str(je))
     if r.status_code == 429 or data.get("message") == "You are making requests too quickly.":
         logger.error(
             "Too many requests to Discogs "

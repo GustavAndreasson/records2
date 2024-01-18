@@ -3,6 +3,7 @@ from django.urls import path, re_path
 from .views import collection
 from .views import record
 from .views import artist
+from .views import multidata
 from .views import progress
 from .views import rates
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path("artist/<int:artist_id>/releases", artist.getArtistReleases, name="getArtistReleases"),
     path("artist/<int:artist_id>/releases/update", artist.updateArtistReleases, name="updateArtistReleases"),
     path("artist/autocomplete", artist.getArtistAutocomplete, name="getArtistAutocomplete"),
+    path("multidata", multidata.getMultipleData, name="getMultipleData"),
     path("progress", progress.getProgress, name="getProgress"),
     re_path(r"^rate/(?P<currency>\w+)$", rates.getRate, name="getRate"),
 ]

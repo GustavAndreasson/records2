@@ -14,7 +14,7 @@ from imagekit.processors import ResizeToFit
 
 class Artist(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=1024, blank=True, null=True)
+    name = models.CharField(max_length=1024, blank=True)
     sname = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.CharField(max_length=255, blank=True, null=True)
@@ -55,7 +55,7 @@ class Artist(models.Model):
 
 class Listen(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    template = models.TextField(blank=True, null=True)
+    template = models.TextField(blank=True)
     icon = models.CharField(max_length=64, blank=True, null=True)
 
     def __str__(self):

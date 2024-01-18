@@ -100,3 +100,16 @@ def collectArtistReleases(artist):
 def fixArtistName(name):
     myre = re.compile("\\(\\d+\\)$")
     return myre.sub("", name).strip()
+
+
+def getArtists(artistList):
+    artists: dict[str, Artist] = {}
+    for artistIdentifier in artistList:
+        try:
+            if artistIdentifier.isdigit():
+                artists[artistIdentifier] = Artist.objects.get(id=int(artistIdentifier))
+            else:
+                artists[artistIdentifier] = Artist.objects.get(sname=artistIdentifier[:20].lower())
+        except (Artist.DoesNotExist, Artist.MultipleObjectsReturned):
+            pass
+    return artists

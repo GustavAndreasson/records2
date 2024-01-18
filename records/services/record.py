@@ -234,3 +234,23 @@ def downloadCover(record):
     fp.write(resp.content)
     record.cover_file.save(str(record.id) + ".jpg", files.File(fp))
     return False
+
+
+def getReleases(releaseList):
+    releases = {}
+    for releaseId in releaseList:
+        try:
+            releases[releaseId] = Record.objects.get(id=int(releaseId))
+        except (Record.DoesNotExist, Record.MultipleObjectsReturned):
+            pass
+    return releases
+
+
+def getMasters(masterList):
+    masters = {}
+    for masterId in masterList:
+        try:
+            masters[masterId] = Record.objects.filter(master=int(masterId))[0]
+        except IndexError:
+            pass
+    return masters

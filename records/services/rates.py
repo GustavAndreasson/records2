@@ -10,7 +10,7 @@ def getRate(currency):
     rates = cache.get(RATES_CACHE_KEY)
     yesterday = time.time() - 86400
     if not rates or rates.get("query").get("timestamp") < yesterday:
-        url = config("RATES_API_URL") + config("RATES_API_KEY")
+        url = str(config("RATES_API_URL") + config("RATES_API_KEY"))
         r = requests.get(url)
         if r.status_code == 200:
             data = r.json()
