@@ -6,7 +6,7 @@ import time
 RATES_CACHE_KEY = "rates_cache_key"
 
 
-def getRate(currency):
+def getRate(currency: str) -> int | None:
     rates = cache.get(RATES_CACHE_KEY)
     yesterday = time.time() - 86400
     if not rates or rates.get("query").get("timestamp") < yesterday:

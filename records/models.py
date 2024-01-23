@@ -122,7 +122,7 @@ class Record(models.Model):
         rls = RecordListens.objects.filter(record=self)
         listens = [rl.to_dict() for rl in rls]
         dict["listens"] = listens
-        track_objects = self.track_set.all()
+        track_objects = self.track_set.all()  # type: ignore
         tracks = [track.to_dict() for track in track_objects]
         dict["tracks"] = tracks
         cache.set(self.get_cache_key(), dict)

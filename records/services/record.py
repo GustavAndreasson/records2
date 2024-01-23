@@ -3,6 +3,7 @@ from django.db import DatabaseError
 from django.core import files
 import requests
 from io import BytesIO
+from decimal import Decimal
 from ..models import (
     Record,
     RecordArtists,
@@ -24,7 +25,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def createRecord(id, data):
+def createRecord(id: int, data: dict) -> Record:
     release_id = id
     master_id = data.get("master", release_id + 990000000)
     if data.get("type") == "master":
@@ -46,7 +47,7 @@ def createRecord(id, data):
     if created:
         logger.info("Created record " + record.name + " (" + str(record.id) + ")")
         position = 0
-        for r_artist in data.get("artists"):
+        for r_artist in data.get("artists") or []:
             delimiter = None
             if type(r_artist) is Artist:
                 artist = r_artist
@@ -55,7 +56,7 @@ def createRecord(id, data):
                 delimiter = r_artist.get("join")
             RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, position=position)
             position += 1
-        r_formats = __getFormats(data.get("format"))
+        r_formats = __getFormats(data.get("format") or [])
         for r_format in r_formats:
             format, created = Format.objects.get_or_create(name=r_format.get("name"))
             if created:
@@ -70,21 +71,21 @@ def createRecord(id, data):
     return record
 
 
-def updateRecord(record):
+def updateRecord(record: Record) -> bool:
     logger.info("Updating record " + record.name + " (" + str(record.id) + ")")
     try:
         release_data = discogs.getRelease(record.id)
         __updateDataWithMasterData(release_data)
-        record.master = release_data.get("master_id")
-        __updateArtists(record, release_data.get("artists"))
-        record.track_set.all().delete()
-        if release_data.get("tracklist"):
-            for track_data in release_data.get("tracklist"):
+        record.master = release_data.master_id
+        __updateArtists(record, release_data.artists or [])
+        record.track_set.all().delete()  # type: ignore
+        if release_data.tracklist:
+            for track_data in release_data.tracklist:
                 __createTrack(record, track_data)
-        if release_data.get("images"):
+        if release_data.images:
             old_cover = record.cover
-            record.cover = release_data["images"][0].get("uri")
-            record.thumbnail = release_data["images"][0].get("uri150")
+            record.cover = release_data.images[0].uri
+            record.thumbnail = release_data.images[0].uri150
             if old_cover != record.cover:
                 try:
                     downloadCover(record)
@@ -92,20 +93,20 @@ def updateRecord(record):
                     logger.error(
                         "Error when downloading cover art for " + record.name + " (" + str(record.id) + ")\n" + str(e)
                     )
-        __updateListens(record, release_data.get("videos"))
-        record.year = release_data.get("year")
-        if release_data.get("formats"):
+        __updateListens(record, release_data.videos or [])
+        record.year = release_data.year
+        if release_data.formats:
             RecordFormats.objects.filter(record=record).delete()
-            r_formats = __getFormats(release_data.get("formats"))
+            r_formats = __getFormats(release_data.formats)
             for r_format in r_formats:
                 format, created = Format.objects.get_or_create(name=r_format.get("name"))
                 if created:
                     format.save()
                 RecordFormats.objects.create(record=record, format=format, qty=r_format.get("qty"))
-        if release_data.get("lowest_price"):
-            record.price = release_data.get("lowest_price")
-        if release_data.get("genres") or release_data.get("styles"):
-            r_genres = (release_data.get("genres") or []) + (release_data.get("styles") or [])
+        if release_data.lowest_price:
+            record.price = Decimal(release_data.lowest_price)
+        if release_data.genres or release_data.styles:
+            r_genres = (release_data.genres or []) + (release_data.styles or [])
             if set(r_genres) != set(record.genres.all()):
                 record.genres.clear()
                 for r_genre in r_genres:
@@ -124,40 +125,40 @@ def updateRecord(record):
     return True
 
 
-def __updateDataWithMasterData(release_data):
-    if release_data.get("master_id"):
+def __updateDataWithMasterData(release_data: discogs.Release) -> None:
+    if release_data.master_id:
         try:
-            master_data = discogs.getMaster(release_data.get("master_id"))
-            release_data["year"] = master_data.get("year")
-            if not release_data.get("images"):
-                if master_data.get("images"):
-                    release_data["images"] = master_data.get("images")
-            if not release_data.get("videos"):
-                if master_data.get("videos"):
-                    release_data["videos"] = master_data.get("videos")
+            master_data = discogs.getMaster(release_data.master_id)
+            release_data.year = master_data.year
+            if not release_data.images:
+                if master_data.images:
+                    release_data.images = master_data.images
+            if not release_data.videos:
+                if master_data.videos:
+                    release_data.videos = master_data.videos
         except discogs.DiscogsError as de:
             logger.info(
                 "Did not find master for record "
-                + release_data.get("title")
+                + str(release_data.title)
                 + " ("
-                + str(release_data.get("id"))
+                + str(release_data.id)
                 + ") on discogs\n"
                 + str(de)
             )
     else:
-        release_data["master_id"] = release_data.get("id") + 990000000
+        release_data.master_id = int(release_data.id or 0) + 990000000
 
 
-def __updateArtists(record, artists):
+def __updateArtists(record: Record, artists: list[discogs.ReleaseArtist]) -> None:
     RecordArtists.objects.filter(record=record).delete()
     position = 0
     for r_artist in artists:
-        artist = artistService.createArtist(r_artist["id"], r_artist["name"])
-        RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist["join"], position=position)
+        artist = artistService.createArtist(r_artist.id, r_artist.name)
+        RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist.join, position=position)
         position += 1
 
 
-def __updateListens(record, videos):
+def __updateListens(record: Record, videos: list[discogs.Video]) -> None:
     try:
         spotify_listen = Listen.objects.get(name="spotify")
         if RecordListens.objects.filter(record=record, listen=spotify_listen).count() == 0:
@@ -174,8 +175,8 @@ def __updateListens(record, videos):
             youtube_listen = Listen.objects.get(name="youtube")
             RecordListens.objects.filter(record=record, listen=youtube_listen).delete()
             for video in videos:
-                if "youtube" in video["uri"] and "v=" in video["uri"]:
-                    youtube_key = video["uri"][video["uri"].find("v=") + 2 :]
+                if "youtube" in video.uri and "v=" in video.uri:
+                    youtube_key = video.uri[video.uri.find("v=") + 2 :]
                     if (
                         RecordListens.objects.filter(
                             record=record, listen=youtube_listen, listen_key=youtube_key
@@ -183,23 +184,23 @@ def __updateListens(record, videos):
                         == 0
                     ):
                         RecordListens.objects.create(
-                            record=record, listen=youtube_listen, listen_key=youtube_key, name=video.get("title")
+                            record=record, listen=youtube_listen, listen_key=youtube_key, name=video.title
                         )
         except Listen.DoesNotExist:
             logger.error("Youtube listen does not exist")
 
 
-def __getFormats(format_data):
+def __getFormats(format_data: list[discogs.Format]) -> list[dict]:
     if not format_data:
         return []
     formats_dup = []
     for format in format_data:
-        format_string = format.get("name")
-        if format.get("descriptions"):
-            desc = re.search(r'(\d[\d\.\,½]*)"|(LP)', " ".join(format.get("descriptions")))
+        format_string = str(format.name)
+        if format.descriptions:
+            desc = re.search(r'(\d[\d\.\,½]*)"|(LP)', " ".join(format.descriptions or []))
             if desc:
                 format_string += desc.group(1) or desc.group(2)
-        formats_dup.append({"name": format_string.replace(" ", "-"), "qty": int(format.get("qty") or "0")})
+        formats_dup.append({"name": format_string.replace(" ", "-"), "qty": int(format.qty or "0")})
     formats = []
     for format in formats_dup:
         qty = sum(f.get("qty") if f.get("name") == format.get("name") else 0 for f in formats_dup)
@@ -208,17 +209,17 @@ def __getFormats(format_data):
     return formats
 
 
-def __createTrack(record, track_data):
-    track = Track.objects.create(position=track_data.get("position"), name=track_data.get("title"), record=record)
-    if track_data.get("artists"):
+def __createTrack(record: Record, track_data: discogs.TracklistItem):
+    track = Track.objects.create(position=track_data.position, name=track_data.title, record=record)
+    if track_data.artists:
         position = 0
-        for t_artist in track_data.get("artists"):
-            artist = artistService.createArtist(t_artist["id"], t_artist["name"])
-            TrackArtists.objects.create(track=track, artist=artist, delimiter=t_artist["join"], position=position)
+        for t_artist in track_data.artists or []:
+            artist = artistService.createArtist(t_artist.id, t_artist.name)
+            TrackArtists.objects.create(track=track, artist=artist, delimiter=t_artist.join, position=position)
             position += 1
 
 
-def downloadCover(record):
+def downloadCover(record: Record) -> bool:
     if not record.cover:
         return False
     if record.cover[-10:] == "spacer.gif":
@@ -236,7 +237,7 @@ def downloadCover(record):
     return False
 
 
-def getReleases(releaseList):
+def getReleases(releaseList: list[str]) -> dict[str, Record]:
     releases = {}
     for releaseId in releaseList:
         try:
@@ -246,7 +247,7 @@ def getReleases(releaseList):
     return releases
 
 
-def getMasters(masterList):
+def getMasters(masterList: list[str]) -> dict[str, Record]:
     masters = {}
     for masterId in masterList:
         try:
