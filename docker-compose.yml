@@ -17,6 +17,7 @@ services:
       - .env
     ports:
       - "8600:8600"
+      - "3000:3000"
     volumes:
       - .:/app
     links:
