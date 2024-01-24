@@ -10,7 +10,7 @@ lxml==4.9.1
 mysqlclient==2.0.3
 oauthlib==3.2.2
 pilkit==3.0
-Pillow==10.0.1
+Pillow==10.2.0
 pydantic==2.5.3
 python-dateutil==2.8.2
 python-decouple==3.4
