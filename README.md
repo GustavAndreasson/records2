@@ -27,10 +27,10 @@ python3 -m venv venv
 
 Add a file .env (copy of env.template) in the records2 directory with correct links to mysql and redis.
 
-Then run this from development machine:
+Then run this from development machine (use switch '-r' if not on local network):
 
 ```sh
-sh install/deploy.sh
+sh dev/deploy.sh
 ```
 
 Recommended crontab:
