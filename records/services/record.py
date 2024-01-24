@@ -52,8 +52,8 @@ def createRecord(id: int, data: dict) -> Record:
             if type(r_artist) is Artist:
                 artist = r_artist
             else:
-                artist = artistService.createArtist(r_artist["id"], r_artist["name"])
-                delimiter = r_artist.get("join")
+                artist = artistService.createArtist(r_artist.id, r_artist.name)
+                delimiter = r_artist.join
             RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, position=position)
             position += 1
         r_formats = __getFormats(data.get("format") or [])
