@@ -2,7 +2,7 @@ import React from "react"
 import { fixArtistName } from "Utils/Helpers"
 import "./Artist.scss"
 
-const Artist = ({ artist, handleClick, active = true }) => (
+const Artist = ({ artist, anv = "", handleClick, active = true }) => (
   <span
     className={"artist" + (!active ? " inactive" : "")}
     onClick={e => {
@@ -10,7 +10,7 @@ const Artist = ({ artist, handleClick, active = true }) => (
       handleClick(artist)
     }}
   >
-    {fixArtistName(artist.name)}
+    {anv || fixArtistName(artist.name)}
   </span>
 )
 

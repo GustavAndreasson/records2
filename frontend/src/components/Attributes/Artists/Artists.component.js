@@ -5,7 +5,7 @@ const Artists = ({ value }) =>
   value &&
   value.map((artist, index) => (
     <Fragment key={artist.artist.id}>
-      <Artist artist={artist.artist} />
+      <Artist artist={artist.artist} anv={artist.anv} />
       {index < value.length - 1 && " " + artist.delimiter + " "}
     </Fragment>
   ))

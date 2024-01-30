@@ -114,7 +114,7 @@ class Record(models.Model):
             "updated": str(self.updated) if self.updated else None,
         }
         ras = RecordArtists.objects.filter(record=self)
-        artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter} for ra in ras]
+        artists = [{"artist": ra.artist.to_dict(False), "delimiter": ra.delimiter, "anv": ra.anv} for ra in ras]
         dict["artists"] = artists
         rfs = RecordFormats.objects.filter(record=self)
         formats = [rf.to_dict() for rf in rfs]
@@ -206,6 +206,7 @@ class RecordArtists(models.Model):
     record = models.ForeignKey(Record, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     delimiter = models.CharField(max_length=255, blank=True, null=True)
+    anv = models.CharField(max_length=255, blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)
 
     class Meta:

@@ -15,7 +15,7 @@ const Record = ({ rec, gridView, gridColumns, handleClick }) => {
   const artists = rec.artists
     .map(
       (artist, index) =>
-        fixArtistName(artist.artist.name) +
+        (artist.anv || fixArtistName(artist.artist.name)) +
         (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
     )
     .join(" ")

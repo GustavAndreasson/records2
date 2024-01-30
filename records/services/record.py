@@ -49,12 +49,14 @@ def createRecord(id: int, data: dict) -> Record:
         position = 0
         for r_artist in data.get("artists") or []:
             delimiter = None
+            anv = None
             if type(r_artist) is Artist:
                 artist = r_artist
             else:
                 artist = artistService.createArtist(r_artist.id, r_artist.name)
                 delimiter = r_artist.join
-            RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, position=position)
+                anv = r_artist.anv
+            RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, anv=anv, position=position)
             position += 1
         r_formats = __getFormats(data.get("format") or [])
         for r_format in r_formats:
@@ -154,7 +156,9 @@ def __updateArtists(record: Record, artists: list[discogs.ReleaseArtist]) -> Non
     position = 0
     for r_artist in artists:
         artist = artistService.createArtist(r_artist.id, r_artist.name)
-        RecordArtists.objects.create(record=record, artist=artist, delimiter=r_artist.join, position=position)
+        RecordArtists.objects.create(
+            record=record, artist=artist, delimiter=r_artist.join, anv=r_artist.anv, position=position
+        )
         position += 1
 
 

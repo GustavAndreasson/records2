@@ -1,6 +1,5 @@
 from lxml import etree
 from django.core.management.base import BaseCommand
-from records.services.artist import fixArtistName
 from records.models import Artist
 
 
@@ -41,7 +40,7 @@ class Command(BaseCommand):
                     and elem.find("id").text
                     and not elem.find("data_quality").text in ("Needs Major Changes", "Entirely Incorrect")
                 ):
-                    name = fixArtistName(elem.find("name").text)
+                    name = elem.find("name").text
                     sname = name[:20].lower()
                     artists_batch.append(Artist(id=elem.find("id").text, name=name, sname=sname))
                     if len(artists_batch) >= batch_size:
