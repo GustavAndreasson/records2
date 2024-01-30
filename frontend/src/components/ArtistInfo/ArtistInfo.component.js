@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react"
 import Artist from "Components/Artist"
 import Description from "./Description"
+import { fixArtistName } from "Utils/Helpers"
 import "./ArtistInfo.scss"
 
 const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
@@ -21,7 +22,7 @@ const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
   return (
     artist && (
       <div className="artist-info">
-        <div className="name">{artist.name}</div>
+        <div className="name">{fixArtistName(artist.name)}</div>
         {artist.image && <img src={artist.image} />}
         <Description description={artist.description} />
         {artist.members && (

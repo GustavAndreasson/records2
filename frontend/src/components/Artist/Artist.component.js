@@ -1,4 +1,5 @@
 import React from "react"
+import { fixArtistName } from "Utils/Helpers"
 import "./Artist.scss"
 
 const Artist = ({ artist, handleClick, active = true }) => (
@@ -9,7 +10,7 @@ const Artist = ({ artist, handleClick, active = true }) => (
       handleClick(artist)
     }}
   >
-    {artist.name}
+    {fixArtistName(artist.name)}
   </span>
 )
 

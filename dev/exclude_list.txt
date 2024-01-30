@@ -1,5 +1,6 @@
-install
+dev
 .git
+.gitignore
 *~
 var
 __pycache__
@@ -10,6 +11,9 @@ frontend/src
 datadump
 media
 .dockerignore
+.vscode
 Dockerfile
 docker-compose.yml
 start.sh
+webpack.config.js
+.babelrc

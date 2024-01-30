@@ -1,4 +1,3 @@
-import re
 from django.db import DatabaseError
 from datetime import date
 from ..models import Artist, ArtistMembers
@@ -11,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def createArtist(id: int, name: str) -> Artist:
-    artist, created = Artist.objects.get_or_create(id=id, defaults={"name": fixArtistName(name)})
+    artist, created = Artist.objects.get_or_create(id=id, defaults={"name": name})
     if created:
         logger.info("Created artist " + artist.name + " (" + str(artist.id) + ")")
     return artist
@@ -26,9 +25,7 @@ def updateArtist(artist: Artist) -> bool:
             artist.image = artist_data.images[0].resource_url
         if artist_data.members:
             for member_data in artist_data.members:
-                member, created = Artist.objects.get_or_create(
-                    id=member_data.id, defaults={"name": fixArtistName(member_data.name)}
-                )
+                member, created = Artist.objects.get_or_create(id=member_data.id, defaults={"name": member_data.name})
                 if created:
                     logger.info("Created artist " + member.name + " (" + str(member.id) + ")")
                 ArtistMembers.objects.update_or_create(
@@ -36,9 +33,7 @@ def updateArtist(artist: Artist) -> bool:
                 )
         if artist_data.groups:
             for group_data in artist_data.groups:
-                group, created = Artist.objects.get_or_create(
-                    id=group_data.id, defaults={"name": fixArtistName(group_data.name)}
-                )
+                group, created = Artist.objects.get_or_create(id=group_data.id, defaults={"name": group_data.name})
                 if created:
                     logger.info("Created artist " + group.name + " (" + str(group.id) + ")")
                 ArtistMembers.objects.update_or_create(
@@ -90,11 +85,6 @@ def collectArtistReleases(artist: Artist) -> bool:
     artist.collectionUpdated = date.today()
     artist.save()
     return True
-
-
-def fixArtistName(name: str) -> str:
-    myre = re.compile("\\(\\d+\\)$")
-    return myre.sub("", name).strip()
 
 
 def getArtists(artistList: list[str]) -> dict[str, Artist]:

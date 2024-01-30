@@ -1,6 +1,7 @@
 import React from "react"
 import LazyLoad from "react-lazyload"
 import { Artists, Formats, Genres, Price, Year } from "Components/Attributes"
+import { fixArtistName } from "Utils/Helpers"
 import "./Record.scss"
 
 const Record = ({ rec, gridView, gridColumns, handleClick }) => {
@@ -14,7 +15,8 @@ const Record = ({ rec, gridView, gridColumns, handleClick }) => {
   const artists = rec.artists
     .map(
       (artist, index) =>
-        artist.artist.name + (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
+        fixArtistName(artist.artist.name) +
+        (index < rec.artists.length - 1 ? " " + artist.delimiter : "")
     )
     .join(" ")
   const format_classes = rec.formats
