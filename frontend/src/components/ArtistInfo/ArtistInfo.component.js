@@ -22,9 +22,9 @@ const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
   return (
     artist && (
       <div className="artist-info">
-        <div className="name">{fixArtistName(artist.name)}</div>
+        {artist.name && <div className="name">{fixArtistName(artist.name)}</div>}
         {artist.image && <img src={artist.image} />}
-        <Description description={artist.description} />
+        {artist.description && <Description description={artist.description} />}
         {artist.members && (
           <div className="members">
             {artist.members.map((member, index) => (

@@ -1,1 +1,1 @@
-export const fixArtistName = name => name.replace(/ \([0-9]+\)/, "")
+export const fixArtistName = name => name && name.replace(/ \([0-9]+\)/, "")
