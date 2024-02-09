@@ -46,7 +46,7 @@ class Artist(models.Model):
         }
 
     def save(self, *args, **kwargs):
-        self.sname = self.name[:20].lower()
+        self.sname = self.name.lower()[:20]
         super(Artist, self).save(*args, **kwargs)
 
     class Meta:
