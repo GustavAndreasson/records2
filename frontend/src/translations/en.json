@@ -6,9 +6,6 @@
     "startuser2": " in the user name field to fetch a record collection (the first time a collection is fetched it might take several minutes).",
     "startartist": "You can also look at an artist and the records it has released. Enter the artists name it the field for artist."
   },
-  "artistinput": {
-    "artist": "Artist"
-  },
   "common": {
     "ok": "OK"
   },
@@ -45,7 +42,9 @@
       "en": "English"
     },
     "layout": "Layout",
-    "columns": "Columns"
+    "columns": "Columns",
+    "username": "Discogs username",
+    "artist": "Artist"
   },
   "progress": {
     "load": "Loading records",

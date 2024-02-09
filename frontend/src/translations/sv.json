@@ -6,9 +6,6 @@
     "startuser2": " i fältet för användarnamn för att hämta en skivsamling (första gången en skivsamling hämtas kan det ta några minuter).",
     "startartist": "Du kan också titta på en artist och vilka skivor den har släppt. Fyll då in artistens namn i fältet för artist (artisten måste finnas i databasen för att den ska komma upp som alternativ)."
   },
-  "artistinput": {
-    "artist": "Artist"
-  },
   "common": {
     "ok": "OK"
   },
@@ -45,7 +42,9 @@
       "en": "Engelska"
     },
     "layout": "Layout",
-    "columns": "Kolumner"
+    "columns": "Kolumner",
+    "username": "Discogs användarnamn",
+    "artist": "Artist"
   },
   "progress": {
     "load": "Laddar skivor",

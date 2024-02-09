@@ -55,7 +55,7 @@ const ArtistInput = ({ handleSetArtist }) => {
         }}
         suggestions={artistList}
         inputProps={{
-          placeholder: t("artistinput.artist"),
+          placeholder: t("settings.artist"),
           value: artistName,
           onChange: (e, { newValue }) => {
             setArtistName(newValue || "")

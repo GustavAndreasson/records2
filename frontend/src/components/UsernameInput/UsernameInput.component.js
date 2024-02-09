@@ -14,7 +14,7 @@ const UsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
       <i className="fas fa-user"></i>
       <input
         type="text"
-        placeholder="Discogs användarnamn"
+        placeholder={t("settings.username")}
         value={user}
         onChange={e => setUser(e.target.value)}
       />

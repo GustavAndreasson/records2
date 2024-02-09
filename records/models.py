@@ -108,7 +108,7 @@ class Record(models.Model):
             "master": self.master,
             "cover": self.cover_file.url if self.cover_file else self.cover,
             "year": self.year,
-            "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,
+            "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,  # type: ignore
             "price": str(self.price) if self.price else None,
             "genres": [genre.name for genre in self.genres.all()],
             "updated": str(self.updated) if self.updated else None,
