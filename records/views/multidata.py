@@ -7,16 +7,16 @@ import json
 
 
 def getMultipleData(request):
-    artistListStr = unquote(request.GET.get("artists", ""))
-    artistList = artistListStr.split(",") if len(artistListStr) > 0 else []
-    artists = artistService.getArtists(artistList)
+    artist_list_str = unquote(request.GET.get("artists", ""))
+    artist_list = artist_list_str.split(",") if len(artist_list_str) > 0 else []
+    artists = artistService.getArtists(artist_list)
     # labels = unquote(request.GET.get("labels", ""))
-    releaseListStr = unquote(request.GET.get("releases", ""))
-    releaseList = releaseListStr.split(",") if len(releaseListStr) > 0 else []
-    releases = recordService.getReleases(releaseList)
-    masterListStr = unquote(request.GET.get("masters", ""))
-    masterList = masterListStr.split(",") if len(masterListStr) > 0 else []
-    masters = recordService.getMasters(masterList)
+    release_list_str = unquote(request.GET.get("releases", ""))
+    release_list = release_list_str.split(",") if len(release_list_str) > 0 else []
+    releases = recordService.getReleases(release_list)
+    master_list_str = unquote(request.GET.get("masters", ""))
+    master_list = master_list_str.split(",") if len(master_list_str) > 0 else []
+    masters = recordService.getMasters(master_list)
     return HttpResponse(
         json.dumps(
             {

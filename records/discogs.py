@@ -273,11 +273,11 @@ def getArtistReleases(artist_id: int, check_main=True) -> list[ArtistRelease]:
 T = TypeVar("T", ArtistRelease, CollectionRelease)
 
 
-def __getPaginatedCollection(uri: str, collectionType: type[T], check_main=False) -> list[T]:
+def __getPaginatedCollection(uri: str, collection_type: type[T], check_main=False) -> list[T]:
     page = 0
     page_size = 25
     pages = 100
-    collection: list[collectionType] = []
+    collection: list[collection_type] = []
     progress.updateProgress("discogs", 0)
     try:
         while True:
@@ -288,7 +288,7 @@ def __getPaginatedCollection(uri: str, collectionType: type[T], check_main=False
                 pagination = Pagination.model_validate(response.get("pagination"))
                 if pagination.items == 0:
                     break
-                releases = [collectionType.model_validate(r) for r in response.get("releases") or []]
+                releases = [collection_type.model_validate(r) for r in response.get("releases") or []]
                 collection.extend(releases)
                 pages = pagination.pages
                 if page >= pages:

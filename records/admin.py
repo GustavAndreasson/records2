@@ -98,9 +98,9 @@ class GroupsInline(admin.TabularInline):
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    fields = ["id", "name", "description", "image", "updated", "collectionUpdated"]
+    fields = ["id", "name", "description", "image", "updated", "collection_updated"]
     inlines = [MembersInline, GroupsInline]
-    list_display = ("id", "name", "description", "image", "updated", "collectionUpdated")
+    list_display = ("id", "name", "description", "image", "updated", "collection_updated")
     search_fields = ["name"]
     actions = [
         reset_updated,

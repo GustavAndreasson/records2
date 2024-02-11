@@ -82,19 +82,19 @@ def collectArtistReleases(artist: Artist) -> bool:
     except discogs.DiscogsError as de:
         logger.info("Did not find releases for " + artist.name + " on discogs\n" + str(de))
         return False
-    artist.collectionUpdated = date.today()
+    artist.collection_updated = date.today()
     artist.save()
     return True
 
 
-def getArtists(artistList: list[str]) -> dict[str, Artist]:
+def getArtists(artist_list: list[str]) -> dict[str, Artist]:
     artists: dict[str, Artist] = {}
-    for artistIdentifier in artistList:
+    for artist_identifier in artist_list:
         try:
-            if artistIdentifier.isdigit():
-                artists[artistIdentifier] = Artist.objects.get(id=int(artistIdentifier))
+            if artist_identifier.isdigit():
+                artists[artist_identifier] = Artist.objects.get(id=int(artist_identifier))
             else:
-                artists[artistIdentifier] = Artist.objects.get(sname=artistIdentifier[:20].lower())
+                artists[artist_identifier] = Artist.objects.get(sname=artist_identifier[:20].lower())
         except (Artist.DoesNotExist, Artist.MultipleObjectsReturned):
             pass
     return artists

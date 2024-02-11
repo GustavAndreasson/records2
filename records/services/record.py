@@ -241,21 +241,21 @@ def downloadCover(record: Record) -> bool:
     return False
 
 
-def getReleases(releaseList: list[str]) -> dict[str, Record]:
+def getReleases(release_list: list[str]) -> dict[str, Record]:
     releases = {}
-    for releaseId in releaseList:
+    for release_id in release_list:
         try:
-            releases[releaseId] = Record.objects.get(id=int(releaseId))
+            releases[release_id] = Record.objects.get(id=int(release_id))
         except (Record.DoesNotExist, Record.MultipleObjectsReturned):
             pass
     return releases
 
 
-def getMasters(masterList: list[str]) -> dict[str, Record]:
+def getMasters(master_list: list[str]) -> dict[str, Record]:
     masters = {}
-    for masterId in masterList:
+    for master_id in master_list:
         try:
-            masters[masterId] = Record.objects.filter(master=int(masterId))[0]
+            masters[master_id] = Record.objects.filter(master=int(master_id))[0]
         except IndexError:
             pass
     return masters

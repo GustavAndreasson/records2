@@ -22,7 +22,7 @@ def updateArtist(request, artist_id):
 
 def getArtistReleases(request, artist_id):
     artist = get_object_or_404(Artist, id=artist_id)
-    if artist.collectionUpdated is None:
+    if artist.collection_updated is None:
         progress.init(request, ["discogs", "create"])
         artistService.collectArtistReleases(artist)
         progress.clearProcesses(["discogs", "create"])
