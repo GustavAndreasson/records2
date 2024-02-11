@@ -41,7 +41,7 @@ def createRecord(id: int, data: dict) -> Record:
             "master": master_id,
             "cover": data.get("cover"),
             "thumbnail": data.get("thumbnail"),
-            "year": data.get("year"),
+            "release_year": data.get("year"),
         },
     )
     if created:
@@ -96,7 +96,8 @@ def updateRecord(record: Record) -> bool:
                         "Error when downloading cover art for " + record.name + " (" + str(record.id) + ")\n" + str(e)
                     )
         __updateListens(record, release_data.videos or [])
-        record.year = release_data.year
+        record.release_year = release_data.year
+        record.release_country = release_data.country
         if release_data.formats:
             RecordFormats.objects.filter(record=record).delete()
             r_formats = __getFormats(release_data.formats)

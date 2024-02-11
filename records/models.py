@@ -82,6 +82,8 @@ class Record(models.Model):
     master = models.IntegerField(blank=True, null=True)
     cover = models.CharField(max_length=255, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
+    release_year = models.IntegerField(blank=True, null=True)
+    release_country = models.CharField(max_length=255, blank=True, null=True)
     updated = models.DateField(blank=True, null=True)
     thumbnail = models.CharField(max_length=255, blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
@@ -108,6 +110,8 @@ class Record(models.Model):
             "master": self.master,
             "cover": self.cover_file.url if self.cover_file else self.cover,
             "year": self.year,
+            "release_year": self.release_year,
+            "release_country": self.release_country,
             "thumbnail": self.thumbnail_file.url if self.thumbnail_file else self.thumbnail,  # type: ignore
             "price": str(self.price) if self.price else None,
             "genres": [genre.name for genre in self.genres.all()],
