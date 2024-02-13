@@ -65,7 +65,19 @@ def clear_cache_item(modeladmin, request, queryset):
 
 @admin.register(Record)
 class RecordAdmin(admin.ModelAdmin):
-    fields = ["id", "name", "master", "year", "cover", "thumbnail", "price", "updated", "genres"]
+    fields = [
+        "id",
+        "name",
+        "master",
+        "year",
+        "release_year",
+        "release_country",
+        "cover",
+        "thumbnail",
+        "price",
+        "updated",
+        "genres",
+    ]
     filter_horizontal = ("genres",)
     inlines = [ArtistInline, TrackInline, FormatInline, ListenInline]
     list_display = ("id", "get_artist", "name", "updated")
