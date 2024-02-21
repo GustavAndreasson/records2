@@ -54,23 +54,14 @@ def collectArtistReleases(artist: Artist) -> bool:
     logger.info("Collecting releases for artist " + artist.name + " (" + str(artist.id) + ")")
     try:
         artist_releases = discogs.getArtistReleases(artist.id)
-        artist_main_releases = [release for release in artist_releases if release.role == "Main"]
+        artist_main_releases = [
+            release for release in artist_releases if release.role == "Main" and release.type == "master"
+        ]
         tot = len(artist_main_releases)
         nr = 0
         for release_data in artist_main_releases:
             try:
-                recordService.createRecord(
-                    release_data.id,
-                    {
-                        "name": release_data.title,
-                        "cover": release_data.thumb,
-                        "thumbnail": release_data.thumb,
-                        "year": release_data.year,
-                        "type": release_data.type,
-                        "main_release": release_data.main_release,
-                        "artists": [artist],
-                    },
-                )
+                recordService.createRecordFromArtistRelease(release_data, artist)
             except DatabaseError as de:
                 logger.error(
                     "Could not create record " + release_data.title + " (" + str(release_data.id) + ")\n" + str(de)

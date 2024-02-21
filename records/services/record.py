@@ -25,46 +25,57 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def createRecord(id: int, data: dict) -> Record:
-    release_id = id
-    master_id = data.get("master", release_id + 990000000)
-    if data.get("type") == "master":
-        master_id = id
-        try:
-            release_id = Record.objects.filter(master=master_id)[0].id
-        except IndexError:
-            release_id = data.get("main_release")
+def createRecordFromArtistRelease(release: discogs.ArtistRelease, artist: Artist) -> Record:
+    release_id = release.main_release or release.id
+    master_id = release.id if release.type == "master" else release.id + 990000000
+    existing_release = Record.objects.filter(master=master_id).first()
+    if existing_release:
+        release_id = existing_release.id
     record, created = Record.objects.get_or_create(
         id=release_id,
         defaults={
-            "name": data.get("name"),
+            "name": release.title,
             "master": master_id,
-            "cover": data.get("cover"),
-            "thumbnail": data.get("thumbnail"),
-            "release_year": data.get("year"),
+            "cover": release.thumb,
+            "thumbnail": release.thumb,
+            "year": release.year,
+        },
+    )
+    if created:
+        logger.info("Created record " + record.name + " (" + str(record.id) + ")")
+        RecordArtists.objects.create(record=record, artist=artist, anv=release.artist, position=0)
+    return record
+
+
+def createRecordFromBasicInformation(release: discogs.BasicInformation) -> Record:
+    record, created = Record.objects.get_or_create(
+        id=release.id,
+        defaults={
+            "name": release.title,
+            "master": release.master_id,
+            "cover": release.cover_image,
+            "thumbnail": release.thumb,
+            "release_year": release.year,
         },
     )
     if created:
         logger.info("Created record " + record.name + " (" + str(record.id) + ")")
         position = 0
-        for r_artist in data.get("artists") or []:
-            delimiter = None
-            anv = None
-            if type(r_artist) is Artist:
-                artist = r_artist
-            else:
-                artist = artistService.createArtist(r_artist.id, r_artist.name)
-                delimiter = r_artist.join
-                anv = r_artist.anv
-            RecordArtists.objects.create(record=record, artist=artist, delimiter=delimiter, anv=anv, position=position)
+        for r_artist in release.artists or []:
+            new_artist = artistService.createArtist(r_artist.id, r_artist.name)
+            delimiter = r_artist.join
+            anv = r_artist.anv
+            RecordArtists.objects.create(
+                record=record, artist=new_artist, delimiter=delimiter, anv=anv, position=position
+            )
             position += 1
-        r_formats = __getFormats(data.get("format") or [])
+        r_formats = __getFormats(release.formats or [])
         for r_format in r_formats:
             format, created = Format.objects.get_or_create(name=r_format.get("name"))
             if created:
                 format.save()
             RecordFormats.objects.create(record=record, format=format, qty=r_format.get("qty"))
-        r_genres = (data.get("genres") or []) + (data.get("styles") or [])
+        r_genres = (release.genres or []) + (release.styles or [])
         for r_genre in r_genres:
             genre, created = Genre.objects.get_or_create(name=r_genre)
             if created:
@@ -77,7 +88,7 @@ def updateRecord(record: Record) -> bool:
     logger.info("Updating record " + record.name + " (" + str(record.id) + ")")
     try:
         release_data = discogs.getRelease(record.id)
-        __updateDataWithMasterData(release_data)
+        __updateWithMasterData(record, release_data)
         record.master = release_data.master_id
         __updateArtists(record, release_data.artists or [])
         record.track_set.all().delete()  # type: ignore
@@ -128,11 +139,12 @@ def updateRecord(record: Record) -> bool:
     return True
 
 
-def __updateDataWithMasterData(release_data: discogs.Release) -> None:
+def __updateWithMasterData(record: Record, release_data: discogs.Release) -> None:
     if release_data.master_id:
         try:
             master_data = discogs.getMaster(release_data.master_id)
-            release_data.year = master_data.year
+            if master_data.year:
+                record.year = master_data.year
             if not release_data.images:
                 if master_data.images:
                     release_data.images = master_data.images

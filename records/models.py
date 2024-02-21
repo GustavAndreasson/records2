@@ -96,6 +96,9 @@ class Record(models.Model):
         source="cover_file", processors=[ResizeToFit(200, 90)], format="JPEG", options={"quality": 100}
     )
 
+    class Meta:
+        indexes = [models.Index(fields=["master"])]
+
     def __str__(self):
         return self.name
 

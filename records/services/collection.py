@@ -19,18 +19,7 @@ def updateCollection(user: DiscogsUser) -> bool:
             basic_information = release_data.basic_information
             if basic_information.id not in old_collection:
                 try:
-                    record = recordService.createRecord(
-                        basic_information.id,
-                        {
-                            "name": basic_information.title,
-                            "master": basic_information.master_id,
-                            "cover": basic_information.cover_image,
-                            "thumbnail": basic_information.thumb,
-                            "year": basic_information.year,
-                            "format": basic_information.formats,
-                            "artists": basic_information.artists,
-                        },
-                    )
+                    record = recordService.createRecordFromBasicInformation(basic_information)
                     ur = UserRecords.objects.create(
                         user=user, record=record, added_date=(release_data.date_added or "")[0:10]
                     )
