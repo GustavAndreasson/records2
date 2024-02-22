@@ -108,6 +108,8 @@ def updateRecord(record: Record) -> bool:
                     )
         __updateListens(record, release_data.videos or [])
         record.release_year = release_data.year
+        if not record.year and release_data.year:
+            record.year = release_data.year
         record.release_country = release_data.country
         if release_data.formats:
             RecordFormats.objects.filter(record=record).delete()
@@ -118,7 +120,7 @@ def updateRecord(record: Record) -> bool:
                     format.save()
                 RecordFormats.objects.create(record=record, format=format, qty=r_format.get("qty"))
         if release_data.lowest_price:
-            record.price = Decimal(release_data.lowest_price)
+            record.price = Decimal(str(release_data.lowest_price))
         if release_data.genres or release_data.styles:
             r_genres = (release_data.genres or []) + (release_data.styles or [])
             if set(r_genres) != set(record.genres.all()):
