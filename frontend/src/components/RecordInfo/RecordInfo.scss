@@ -24,10 +24,15 @@
     font-size: 14px;
   }
 
-  .year {
-    color: #0000aa;
-    cursor: pointer;
-    font-weight: bold;
+  .origin {
+    .year {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .release-info {
+      font-size: 14px;
+    }
   }
 
   .track {

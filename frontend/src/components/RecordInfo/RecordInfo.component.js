@@ -45,12 +45,19 @@ const RecordInfo = ({
                   <Formats value={rec.formats} />
                 </div>
               )}
-              {(rec.year && (
-                <div className="year">
-                  <Year value={rec.year} />
+              {(rec.year || rec.release_year || rec.release_country) && (
+                <div className="origin">
+                  {(rec.year && <Year value={rec.year} />) || null}
+                  {(rec.release_year || rec.release_country) && (
+                    <span className="release-info">
+                      {"(" +
+                        (rec.release_year ? rec.release_year + (rec.release_country && ", ") : "") +
+                        (rec.release_country ? rec.release_country : "") +
+                        ")"}
+                    </span>
+                  )}
                 </div>
-              )) ||
-                null}
+              )}
               {rec.genres && (
                 <div className="genres">
                   <Genres value={rec.genres} />
