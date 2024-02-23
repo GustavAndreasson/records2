@@ -97,7 +97,11 @@ const Description = ({ description }) => {
     {
       name: "url",
       nesting: true,
-      generate: node => <a href={node.value}>{generate(node.children)}</a>,
+      generate: node => (
+        <a href={node.value} target="_blank">
+          {generate(node.children)}
+        </a>
+      ),
     },
   ]
 
