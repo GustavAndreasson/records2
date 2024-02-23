@@ -87,6 +87,13 @@ const RecordInfo = ({
               </div>
             </div>
             <div className="right">
+              <a
+                className="discogs-link"
+                target="_blank"
+                href={"https://www.discogs.com/release/" + rec.id}
+              >
+                Discogs
+              </a>
               {rec.listens &&
                 rec.listens.map((listen, index) => (
                   <div className="listen-link" key={index}>

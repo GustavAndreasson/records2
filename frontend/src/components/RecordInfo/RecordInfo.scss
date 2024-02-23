@@ -43,6 +43,18 @@
     }
   }
 
+  .right {
+    text-align: right;
+  }
+
+  .discogs-link {
+    display: inline-block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #0000aa;
+  }
+
   .listen-link {
     text-align: right;
     max-width: 250px;
