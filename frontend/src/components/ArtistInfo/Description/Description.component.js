@@ -39,9 +39,8 @@ const Description = ({ description }) => {
     }
   }, [description])
 
-  const tags = [
-    {
-      name: "a",
+  const tags = {
+    a: {
       nesting: false,
       generate: node => {
         if (artists[node.value]) {
@@ -51,16 +50,14 @@ const Description = ({ description }) => {
         return <span className="dataitem">{node.value}</span>
       },
     },
-    { name: "b", nesting: true, generate: node => <b>{generate(node.children)}</b> },
-    { name: "br", nesting: false, generate: node => <br /> },
-    {
-      name: "g",
+    b: { nesting: true, generate: node => <b>{generate(node.children)}</b> },
+    br: { nesting: false, generate: node => <br /> },
+    g: {
       nesting: false,
       generate: node => <span className="dataitem">{"RSG §" + node.value}</span>,
     },
-    { name: "i", nesting: true, generate: node => <i>{generate(node.children)}</i> },
-    {
-      name: "l",
+    i: { nesting: true, generate: node => <i>{generate(node.children)}</i> },
+    l: {
       nesting: false,
       generate: node => {
         if (labels[node.value]) {
@@ -70,8 +67,7 @@ const Description = ({ description }) => {
         return <span className="dataitem">{node.value}</span>
       },
     },
-    {
-      name: "m",
+    m: {
       nesting: false,
       generate: node => {
         if (masters[node.value]) {
@@ -81,8 +77,7 @@ const Description = ({ description }) => {
         return <span className="dataitem">{node.value}</span>
       },
     },
-    {
-      name: "r",
+    r: {
       nesting: false,
       generate: node => {
         if (releases[node.value]) {
@@ -92,10 +87,9 @@ const Description = ({ description }) => {
         return <span className="dataitem">{node.value}</span>
       },
     },
-    { name: "s", nesting: true, generate: node => <s>{generate(node.children)}</s> },
-    { name: "u", nesting: true, generate: node => <u>{generate(node.children)}</u> },
-    {
-      name: "url",
+    s: { nesting: true, generate: node => <s>{generate(node.children)}</s> },
+    u: { nesting: true, generate: node => <u>{generate(node.children)}</u> },
+    url: {
       nesting: true,
       generate: node => (
         <a href={node.value} target="_blank">
@@ -103,7 +97,7 @@ const Description = ({ description }) => {
         </a>
       ),
     },
-  ]
+  }
 
   const tokenize = str => str.match(/[^\[\n]+|\[[^\]]+\]|\n/g).map(t => (t === "\n" ? "[br]" : t))
 
@@ -125,10 +119,12 @@ const Description = ({ description }) => {
       } else {
         ;[type, value] = (token.match(/\[([a-zA-Z]+)=?([^\]]*)\]/) || []).slice(1, 3)
         type = type?.toLowerCase()
-        if (tags.filter(t => t.nesting).some(t => t.name === type)) {
-          eating = true
-        } else if (tags.filter(t => !t.nesting).some(t => t.name === type)) {
-          nodes.push({ type: type, value: value })
+        if (tags[type]) {
+          if (tags[type].nesting) {
+            eating = true
+          } else {
+            nodes.push({ type: type, value: value })
+          }
         } else {
           nodes.push({ type: "text", value: token })
         }
@@ -143,7 +139,7 @@ const Description = ({ description }) => {
   const generate = nodes =>
     nodes.map((node, i) => (
       <Fragment key={i}>
-        {node.type === "text" ? node.value : tags.find(t => t.name === node.type).generate(node)}
+        {node.type === "text" ? node.value : tags[node.type].generate(node)}
       </Fragment>
     ))
 
