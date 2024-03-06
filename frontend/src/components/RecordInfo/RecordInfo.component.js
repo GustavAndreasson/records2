@@ -90,6 +90,7 @@ const RecordInfo = ({
               <a
                 className="discogs-link"
                 target="_blank"
+                rel="noreferrer"
                 href={"https://www.discogs.com/release/" + rec.id}
               >
                 Discogs

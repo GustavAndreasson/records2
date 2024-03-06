@@ -92,7 +92,7 @@ const Description = ({ description }) => {
     url: {
       nesting: true,
       generate: node => (
-        <a href={node.value} target="_blank">
+        <a href={node.value} target="_blank" rel="noreferrer">
           {generate(node.children)}
         </a>
       ),
