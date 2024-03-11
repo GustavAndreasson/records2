@@ -1,11 +1,11 @@
 from django.http import HttpResponse, Http404
+from django.utils.html import escape
 import json
-import re
 import records.services.rates as ratesService
 
 
 def getRate(request, currency):
-    cur = re.sub(r"[\W_]+", "", currency)
+    cur = escape(currency)
     if not (cur.isupper() and len(cur) == 3):
         raise Http404
     rate = ratesService.getRate(cur)
