@@ -13,7 +13,7 @@ Copy env.template to .env with the appropriate changes
 ```sh
 npm install
 npm run dev
-docker-compose up
+docker-compose up --build
 ```
 
 ### Production
