@@ -1,3 +1,5 @@
+@use "sass:list";
+
 $formats: (
   Memory-stick: (
     20,
@@ -135,8 +137,8 @@ $formats: (
   @each $format, $sizes in $formats {
     &.format-#{$format},
     &.format-#{$format} .cover {
-      height: nth($sizes, 1) + 0px;
-      min-width: nth($sizes, 2) + 0px;
+      height: list.nth($sizes, 1) + 0px;
+      min-width: list.nth($sizes, 2) + 0px;
     }
   }
 
