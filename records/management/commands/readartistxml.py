@@ -36,13 +36,13 @@ class Command(BaseCommand):
         for event, elem in context:
             if loop_counter >= start:
                 if (
-                    elem.find("name").text
-                    and elem.find("id").text
-                    and not elem.find("data_quality").text in ("Needs Major Changes", "Entirely Incorrect")
+                    elem.findtext("name")
+                    and elem.findtext("id")
+                    and not elem.findtext("data_quality") in ("Needs Major Changes", "Entirely Incorrect")
                 ):
-                    name = elem.find("name").text
+                    name = elem.findtext("name")
                     sname = name.lower()[:20]
-                    artists_batch.append(Artist(id=elem.find("id").text, name=name, sname=sname))
+                    artists_batch.append(Artist(id=elem.findtext("id"), name=name, sname=sname))
                     if len(artists_batch) >= batch_size:
                         Artist.objects.bulk_create(
                             artists_batch, update_conflicts=True, update_fields=("name", "sname")
@@ -70,7 +70,7 @@ class Command(BaseCommand):
                 break
         if artists_batch:
             Artist.objects.bulk_create(
-                artists_batch, ignore_conflicts=True, update_conflicts=True, update_fields=("name", "sname")
+                artists_batch, update_conflicts=True, update_fields=("name", "sname")
             )
             artists_imported += len(artists_batch)
         self.stdout.write("\nArtist import done. " + str(artists_imported) + " artists imported.")

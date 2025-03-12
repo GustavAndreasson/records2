@@ -77,9 +77,9 @@ Admin interface can be reached at yoururl/admin
 ## Import artists
 
 ```sh
-wget http://discogs-data.s3-us-west-2.amazonaws.com/data/2022/discogs_20220101_artists.xml.gz
+wget http://discogs-data-dump.s3-us-west-2.amazonaws.com/data/2022/discogs_20220101_artists.xml.gz
 gunzip discogs_20220101_artists.xml.gz
-python manage.py importartistxml discogs_20220101_artists.xml
+python manage.py readartistxml discogs_20220101_artists.xml
 ```
 
 Adjust file name to get most current artists dump.
