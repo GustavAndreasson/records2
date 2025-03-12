@@ -18,7 +18,7 @@ Persistant.init([
     default: false,
   },
   { path: "ui.gridView", lsKey: "grid_view", default: false },
-  { path: "ui.gridColumns", lsKey: "grid_columns", default: ["artist", "name"] },
+  { path: "ui.gridColumns", lsKey: "grid_columns", default: ["artists", "name"] },
 ])
 
 const initialState = {
