@@ -16,6 +16,7 @@ from ..models import (
     TrackArtists,
     Artist,
 )
+from ..discogs_models import DiscogsRelease
 from .. import discogs
 from .. import spotify
 import records.services.artist as artistService
@@ -82,6 +83,15 @@ def createRecordFromBasicInformation(release: discogs.BasicInformation) -> Recor
                 genre.save()
             record.genres.add(genre)
     return record
+
+
+def __updateRecordFromDiscogsData(record: Record) -> bool:
+    try:
+        discogs_release = DiscogsRelease.objects.get(id=record.id)
+        
+    except DiscogsRelease.DoesNotExist:
+        return False
+    return True
 
 
 def updateRecord(record: Record) -> bool:
