@@ -6,7 +6,7 @@ django-redis==6.0.0
 django-appconf==1.2.0
 django-imagekit==6.1
 idna==3.7
-lxml==4.9.1
+lxml==6.1.0
 mysqlclient==2.0.3
 oauthlib==3.2.2
 pilkit==3.0
