@@ -288,7 +288,15 @@ def __getPaginatedCollection(uri: str, collection_type: type[T], check_main=Fals
                 pagination = Pagination.model_validate(response.get("pagination"))
                 if pagination.items == 0:
                     break
-                releases = [collection_type.model_validate(r) for r in response.get("releases") or []]
+                releases: list[collection_type] = []
+                for r in response.get("releases") or []:
+                    try:
+                        releases.append(collection_type.model_validate(r))
+                    except ValidationError as ve:
+                        logger.warning(
+                            f"Skipping invalid release in collection from {uri} (page {page}): {ve.json()}"
+                        )
+
                 collection.extend(releases)
                 pages = pagination.pages
                 if page >= pages:
