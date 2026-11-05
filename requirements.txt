@@ -1,5 +1,5 @@
 asgiref==3.11.1
-certifi==2024.7.4
+certifi==2026.10.18
 chardet==4.0.0
 Django==5.2.15
 django-redis==6.0.0
