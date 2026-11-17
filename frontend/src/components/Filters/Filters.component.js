@@ -1,24 +1,30 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import Popup from "Components/Popup"
 import FilterValue from "./FilterValue"
 import Filter from "Utils/Filter"
 import "./Filters.scss"
 
-const Filters = ({ filters, handleUpdate }) => {
-  const { t, i18n } = useTranslation()
+const Filters = () => {
+  const { t } = useTranslation()
+  const filters = useAppStore(state => state.filters)
+  const setFilters = useAppStore(state => state.setFilters)
+
   const [attribute, setAttribute] = useState(Object.values(Filter.attributes)[0].key)
   const [compare, setCompare] = useState(Object.values(Filter.attributes)[0].compares[0].key)
   const [value, setValue] = useState("")
+
   const handleAttributeChange = event => {
     setAttribute(event.target.value)
     setCompare(Filter.attributes[event.target.value].compares[0].key)
   }
   const handleCompareChange = event => setCompare(event.target.value)
   const handleValueChange = val => setValue(val)
+
   const handleAddClick = e => {
     e.preventDefault()
-    handleUpdate(
+    setFilters(
       filters.concat({
         attribute: attribute,
         compare: compare,
@@ -27,7 +33,9 @@ const Filters = ({ filters, handleUpdate }) => {
     )
     setValue("")
   }
-  const handleRemoveClick = index => handleUpdate(filters.filter((_, i) => i !== index))
+
+  const handleRemoveClick = index => setFilters(filters.filter((_, i) => i !== index))
+
   return (
     <Popup name="filters" icon={{ icon: "fas fa-filter" }} title={t("process.filter")}>
       <div className="filters">

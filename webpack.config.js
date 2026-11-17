@@ -24,9 +24,9 @@ module.exports = {
   resolve: {
     alias: {
       Components: path.resolve(__dirname, 'frontend/src/components'),
-      Actions: path.resolve(__dirname, 'frontend/src/actions'),
-      Reducers: path.resolve(__dirname, 'frontend/src/reducers'),
       Selectors: path.resolve(__dirname, 'frontend/src/selectors'),
+      Store: path.resolve(__dirname, 'frontend/src/store'),
+      Queries: path.resolve(__dirname, 'frontend/src/queries'),
       Api: path.resolve(__dirname, 'frontend/src/api'),
       Utils: path.resolve(__dirname, 'frontend/src/utils')
     },

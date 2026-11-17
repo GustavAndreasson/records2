@@ -1,27 +1,47 @@
 import React, { useEffect } from "react"
+import { useAppStore } from "Store"
+import { useCollectionQuery, useArtistCollectionQuery, useRecordQuery, useRecordMutation, useRateQuery } from "Queries"
+import { getActiveRecord } from "Store/selectors"
 import Popup from "Components/Popup"
 import { Artists, Formats, Genres, Price, Year } from "Components/Attributes"
 import Listen from "./Listen"
 import "./RecordInfo.scss"
 
-const RecordInfo = ({
-  rec,
-  recordsLoading,
-  rate,
-  currency,
-  updateRecord,
-  handleListenClick,
-  hideRecord,
-}) => {
+const RecordInfo = () => {
+  const activeRecordId = useAppStore(state => state.activeRecord)
+  const discogsUsername = useAppStore(state => state.discogsUsername)
+  const activeArtist = useAppStore(state => state.activeArtist)
+  const viewArtistCollection = useAppStore(state => state.viewArtistCollection)
+  const recordsLoading = useAppStore(state => state.recordsLoading)
+  const currency = useAppStore(state => state.currency)
+  const hideRecord = useAppStore(state => state.hideRecord)
+  const showListen = useAppStore(state => state.showListen)
+
+  const { data: collection } = useCollectionQuery(discogsUsername)
+  const { data: artistCollection } = useArtistCollectionQuery(
+    viewArtistCollection && activeArtist ? activeArtist.id : null
+  )
+  const { data: recordDetails, isFetching: isRecordFetching } = useRecordQuery(activeRecordId)
+  const { data: rate = 1 } = useRateQuery(currency)
+  const updateRecordMutation = useRecordMutation(activeRecordId)
+
+  const cachedRecord = getActiveRecord(collection, artistCollection, viewArtistCollection, activeRecordId)
+  const rec = recordDetails || cachedRecord
+
   useEffect(() => {
-    if (rec) {
+    if (rec && rec.id) {
       let threeMonthsAgo = new Date()
       threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
       if (!rec.updated || rec.updated < threeMonthsAgo.toISOString()) {
-        updateRecord(rec)
+        updateRecordMutation.mutate(rec.id)
       }
     }
-  }, [rec])
+  }, [rec?.id, rec?.updated])
+
+  const isLoading =
+    isRecordFetching ||
+    updateRecordMutation.isLoading ||
+    (activeRecordId && recordsLoading.includes(activeRecordId))
 
   return (
     rec && (
@@ -31,11 +51,11 @@ const RecordInfo = ({
           icon={{ icon: "fas fa-record-vinyl" }}
           title={rec.name}
           scrolling={true}
-          loading={recordsLoading.includes(rec.id)}
+          loading={Boolean(isLoading)}
           hide={hideRecord}
         >
           <div className={"record-info"}>
-            <img className="cover" src={rec.cover} />
+            <img className="cover" src={rec.cover} alt={rec.name} />
             <div className="artists">
               <Artists value={rec.artists} />
             </div>
@@ -98,8 +118,8 @@ const RecordInfo = ({
               {rec.listens &&
                 rec.listens.map((listen, index) => (
                   <div className="listen-link" key={index}>
-                    <button type="button">
-                      <img src={listen.icon} onClick={() => handleListenClick(listen)} />
+                    <button type="button" onClick={() => showListen(listen)}>
+                      <img src={listen.icon} alt={listen.name || listen.type} />
                     </button>
                     {listen.name || listen.type}
                   </div>

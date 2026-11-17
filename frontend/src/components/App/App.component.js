@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Helmet } from "react-helmet"
+import { useAppStore } from "Store"
 import Header from "Components/Header"
 import Collection from "Components/Collection"
 import Progress from "Components/Progress"
@@ -13,8 +14,11 @@ import Orders from "Components/Orders"
 import Settings from "Components/Settings"
 import "./App.scss"
 
-const App = ({ discogsUsername, activeArtist, viewArtistCollection }) => {
-  const { t, i18n } = useTranslation()
+const App = () => {
+  const { t } = useTranslation()
+  const discogsUsername = useAppStore(state => state.discogsUsername)
+  const activeArtist = useAppStore(state => state.activeArtist)
+  const viewArtistCollection = useAppStore(state => state.viewArtistCollection)
   return (
     <>
       <Helmet>

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import AutoSuggest from "react-autosuggest"
+import { useAppStore } from "Store"
 import api from "Api"
 import "./ArtistInput.scss"
 
-const ArtistInput = ({ handleSetArtist }) => {
-  const { t, i18n } = useTranslation()
+const ArtistInput = () => {
+  const { t } = useTranslation()
+  const showArtist = useAppStore(state => state.showArtist)
+  const setViewArtistCollection = useAppStore(state => state.setViewArtistCollection)
+
   const [artistList, setArtistList] = useState([])
   const [artist, setArtist] = useState(null)
   const [artistName, setArtistName] = useState("")
   const [artistQuery, setArtistQuery] = useState("")
+
   useEffect(() => {
     const getList = async () => {
       try {
@@ -27,10 +32,15 @@ const ArtistInput = ({ handleSetArtist }) => {
       getList()
     }
   }, [artistQuery])
+
   const handleSubmit = e => {
     e.preventDefault()
-    artist && handleSetArtist(artist)
+    if (artist) {
+      showArtist(artist)
+      setViewArtistCollection(true)
+    }
   }
+
   return (
     <form className="artist-input" onSubmit={handleSubmit}>
       <i className="fas fa-guitar"></i>
@@ -43,7 +53,7 @@ const ArtistInput = ({ handleSetArtist }) => {
         )}
         getSuggestionValue={item => item.name}
         onSuggestionsFetchRequested={({ value, reason }) =>
-          reason == "input-changed" && setArtistQuery(value)
+          reason === "input-changed" && setArtistQuery(value)
         }
         onSuggestionsClearRequested={() => {
           setArtistList([])

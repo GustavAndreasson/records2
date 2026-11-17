@@ -1,1 +1,1 @@
-export { default } from "./Year.container"
+export { default } from "./Year.component"

@@ -1,9 +1,34 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
+import { useCollectionQuery, useArtistCollectionQuery, useProgressQuery } from "Queries"
 import "./Progress.scss"
 
-const Progress = ({ collectionLoading, progress, status }) => {
-  const { t, i18n } = useTranslation()
+const Progress = () => {
+  const { t } = useTranslation()
+  const discogsUsername = useAppStore(state => state.discogsUsername)
+  const activeArtist = useAppStore(state => state.activeArtist)
+  const viewArtistCollection = useAppStore(state => state.viewArtistCollection)
+  const storeProgress = useAppStore(state => state.progress)
+  const storeStatus = useAppStore(state => state.status)
+
+  const { isFetching: isCollectionFetching, isError: isCollectionError } = useCollectionQuery(discogsUsername)
+  const { isFetching: isArtistFetching, isError: isArtistError } = useArtistCollectionQuery(
+    viewArtistCollection && activeArtist ? activeArtist.id : null
+  )
+
+  const collectionLoading = viewArtistCollection ? isArtistFetching : isCollectionFetching
+  const isError = viewArtistCollection ? isArtistError : isCollectionError
+
+  const { data: progressData } = useProgressQuery(collectionLoading)
+
+  const progress = progressData && Object.keys(progressData).length > 0 ? progressData : storeProgress
+  const status = isError
+    ? "Något gick fel..."
+    : collectionLoading
+    ? "Hämtar skivor..."
+    : storeStatus
+
   return (
     collectionLoading &&
     progress && (

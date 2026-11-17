@@ -1,18 +1,24 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import Popup from "Components/Popup"
 import Order from "Utils/Order"
 import "./Orders.scss"
 
-const Orders = ({ orders, handleUpdate }) => {
-  const { t, i18n } = useTranslation()
+const Orders = () => {
+  const { t } = useTranslation()
+  const orders = useAppStore(state => state.orders)
+  const setOrders = useAppStore(state => state.setOrders)
+
   const [attribute, setAttribute] = useState(Object.values(Order.attributes)[0].key)
   const [reverse, setReverse] = useState(false)
+
   const handleAttributeChange = event => setAttribute(Order.attributes[event.target.value].key)
   const handleReverseChange = event => setReverse(event.target.checked)
+
   const handleAddClick = e => {
     e.preventDefault()
-    handleUpdate(
+    setOrders(
       orders.concat({
         attribute: attribute,
         reverse: reverse,
@@ -20,7 +26,9 @@ const Orders = ({ orders, handleUpdate }) => {
     )
     setReverse(false)
   }
-  const handleRemoveClick = index => handleUpdate(orders.filter((_, i) => i !== index))
+
+  const handleRemoveClick = index => setOrders(orders.filter((_, i) => i !== index))
+
   return (
     <Popup name="orders" icon={{ icon: "fas fa-sort" }} title={t("process.sort")}>
       <div className="orders">

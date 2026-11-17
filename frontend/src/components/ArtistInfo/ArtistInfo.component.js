@@ -1,29 +1,37 @@
 import React, { Fragment, useEffect } from "react"
+import { useAppStore } from "Store"
+import { useArtistQuery, useUpdateArtistMutation } from "Queries"
 import Artist from "Components/Artist"
 import Description from "./Description"
 import { fixArtistName } from "Utils/Helpers"
 import "./ArtistInfo.scss"
 
-const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
+const ArtistInfo = () => {
+  const activeArtist = useAppStore(state => state.activeArtist)
+  const hideArtist = useAppStore(state => state.hideArtist)
+
+  const { data: fetchedArtist } = useArtistQuery(activeArtist?.id)
+  const updateArtistMutation = useUpdateArtistMutation(activeArtist?.id)
+
+  const artist = fetchedArtist || activeArtist
+
   useEffect(() => {
-    if (artist) {
-      if (artist.updated === undefined) {
-        getArtist(artist)
-      } else {
+    if (artist && artist.id) {
+      if (artist.updated) {
         let threeMonthsAgo = new Date()
         threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
-        if (!artist.updated || artist.updated < threeMonthsAgo.toISOString()) {
-          updateArtist(artist)
+        if (artist.updated < threeMonthsAgo.toISOString()) {
+          updateArtistMutation.mutate(artist.id)
         }
       }
     }
-  }, [artist])
+  }, [artist?.id, artist?.updated])
 
   return (
     artist && (
       <div className="artist-info">
         {artist.name && <div className="name">{fixArtistName(artist.name)}</div>}
-        {artist.image && <img src={artist.image} />}
+        {artist.image && <img src={artist.image} alt={artist.name} />}
         {artist.description && <Description description={artist.description} />}
         {artist.members && (
           <div className="members">
@@ -46,7 +54,7 @@ const ArtistInfo = ({ artist, getArtist, updateArtist, handleCloseClick }) => {
           </div>
         )}
         <div className="artist-buttons">
-          <button type="button" className="fas fa-times" onClick={handleCloseClick}></button>
+          <button type="button" className="fas fa-times" onClick={hideArtist}></button>
         </div>
       </div>
     )
