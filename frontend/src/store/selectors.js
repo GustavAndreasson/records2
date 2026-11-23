@@ -1,6 +1,6 @@
 import FilterUtil from "Utils/Filter"
 import OrderUtil from "Utils/Order"
-import Persistant from "Utils/Persistant"
+import Persistent from "Utils/Persistent"
 
 export const filterAndOrderCollection = ({
   collection,
@@ -96,7 +96,7 @@ export const getDirectLink = ({
   activeArtist,
   viewArtistCollection,
 }) => {
-  return Persistant.query({
+  return Persistent.query({
     discogsUsername,
     orders,
     filters,

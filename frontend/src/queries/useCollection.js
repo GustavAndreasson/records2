@@ -1,7 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import api from "Api"
+import { useAppStore } from "Store"
 
-export const fetchCollection = async (username, onProgress) => {
+export const fetchCollection = async (username, queryClient, onProgress) => {
   if (!username) return null
   let page = 1
   let json = {}
@@ -16,6 +17,10 @@ export const fetchCollection = async (username, onProgress) => {
     json = await response.json()
     if (json.data) {
       collection = { ...collection, ...json.data }
+
+      if (queryClient) {
+        queryClient.setQueryData(["collection", username], collection)
+      }
     }
     if (onProgress && json.pagination?.pagecount) {
       onProgress(Math.round((page * 100) / json.pagination.pagecount))
@@ -26,11 +31,14 @@ export const fetchCollection = async (username, onProgress) => {
 }
 
 export const useCollectionQuery = (username, options = {}) => {
+  const queryClient = useQueryClient()
+  const updateProgress = useAppStore(state => state.updateProgress)
   return useQuery({
     queryKey: ["collection", username],
-    queryFn: () => fetchCollection(username),
+    queryFn: () => fetchCollection(username, queryClient, percentage => {
+      updateProgress({ load: percentage })
+    }),
     enabled: Boolean(username),
-    staleTime: 5 * 60 * 1000,
     ...options,
   })
 }
@@ -38,6 +46,7 @@ export const useCollectionQuery = (username, options = {}) => {
 export const useUpdateCollectionMutation = (username) => {
   const queryClient = useQueryClient()
   return useMutation({
+    mutationKey: ["collection", username],
     mutationFn: async (user = username) => {
       const response = await api.updateCollection(user)
       if (!response.ok) {
@@ -46,7 +55,7 @@ export const useUpdateCollectionMutation = (username) => {
       return response.json()
     },
     onSuccess: (_, user) => {
-      queryClient.invalidateQueries(["collection", user || username])
+      queryClient.invalidateQueries({ queryKey: ["collection", user || username]})
     },
   })
 }

@@ -14,8 +14,8 @@ const UpdateButton = () => {
   const activeRecordId = useAppStore(state => state.activeRecord)
   const viewArtistCollection = useAppStore(state => state.viewArtistCollection)
 
-  const { isFetching: isCollectionFetching, refetch: refetchCollection } = useCollectionQuery(discogsUsername)
-  const { isFetching: isArtistFetching, refetch: refetchArtistCollection } = useArtistCollectionQuery(
+  const { isFetching: isCollectionFetching } = useCollectionQuery(discogsUsername)
+  const { isFetching: isArtistFetching } = useArtistCollectionQuery(
     viewArtistCollection && activeArtist ? activeArtist.id : null
   )
 
@@ -30,10 +30,8 @@ const UpdateButton = () => {
       await updateRecordMutation.mutateAsync(activeRecordId)
     } else if (viewArtistCollection && activeArtist) {
       await updateArtistCollectionMutation.mutateAsync(activeArtist.id)
-      refetchArtistCollection()
     } else if (discogsUsername) {
       await updateCollectionMutation.mutateAsync(discogsUsername)
-      refetchCollection()
     }
   }
 

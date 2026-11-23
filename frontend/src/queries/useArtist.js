@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import api from "Api"
+import { useAppStore } from "Store"
 
 export const fetchArtist = async (artistId) => {
   if (!artistId) return null
@@ -10,7 +11,7 @@ export const fetchArtist = async (artistId) => {
   return response.json()
 }
 
-export const fetchArtistReleases = async (artistId, onProgress) => {
+export const fetchArtistReleases = async (artistId, queryClient, onProgress) => {
   if (!artistId) return null
   let page = 1
   let json = {}
@@ -25,6 +26,10 @@ export const fetchArtistReleases = async (artistId, onProgress) => {
     json = await response.json()
     if (json.data) {
       collection = { ...collection, ...json.data }
+
+      if (queryClient) {
+        queryClient.setQueryData(["artistCollection", artistId], collection)
+      }
     }
     if (onProgress && json.pagination?.pagecount) {
       onProgress(Math.round((page * 100) / json.pagination.pagecount))
@@ -39,17 +44,19 @@ export const useArtistQuery = (artistId, options = {}) => {
     queryKey: ["artist", artistId],
     queryFn: () => fetchArtist(artistId),
     enabled: Boolean(artistId),
-    staleTime: 5 * 60 * 1000,
     ...options,
   })
 }
 
 export const useArtistCollectionQuery = (artistId, options = {}) => {
+  const queryClient = useQueryClient()
+  const updateProgress = useAppStore(state => state.updateProgress)
   return useQuery({
     queryKey: ["artistCollection", artistId],
-    queryFn: () => fetchArtistReleases(artistId),
+    queryFn: () => fetchArtistReleases(artistId, queryClient, percentage => {
+      updateProgress({ load: percentage })
+    }),
     enabled: Boolean(artistId),
-    staleTime: 5 * 60 * 1000,
     ...options,
   })
 }
@@ -57,6 +64,7 @@ export const useArtistCollectionQuery = (artistId, options = {}) => {
 export const useUpdateArtistMutation = (artistId) => {
   const queryClient = useQueryClient()
   return useMutation({
+    mutationKey: ["artist", artistId],
     mutationFn: async (id = artistId) => {
       const response = await api.updateArtist(id)
       if (!response.ok) {
@@ -73,6 +81,7 @@ export const useUpdateArtistMutation = (artistId) => {
 export const useUpdateArtistCollectionMutation = (artistId) => {
   const queryClient = useQueryClient()
   return useMutation({
+    mutationKey: ["artistCollection", artistId],
     mutationFn: async (id = artistId) => {
       const response = await api.updateArtistReleases(id)
       if (!response.ok) {
@@ -81,7 +90,7 @@ export const useUpdateArtistCollectionMutation = (artistId) => {
       return response.json()
     },
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries(["artistCollection", id || artistId])
+      queryClient.invalidateQueries({ queryKey: ["artistCollection", id || artistId]})
     },
   })
 }

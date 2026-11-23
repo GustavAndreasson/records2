@@ -10,19 +10,21 @@ const ArtistInfo = () => {
   const activeArtist = useAppStore(state => state.activeArtist)
   const hideArtist = useAppStore(state => state.hideArtist)
 
-  const { data: fetchedArtist } = useArtistQuery(activeArtist?.id)
+  const { data: fetchedArtist } = useArtistQuery(activeArtist?.id, {
+    enabled: Boolean(activeArtist?.id && activeArtist?.updated === undefined),
+    staleTime: 0,
+    refetchOnMount: "always",
+  })
   const updateArtistMutation = useUpdateArtistMutation(activeArtist?.id)
 
   const artist = fetchedArtist || activeArtist
 
   useEffect(() => {
-    if (artist && artist.id) {
-      if (artist.updated) {
-        let threeMonthsAgo = new Date()
-        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
-        if (artist.updated < threeMonthsAgo.toISOString()) {
-          updateArtistMutation.mutate(artist.id)
-        }
+    if (artist && artist.id && artist.updated !== undefined) {
+      let threeMonthsAgo = new Date()
+      threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3)
+      if (!artist.updated || artist.updated < threeMonthsAgo.toISOString()) {
+        updateArtistMutation.mutate(artist.id)
       }
     }
   }, [artist?.id, artist?.updated])

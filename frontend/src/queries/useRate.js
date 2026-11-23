@@ -16,7 +16,6 @@ export const useRateQuery = (currency, options = {}) => {
     queryKey: ["rate", currency],
     queryFn: () => fetchRate(currency),
     enabled: Boolean(currency),
-    staleTime: 60 * 60 * 1000, // 1 hour for exchange rates
     ...options,
   })
 }

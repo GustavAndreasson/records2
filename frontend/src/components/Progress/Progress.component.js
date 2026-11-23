@@ -1,5 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { useIsMutating } from "@tanstack/react-query";
 import { useAppStore } from "Store"
 import { useCollectionQuery, useArtistCollectionQuery, useProgressQuery } from "Queries"
 import "./Progress.scss"
@@ -16,21 +17,29 @@ const Progress = () => {
   const { isFetching: isArtistFetching, isError: isArtistError } = useArtistCollectionQuery(
     viewArtistCollection && activeArtist ? activeArtist.id : null
   )
+  const isCollectionMutating = useIsMutating({ mutationKey: ["collection"]}) > 0
+  const isArtistCollectionMutating = useIsMutating({ mutationKey: ["artistCollection"]}) > 0
 
-  const collectionLoading = viewArtistCollection ? isArtistFetching : isCollectionFetching
+  const collectionFetching = viewArtistCollection
+      ? isArtistFetching
+      : isCollectionFetching
+  const collectionMutating = viewArtistCollection
+      ? isArtistCollectionMutating
+      : isCollectionMutating
+
   const isError = viewArtistCollection ? isArtistError : isCollectionError
 
-  const { data: progressData } = useProgressQuery(collectionLoading)
+  const { data: progressData } = useProgressQuery(collectionMutating)
 
   const progress = progressData && Object.keys(progressData).length > 0 ? progressData : storeProgress
   const status = isError
     ? "Något gick fel..."
-    : collectionLoading
+    : (collectionFetching || collectionMutating)
     ? "Hämtar skivor..."
     : storeStatus
 
   return (
-    collectionLoading &&
+    (collectionFetching || collectionMutating) &&
     progress && (
       <div className="progress">
         {status && <div className="progress-title">{status}</div>}

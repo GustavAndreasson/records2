@@ -66,4 +66,4 @@ const Record = ({ rec }) => {
   )
 }
 
-export default Record
+export default React.memo(Record)

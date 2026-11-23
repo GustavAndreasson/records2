@@ -9,7 +9,7 @@ const ArtistViewButton = () => {
   const toggleViewArtistCollection = useAppStore(state => state.toggleViewArtistCollection)
 
   const { isFetching: isCollectionFetching } = useCollectionQuery(discogsUsername)
-  const { isFetching: isArtistFetching } = useArtistCollectionQuery(artist?.id)
+  const { isFetching: isArtistFetching } = useArtistCollectionQuery(viewArtistCollection && artist?.id)
   const collectionLoading = viewArtistCollection ? isArtistFetching : isCollectionFetching
 
   if (!artist || !discogsUsername) return null

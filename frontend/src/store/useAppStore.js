@@ -1,9 +1,9 @@
 import { create } from "zustand"
 import Filter from "Utils/Filter"
 import Order from "Utils/Order"
-import Persistant from "Utils/Persistant"
+import Persistent from "Utils/Persistent"
 
-Persistant.init([
+Persistent.init([
   { path: "filters", lsKey: "filters", qKey: "f", validate: Filter.validate, default: [] },
   { path: "orders", lsKey: "orders", qKey: "o", validate: Order.validate, default: [] },
   { path: "discogsUsername", lsKey: "discogs_username", qKey: "u", default: "" },
@@ -43,7 +43,7 @@ const defaultState = {
   status: "",
 }
 
-const initialPersistedState = Persistant.getInitialState(defaultState)
+const initialPersistedState = Persistent.getInitialState(defaultState)
 
 if (typeof window !== "undefined" && window.history && window.location) {
   window.history.replaceState({}, document.title, window.location.protocol + "//" + window.location.host + window.location.pathname)
@@ -95,7 +95,7 @@ export const useAppStore = create((set, get) => ({
     set((state) => ({
       popups:
         state.popups.indexOf(popup) === 0
-          ? popup.substr(0, popup.lastIndexOf("."))
+          ? popup.substring(0, popup.lastIndexOf("."))
           : state.popups,
     })),
   addRecordLoading: (recordId) =>
@@ -111,6 +111,6 @@ export const useAppStore = create((set, get) => ({
   setStatus: (status) => set({ status }),
 }))
 
-Persistant.subscribe(useAppStore)
+Persistent.subscribe(useAppStore)
 
 export default useAppStore

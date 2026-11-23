@@ -15,7 +15,6 @@ export const useRecordQuery = (recordId, options = {}) => {
     queryKey: ["record", recordId],
     queryFn: () => fetchRecord(recordId),
     enabled: Boolean(recordId),
-    staleTime: 5 * 60 * 1000,
     ...options,
   })
 }

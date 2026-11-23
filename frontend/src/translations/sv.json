@@ -54,6 +54,7 @@
   "format": {
     "Box-Set": "Box",
     "CD": "CD",
+    "CDr": "CDr",
     "Cassette": "Kassett",
     "DVD":"DVD",
     "Vinyl":"Vinyl",

@@ -2,7 +2,7 @@ import * as qs from "query-string"
 import isEqual from "is-equal"
 import objectPath from "object-path"
 
-let persistantObjects = []
+let persistentObjects = []
 
 const getStorageValue = (val, obj) => {
   if (typeof obj.default !== "string" && !obj.ref) {
@@ -14,14 +14,14 @@ const getStorageValue = (val, obj) => {
   }
 }
 
-const Persistant = {
+const Persistent = {
   init(po) {
-    persistantObjects = po
+    persistentObjects = po
   },
   getInitialState(defaultState = {}) {
     const queryString = qs.parse(window.location.search)
     const state = { ...defaultState }
-    persistantObjects.forEach(obj => {
+    persistentObjects.forEach(obj => {
       let res = null
       if (obj.qKey) {
         try {
@@ -62,7 +62,7 @@ const Persistant = {
   },
   update(state) {
     const queryString = qs.parse(window.location.search)
-    persistantObjects
+    persistentObjects
       .map(obj => {
         let res = null
         if (obj.qKey) {
@@ -107,7 +107,7 @@ const Persistant = {
     if (!store || !store.subscribe) return
     let prevState = store.getState()
     store.subscribe((state) => {
-      persistantObjects.forEach(obj => {
+      persistentObjects.forEach(obj => {
         if (obj.lsKey) {
           const val = objectPath.get(state, obj.path)
           const prevVal = objectPath.get(prevState, obj.path)
@@ -121,7 +121,7 @@ const Persistant = {
   },
   query(values) {
     const query = {}
-    persistantObjects.forEach(obj => {
+    persistentObjects.forEach(obj => {
       const val = values[obj.path] !== undefined ? values[obj.path] : objectPath.get(values, obj.path)
       if (val !== undefined && val !== null && val !== "" && obj.qKey) {
         if (Array.isArray(val) && val.length === 0) return
@@ -133,4 +133,4 @@ const Persistant = {
   },
 }
 
-export default Persistant
+export default Persistent
