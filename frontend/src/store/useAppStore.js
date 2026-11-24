@@ -75,7 +75,7 @@ export const useAppStore = create((set, get) => ({
         (f) =>
           f.attribute === filter.attribute &&
           f.compare === filter.compare &&
-          f.value === filter.value
+          f.value == filter.value
       )
       if (exists) {
         return { activeRecord: null }
