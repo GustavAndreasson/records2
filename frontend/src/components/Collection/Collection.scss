@@ -1,7 +1,9 @@
 .collection {
+  width: fit-content;
+  margin: 3px auto 0;
+
   &.grid-view {
     display: table;
-    margin: 3px auto 0;
     border-collapse: collapse;
 
     & > div {

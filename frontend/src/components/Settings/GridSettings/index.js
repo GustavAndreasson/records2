@@ -1,1 +1,1 @@
-export { default } from "./GridSettings.container"
+export { default } from "./GridSettings.component"

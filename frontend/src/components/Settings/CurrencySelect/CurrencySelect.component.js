@@ -1,16 +1,20 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import "./CurrencySelect.scss"
 
-const CurrencySelect = ({ currency, handleUpdateCurrency }) => {
-  const { t, i18n } = useTranslation()
+const CurrencySelect = () => {
+  const { t } = useTranslation()
+  const currency = useAppStore(state => state.currency)
+  const setCurrency = useAppStore(state => state.setCurrency)
+
   return (
     <div className="currency-select">
       <div className="currency-label">{t("settings.currency")}</div>
       <select
         value={currency}
         onChange={e => {
-          handleUpdateCurrency(e.target.value)
+          setCurrency(e.target.value)
         }}
       >
         <option value="SEK">SEK</option>

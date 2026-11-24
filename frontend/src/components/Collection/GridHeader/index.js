@@ -1,1 +1,1 @@
-export { default } from "./GridHeader.container"
+export { default } from "./GridHeader.component"

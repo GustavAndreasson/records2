@@ -49,11 +49,14 @@
   "progress": {
     "load": "Laddar skivor",
     "discogs": "Hämtar från discogs",
-    "create": "Skapar skivor"
+    "create": "Skapar skivor",
+    "loadingTitle": "Hämtar skivor...",
+    "error": "Något gick fel"
   },
   "format": {
     "Box-Set": "Box",
     "CD": "CD",
+    "CDr": "CDr",
     "Cassette": "Kassett",
     "DVD":"DVD",
     "Vinyl":"Vinyl",

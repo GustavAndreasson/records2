@@ -21,10 +21,10 @@ const Description = ({ description }) => {
           throw Error(response.statusText)
         }
         const data = await response.json()
-        data.artists && setArtists(data.artists)
-        data.labels && setLabels(data.labels)
-        data.releases && setReleases(data.releases)
-        data.masters && setMasters(data.masters)
+        data.artists && setArtists({ ...artists, ...data.artists })
+        data.labels && setLabels({ ...labels, ...data.labels })
+        data.releases && setReleases({ ...releases, ...data.releases })
+        data.masters && setMasters({ ...masters, ...data.masters })
       } catch (error) {
         console.error(error)
       }
@@ -145,9 +145,7 @@ const Description = ({ description }) => {
 
   return description ? (
     <div className="description">{generate(parse(tokenize(description)))}</div>
-  ) : (
-    false
-  )
+  ) : false
 }
 
 export default Description

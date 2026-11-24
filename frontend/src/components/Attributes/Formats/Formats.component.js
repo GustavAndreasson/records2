@@ -1,9 +1,12 @@
 import React, { Fragment } from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import "./Formats.scss"
 
-const Formats = ({ value, filterFormat }) => {
-  const { t, i18n } = useTranslation()
+const Formats = ({ value }) => {
+  const { t } = useTranslation()
+  const addFilter = useAppStore(state => state.addFilter)
+
   return value
     ? value
         .filter(format => format.name !== "All-Media")
@@ -14,7 +17,7 @@ const Formats = ({ value, filterFormat }) => {
               className="format"
               onClick={e => {
                 e.stopPropagation()
-                filterFormat(format)
+                addFilter({ attribute: "formats", compare: "seq", value: format.name })
               }}
               key={index}
             >

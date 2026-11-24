@@ -1,8 +1,11 @@
 import React, { Fragment } from "react"
+import { useAppStore } from "Store"
 import "./Genres.scss"
 
-const Genres = ({ value, filterGenre }) =>
-  value
+const Genres = ({ value }) => {
+  const addFilter = useAppStore(state => state.addFilter)
+
+  return value
     ? value.map((genre, index) => (
         <Fragment key={index}>
           {(index && ", ") || null}
@@ -10,7 +13,7 @@ const Genres = ({ value, filterGenre }) =>
             className="genre"
             onClick={e => {
               e.stopPropagation()
-              filterGenre(genre)
+              addFilter({ attribute: "genres", compare: "seq", value: genre })
             }}
             key={index}
           >
@@ -19,5 +22,6 @@ const Genres = ({ value, filterGenre }) =>
         </Fragment>
       ))
     : null
+}
 
 export default Genres

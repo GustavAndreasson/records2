@@ -1,1 +1,1 @@
-export { default } from "./Formats.container"
+export { default } from "./Formats.component"

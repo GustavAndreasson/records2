@@ -1,5 +1,14 @@
 .artist-info {
   position: relative;
+  display: flow-root;
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+
+  .name {
+    font-size: 22px;
+    font-weight: bold;
+  }
 
   img {
     float: left;

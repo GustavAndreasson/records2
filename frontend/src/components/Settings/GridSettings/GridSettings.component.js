@@ -1,10 +1,16 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import Order from "Utils/Order"
 import "./GridSettings.scss"
 
-const GridSettings = ({ gridView, gridColumns, setGridView, setGridColumns }) => {
-  const { t, i18n } = useTranslation()
+const GridSettings = () => {
+  const { t } = useTranslation()
+  const gridView = useAppStore(state => state.gridView)
+  const gridColumns = useAppStore(state => state.gridColumns)
+  const setGridView = useAppStore(state => state.setGridView)
+  const setGridColumns = useAppStore(state => state.setGridColumns)
+
   const handleColumnSelect = attribute =>
     setGridColumns(
       Object.keys(Order.attributes).filter(
@@ -13,6 +19,7 @@ const GridSettings = ({ gridView, gridColumns, setGridView, setGridColumns }) =>
           (!gridColumns.includes(attr) && attr === attribute)
       )
     )
+
   return (
     <>
       <div className="grid-enable">

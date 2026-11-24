@@ -1,5 +1,5 @@
 #!/bin/bash
-npm run build || { echo 'npm build failed' ; exit 1; }
+#npm run build || { echo 'npm build failed' ; exit 1; }
 SERVER_IP=$(grep SERVER_PRIVATE_IP $(dirname $0)/../.env | xargs)
 while getopts r option
 do

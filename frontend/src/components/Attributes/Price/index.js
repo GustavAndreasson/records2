@@ -1,1 +1,1 @@
-export { default } from "./Price.container"
+export { default } from "./Price.component"

@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { useAppStore } from "Store"
 import "./UsernameInput.scss"
 
-const UsernameInput = ({ discogsUsername, handleUpdateUsername }) => {
-  const { t, i18n } = useTranslation()
+const UsernameInput = () => {
+  const { t } = useTranslation()
+  const discogsUsername = useAppStore(state => state.discogsUsername)
+  const setDiscogsUsername = useAppStore(state => state.setDiscogsUsername)
   const [user, setUser] = useState(discogsUsername)
   const handleSubmit = e => {
     e.preventDefault()
-    handleUpdateUsername(user)
+    setDiscogsUsername(user)
   }
   return (
     <form className="username-input" onSubmit={handleSubmit}>
