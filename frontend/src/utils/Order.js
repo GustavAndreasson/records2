@@ -1,6 +1,5 @@
 const attributes = {
   artists: {
-    name: "Artist",
     key: "artists",
     getValue: rec =>
       rec.artists
@@ -11,37 +10,30 @@ const attributes = {
         .join(" "),
   },
   name: {
-    name: "Album",
     key: "name",
     getValue: rec => rec.name,
   },
   year: {
-    name: "År",
     key: "year",
     getValue: rec => rec.year,
   },
   formats: {
-    name: "Format",
     key: "formats",
     getValue: rec => rec.formats && rec.formats.map(f => f.name).join(" "),
   },
   genres: {
-    name: "Genres",
     key: "genres",
     getValue: rec => rec.genres && rec.genres.join(" "),
   },
   price: {
-    name: "Pris",
     key: "price",
     getValue: rec => (rec.price == null ? 0 : parseFloat(rec.price)),
   },
   addedDate: {
-    name: "Tillagd",
     key: "addedDate",
     getValue: rec => rec.addedDate,
   },
   id: {
-    name: "ID",
     key: "id",
     getValue: rec => rec.id,
   },

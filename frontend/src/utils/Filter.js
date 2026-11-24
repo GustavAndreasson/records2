@@ -4,23 +4,21 @@ const compares = {
     key: "sub",
     func: (a, b) => a.toLowerCase().indexOf(b.toLowerCase()) >= 0,
   },
-  eq: { name: "=", key: "eq", func: (a, b) => a == b },
-  neq: { name: "\u2260", key: "neq", func: (a, b) => a != b },
-  seq: { name: "=", key: "seq", func: (a, b) => a.toLowerCase() == b.toLowerCase() },
-  sneq: { name: "\u2260", key: "sneq", func: (a, b) => a.toLowerCase() != b.toLowerCase() },
+  eq: { name: "=", key: "eq", func: (a, b) => a === b },
+  neq: { name: "\u2260", key: "neq", func: (a, b) => a !== b },
+  seq: { name: "=", key: "seq", func: (a, b) => a.toLowerCase() === b.toLowerCase() },
+  sneq: { name: "\u2260", key: "sneq", func: (a, b) => a.toLowerCase() !== b.toLowerCase() },
   lt: { name: "<", key: "lt", func: (a, b) => a <= b },
   gt: { name: ">", key: "gt", func: (a, b) => a >= b },
 }
 const attributes = {
   name: {
-    name: "Album",
     key: "name",
     type: "text",
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
     getValues: rec => [rec.name],
   },
   artist: {
-    name: "Artist",
     key: "artist",
     type: "text",
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
@@ -48,42 +46,36 @@ const attributes = {
         ),
   },
   track: {
-    name: "Spår",
     key: "track",
     type: "text",
     compares: ["seq", "sub"].map(cmp => compares[cmp]),
     getValues: rec => (rec.tracks ? rec.tracks.map(track => track.name) : []),
   },
   formats: {
-    name: "Format",
     key: "formats",
     type: "text",
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
     getValues: rec => (rec.formats ? rec.formats.map(f => f.name) : [""]),
   },
   genres: {
-    name: "Genre",
     key: "genres",
     type: "text",
     compares: ["seq", "sub", "sneq"].map(cmp => compares[cmp]),
     getValues: rec => rec.genres || [],
   },
   year: {
-    name: "År",
     key: "year",
     type: "number",
     compares: ["gt", "lt", "eq", "neq"].map(cmp => compares[cmp]),
     getValues: rec => [rec.year],
   },
   price: {
-    name: "Pris",
     key: "price",
     type: "number",
     compares: ["gt", "lt", "eq"].map(cmp => compares[cmp]),
     getValues: rec => [parseFloat(rec.price)],
   },
   addedDate: {
-    name: "Tillagd",
     key: "addedDate",
     type: "date",
     compares: ["gt", "lt", "eq", "neq"].map(cmp => compares[cmp]),
@@ -97,7 +89,7 @@ export default {
   run:
     ({ attribute, compare, value }) =>
     rec =>
-      compare == "sneq" || compare == "neq"
+      compare === "sneq" || compare === "neq"
         ? attributes[attribute]
             .getValues(rec)
             .every(recVal => compares[compare].func(recVal, value))

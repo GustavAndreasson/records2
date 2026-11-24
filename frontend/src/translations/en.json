@@ -49,7 +49,9 @@
   "progress": {
     "load": "Loading records",
     "discogs": "Fetching from discogs",
-    "create": "Creating records"
+    "create": "Creating records",
+    "loadingTitle": "Loading records...",
+    "error": "Something went wrong"
   },
   "format": {
     "Box-Set": "Box-Set",

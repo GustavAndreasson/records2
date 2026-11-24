@@ -33,9 +33,9 @@ const Progress = () => {
 
   const progress = progressData && Object.keys(progressData).length > 0 ? progressData : storeProgress
   const status = isError
-    ? "Något gick fel..."
+    ? t("progress.error")
     : (collectionFetching || collectionMutating)
-    ? "Hämtar skivor..."
+    ? t("progress.loadingTitle")
     : storeStatus
 
   return (
