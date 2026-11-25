@@ -19,8 +19,8 @@ const Header = () => {
   const viewArtistCollection = useAppStore(state => state.viewArtistCollection)
   const showControls = Boolean(discogsUsername || (activeArtist && viewArtistCollection))
 
-  const headerContent = (
-    <>
+  return (
+    <header>
       <h1>{t("header.title")}</h1>
       {showControls && (
         <>
@@ -35,13 +35,7 @@ const Header = () => {
           <CollectionStats />
         </>
       )}
-    </>
-  )
-  return (
-    <>
-      <header>{headerContent}</header>
-      <div className="header-push">{headerContent}</div>
-    </>
+    </header>
   )
 }
 

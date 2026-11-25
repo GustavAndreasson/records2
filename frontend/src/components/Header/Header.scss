@@ -1,7 +1,14 @@
-header,
-.header-push {
+header {
   overflow: hidden;
   margin-bottom: 5px;
+  position: sticky;
+  background: #fff;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 8px 8px 0 8px;
+  box-shadow: 0 5px 3px #fff;
+  z-index: 10;
 
   h1 {
     float: left;
@@ -32,19 +39,4 @@ header,
       }
     }
   }
-}
-
-header {
-  position: fixed;
-  background: #fff;
-  left: 0;
-  right: 0;
-  top: 0;
-  padding: 8px 8px 0 8px;
-  box-shadow: 0 5px 3px #fff;
-  z-index: 10;
-}
-
-.header-push {
-  visibility: hidden;
 }
