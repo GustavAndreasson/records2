@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "paths": {
+      "Components": ["components"],
+      "Components/*": ["components/*"],
+      "Selectors": ["selectors"],
+      "Selectors/*": ["selectors/*"],
+      "Store": ["store"],
+      "Store/*": ["store/*"],
+      "Queries": ["queries"],
+      "Queries/*": ["queries/*"],
+      "Api": ["api"],
+      "Api/*": ["api/*"],
+      "Utils": ["utils"],
+      "Utils/*": ["utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

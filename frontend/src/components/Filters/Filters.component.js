@@ -28,7 +28,7 @@ const Filters = () => {
       filters.concat({
         attribute: attribute,
         compare: compare,
-        value: value,
+        value: Filter.attributes[attribute].type === "number" ? Number(value) : value,
       })
     )
     setValue("")

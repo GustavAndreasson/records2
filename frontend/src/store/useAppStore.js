@@ -71,13 +71,12 @@ export const useAppStore = create((set, get) => ({
   setFilters: (filters) => set({ filters }),
   addFilter: (filter) =>
     set((state) => {
-      const exists = state.filters.some(
+      if (state.filters.some(
         (f) =>
-          f.attribute === filter.attribute &&
-          f.compare === filter.compare &&
-          f.value == filter.value
-      )
-      if (exists) {
+            f.attribute === filter.attribute &&
+            f.compare === filter.compare &&
+            f.value === filter.value
+      )) {
         return { activeRecord: null }
       }
       return {
