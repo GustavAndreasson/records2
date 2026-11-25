@@ -6,6 +6,13 @@
     display: table;
     border-collapse: collapse;
 
+    & > div:first-child {
+      & > div:first-child {
+        border-top-width: 0;
+        border-left-width: 0;
+      }
+    }
+
     & > div {
       display: table-row;
 
